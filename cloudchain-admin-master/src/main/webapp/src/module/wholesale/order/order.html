@@ -1,0 +1,69 @@
+<!--<div id="d2dNav">
+	<ul>
+		<li class="" ng-click="toPage(1)">
+			<h3>01</h3>
+			<a href="javascript:void(0)">商品</a>
+		</li>
+		<li class="" ng-click="toPage(3)">
+			<h3>03</h3>
+			<a href="javascript:void(0)">购物车</a>
+		</li>
+		<li class="on" ng-click="toPage(4)">
+			<h3>04</h3>
+			<a href="javascript:void(0)">订单</a>
+		</li>
+	</ul>
+</div>-->
+<div class="nullInfo" ng-if="wholesaleorder.goodsList==''">
+	暂无信息
+</div>
+<div class="row firstRow" ng-if="wholesaleorder.goodsList!=''">
+	<form id="settingWayZero">
+		<div class="packTableHeader">
+			<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+				<thead class="iboxHeader">
+				<tr>
+					<th style="width:12%">订单编号</th>
+					<th style="width:10%">订单金额</th>
+					<th style="width:7%">运费</th>
+					<th style="width:10%">结算方式</th>
+					<th style="width:10%">网点用户名</th>
+					<th style="width:15%">下单时间</th>
+					<th style="width:10%">订单状态</th>
+					<th style="width:10%">发货状态</th>
+					<th style="width:8%">需要发票</th>
+					<th style="width:8%">已开发票</th>
+				</tr>
+				</thead>
+			</table>
+		</div>
+		<div class="ibox-content firstLoad">
+			<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+				<tbody>
+				<tr ng-repeat="list in wholesaleorder.orderList" class="goodsPrice_{{$index}}" ng-click="wholesaleorder.toOrderDetail(list.orderId)" start-foo-table style="cursor:pointer">
+					<td style="width:12%;cursor:pointer;color:#649BFF">{{list.orderId}}</td>
+					<td style="width:10%" class="redPrice">￥{{list.actualMoney/100}}</td>
+					<td style="width:7%">{{list.transFee}}</td>
+					<td style="width:10%">{{list.settlementWay==0?'现结':(list.settlementWay==1?'月结':(list.settlementWay==2?'预付':(list.settlementWay==3?'组合':'')))}}</td>
+					<td style="width:10%">{{list.pName}}</td>
+					<td style="width:15%">{{list.createdTime}}</td>
+
+					<td style="width:10%">{{list.orderState==0?'待支付':(list.orderState==1?'待发货':(list.orderState==2?'待确认收货':(list.orderState==3?'已完成':(list.orderState==4?'关闭':''))))}}</td>
+					<td style="width:10%">{{list.deliverState==0?'未发货':(list.deliverState==1?'已发货':(list.deliverState==2?'部分发货':''))}}</td>
+					<td style="width:8%">{{list.isInvoice==0?'不需要':(list.isInvoice==1?'需要':'')}}</td>
+					<td style="width:8%">{{list.hasInvoice==0?'未开':(list.hasInvoice==1?'已开':'')}}</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="packPagination" style="padding: 0 20px;">
+			<uib-pagination class="pagination-prev-large" total-items="wholesaleorder.pageCount" items-per-page="wholesaleorder.pageSize" ng-change="wholesaleorder.getGoodsList()" ng-model="wholesaleorder.page" max-size="wholesaleorder.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+			</uib-pagination>
+
+			<div class="selectNum">
+				<select class="form-control" style="width:80px" ng-model="wholesaleorder.selected" ng-options="x.id as x.name for x in wholesaleorder.pages" ng-change="wholesaleorder.packChange(wholesaleorder.selected)"></select>
+				<span class="selectText">条记录</span>
+			</div>
+		</div>
+	</form>
+</div>

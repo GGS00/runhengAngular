@@ -1,0 +1,65 @@
+<style>
+    .packCheck tbody td {
+        font-size: 13px !important;
+    }
+</style>
+<div class="topLine"></div>
+<div class="row firstRow" style="margin-top: 10px;width: 1190px;margin: 0 auto;">
+    <span class="offerTitle">选择仓源</span>
+    <form id="settingWayZero">
+        <div class="packTableHeader" style="margin-top: 0px">
+            <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                <thead class="iboxHeader">
+                <tr>
+                    <th style="width:15%">编号</th>
+                    <th style="width:15%">仓库名称</th>
+                    <th style="width:25%">仓库地址</th>
+                    <th style="width:10%">库区</th>
+                    <th style="width:10%">库区类型</th>
+                    <th style="width:15%">存放物品</th>
+                    <th style="width:10%">可用库容</th>
+                </tr>
+                </thead>
+            </table>
+        </div>
+        <div class="ibox-contentx firstLoad">
+            <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                <tbody>
+                <tr ng-repeat="list in d2wgoodsoffer.wareList" start-foo-table>
+                    <td style="width:15%">
+                        <label class="mt-checkbox mt-checkbox-outline" style="display: inline-block;margin-bottom: 0;">
+                            <input type="checkbox" value="1" ng-model="list.checkStatus" ng-change="d2wgoodsoffer.statusChange()"/>
+                            <span></span>{{list.id}}
+                        </label>
+                    </td>
+                    <td style="width:15%">{{list.warehouseName}}</td>
+                    <td style="width:25%">{{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}</td>
+                    <td style="width:10%">{{list.warehouseAreaName}}</td>
+                    <td style="width:10%">{{list.warehouseAreaType==01?"普通":(list.warehouseAreaType==02?"冷藏":(list.warehouseAreaType==03?"恆溫":(list.warehouseAreaType==04?"特种":(list.warehouseAreaType==05?"气调":""))))}}</td>
+                    <td style="width:15%">{{list.warehouseAreaStore}}</td>
+                    <td style="width:10%">{{list.storageSqm}}m<sup>2</sup>{{list.storageCum}}m<sup>3</sup></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+    <span  class="offerTitle">报价</span>
+    <div style="margin-left: 40px;height: 56px;">
+        <div class="offerGroup">
+            <span class="wareInfo">所需服务 : {{d2wgoodsoffer.goodsDetailData.type==0?'仓储租赁':(d2wgoodsoffer.goodsDetailData.type==1?'货物保管':'')}}</span>
+        </div>
+        <div class="offerGroup">
+            <span class="wareInfo">所需库容 : {{d2wgoodsoffer.goodsDetailData.storageSqm}}m<sup>2</sup></span>
+        </div>
+        <div class="offerGroup">
+            <span class="wareInfo">意向价格 : {{d2wgoodsoffer.goodsDetailData.intentPrice/100}}元</span>
+        </div>
+        <div class="offerGroup">
+            <span class="wareInfo">租赁价格 : <input type="number" min="0"  data-required="1" class="form-control" placeholder="请输入租赁价格" name="rentPrice" style="width: 152px;display: inline-block;"/>元/天/m<sup>2</sup></span>
+</span>
+        </div>
+    </div>
+    <div>
+        <span class="settledBtn" style="margin: 50px auto;margin-bottom: 18px;" ng-click="d2wgoodsoffer.submit()">提交</span>
+    </div>
+</div>

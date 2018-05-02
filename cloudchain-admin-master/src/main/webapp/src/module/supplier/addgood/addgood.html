@@ -1,0 +1,148 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>添加供应商品</span>
+    <div class="row divline">
+        <div class="col-md-12" style="padding-left: 0px;" ng-if="addgood.goodFlag==1">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label class="control-label col-md-3">供应商
+                    </label>
+                    <input type="hidden" id="id_trans"
+                           value="{{addgood.supplierEntity.getSelectedRows()[0].userId}}" />
+                    <select-table st-combo="addgood.updata()" st-text="addgood.placeholder_supplier"
+                                  st-icon="addgood.icon_supplier"
+                                  st-value="addgood.supplierEntity.getSelectedRows()[0].nickName" ng-model="addgood.supplierEntity.getSelectedRows()[0].nickName" ng-click="addgood.updata()">
+                        <table-expandable table-column="addgood.supplierColumn"
+                                          table-page="addgood.supplierPage()"
+                                          table-data="addgood.supplierData"
+                                          table-conf="addgood.supplierParams"
+                                          self-page="true"
+                                          entity="addgood.supplierEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <!--<div class="col-md-2">-->
+                <!--<input type="button"  value="查询" ng-click="addgood.updata()"/>-->
+            <!--</div>-->
+            <div class="col-md-5">
+                <select-goods ng-if="addgood.showSG " text="'添加供应商品'" over-click="addgood.selectGoodsAdd()" column="addgood.selectGoodsColumn" item="addgood.selectGoodsentity" params="addgood.selectGoodsParams"></select-goods>
+                <button type="button" class="btn btn-default pusht" ng-click="addgood.returnButton()"
+                        style="font-weight: inherit">返回
+                </button>
+            </div>
+
+        </div> 
+
+
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <!--<button type="button" class="btn btn-default pusht" id="id_receiver" style="font-weight: inherit" ng-click="addgood.addgoods()">-->
+            <!--添加供应商品-->
+        <!--</button>-->
+
+
+    </div>
+        <table-expandable table-column="addgood.column" table-page="addgood.getPage()"
+                          table-data="addgood.data" table-conf="addgood.pageParams" self-page="false"
+                          entity="addgood.entity">
+        </table-expandable>
+    </div>
+</div>
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 80%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">选择供应商品</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+
+
+                <div class="row firstRow">
+                    <div class="col-md-11">
+                        <div class="row  col-md-offset-2">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 bold">商品编号
+                                    </label>
+                                    <div class="col-md-5">
+                                        <input type="text" id="id_skuId" class="form-control" placeholder="请输入商品编号">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row  col-md-offset-2">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label class="control-label col-md-2 bold">商品名称
+                                    </label>
+                                    <div class="col-md-5">
+                                        <input type="text" id="id_title" class="form-control" placeholder="请输入商品名称">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!--<div class="row  col-md-offset-2">-->
+                            <!--<div class="col-md-9">-->
+                                <!--<div class="form-group">-->
+                                    <!--<label class="control-label col-md-2 bold">商品分类-->
+                                    <!--</label>-->
+                                    <!--<div class="col-md-3">-->
+                                        <!--<select class="form-control select2me" ng-change="add.selectRoleChange()"-->
+                                                <!--ng-model="add.roleSelect">-->
+                                            <!--<option selected value="">全部</option>-->
+                                            <!--&lt;!&ndash;<option ng-repeat="list in add.roleList" value="{{list.roleId}}">{{list.roleName}}</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-3">-->
+                                        <!--<select class="form-control select2me" ng-change="add.selectNameChange()"-->
+                                                <!--ng-model="add.nameSelect">-->
+                                            <!--<option selected value="">全部</option>-->
+                                            <!--&lt;!&ndash;<option ng-repeat="list in add.nameList" value="{{list.empId}}">{{list.realName}}</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                    <!--<div class="col-md-3">-->
+                                        <!--<select class="form-control select2me" ng-change="add.selectNameChange()"-->
+                                                <!--ng-model="add.nameSelect">-->
+                                            <!--<option selected value="">全部</option>-->
+                                            <!--&lt;!&ndash;<option ng-repeat="list in add.nameList" value="{{list.empId}}">{{list.realName}}</option>&ndash;&gt;-->
+                                        <!--</select>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    </div>
+
+                    <div class="col-md-1">
+                        <div class="btn-group">
+                            <button type="button" class="btn blue" ng-click="addgood.selectSupplierGoodFind()">
+                                搜索
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <table-expandable table-column="addgood.selectGoodsColumn" table-page="addgood.getAddSupplierGoodPage()"
+                                  table-data="addgood.selectGoodsdata" table-conf="addgood.selectGoodsParams"
+                                  self-page="false" entity="addgood.selectGoodsentity">
+                </table-expandable>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="addgood.selectGoodsAdd()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

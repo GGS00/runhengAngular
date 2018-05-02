@@ -1,0 +1,278 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>收件地区仓库优先级设置</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            选择收件区域：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-8">
+                            <span style="padding-top: 7px;" ng-if="wareset.addressSwitch == 0">{{wareset.detailData.receiverProvinceName}}{{wareset.detailData.receiverCityName}}{{wareset.detailData.receiverDistrictName}}</span><button type="button" style="margin-left: 10px;" ng-if="wareset.addressSwitch == 0" class="btn blue" ng-click="wareset.editAddress()">修改</button>
+                        </div>
+                        <city-select ng-if="wareset.addressSwitch == 1" class="provideAddress" fun="wareset.searchByAddress()"></city-select>
+                    </div>
+
+                    <div class="form-group" ng-if="wareset.addressSwitch == 1">
+                        <label class="control-label col-md-3 bold">
+                        </label>
+                        <div class="col-sm-8" style="padding-left: 5px;">
+                            <button type="button" style="margin-left: 10px;" class="btn blue" ng-click="wareset.editBackAddress()">返回</button>
+                        </div>
+                    </div>
+
+
+ <!--                   <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            可发货仓库数：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <span style="padding-top: 7px;display: block;">123456</span>
+                        </div>
+                    </div>-->
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            规则名称：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="ruleName" class="form-control" data-required="1" value="{{wareset.detailData.ruleName}}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            适用商品：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_5" name="suitGood"  value="0"  ng-model="wareset.detailData.usedSpu" class="md-radiobtn">
+                                    <label for="checkbox1_5">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        全部商品
+                                    </label>
+                                </div>
+                               <!-- <div class="md-radio">
+                                    <input type="radio" id="checkbox1_6" name="suitGood"  value="1" ng-model="wareset.detailData.usedSpu"  class="md-radiobtn">
+                                    <label for="checkbox1_6">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        部分商品
+                                    </label>
+                                </div>
+                                <button type="button" ng-if="wareset.detailData.usedSpu==1" class="btn blue" ng-click="wareset.goodsModalShow()">选择商品</button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="wareset.detailData.usedSpu==1">
+                        <div class="col-md-7 col-md-offset-3" style="margin-top: 9px;">
+                            <div class="portlet-body">
+                                <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:30%">商品编号</th>
+                                        <th style="width:70%">商品</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr  class="">
+                                        <td style="width:30%">1</td>
+                                        <td style="width:70%">江苏</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            优先级排序：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-2" style="position:relative;" ng-repeat="list in wareset.wareSortList">
+                                <span class="wareSort">{{list==1?'自有仓':(list==2?'供应商仓':(list==3?'门店仓':''))}}</span><div class="changeSort"><i class="fa fa-arrow-left" ng-if="$index<2" ng-click="wareset.changeSort($index,wareset.wareSortList[$index+1])"></i></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            自有仓优先级排序：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-6">
+                            <div class="portlet-body" style="margin-top: 10px;">
+                                <table class="table table-striped table-bordered table-hover order-column addPurchaseTable warsetTable">
+                                    <tbody>
+                                        <tr ng-repeat="list in wareset.ruleSortList" ng-if="wareset.addressSwitch == 0">
+                                            <td style="width:80%">{{list.warehouseName}}</td>
+                                            <td style="width:20%"><i class="fa  fa-arrow-down" style="outline:none" ng-click="wareset.sortWareDown(list.id,list.priority,$index)" ng-if="$index+1<wareset.ruleSortList.length"></i> <i class="fa  fa-arrow-up" style="outline:none" ng-if="$index>0" ng-click="wareset.sortWareUp(list.id,list.priority,$index)"></i></td>
+                                        </tr>
+                                        <tr ng-repeat="list in wareset.ruleSortListT" ng-if="wareset.addressSwitch == 1">
+                                            <td style="width:80%">{{list.wareHouseName}}</td>
+                                            <td style="width:20%"><i class="fa  fa-arrow-down" style="outline:none" ng-click="wareset.sortWareSetDown($index)" ng-if="$index+1<wareset.ruleSortListT.length"></i> <i class="fa  fa-arrow-up" style="outline:none" ng-if="$index>0" ng-click="wareset.sortWareSetUp($index)"></i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            生效时间：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-3 startTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            失效时间：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-3 endTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                        <label class="mt-checkbox mt-checkbox-outline" style="margin-top: 7px;">
+                            <input type="checkbox" value="1" name="test" ng-model="wareset.endTimeState" />
+                            <span></span>永久有效
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            有效期内新增的仓库优先级排序设置：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_8" name="sortGood"  ng-model="wareset.detailData.newWarehousePriority" value="1"  class="md-radiobtn">
+                                    <label for="checkbox1_8">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        默认最次
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_7" name="sortGood"   value="0"  ng-model="wareset.detailData.newWarehousePriority" class="md-radiobtn">
+                                    <label for="checkbox1_7">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        默认最优
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-group" style="margin-bottom:0px;">
+                        <label class="control-label col-md-3 bold">
+                            规则优先级设置：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-4">
+                            <input type="text" name="ruleName" class="form-control" data-required="1"/>
+                        </div>
+                    </div>-->
+
+                 <!--   <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+
+                        </label>
+                        <div class="col-sm-4">
+                            <span style="padding-top: 7px;display: block;font-size: 13px;color: #939393;">同地区规则优先级排序（忽略适用商品），为1时默认本次设置最优，为0时默认本次设置最次</span>
+                        </div>
+                    </div>-->
+
+
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="wareset.submit()">保存</button>
+                        <button type="cancel" class="btn white"  ng-click="wareset.towarerule()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+</div>
+
+<div class="modal fade" id="selectGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>商品
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <table-expandable table-column="wareset.column"  table-page="wareset.getPage()" table-data="wareset.data" table-conf="wareset.pageParams"  entity="wareset.entity" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="wareset.addGoods()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

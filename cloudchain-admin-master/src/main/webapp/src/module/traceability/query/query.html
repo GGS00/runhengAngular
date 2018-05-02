@@ -1,0 +1,22 @@
+<div>
+    <span class="pageTitle font-green"><i class="fa fa-search"></i>防伪码查询</span>
+    <div class="row firstRow    ">
+        <div class="col-md-12">
+            <div class="col-md-3 "style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="mSecurityCode" class="form-control" maxlength="30"placeholder="输入防伪码">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <button type="button"  ng-click="query.find()" class="btn btn-primary radius search">
+                    <i class="fa fa-search"></i> 查找
+                </button>
+            </div>
+        </div>
+    </div>
+    <table-expandable table-column="query.column"  table-page="query.getPage()" table-data="query.data" table-conf="query.pageParams" self-page="false" entity="query.entity">
+    </table-expandable>
+  </div>
+</div>
+
+

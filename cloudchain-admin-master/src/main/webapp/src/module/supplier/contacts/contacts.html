@@ -1,0 +1,73 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>添加联系人
+      </span>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="contacts.addContacts()"
+                style="font-weight: inherit">添加联系人
+        </button>
+    </div>
+
+    <table-expandable table-column="contacts.column_contacts" table-page="contacts.getContactsPage()"
+                      table-data="contacts.contactsdata" table-conf="contacts.contacts_params"
+                      self-page="false" entity="contacts.entity">
+    </table-expandable>
+
+</div>
+<div class="modal fade" id="addContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加联系人</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div  class="row">
+                    <div class="form-group ">
+                        <label class="control-label col-sm-2 col-md-offset-3" style="margin-right: -31px; margin-top: 7px;">&nbsp;&nbsp;&nbsp;联系人<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5 ">
+                            <input type="text" id="id_nickname" class="form-control" placeholder="请输入联系人">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-3" style="margin-right: -31px;    margin-top: 7px;">联系电话<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_mobile" class="form-control" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-3" style="margin-right: -31px; margin-top: 7px;">联系邮箱<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_email" class="form-control" placeholder="请输入联系邮箱">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="look.btaddContacts()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,126 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>修改库区</span>
+
+
+    <div class="portlet-body">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body" >
+                <div class="form-group">
+                    <label class="col-md-2 control-label">所属仓库<span class="required"
+                                                                    aria-required="true"> * </span></label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="id_warehouse" readonly >
+                    </div>
+                </div>
+
+                <div class="form-group" ng-show="updateregion.radioFlag==1">
+                    <label class="control-label col-sm-2 ">库区类型<span class="required"
+                                                                     aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-5">
+                        <div class="md-radio-inline">
+                            <div class="md-radio" ng-repeat="list in updateregion.radiolist">
+                                <input type="radio" id="radio{{$index}}" name="radio22" class="md-radiobtn"
+                                       ng-model="updateregion.upradioValue" value="{{list.value}}">
+                                <label for="radio{{$index}}">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>{{list.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--style="border-bottom: 1px solid #f5f5f5;border-top:1px solid #f5f5f5;padding: 10px"-->
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">库区名称<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="id_wareNamee" ng-model="updateregion.regList.Name"  placeholder="请输入库区名称">
+                        </div>
+                        <label style="margin-left: -60px" class="col-md-2  control-label">存放商品<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <div class="md-radio-inline col-md-4" >
+                            <div class="md-radio">
+                                <input type="radio" id="radioId" name="radio" class="md-radiobtn"
+                                       ng-model="updateregion.regList.radioFlag" value="1">
+                                <label for="radioId">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全部</label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="radioId2" name="radio" class="md-radiobtn"
+                                       ng-model="updateregion.regList.radioFlag" value="0">
+                                <label for="radioId2">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 部分</label>
+                                <a style="margin-left: 10px" ng-show="updateregion.regList.radioFlag ==0"  ng-click="updateregion.setShowClassify()">选择商品分类</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">温度范围</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="id_lowtemp" >
+                    </div>
+                    <label class=" control-label" style="    float: left;">-</label>
+                    <div class="col-md-2">
+                        <input type="text" class="form-control" id="id_higthtemp"  >
+                    </div>
+                </div>
+                <!--ng-show="updatewarehouse.fahuoSwitch[$index]==$index+1"-->
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row" style="margin-left: 15px">
+                    <div class="col-md-offset-3 col-md-9">
+
+                        <button type="cancel" class="btn white" ng-click="updateregion.returnButton()">取消</button>
+                        <button type="submit" class="btn blue" ng-click="updateregion.submitUser()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div class="portlet-body">
+                        <div id="categoryTree" class="tree-demo"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="" class="btn btn-primary" data-dismiss="modal">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>我的资产</span>
+    <div class="portlet-body row">
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body" style="font-size: large">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" >账户名：</label>
+                        <label class="control-label col-sm-4" style="text-align: left;">{{account.data.userName}}</label>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" style="font-size: large">余额：</label>
+                        <label class="control-label col-sm-3" style="text-align: left;">{{account.amount}}
+                        <span style="font-size: small">元</span>
+                        </label>
+                        <label class="control-label col-sm-2" style="text-align: left;font-size: medium">
+                            <a ng-click="account.gotoWithdrawPage()" style="margin-left:30px;padding-right:15px;border-right:1px solid #d4d4d4;margin-right:10px;">提现</a>
+                            <a ng-click="account.gotoTransferPage()">转账</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

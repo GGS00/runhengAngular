@@ -1,0 +1,92 @@
+<div>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button> 表单信息有误,请检查. </div>
+                <div class="alert alert-success display-hide">
+                    <button class="close" data-close="alert"></button> 表单信息验证通过! </div>
+                <span class="pageTitle"><i class="fa fa-paper-plane"></i>根据防伪码编号修改防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">防伪码
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_security" value="{{update.securityEntity.getSelectedRows()[0].code}}"/>
+                                <select-table st-combo="test()" st-text="update.placeholder_securityCode"
+                                              st-icon="update.icon_securityCode"
+                                              st-value="update.securityEntity.getSelectedRows()[0].code">
+                                    <table-expandable table-column="update.securitycolumn"
+                                                      table-page="update.getSecurityPage()"
+                                                      table-data="update.securitydata"
+                                                      table-conf="update.securityParams" self-page="true"
+                                                      entity="update.securityEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" ng-click="update.showLocation(1)" class="btn blue">确认防伪码</button>
+                        </div>
+                    </div>
+                </div>
+                <span class="pageTitle"><i class="fa fa-paper-plane"></i>根据批次修改防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">批次号
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_batch" value="{{update.batchEntity.getSelectedRows()[0].lot}}"/>
+                                <select-table st-combo="test()" st-text="update.placeholder_batchCode"
+                                              st-icon="update.icon_batchCode"
+                                              st-value="update.batchEntity.getSelectedRows()[0].lot">
+                                    <table-expandable table-column="update.batchcolumn"
+                                                      table-page="update.getbatchCodePage()"
+                                                      table-data="update.batch_data"
+                                                      table-conf="update.batchParams"
+                                                       self-page="true"
+                                                      entity="update.batchEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn blue" ng-click="update.showLocation(2)">确认批次号</button>
+                        </div>
+                    </div>
+                </div>
+                <span class="pageTitle"><i class="fa fa-paper-plane"></i>根据商品名称修改防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">商品名
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_goods" value="{{update.goodsEntity.getSelectedRows()[0].title}}"/>
+                                <select-table st-combo="test()" st-text="update.placeholder_goodsName"
+                                              st-icon="update.icon_goodsName"
+                                              st-value="update.goodsEntity.getSelectedRows()[0].title">
+                                    <table-expandable table-column="update.goodscolumn"
+                                                      table-page="update.getGoodsPage()"
+                                                      table-data="update.goodsdata"
+                                                      table-conf="update.goodsParams" self-page="true"
+                                                      entity="update.goodsEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn blue" ng-click="update.showLocation(3)">确认商品名</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+</div>

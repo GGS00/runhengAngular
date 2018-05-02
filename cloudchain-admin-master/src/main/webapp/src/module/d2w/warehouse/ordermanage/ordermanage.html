@@ -1,0 +1,113 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>订单管理</span>
+    <md-content style="margin-top: 10px;background: #fff">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="我是货主" ng-click="ordermanage.showTabs(0)">
+                <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow" style="margin-bottom: -20px;">
+                        <div class="col-md-10"  style="padding-left: 0px;">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <input type="text" name="orderId" class="form-control" placeholder="订单编号">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control orderType">
+                                        <opt ion selected value=" ">服务类型</option>
+                                        <option value="0">仓库租赁</option>
+                                        <option value="1">货物保管</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me warehouseAreaType">
+                                        <option selected value=" ">库区类型</option>
+                                        <option value="01">普通</option>
+                                        <option value="02">冷藏</option>
+                                        <option value="03">恆溫</option>
+                                        <option value="04">特种</option>
+                                        <option value="05">气调</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-10" style="padding-left: 0px;">
+                            <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">仓库区域</label>
+                            <multicity-select></multicity-select>
+
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="ordermanage.getPageByFilter()">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table-expandable table-column="ordermanage.goodsColumn"  table-page="ordermanage.getGoodsPage()" table-data="ordermanage.goodsData" table-conf="ordermanage.goodsPageParams" self-page="false" entity="ordermanage.goodsEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="我是仓主" ng-click="ordermanage.showTabs(1)">
+                <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow" style="margin-bottom: -20px;">
+                        <div class="col-md-10"  style="padding-left: 0px;">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <input type="text" name="wareOrderId" class="form-control" placeholder="订单编号">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me wareorderType">
+                                        <option selected value=" ">服务类型</option>
+                                        <option value="0">仓库租赁</option>
+                                        <option value="1">货物保管</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me warehouseAreaTypeWare">
+                                        <option selected value=" ">库区类型</option>
+                                        <option value="01">普通</option>
+                                        <option value="02">冷藏</option>
+                                        <option value="03">恆溫</option>
+                                        <option value="04">特种</option>
+                                        <option value="05">气调</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-10" style="padding-left: 0px;">
+                            <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">仓库区域</label>
+                            <multicity-select></multicity-select>
+
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="ordermanage.getWarePageByFilter()">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <table-expandable table-column="ordermanage.column"  table-page="ordermanage.getPage()" table-data="ordermanage.data" table-conf="ordermanage.pageParams" self-page="false" entity="ordermanage.entity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+</div>

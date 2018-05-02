@@ -1,0 +1,41 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-map-signs"></i>收货记录</span>
+    <div class="row  firstRow">
+
+        <div class="col-md-10">
+            <div class="col-sm-4" style="padding-left: 0px;">
+                <div class="form-group from-group2">
+                    <input type="text" name="inboundCode" class="form-control"  placeholder="入库单号" title="入库单号"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group from-group2">
+                    <select class="form-control" id="id_billType" name="billType_code_query" ng-model="InboundRecordManage.billType">
+                        <option selected value="">单据类型</option>
+                        <option ng-repeat="billTypeList in InboundRecordManage.billTypeList" value="{{billTypeList.dataValue}}">
+                            {{billTypeList.dataName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="InboundRecordManage.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="InboundRecordManage.returnButton()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="InboundRecordManage.column" table-page="InboundRecordManage.getPage()"
+                      table-data="InboundRecordManage.data" table-conf="InboundRecordManage.pageParams" self-page="false"
+                      entity="InboundRecordManage.entity">
+    </table-expandable>
+
+</div>
+</div>
+

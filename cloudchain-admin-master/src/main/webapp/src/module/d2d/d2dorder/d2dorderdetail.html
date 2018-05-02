@@ -1,0 +1,81 @@
+<div>
+	<div class="orderDetailH">
+		<span class="orderDetailHT">订单编号：{{orderdetail.orderDetail.order.orderId}}</span>
+		<span class="orderDetailHT">状态：<span class="redPrice">{{orderdetail.orderDetail.order.orderState==0?'待支付':(orderdetail.orderDetail.order.orderState==1?'待发货':(orderdetail.orderDetail.order.orderState==2?'待确认收货':(orderdetail.orderDetail.order.orderState==3?'已完成':(orderdetail.orderDetail.order.orderState==4?'关闭':''))))}}</span></span>
+	</div>
+	<div class="orderDetailM">
+		<span>配送方式 : {{orderdetail.orderDetail.order.distributionWay==0?'柴米配送':(orderdetail.orderDetail.order.distributionWay==1?'自提':'')}}</span>
+		<span>结算方式 : {{orderdetail.orderDetail.order.settlementWay==0?'现结':(orderdetail.orderDetail.order.settlementWay==1?'月结':(orderdetail.orderDetail.order.settlementWay==2?'预付':(orderdetail.orderDetail.order.settlementWay==3?'组合':'')))}}</span>
+		<span>买家留言 : {{orderdetail.orderDetail.order.remark}}</span>
+		<span>收货信息 : {{orderdetail.orderDetail.logistics.province}} {{orderdetail.orderDetail.logistics.city}} {{orderdetail.orderDetail.logistics.county}} {{orderdetail.orderDetail.logistics.address}} {{orderdetail.orderDetail.logistics.address}} ({{orderdetail.orderDetail.logistics.cneeName}} 收) {{orderdetail.orderDetail.logistics.cneeMobile}}</span>
+	</div>
+	<div class="packTableHeader">
+		<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+			<thead class="iboxHeader">
+			<tr>
+				<th style="width:50%">商品</th>
+				<th style="width:10%">数量</th>
+				<th style="width:10%">单位</th>
+				<th style="width:15%">单价</th>
+				<th style="width:15%">合计</th>
+			</tr>
+			</thead>
+		</table>
+	</div>
+	<div class="ibox-content firstLoad" style="height: auto;border-bottom: #E7ECF1 1px solid;">
+		<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+			<tbody>
+			<tr style="cursor:pointer" ng-repeat="list in orderdetail.goodsInfo" class="goodsPrice_{{$index}}" start-foo-table ng-click="orderdetail.toLogistics(list.spuId,list.skuId)">
+				<td style="width:50%;text-align: left">
+					<div class="media">
+						<div class="media-left">
+							<img class="media-object" ng-src="{{list.img}}" alt="{{list.spec}}">
+						</div>
+						<div class="media-body" style="vertical-align: middle;">
+							<h6 class="media-heading">
+								<a href="javascript:;" style="text-decoration: none">
+										<span>
+											{{list.skuTitle}}
+										</span>
+								</a>
+							</h6>
+							<span class="text-danger">
+									{{list.spec}}
+								</span>
+						</div>
+					</div>
+				</td>
+				<td style="width:10%">
+					{{list.count}}
+				</td>
+				<td style="width:10%">
+					{{list.unit}}
+				</td>
+				<td style="width:15%" class="redPrice">
+					￥{{list.price/100}}
+				</td>
+				<td style="width:15%" class="redPrice">
+					￥{{list.subTotal/100}}
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<div class="orderDetailF">
+		<div class="feeDetail">
+			<label class="col-sm-7">商品金额 :</label>
+			<div class="col-sm-5">￥{{(orderdetail.orderDetail.order.actualMoney-orderdetail.orderDetail.order.transFee)/100 | totwo}}</div>
+		</div>
+		<div class="feeDetail">
+			<label class="col-sm-7">运费 :</label>
+			<div class="col-sm-5">￥{{orderdetail.orderDetail.order.transFee/100}}</div>
+		</div>
+		<div class="feeDetail">
+			<label class="col-sm-7">应付金额 :</label>
+			<div class="col-sm-5 redPrice">￥{{orderdetail.orderDetail.order.actualMoney/100 | totwo}}</div>
+		</div>
+	</div>
+
+
+</div>

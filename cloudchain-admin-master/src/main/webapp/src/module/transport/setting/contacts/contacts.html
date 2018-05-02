@@ -1,0 +1,15 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-users"></i>常用联系人</span>
+
+    <div class="search-form btnGroup" style="margin-top: 12px;">
+        <button type="button" class="btn btn-default"  ng-click="comContacts.addComContacts()" style="font-weight: inherit">新增</button>
+        <button type="button" class="btn btn-default"  ng-click="comContacts.removeComContacts()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="comContacts.column"  table-page="comContacts.getPage()" table-data="comContacts.data" table-conf="comContacts.pageParams" self-page="false" entity="comContacts.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

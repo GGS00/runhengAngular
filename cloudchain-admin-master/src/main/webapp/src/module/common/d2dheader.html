@@ -1,0 +1,93 @@
+<!-- BEGIN HEADER INNER -->
+<div class="page-header-inner">
+    <!-- BEGIN LOGO -->
+    <div class="page-logo">
+        <a href="/chaimihome">
+            <img src="{{settings.layoutPath}}/img/logo.png" alt="logo" class="logo-default" style="width: 154px;height: 30px;"/>
+            <!--<h3 style="color:#fff;font-size: 26px;margin-top: 8px;">Cloud<span style="color:#68D23D">Chain</span></h3>-->
+        </a>
+        <!--<div class="menu-toggler sidebar-toggler">
+            <span></span>
+            &lt;!&ndash; DOC: Remove the above "hide" to enable the sidebar toggler button on header &ndash;&gt;
+        </div>-->
+    </div>
+    <!-- END LOGO -->
+    <!-- BEGIN HEADER SEARCH BOX -->
+    <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
+    <form class="search-form hide" action="#" method="GET">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="搜索商品" name="query">
+            <span class="input-group-btn">
+                <a href="javascript:;" class="btn submit">
+                    <i class="icon-magnifier"></i>
+                </a>
+            </span>
+        </div>
+    </form>
+
+    <ul class="mainNav" >
+        <li class="homeItem">
+            <a  class="goodsPage" ng-click="toPage(1)">
+                商品
+            </a>
+        </li>
+        <li class="homeItem">
+            <a  ng-click="toPage(3)" class="cart">
+			<span>
+				购物车
+			</span>
+                <!--<span class="badge badge-info">
+				{{cartTotal}}
+			    </span>-->
+            </a>
+        </li>
+        <li class="homeItem">
+            <a  class="orderPage"  ng-click="toPage(4)">
+                订单
+            </a>
+        </li>
+    </ul>
+
+    <!-- END HEADER SEARCH BOX -->
+    <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+    <!--<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        <span></span>
+    </a>-->
+    <!-- END RESPONSIVE MENU TOGGLER -->
+    <!-- BEGIN TOP NAVIGATION MENU -->
+    <div class="top-menu" ng-if="isLogin != 1">
+        <ul class="nav navbar-nav pull-right">
+            <!-- BEGIN USER LOGIN DROPDOWN -->
+            <li class="dropdown dropdown-user" style="margin-top: 8px;">
+                <a href="#" class="dropdown-toggle" dropdown-menu-hover data-toggle="dropdown" data-close-others="true">
+                    <img alt="" class="img-circle" src="{{loginPhoto}}" />
+                    <span class="username username-hide-on-mobile"> {{loginName}}</span>
+                    <i class="fa fa-angle-down"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-default">
+                    <!-- <li>
+                         <a href="#/profile/dashboard">
+                             <i class="icon-user"></i> 账号信息 </a>
+                     </li>
+                     <li>
+                         <a href="#">
+                             <i class="icon-key"></i> 修改密码 </a>
+                     </li>
+                     <li>
+                         <a href="#/todo">
+                             <i class="icon-settings"></i> 系统设置
+                         </a>
+                     </li>
+                     <li class="divider"> </li>-->
+                    <li>
+                        <a ng-click="loginOut()">
+                            <i class="icon-power"></i> 退出系统 </a>
+                    </li>
+                </ul>
+            </li>
+            <!-- END USER LOGIN DROPDOWN -->
+        </ul>
+    </div>
+    <!-- END TOP NAVIGATION MENU -->
+</div>
+<!-- END HEADER INNER -->

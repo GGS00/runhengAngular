@@ -1,0 +1,122 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>损耗增溢管理</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-10 form-group">
+                <div class="col-sm-2" style="padding-left: 0px;">
+                    <div class="form-group">
+                        <input type="text" name="ownerId" class="form-control" placeholder="货主"></div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="supplierId" class="form-control" placeholder="供应商">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="oriCode" class="form-control" placeholder="相关单据">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_type">
+                            <option selected value=" ">类型</option>
+                            <option value="LOSS">损耗</option>
+                            <option value="PROFIT">增溢</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="productId" class="form-control" placeholder="商品编号">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10 form-group" style=" padding-left: 0px;">
+                <div class="col-sm-3" ng-click="inventoryProfitLoss.warehouseLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text=" inventoryProfitLoss.placeholder_warehouseName"
+                                  st-icon=" inventoryProfitLoss.icon_warehouse"
+                                  st-value=" inventoryProfitLoss.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column=" inventoryProfitLoss.warehouseColumn"
+                                          table-page=" inventoryProfitLoss.warehousePage()"
+                                          table-data=" inventoryProfitLoss.warehouseData"
+                                          table-conf=" inventoryProfitLoss.warehouseParams"
+                                          self-page="true"
+                                          entity=" inventoryProfitLoss.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+
+                <div class="col-sm-3" style="border:none;outline:none;">
+                    <div ng-click="inventoryProfitLoss.regionLinsener()">
+
+                        <select-table st-combo="test()" st-text="inventoryProfitLoss.placeholder_regionName"
+                                      st-icon="inventoryProfitLoss.icon_region"
+                                      st-value="inventoryProfitLoss.regionEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="inventoryProfitLoss.regionColumn"
+                                              table-page="inventoryProfitLoss.regionPage()"
+                                              table-data="inventoryProfitLoss.regionData"
+                                              table-conf="inventoryProfitLoss.region_params"
+                                              self-page="true"
+                                              entity="inventoryProfitLoss.regionEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-sm-3" ng-click="inventoryProfitLoss.locationLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text="inventoryProfitLoss.placeholder_locationName"
+                                  st-icon="inventoryProfitLoss.icon_location"
+                                  st-value="inventoryProfitLoss.locationEntity.getSelectedRows()[0].name">
+                        <table-expandable table-column="inventoryProfitLoss.locationColumn"
+                                          table-page="inventoryProfitLoss.locationPage()"
+                                          table-data="inventoryProfitLoss.locationrData"
+                                          table-conf="inventoryProfitLoss.locationrParams"
+                                          self-page="true"
+                                          entity="inventoryProfitLoss.locationEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_status">
+                            <option selected value=" ">状态</option>
+                            <option value="OPEN">待审核</option>
+                            <option value="ACTIVE">审核通过</option>
+                            <option value="INVALID">驳回</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 form-group">
+                <div class="col-sm-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn blue" ng-click="inventoryProfitLoss.getPageByFilter()">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryProfitLoss.pass()"
+                style="font-weight: inherit">通过
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryProfitLoss.rebut()"
+                style="font-weight: inherit">驳回
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryProfitLoss.delete()"
+                style="font-weight: inherit">删除
+        </button>
+    </div>
+    <table-expandable table-column="inventoryProfitLoss.column" table-page="inventoryProfitLoss.getPage()"
+                      table-data="inventoryProfitLoss.data" table-conf="inventoryProfitLoss.pageParams"
+                      self-page="false"
+                      entity="inventoryProfitLoss.entity">
+    </table-expandable>
+
+</div>
+
+
+
+

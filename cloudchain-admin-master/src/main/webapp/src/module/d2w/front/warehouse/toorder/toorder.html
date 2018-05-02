@@ -1,0 +1,292 @@
+<div class="topLine"></div>
+<div style="overflow-x: hidden;background: #fff;">
+    <div class="portlet-body row">
+      <div class="orderSpace">
+        <form class="form-horizontal ng-pristine ng-valid">
+            <sapn class="contentTitle">下单</sapn>
+            <div class="form-group">
+                <label class="textDesc">
+                    仓库地址：
+                </label>
+                <div class="textInput d2wtext">
+                    <span>{{d2wsourceorder.orderData.provinceName}}{{d2wsourceorder.orderData.cityName}}{{d2wsourceorder.orderData.districtName}}{{d2wsourceorder.orderData.address}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="textDesc">
+                    库区类型：
+                </label>
+                <div class="textInput d2wtext">
+                    <span>{{d2wsourceorder.orderData.warehouseAreaType==01?"普通":(d2wsourceorder.orderData.warehouseAreaType==02?"冷藏":(d2wsourceorder.orderData.warehouseAreaType==03?"恆溫":(d2wsourceorder.orderData.warehouseAreaType==04?"特种":(d2wsourceorder.orderData.warehouseAreaType==05?"气调":""))))}}</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="textDesc">
+                    服务需求：
+                </label>
+                <div class="textInput d2wtext">
+                    <span>{{d2wsourceorder.serviceRequest==0?"仓储租赁":(d2wsourceorder.serviceRequest==1?"货物保管":"")}}</span>
+                </div>
+            </div>
+
+            <div ng-if="d2wsourceorder.serviceRequest==0">
+
+
+                <sapn class="contentTitle" style="margin-top: 30px;">订单信息</sapn>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        计费规则：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <span>{{d2wsourceorder.orderData.chargingRule==0?"按周期收取":(d2wsourceorder.orderData.chargingRule==1?"按每天收取":(d2wsourceorder.orderData.chargingRule==2?"按月收取":(d2wsourceorder.orderData.chargingRule==3?"":(d2wsourceorder.orderData.chargingRule==4?"":""))))}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        单价：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <span>{{d2wsourceorder.orderData.rentPrice/100}}元</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        所需库容：
+                    </label>
+                    <div class="textInput" style="width: 248px;">
+                        <div class="input-group">
+                            <input type="number" name="wareCum" min="0" data-required="1" class="form-control" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')"/>
+                            <span class="input-group-addon">{{d2wsourceorder.orderData.unit==0?"吨":(d2wsourceorder.orderData.unit==1?"件":(d2wsourceorder.orderData.unit==2?"库位":(d2wsourceorder.orderData.unit==3?"平方":(d2wsourceorder.orderData.unit==4?"":""))))}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        开始时间：
+                    </label>
+                    <div class="textInput goodsBeginTime" style="width: 248px;">
+                        <single-time-picker></single-time-picker>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        结束时间：
+                    </label>
+                    <div class="textInput goodsEndTime" style="width: 248px;">
+                        <single-time-picker></single-time-picker>
+                    </div>
+                </div>
+
+                <div class="form-group" style="height: auto;">
+                    <label class="textDesc">
+                        备注：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <textarea class="form-control goodsRemarks" name="goodsRemarks" rows="3" style="resize: none;" placeholder="200个字符以内"></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="settledBtn" ng-click="wareSubmit()">下单</span>
+                    <span class="goodstips"></span>
+                </div>
+
+            </div>
+
+            <div ng-if="d2wsourceorder.serviceRequest==1">
+                <sapn class="contentTitle" style="margin-top: 30px;">订单信息</sapn>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        计算单位：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <span>{{d2wsourceorder.orderData.keepUnit==0?"按吨":(d2wsourceorder.orderData.keepUnit==1?"按件":(d2wsourceorder.orderData.keepUnit==2?"按库位":(d2wsourceorder.orderData.keepUnit==3?"按面积":(d2wsourceorder.orderData.unit==4?"":""))))}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        单价：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <span>{{d2wsourceorder.orderData.keepPrice/100}}元</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        计费规则：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <span>{{d2wsourceorder.orderData.chargingRule==0?"按周期收取":(d2wsourceorder.orderData.chargingRule==1?"按每天收取":(d2wsourceorder.orderData.chargingRule==2?"按月收取":(d2wsourceorder.orderData.chargingRule==3?"":(d2wsourceorder.orderData.chargingRule==4?"":""))))}}</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        开始时间：
+                    </label>
+                    <div class="textInput wareBeginTime" style="width: 248px;">
+                        <single-time-picker callback="d2wsourceorder.test()";></single-time-picker>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="textDesc">
+                        结束时间：
+                    </label>
+                    <div class="textInput wareEndTime" style="width: 248px;">
+                        <single-time-picker></single-time-picker>
+                    </div>
+                </div>
+
+                <div class="form-group" style="height: auto;">
+                    <label class="textDesc">
+                        备注：
+                    </label>
+                    <div class="textInput d2wtext">
+                        <textarea class="form-control wareRemarks" name="wareRemarks" rows="3" style="resize: none;" placeholder="200个字符以内"></textarea>
+                    </div>
+                </div>
+
+                <div>
+                    <span class="settledBtn" ng-click="goodsSubmit()">下单</span>
+                    <span class="waretips"></span>
+                </div>
+
+            </div>
+
+        </form>
+      </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>商品
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table-expandable table-column="d2wsourceorder.column"  table-page="d2wsourceorder.getPage()" table-data="d2wsourceorder.data" table-conf="d2wsourceorder.pageParams"  entity="d2wsourceorder.entity" self-page="false">
+                </table-expandable>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn blue" ng-click="d2wsourceorder.confirmGoods()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmSubmit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 250px;width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 8px;border: none;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body settledSuccess">
+                <div style="color: #626262;text-align: center;padding-top: 30px;">
+                    <span style="font-size: 20px;">确定下单么？</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" ng-click="d2wsourceorder.confirmSubmit()" style="background: #E2393C;border: #E2393C;">
+                    去下单
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="successTips" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 250px;width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 8px;border: none;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body settledSuccess">
+                <div class="successText">
+                    <i class="iconfont icon-chenggong"></i>
+                    <span>成功</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf"></i>放款记录</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="applyLoanCode" class="form-control" placeholder="申请编号"></div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="customerName" class="form-control" placeholder="客户名称"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_loan_type">
+                        <option selected value="">货代品种</option>
+                        <option value="INVENTORY_FINANCE">货好贷</option>
+                        <option value="ORDER_FINANCE">单好贷</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="extendLoan.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <table-expandable table-column="extendLoan.column" table-page="extendLoan.getPage()"
+                      table-data="extendLoan.data" table-conf="extendLoan.pageParams" self-page="false"
+                      entity="extendLoan.entity">
+    </table-expandable>
+
+</div>
+</div>

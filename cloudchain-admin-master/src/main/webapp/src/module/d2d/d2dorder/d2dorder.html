@@ -1,0 +1,155 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>订单管理</span>
+
+    <md-content style="margin-top: 25px;background: #fff">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="卖出商品" ng-click="d2dorder.showTabs(0)">
+                <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow">
+                        <div class="col-md-6"  style="padding-left: 0px;">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <input type="text" name="orderId" class="form-control" placeholder="订单编号">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <select class="form-control select2me orderState">
+                                        <option selected value=" ">订单状态</option>
+                                        <option value="0">待支付</option>
+                                        <option value="1">待发货</option>
+                                        <option value="2">待确认收货</option>
+                                        <option value="3">已完成</option>
+                                        <option value="4">关闭</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="d2dorder.getPageByFilter()">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nullInfo" ng-if="d2dorder.orderList==''">
+                        暂无信息
+                    </div>
+                    <div class="row firstRow" ng-if="d2dorder.orderList!=''">
+                        <form id="settingWayZero">
+                            <div class="packTableHeader">
+                                <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                    <thead class="iboxHeader">
+                                    <tr>
+                                        <th style="width:12%">订单编号</th>
+                                        <th style="width:10%">订单金额</th>
+                                        <th style="width:7%">运费</th>
+                                        <th style="width:10%">结算方式</th>
+                                        <th style="width:10%">网点用户名</th>
+                                        <th style="width:15%">下单时间</th>
+                                        <th style="width:10%">订单状态</th>
+                                        <th style="width:10%">发货状态</th>
+                                        <th style="width:8%">需要发票</th>
+                                        <th style="width:8%">已开发票</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ibox-content firstLoad">
+                                <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                    <tbody>
+                                    <tr ng-repeat="list in d2dorder.orderList" class="goodsPrice_{{$index}}" ng-click="d2dorder.toOrderDetail(list.orderId)" start-foo-table style="cursor:pointer">
+                                        <td style="width:12%;cursor:pointer;color:#649BFF">{{list.orderId}}</td>
+                                        <td style="width:10%" class="redPrice">￥{{list.actualMoney/100}}</td>
+                                        <td style="width:7%">{{list.transFee}}</td>
+                                        <td style="width:10%">{{list.settlementWay==0?'现结':(list.settlementWay==1?'月结':(list.settlementWay==2?'预付':(list.settlementWay==3?'组合':'')))}}</td>
+                                        <td style="width:10%">{{list.pName}}</td>
+                                        <td style="width:15%">{{list.createdTime}}</td>
+
+                                        <td style="width:10%">{{list.orderState==0?'待支付':(list.orderState==1?'待发货':(list.orderState==2?'待确认收货':(list.orderState==3?'已完成':(list.orderState==4?'关闭':''))))}}</td>
+                                        <td style="width:10%">{{list.deliverState==0?'未发货':(list.deliverState==1?'已发货':(list.deliverState==2?'部分发货':''))}}</td>
+                                        <td style="width:8%">{{list.isInvoice==0?'不需要':(list.isInvoice==1?'需要':'')}}</td>
+                                        <td style="width:8%">{{list.hasInvoice==0?'未开':(list.hasInvoice==1?'已开':'')}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="packPagination" style="padding: 0 20px;">
+                                <uib-pagination class="pagination-prev-large" total-items="d2dorder.pageCount" items-per-page="d2dorder.pageSize" ng-change="d2dorder.getSaleList()" ng-model="d2dorder.page" max-size="d2dorder.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                                </uib-pagination>
+
+                                <div class="selectNum">
+                                    <select class="form-control" style="width:80px" ng-model="d2dorder.selected" ng-options="x.id as x.name for x in d2dorder.pages" ng-change="d2dorder.packChange(d2dorder.selected)"></select>
+                                    <span class="selectText">条记录</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </md-content>
+            </md-tab>
+            <md-tab label="买入商品" ng-click="d2dorder.showTabs(1)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="nullInfo" ng-if="d2dorder.orderBuyList==''">
+                        暂无信息
+                    </div>
+                    <div class="row firstRow" ng-if="d2dorder.orderBuyList!=''">
+                        <form id="">
+                            <div class="packTableHeader">
+                                <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                    <thead class="iboxHeader">
+                                    <tr>
+                                        <th style="width:12%">订单编号</th>
+                                        <th style="width:10%">订单金额</th>
+                                        <th style="width:7%">运费</th>
+                                        <th style="width:10%">结算方式</th>
+                                        <th style="width:10%">网点用户名</th>
+                                        <th style="width:15%">下单时间</th>
+                                        <th style="width:10%">订单状态</th>
+                                        <th style="width:10%">发货状态</th>
+                                        <th style="width:8%">需要发票</th>
+                                        <th style="width:8%">已开发票</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="ibox-content firstLoad">
+                                <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                    <tbody>
+                                    <tr ng-repeat="list in d2dorder.orderBuyList" class="goodsPrice_{{$index}}" ng-click="d2dorder.toOrderDetail(list.orderId)" start-foo-table style="cursor:pointer">
+                                        <td style="width:12%;cursor:pointer;color:#649BFF">{{list.orderId}}</td>
+                                        <td style="width:10%" class="redPrice">￥{{list.actualMoney/100}}</td>
+                                        <td style="width:7%">{{list.transFee}}</td>
+                                        <td style="width:10%">{{list.settlementWay==0?'现结':(list.settlementWay==1?'月结':(list.settlementWay==2?'预付':(list.settlementWay==3?'组合':'')))}}</td>
+                                        <td style="width:10%">{{list.pName}}</td>
+                                        <td style="width:15%">{{list.createdTime}}</td>
+
+                                        <td style="width:10%">{{list.orderState==0?'待支付':(list.orderState==1?'待发货':(list.orderState==2?'待确认收货':(list.orderState==3?'已完成':(list.orderState==4?'关闭':''))))}}</td>
+                                        <td style="width:10%">{{list.deliverState==0?'未发货':(list.deliverState==1?'已发货':(list.deliverState==2?'部分发货':''))}}</td>
+                                        <td style="width:8%">{{list.isInvoice==0?'不需要':(list.isInvoice==1?'需要':'')}}</td>
+                                        <td style="width:8%">{{list.hasInvoice==0?'未开':(list.hasInvoice==1?'已开':'')}}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="packPagination" style="padding: 0 20px;">
+                                <uib-pagination class="pagination-prev-large" total-items="d2dorder.pageBuyCount" items-per-page="d2dorder.buypageSize" ng-change="d2dorder.getOrderBuyList()" ng-model="d2dorder.buypage" max-size="d2dorder.buymaxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                                </uib-pagination>
+
+                                <div class="selectNum">
+                                    <select class="form-control" style="width:80px" ng-model="d2dorder.buyselected" ng-options="x.id as x.name for x in d2dorder.buypages" ng-change="d2dorder.packBuyChange(d2dorder.buyselected)"></select>
+                                    <span class="selectText">条记录</span>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </md-content>
+            </md-tab>
+
+        </md-tabs>
+    </md-content>
+
+</div>
+

@@ -1,0 +1,113 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-share-square-o"></i>上架单管理</span>
+    <div class="row  firstRow">
+        <div class="col-md-8">
+            <div class="col-sm-3" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="上架单号"></div>
+            </div>
+            <!--/span-->
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <input type="text" name="original_bill_code" class="form-control" placeholder="入库单号">
+                </div>
+            </div>
+
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <select class="form-control select2me status">
+                            <option selected value=" ">状态</option>
+                            <option value="OPEN">打开</option>
+                            <option value="PART_ALLOCATED">部分分配</option>
+                            <option value="ALLOCATED">分配完成</option>
+                            <option value="ACTIVE">生效</option>
+                            <option value="FINISHED">完成</option>
+                            <option value="INVALID">失效</option>
+                        </select>
+                    </div>
+                </div>
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="shelfManage.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht"  ng-click="shelfManage.allot()" style="font-weight: inherit">手动分配</button>
+        <button type="button" class="btn btn-default pusht" ng-click="shelfManage.operateEffect()" style="font-weight: inherit">生效</button>
+        <button type="button" class="btn btn-default pusht" ng-click="shelfManage.invalid()" style="font-weight: inherit">失效</button>
+        <button type="button" class="btn btn-default pusht" ng-click="shelfManage.allotEmploy()" style="font-weight: inherit">人员分配</button>
+    </div>
+
+    <table-expandable table-column="shelfManage.column" table-page="shelfManage.getPage()"
+                      table-data="shelfManage.data" table-conf="shelfManage.pageParams" self-page="false"
+                      entity="shelfManage.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<!--	<select-table st-combo="test()" st-value="shelfManage.entity[0].goods_name" st-text="shelfManage.placeholder" st-icon="shelfManage.icon">
+                    <table-expandable  table-column="shelfManage.column"  table-page="shelfManage.getPage()" table-data="shelfManage.data" table-conf="shelfManage.pageParams" self-page="true" entity="shelfManage.entity">
+                    </table-expandable>
+                </select-table>-->
+
+<div class="modal fade" id="allotEmployModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">分配上架人员</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal col-sm-offset-1">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">上架单</label>
+                        <div class="col-md-6">
+                            <input type="hidden" id="shelveDocId"/>
+                            <input type="text" id="shelveDocCode" class="form-control" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">负责人<span class="required"  aria-required="true">*</span></label>
+                        <div class="col-md-6">
+                            <select-table st-combo="test()" st-text="shelfManage.placeholder_employName"
+                                          st-icon="shelfManage.icon_employ"
+                                          st-value="shelfManage.employEntity.getSelectedRows()[0].realName">
+                                <table-expandable table-column="shelfManage.employColumn"
+                                                  table-page="shelfManage.employPage()"
+                                                  table-data="shelfManage.employData"
+                                                  table-conf="shelfManage.employParams"
+                                                  self-page="true"
+                                                  entity="shelfManage.employEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="shelfManage.allotEmploySubmit()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

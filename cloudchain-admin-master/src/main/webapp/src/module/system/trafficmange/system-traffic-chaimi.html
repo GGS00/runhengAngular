@@ -1,0 +1,252 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>柴米承运商</span>
+    <input id="qry_cooperRole" name="qryRole" type="hidden" value="3">
+    <input id="qry_function" type="hidden" value="transport">
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="qryName" name="qryName" class="form-control" placeholder="账号"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" id="qryNick" name="qryNick" class="form-control" placeholder="昵称">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" id="qryTel" name="qryTel" class="form-control" placeholder="手机">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" id="qryMail" name="qryMail" class="form-control" placeholder="邮箱">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me receiveStatus" id="id_status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="01">有效</option>
+                        <option value="02">无效</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="addTmsChaimiCooper.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default pusht" ng-click="addTmsChaimiCooper.addCooper()" style="font-weight: inherit">新增</button>
+        <button type="button" class="btn btn-default pusht" ng-click="addTmsChaimiCooper.updCooper()" style="font-weight: inherit">修改</button>
+        <button type="button" class="btn btn-default pusht" ng-click="addTmsChaimiCooper.delCooper()" style="font-weight: inherit">删除</button>
+    </div>
+
+    <table-expandable table-column="addTmsChaimiCooper.column"  table-page="addTmsChaimiCooper.getPage()" table-data="addTmsChaimiCooper.data"
+                      table-conf="addTmsChaimiCooper.pageParams" self-page="false" entity="addTmsChaimiCooper.entity">
+    </table-expandable>
+
+</div>
+
+<div class="modal fade" id="add_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加柴米承运商</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="UmsCooperInfo">
+                    <div class=" form-horizontal">
+                        <input type="hidden" id="add_cooperMode" name="cooperMode" value="02"/>
+                        <input type="hidden" id="add_cooperRole" name="cooperRole" value="3"/>
+                        <!--div class="form-group">
+                            <label class="col-md-2 control-label">服务商类型<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <select class="form-control" id="add_cooperRole" name="cooperRole">
+                                    <option value="3" selected>承运人</option>
+                                </select>
+                            </div>
+                        </div-->
+                        <div class="form-group">
+                            <input id="add_cooperUserId" name="cooperUserId" type="hidden">
+                            <label class="col-md-3 control-label">对方账号<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperUserNm" name="cooperUserNm" placeholder="根据输入的关键字匹配开通了TMS的用户">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">昵称<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperNicknm" name="cooperNicknm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperPhone" name="cooperPhone" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperEmail" name="cooperEmail" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">物流费用结算周期</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_settlFeePrd" name="settlFeePrd" value="1">
+                            </div>
+                            <label class="control-label">天</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="add_startTime" name="startTime" type="hidden">
+                            <label class="col-md-3 control-label">合作开始时间</label>
+                            <div class="col-md-6 addStartTime">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="add_endTime" name="endTime" type="hidden">
+                            <label class="col-md-3 control-label">合作结束时间</label>
+                            <div class="col-md-6 addEndTime" ng-if="addTmsChaimiCooper.add_end_time_switch==1">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <input id="add_foreverFlg" name="foreverFlg" type="hidden" value="0">
+                            <div class="col-md-6">
+                                <input id="add_check_flg" type="checkbox" ng-click="addTmsChaimiCooper.addCheckFlg()"><span> 永久有效</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="submitAddCooper" class="btn btn-primary" ng-click="addTmsChaimiCooper.submitAddCooper()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--柴米详情model-->
+<div class="modal fade" id="upd_cooper_model" tabindex="-1" role="dialog" aria-labelledby="updModalCooper"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">柴米服务商详情</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="updUmsCooperInfo">
+                    <div class=" form-horizontal">
+                        <div class="form-group">
+                            <input id="updCooperRole" name="cooperRole" type="hidden">
+                            <label class="col-md-3 control-label">服务商类型<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_cooperRole" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">对方账号<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_acc_name" name="cooperUserNm" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">昵称<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_nick_name" name="cooperNicknm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_phone" name="cooperPhone" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_email" name="cooperEmail" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">物流费用结算周期</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_settlFeePrd" name="settlFeePrd">
+                            </div>
+                            <label class="control-label">天</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">合作开始时间</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_startTime" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="upd_endTime" name="endTime" type="hidden">
+                            <label class="col-md-3 control-label">合作结束时间</label>
+                            <div class="col-md-6 updEndTime" ng-if="addTmsChaimiCooper.upd_end_time_switch==1">
+                                <single-time-picker time="{{addTmsChaimiCooper.testTime}}"></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <input id="upd_foreverFlg" name="foreverFlg" type="hidden">
+                            <div class="col-md-6">
+                                <input id="upd_check_flg" type="checkbox" ng-click="addTmsChaimiCooper.updCheckFlg()"><span> 永久有效</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="submitUpdCooper" class="btn btn-primary" ng-click="addTmsChaimiCooper.submitUpdCooper()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

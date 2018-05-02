@@ -1,0 +1,18 @@
+<div class="col-sm-2">
+    <select class="form-control select2me selectPro"  ng-change="multicitySelect.selectProChange()" ng-model="multicitySelect.proSelect" >
+        <option selected value="">全部</option>
+        <option ng-repeat="list in multicitySelect.provinceList" value="{{list.regionId}}">{{list.regionName}}</option>
+    </select>
+</div>
+<div class="col-sm-2">
+    <select class="form-control select2me selectCity"  ng-change="multicitySelect.selectCityChange()" ng-model="multicitySelect.citySelect">
+        <option selected value="">全部</option>
+        <option ng-repeat="list in multicitySelect.cityList" value="{{list.regionId}}">{{list.regionName}}</option>
+    </select>
+</div>
+<div class="col-sm-2">
+    <select class="form-control select2me selectArea"  ng-change="multicitySelect.selectAreaChange()" ng-model="multicitySelect.areaSelect">
+        <option selected value="">全部</option>
+        <option ng-repeat="list in multicitySelect.areaList" value="{{list.regionId}}">{{list.regionName}}</option>
+    </select>
+</div>

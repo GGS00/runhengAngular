@@ -1,0 +1,305 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-sticky-note-o"></i>选择仓库</span>
+    <div class="row firstRow" style="padding: 0;">
+        <div class="form-group" style="height:33px">
+            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">可用库容
+            </label>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <input type="number"  data-required="1" class="form-control" name="storageMin"/>
+                    <span class="input-group-addon">m<sup>2</sup></span>
+                </div>
+            </div>
+            <div class="rangeLine" style="font-size: 19px;">~</div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <input type="number"  data-required="1" class="form-control" name="storageMax"/>
+                    <span class="input-group-addon">m<sup>2</sup></span>
+                </div>
+            </div>
+
+            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">报价
+            </label>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <input type="number"  data-required="1" class="form-control" name="offerMin"/>
+                    <span class="input-group-addon">元</span>
+                </div>
+            </div>
+            <div class="rangeLine" style="font-size: 19px;">~</div>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <input type="number"  data-required="1" class="form-control" name="offerMax"/>
+                    <span class="input-group-addon">元</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="chosewarehouse.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group" style="height: 33px;margin-bottom: 0;">
+            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">
+                增值服务
+            </label>
+            <div class="col-md-10">
+                <div class="mt-checkbox-list" style="height: 34px;padding-bottom: 0px;">
+                    <label class="mt-checkbox mt-checkbox-outline" ng-repeat="list in chosewarehouse.addServiceList" style="display: inline-block;width: 100px">
+                        <input type="checkbox" value="{{list.dataValue}}" name="addService_{{dataValue}}" ng-model="list.checkState" ng-change="chosewarehouse.serviceChange(list.checkState,list.dataName)"/>
+                        <span></span>{{list.dataName}}
+                    </label>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div>
+        <div class="nullInfo" ng-if="chosewarehouse.dataList==''">
+            暂无信息
+        </div>
+        <div class="row firstRow" ng-if="chosewarehouse.dataList!=''">
+            <form id="settingWayZero">
+                <div class="packTableHeader" style="margin-top: 0px">
+                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                        <thead class="iboxHeader">
+                        <tr>
+                            <th style="width:30%">仓库</th>
+                            <th style="width:10%">库区类型</th>
+                            <th style="width:10%">可存放物品</th>
+                            <th style="width:10%">可用库容</th>
+                            <th style="width:10%">报价</th>
+                            <th style="width:20%">报价时间</th>
+                            <th style="width:10%">操作</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="ibox-contentx firstLoad" style="min-height: 300px;">
+                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                        <tbody>
+                        <tr ng-repeat="list in chosewarehouse.dataList" start-foo-table>
+                            <td style="width:30%;text-align: left">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <img style="width: 100px;height: 100px;" class="media-object" ng-src="{{list.imgs[0].img}}">
+                                    </div>
+                                    <div class="media-body" style="vertical-align: top;">
+                                        <h6 class="media-heading">
+                                            <a href="javascript:;">
+                                                <span style="font-size: 14px;">
+                                                    {{list.warehouseName}}
+                                                </span>
+                                            </a>
+                                        </h6>
+                                        <span style="color: #A6A6A6;">
+                                            {{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}
+                                        </span>
+                                        <span style="color: #A6A6A6;display: block;margin-top: 3px;">
+                                            {{list.showService}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td style="width:10%">
+                                {{list.warehouseAreaType==01?"普通":(list.warehouseAreaType==02?"冷藏":(list.warehouseAreaType==03?"恆溫":(list.warehouseAreaType==04?"特种":(list.warehouseAreaType==05?"气调":""))))}}
+                            </td>
+                            <td style="width:10%">
+                                {{list.warehouseAreaStore}}
+                            </td>
+                            <td style="width:10%">
+                                {{list.storageSqm}}m<sup>2</sup>/{{list.storageCum}}m<sup>3</sup>
+                            </td>
+                            <td style="width:10%">
+                                {{list.offerPrice/100}}元
+                            </td>
+                            <td style="width:20%">
+                                {{list.offerTime}}
+                            </td>
+                            <td style="width:10%">
+                                <span style="cursor:pointer;color: #F72D2D;outline: none;" ng-click="chosewarehouse.toSelectWare(list)">选择仓库</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="packPagination">
+                    <uib-pagination class="pagination-prev-large" total-items="chosewarehouse.pageCount" items-per-page="chosewarehouse.pageParams.rows" ng-change="chosewarehouse.getPage()" ng-model="chosewarehouse.pageParams.page" max-size="chosewarehouse.maxSize" previous-text="<" next-text=">" boundary-links="false">
+                    </uib-pagination>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="selectWare" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>下单
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal ng-pristine ng-valid">
+                    <sapn class="contentTitle">下单</sapn>
+                    <div class="form-group">
+                        <label class="textDesc">
+                            仓库地址：
+                        </label>
+                        <div class="textInput d2wtext">
+                            <span>{{chosewarehouse.selectWareData.provinceName}}{{chosewarehouse.selectWareData.cityName}}{{chosewarehouse.selectWareData.districtName}}{{chosewarehouse.selectWareData.address}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="textDesc">
+                            库区类型：
+                        </label>
+                        <div class="textInput d2wtext">
+                            <span>{{chosewarehouse.selectWareData.warehouseAreaType==01?"普通":(chosewarehouse.selectWareData.warehouseAreaType==02?"冷藏":(chosewarehouse.selectWareData.warehouseAreaType==03?"恆溫":(chosewarehouse.selectWareData.warehouseAreaType==04?"特种":(chosewarehouse.selectWareData.warehouseAreaType==05?"气调":""))))}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="textDesc">
+                            服务需求：
+                        </label>
+                        <div class="textInput d2wtext">
+                            <span>{{chosewarehouse.type == 0?'仓储租赁':(chosewarehouse.type ==1?'货物保管':'')}}</span>
+                        </div>
+                    </div>
+
+                    <div ng-if="chosewarehouse.type==1">
+
+                        <sapn class="contentTitle" style="margin-top: 30px;">订单信息</sapn>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                单价：
+                            </label>
+                            <div class="textInput" style="width: 248px;">
+                                <input name="goodsprice" type="text" class="form-control">
+                            </div>
+                            <div class="textInput" style="width: 110px;padding-left:0px;">
+                                <div style="display: flex;padding-left: 0px;width: 130px;float: left;">
+                                    <span class="d2wunit" style="width: 80px;">元/天</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                预计入库时间：
+                            </label>
+                            <div class="textInput goodsBeginTime" style="width: 248px;">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                预计出库时间：
+                            </label>
+                            <div class="textInput goodsEndTime" style="width: 248px;">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="height: auto;">
+                            <label class="textDesc">
+                                备注：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <textarea class="form-control goodsRemarks" rows="3" style="resize: none;" placeholder="200个字符以内"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div ng-if="chosewarehouse.type==0">
+                        <sapn class="contentTitle" style="margin-top: 30px;">订单信息</sapn>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                所需库容：
+                            </label>
+                            <div class="textInput" style="width: 248px;">
+                                <div class="input-group">
+                                    <input type="number" name="wareCum" min="0" data-required="1" class="form-control" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                开始时间：
+                            </label>
+                            <div class="textInput wareBeginTime" style="width: 248px;">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                结束时间：
+                            </label>
+                            <div class="textInput wareEndTime" style="width: 248px;">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textDesc">
+                                单价：
+                            </label>
+                            <div class="textInput" style="width: 248px;">
+                                <input name="wareprice" type="number" min="0" class="form-control">
+                            </div>
+                            <div class="textInput" style="width: 110px;padding-left:0px;">
+                                <div style="display: flex;padding-left: 0px;width: 130px;float: left;">
+                                    <span class="d2wunit" style="width: 80px;">元/天/</span>
+                                    <select class="form-control select2me wareGoodsUnit" name="wareGoodsUnit">
+                                        <option ng-repeat="list in chosewarehouse.unitList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="height: auto;">
+                            <label class="textDesc">
+                                备注：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <textarea class="form-control wareRemarks" rows="3" style="resize: none;" placeholder="200个字符以内"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="chosewarehouse.confirmWare()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

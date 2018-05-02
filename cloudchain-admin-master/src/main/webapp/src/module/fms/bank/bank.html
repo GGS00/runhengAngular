@@ -1,0 +1,22 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf"></i>银行卡管理</span>
+    <div class="row" style="text-align: right; margin-left: 0px; margin-right: 0px; ">
+        <div class="search-form divline divdistance">
+            <button type="button" class="btn btn-default pusht" ng-click="bank.refreshPage()" style="font-weight: inherit">刷新</button>
+            <button type="button" class="btn btn-default pusht" ng-click="bank.addBankPage()" style="font-weight: inherit">新建</button>
+            <button type="button" class="btn btn-default pusht" ng-click="bank.deleteBank()" style="font-weight: inherit">删除</button>
+            <button type="button" class="btn btn-default pusht" ng-click="bank.setDefaultBank()" style="font-weight: inherit">设置默认</button>
+        </div>
+    </div>
+
+    <table-expandable table-column="bank.column"
+                      table-page="bank.getPage()"
+                      table-data="bank.data"
+                      table-conf="bank.pageParams"
+                      self-page="false"
+                      entity="bank.entity">
+    </table-expandable>
+</div>
+
+
+

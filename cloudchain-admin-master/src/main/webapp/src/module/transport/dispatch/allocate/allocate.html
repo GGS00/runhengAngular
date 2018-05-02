@@ -1,0 +1,52 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-road"></i>调度</span>
+    <div class="row firstRow">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="调度单号"> </div>
+            </div>
+            <!--/span-->
+
+
+            <div class="btn-group col-sm-2">
+                <button type="button" class="btn blue" ng-click="dispatch.getPageByFilter()">
+                    搜索
+                </button>
+
+
+               <!-- <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle btn-operate" data-toggle="dropdown" href="javascript:;">操作
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-click="dispatch.toCreateNewDispatch()">新增调度
+
+                            </a>
+                        </li>
+                    </ul>
+                </div>-->
+
+            </div>
+
+
+
+
+    </div>
+
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="dispatch.toCreateNewDispatch()" style="font-weight: inherit">新增调度
+        </button>
+        <button type="button" class="btn btn-default" ng-click="dispatch.operateEffect()"  style="font-weight: inherit">生效调度单</button>
+        <button type="button" class="btn btn-default" ng-click="dispatch.invalid()" style="font-weight: inherit">失效调度单</button>
+        <button type="button" class="btn btn-default" ng-click="dispatch.delete()" style="font-weight: inherit">删除调度单</button>
+    </div>
+
+    <table-expandable table-column="dispatch.column"  table-page="dispatch.getPage()" table-data="dispatch.data" table-conf="dispatch.pageParams" self-page="false" entity="dispatch.entity">
+    </table-expandable>
+
+
+</div>
+
+
+

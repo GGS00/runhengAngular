@@ -1,0 +1,120 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>平账</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-10 form-group">
+                <label class=" col-sm-1" style="  margin-top: 7px;">单据编号
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_code" class="form-control" readonly >
+                </div>
+                <label class=" col-sm-1" style="margin-top: 7px;">仓库名称
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_warehouseName" class="form-control" readonly >
+                </div>
+                <label class=" col-sm-1" style="  margin-top: 7px;">账存时间
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_accountTime" class="form-control" readonly>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="platestock.platestockSure()"
+                style="font-weight: inherit">确定
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="platestock.back()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="  platestock.column" table-page="  platestock.getPage()"
+                      table-data="  platestock.data" table-conf="  platestock.pageParams" self-page="false"
+                      entity="  platestock.entity">
+    </table-expandable>
+</div>
+
+<!---->
+<!--&lt;!&ndash;货权转移对话框&ndash;&gt;-->
+<!--<div class="modal fade" id="changeOwnerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"-->
+<!--aria-hidden="true">-->
+<!--<div class="modal-dialog" style="margin-top:100px;width: 700px">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close"-->
+<!--data-dismiss="modal" aria-hidden="true">-->
+<!--&times;-->
+<!--</button>-->
+<!--<h4 class="modal-title" id="myModalLabel">-->
+<!--<i class="fa fa-plus" style="margin-right: 10px;">货权转移</i>-->
+<!--</h4>-->
+<!--</div>-->
+
+<!--<div class="modal-body">-->
+<!--<form id="allocateForm">-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label  col-md-offset-3">货品名称-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<input name="productName" type="text" class="form-control" readonly>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label  col-md-offset-3">移动后货主-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<select-table st-combo="test()" st-text="  platestock.placeholder_ownerName"-->
+<!--st-icon="  platestock.icon_owner"-->
+<!--st-value="  platestock.ownerEntity.getSelectedRows()[0].nickName">-->
+<!--<table-expandable table-column="  platestock.ownerColumn"-->
+<!--table-page="  platestock.ownerPage()"-->
+<!--table-data="  platestock.ownerData"-->
+<!--table-conf="  platestock.ownerParams"-->
+<!--self-page="true"-->
+<!--entity="  platestock.ownerEntity">-->
+<!--</table-expandable>-->
+<!--</select-table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label col-md-offset-3">转移数量-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<input name="moveOwnerQuantity" type="text" class="form-control">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label col-md-offset-3">转移原因-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<input name="mvOwnerDescription" type="text" class="form-control">-->
+<!--&lt;!&ndash;textarea name="description" class="form-control"/&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-default"-->
+<!--data-dismiss="modal">关闭-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary" ng-click="  platestock.confirmChangeOwner()">-->
+<!--确定-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+

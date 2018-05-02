@@ -1,0 +1,117 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>供应商管理
+      </span>
+
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="id_company" class="form-control" placeholder="公司名称"></div>
+            </div>
+            <div class="col-sm-2" >
+                <div class="form-group">
+                    <input type="text" id="id_nickName" class="form-control" placeholder="公司简称"></div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_isSupply">
+                        <option selected value=" ">是否供货</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_isPurchase">
+                        <option selected value=" ">是否自采</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_isPaveWare">
+                        <option selected value=" ">是否铺仓</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_isDeliver">
+                        <option selected value=" ">是否代发货</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 0px;" >
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_state">
+                        <option selected value=" ">当前状态</option>
+                        <option value="0">正常</option>
+                        <option value="1">锁定</option>
+                        <option value="2">注销</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                <div class="form-group">
+                    <label class="control-label col-sm-2" style="    margin-top: 7px;">添加时间
+                    </label>
+                    <div class="col-sm-7 senderTime">
+                        <!--<input type="text" name="name" data-required="1" class="form-control"/>-->
+                        <time-picker></time-picker>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="manage.supplierFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ui-sref="supplier.add" style="font-weight: inherit">新增供应商
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="manage.updateSupplier()" style="font-weight: inherit">修改供应商
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="manage.AddrManage()" style="font-weight: inherit">地址库管理
+        </button>
+        <button type="button" class="btn btn-default"   ng-click="manage.supplierManage()" style="font-weight: inherit">供应商商品管理
+        </button>
+        <button type="button" class="btn btn-default"    ng-click="manage.Identity()" style="font-weight: inherit">添加主账号
+        </button>
+        <button type="button" class="btn btn-default"  disabled="disabled"   style="font-weight: inherit">设置采购信息
+        </button>
+        <button type="button" class="btn btn-default"  disabled="disabled"  ng-click="manage.ShippSpace()" style="font-weight: inherit">设置发货区域
+        </button>
+        <button type="button" class="btn btn-default" disabled="disabled"  ng-click="manage.AddContacts()" style="font-weight: inherit">添加联系人
+        </button>
+        <button type="button" class="btn btn-default" disabled="disabled"   ng-click="manage.BankAccount()" style="font-weight: inherit">添加银行账户
+        </button>
+        <button type="button" class="btn btn-default" disabled="disabled"  ng-click="manage.Freeze()" style="font-weight: inherit">冻结
+        </button>
+        <button type="button" class="btn btn-default" disabled="disabled"  ng-click="manage.Unfreeze()" style="font-weight: inherit">解冻
+        </button>
+    </div>
+
+    <table-expandable table-column="column" table-page="getPage()" table-data="data" table-conf="pageParams"
+                      self-page="false" entity="entity">
+    </table-expandable>
+
+</div>
+
+
+
+

@@ -1,0 +1,71 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>报价管理</span>
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="id" class="form-control" placeholder="货源编号"> </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input type="text" name="ownerInfo" class="form-control" placeholder="货主（账号/手机号/邮箱）"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me type">
+                        <option selected value=" ">服务类型</option>
+                        <option value="0">仓储租赁</option>
+                        <option value="1">货物保管</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me warehouseAreaType" name="warehouseAreaType">
+                        <option selected value=" ">库区类型</option>
+                        <option value="01">普通</option>
+                        <option value="02">冷藏</option>
+                        <option value="03">恆溫</option>
+                        <option value="04">特种</option>
+                        <option value="05">气调</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="offermanage.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10" style="padding-left: 0px;">
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="0">带选择</option>
+                        <option value="1">已选择</option>
+                        <option value="2">取消</option>
+                    </select>
+                </div>
+            </div>
+            <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">仓库区域</label>
+            <multicity-select></multicity-select>
+        </div>
+
+
+
+    </div>
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="offermanage.cancelOffer()" style="font-weight: inherit">取消</button>
+    </div>
+    <table-expandable table-column="offermanage.column"  table-page="offermanage.getPage()" table-data="offermanage.data" table-conf="offermanage.pageParams" self-page="false" entity="offermanage.entity">
+    </table-expandable>
+</div>

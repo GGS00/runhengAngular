@@ -1,0 +1,41 @@
+
+<div class="portlet-body row">
+    <!-- BEGIN FORM-->
+    <form  id="form_sample_1" class="form-horizontal">
+        <div class="form-body">
+            <div class="nullInfo" ng-if="logistics.logisticsInfo==''">
+                <i class="fa fa-arrow-left" ng-click="logistics.backToDetail()"></i>暂无信息
+            </div>
+            <div class="divSpace" style="padding-bottom: 12px;border:none" ng-if="logistics.logisticsInfo!=''">
+                <span class="orderTitle" style="margin-bottom: 30px;display: block;"><i class="fa fa-arrow-left" ng-click="logistics.backToDetail()"></i>运单号：{{logistics.logisticsInfo[0].logisticsNo}} <span style="margin-left: 18px;font-size: 14px;color: #9E9E9E;">{{logistics.logisticsInfo[0].goodName}} (数量: {{logistics.logisticsInfo[0].count}})</span><button ng-if="logistics.logisticsInfo[0].state==0" class="btn blue-madison" type="button" style="margin-left: 16px;padding: 6px 15px;border-radius: 5px;float: right;margin-right: 25px;" ng-click="logistics.confirmR()">确认收货</button></span>
+                <ul class="timeline">
+                    <li ng-repeat="list in logistics.logisticsInfo[0].logList">
+                        <i  ng-if="$index > 0" class="fa fa-clock-o bg-aqua">
+                        </i>
+                        <i  ng-if="$index == 0" class="fa fa-clock-o" style="background: #DD4B39">
+                        </i>
+                        <div class="timeline-item">
+                                <span class="time">
+                                    <span class='label label-default'>{{list.status=='OPEN'?'打开':(list.status=='ACTIVE'?'生效':(list.status=='ENTERED'?'入场':(list.status=='DISPATCHED'?'已调度':(list.status=='ONWAY'?'在途':(list.status=='ARRIVED'?'运抵':(list.status=='SIGNED'?'签收':(list.status=='CANCEL'?'取消':(list.status=='TRUCKED'?'已装车':''))))))))}}</span>
+                                    <i class="fa fa-clock-o">
+                                    </i>
+                                    {{list.operatorTime}}
+                                </span>
+
+                            <h3 ng-if="$index == 0" class="timeline-header" style="font-size:14px;color:#DD4B39;font-weight: bold">
+                                {{list.description}}
+                            </h3>
+                            <h3 ng-if="$index > 0" class="timeline-header" style="font-size:14px">
+                                {{list.description}}
+                            </h3>
+                        </div>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+    </form>
+    <!-- END FORM-->
+</div>

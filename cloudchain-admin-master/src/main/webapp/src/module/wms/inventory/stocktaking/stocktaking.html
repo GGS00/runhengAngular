@@ -1,0 +1,92 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>盘点单管理</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+
+            <div class="col-sm-3" style="padding-left: 0px">
+                <div class="form-group">
+                    <input type="hidden" id="id_WarehouseId"
+                           value="{{ stocktaking.warehouseEntity.getSelectedRows()[0].ID}}">
+                    <select-table st-combo="test()"st-text=" stocktaking.placeholder_warehouseName"
+                                  st-icon="stocktaking.icon_warehouse"
+                                  st-value=" stocktaking.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="stocktaking.warehouseColumn"
+                                          table-page="stocktaking.warehousePage()"
+                                          table-data="stocktaking.warehouseData"
+                                          table-conf="stocktaking.warehouseParams"
+                                          self-page="true"
+                                          entity="stocktaking.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+
+            <div class="col-sm-2" style="padding-left: 0px">
+                <div class="form-group">
+                    <input type="text" id="id_creater" class="form-control" placeholder="创建人">
+                </div>
+            </div>
+
+            <div class="col-sm-2" >
+                <div class="form-group" >
+                    <select class="form-control" id="id_status">
+                        <option selected value="">状态</option>
+                        <option ng-repeat="list in stocktaking.billLst" value="{{list.dataValue}}">
+                            {{list.dataName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-9" style="padding-bottom: 12px">
+                <label class="col-sm-3" style="padding-top: 12px;">创建时间
+                </label>
+                <div class="col-sm-5 createtime" style="margin-left: -144px">
+                    <time-picker></time-picker>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="stocktaking.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.stockPlan()"
+                style="font-weight: inherit">盘点计划
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.stockActive()"
+                style="font-weight: inherit">生效
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.stockallocat(1)"
+                style="font-weight: inherit">初盘分配
+        </button>
+        <!-- 不可用 disabled="true"-->
+        <button type="button" class="btn btn-default pusht " disabled ng-click="stocktaking.inventoryUnFrozen()"
+                style="font-weight: inherit">打印盘点单
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.initstock()"
+                style="font-weight: inherit">初盘
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.stockallocat(2)"
+                style="font-weight: inherit">复盘分配
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.changeOwner(2)"
+                style="font-weight: inherit">复盘
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="stocktaking.platestock()"
+                style="font-weight: inherit">平账
+        </button>
+    </div>
+    <table-expandable table-column="stocktaking.column" table-page="stocktaking.getPage()"
+                      table-data="stocktaking.data" table-conf="stocktaking.pageParams" self-page="false"
+                      entity="stocktaking.entity">
+    </table-expandable>
+</div>
+
+
+
+

@@ -1,0 +1,170 @@
+    <div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>库区管理</span>
+        <div class="row firstRow">
+            <div class="col-md-10">
+                <div class="col-sm-2" style="padding-left: 0px;">
+                    <div class="form-group">
+                        <input type="text" id="id_areaName" class="form-control" placeholder="库区名称"></div>
+                </div>
+                <div class="col-sm-2" >
+                    <div class="form-group">
+                        <input type="text" id="id_wareName" class="form-control" placeholder="仓库名称"></div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_areaType">
+                            <option selected value=" ">库区类型</option>
+                            <option value="01">普通</option>
+                            <option value="02">冷藏</option>
+                            <option value="03">恒温</option>
+                            <option value="04">特种</option>
+                            <option value="05">气调</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_Status">
+                            <option selected value=" ">当前状态</option>
+                            <option value="ACTIVE">有效</option>
+                            <option value="INVALID">无效</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="region.regionFind()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="region.newRegion()"
+                style="font-weight: inherit">新建
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="region.updataregion()"
+                style="font-weight: inherit">修改
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="region.activeregion()"
+                style="font-weight: inherit">生效
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="region.invalidregion()"
+                style="font-weight: inherit">失效
+        </button>
+    </div>
+    <table-expandable table-column="region.column" table-page="region.getPage()"
+                      table-data="region.data" table-conf="region.region_params"
+                      self-page="false" entity="region.entity">
+    </table-expandable>
+</div>
+
+</div>
+
+<div class="modal fade selectCommonContacts2" id="newregion1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">新建库区</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal col-md-offset-3">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">所属仓库<span class="required"
+                                                                        aria-required="true"> * </span></label>
+                        <input type="hidden" value="{{region.warehouseEntity.getSelectedRows()[0].NAME}}"
+                               id="id_Warehouse">
+                        <div class="col-md-4 ">
+                        <select-table st-combo="test()" st-text="region.placeholder_warehouseName"
+                                      st-icon="region.icon_warehouse"
+                                      st-value="region.warehouseEntity.getSelectedRows()[0].NAME">
+                            <table-expandable table-column="region.warehouseColumn"
+                                              table-page="region.warehousePage()"
+                                              table-data="region.warehouseData"
+                                              table-conf="region.warehouseParams"
+                                              self-page="true"
+                                              entity="region.warehouseEntity">
+                            </table-expandable>
+                        </select-table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">库区编码<span class="required"
+                                                                        aria-required="true"> *</span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareCode" value="" placeholder="请输入库区编码">
+                        </div>
+                    </div>
+                    <div class="form-group senderAddress">
+                        <label class="col-md-2 control-label">库区名称<span class="required"  aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareNamee" value="" placeholder="请输入库区名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">描述</label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareescription"  value="" placeholder="请输入对库区描述信息">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="region.add()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade selectCommonContacts2" id="updateregion" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" >
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改库区</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">描述</label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_updateDescript"  value="" placeholder="请输入对仓库的描述">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="region.update()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

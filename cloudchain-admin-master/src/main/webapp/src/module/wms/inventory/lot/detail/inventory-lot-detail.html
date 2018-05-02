@@ -1,0 +1,88 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>库存明细</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label class="col-md-2 control-label">相关单据编号</label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="code" value = "{{inventoryDetail.code}}" class="form-control"  readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">库存</label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="shelveCode" value = "{{inventoryDetail.inventory}}" class="form-control" readonly="readonly">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">货主</label>
+                <div class="col-md-2">
+                    <input type="text" name="ownerName" value = "{{inventoryDetail.ownerName}}" class="form-control"  readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">供应商</label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text" name="supplierName" value = "{{inventoryDetail.supplierName}}" class="form-control" readonly="readonly">
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">单据类型</label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="billType" value = "{{inventoryDetail.billType}}"  class="form-control" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">所在位置</label>
+                <div class="col-md-3 col-left2">
+                    <input type="text" name="position" value = "{{inventoryDetail.position}}" class="form-control" readonly="readonly">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryDetail.returnButton()" style="font-weight: inherit">返回</button>
+    </div>
+
+    <div class="portlet-body" style="margin-top: 10px;">
+        <div class="tabbable-bordered">
+            <ul class="nav nav-tabs" id="myTab">
+                <li>
+                    <a href="#tab_inventory_change" ng-click="inventoryDetail.showTabs(0)" data-toggle="tab">库存变化明细</a>
+                </li>
+                <li>
+                    <a href="#tab_inventory_frozen" ng-click="inventoryDetail.showTabs(1)" data-toggle="tab">冻结解冻记录</a>
+                </li>
+                <li class="active">
+                    <a href="#tab_inventory_outbound" ng-click="inventoryDetail.showTabs(2)" data-toggle="tab">关联出库单</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="tab_inventory_change">
+                    <table-expandable table-column="inventoryDetail.inventChangeColumn" table-page="inventoryDetail.getInventChangePage()"
+                                      table-data="inventoryDetail.inventChangeData" table-conf="inventoryDetail.inventChangeParams"
+                                      self-page="false" entity="inventoryDetail.inventChangeEntity">
+                    </table-expandable>
+                </div>
+                <div class="tab-pane" id="tab_inventory_frozen">
+                    <table-expandable table-column="inventoryDetail.inventFrozenColumn" table-page="inventoryDetail.getInventFrozenPage()"
+                                      table-data="inventoryDetail.inventFrozenData" table-conf="inventoryDetail.inventFrozenParams"
+                                      self-page="false" entity="inventoryDetail.inventFrozenEntity">
+                    </table-expandable>
+                </div>
+                <div class="tab-pane active" id="tab_inventory_outbound">
+                    <table-expandable table-column="inventoryDetail.inventOutboundColumn" table-page="inventoryDetail.getInventOutboundPage()"
+                                      table-data="inventoryDetail.inventOutboundData" table-conf="inventoryDetail.inventOutboundParams"
+                                      self-page="false" entity="inventoryDetail.inventOutboundEntity">
+                    </table-expandable>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+

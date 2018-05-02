@@ -1,0 +1,68 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cubes"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-cubes"></i>新增常用货品</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="padding-bottom: 12px;">
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">货品名
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="name" data-required="1" class="form-control" placeholder="货品名"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">单位
+                        </label>
+                        <div class="col-md-3">
+                                <select class="form-control select2me" name="unit">
+                                    <option selected value="件">件</option>
+                                    <option value="桶">桶</option>
+                                    <option value="箱">箱</option>
+                                    <option value="捆">捆</option>
+                                    <option value="扎">扎</option>
+                                    <option value="托">托</option>
+                                    <option value="头">头</option>
+                                    <option value="台">台</option>
+                                    <option value="辆">辆</option>
+                                    <option value="袋">袋</option>
+                                    <option value="棵">棵</option>
+                                    <option value="副">副</option>
+                                    <option value="根">根</option>
+                                    <option value="kg">kg</option>
+                                    <option value="片">片</option>
+                                </select>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="comGoodsSet.commitComGoods()">添加</button>
+                            <button type="submit" class="btn white" ng-click="comGoodsSet.backComGoods()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,62 @@
+<div id="sample_1_wrapper" class="dataTables_wrapper no-footer" ui-i18n="{{lang}}">
+        <div class="row" ng-if="!table.selfPage" style="margin-bottom: 14px;">
+
+            <!--<div class="col-md-6 col-sm-6 col-sm-offset-6" ng-if="searchSwitch == 'on'">
+                <div class="input-group pull-right" style="width: 250px;">
+                    <input type="text" name="name" data-required="1" class="form-control" placeholder="关键字"/>
+                    <span class="input-group-addon btn blue">搜索</span>
+                </div>
+            </div>-->
+
+        </div>
+
+        <div ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid"></div>
+
+
+        <div class="row" style="margin-top: 16px" ng-if="!table.selfPage">
+            <div class="col-md-3 col-sm-3">
+                <div class="dataTables_info" id="sample_1_info" role="status" aria-live="polite">
+                    <page page-size="table.tableConf.rows" page-num="table.tableConf.page" page-count="gridOptions.totalItems"></page>
+
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-7" style="display: inline-flex;">
+                <div>
+                    <uib-pagination class="pagination-prev-sm pagination-sm" total-items="gridOptions.totalItems" items-per-page="table.tableConf.rows" ng-change="table.tablePage()" ng-model="table.tableConf.page" max-size="15" previous-text="<" next-text=">" boundary-links="false">
+                    </uib-pagination>
+                </div>
+                <!--<div class="col-md-6 col-sm-6">
+                    <div class="dataTables_length" id="sample_1_length">
+                        <label class="selectPageSelect">
+                            每页显示
+                            <select class="form-control input-sm input-xsmall input-inline" ng-model="table.tableConf.rows" ng-options="x for x in pages" ng-change="table.tablePage()">
+                            </select>
+                            条
+                        </label>
+                    </div>
+                </div>-->
+                <div class="input-group" style="width: 128px;margin: 4px 12px;">
+                    <input type="text" class="form-control input-sm" ng-model="table.gotoPageNum" placeholder="跳转页数" style="font-size: 12px;">
+                    <span class="input-group-btn">
+                <button class="btn blue btn-sm" type="button"  style="padding: 5px 18px 5px 18px;" ng-click="table.toPage()">
+                        确定
+                </button>
+            </span>
+                </div>
+
+            </div>
+
+            <div class="col-md-2 col-sm-2">
+                <div class="dataTables_length pull-right" id="sample_1_length">
+                    <label class="selectPageSelect">
+                        显示
+                        <select class="form-control input-sm input-xsmall input-inline" ng-model="table.tableConf.rows" ng-options="x for x in pages" ng-change="table.tablePage()">
+                        </select>
+                        条
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+

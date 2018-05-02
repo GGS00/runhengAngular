@@ -1,0 +1,69 @@
+<div>
+	<span class="pageTitle"><i class="fa fa-sticky-note-o"></i>批发订单管理</span>
+    <div class="row firstRow">
+    	<div class="col-md-10" style="padding-left: 0px;">
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <input type="text" name="orderId" class="form-control" placeholder="订单编号"> </div>
+	        </div>
+
+			<div class="col-sm-3">
+				<select class="form-control select2me userId" name="userId">
+					<option selected value=" ">选择网点</option>
+					<option ng-repeat="list in d2porder.pList" value="{{list.userId}}">{{list.nickName}}</option>
+				</select>
+			</div>
+
+	        <!--/span-->
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <select class="form-control select2me orderState">
+                        <option selected value=" ">订单状态</option>
+						<option value="0">待支付</option>
+						<option value="1">待发货</option>
+						<option value="2">待确认收货</option>
+						<option value="3">已完成</option>
+						<option value="4">关闭</option>
+					</select>
+	            </div>
+	        </div>
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <select class="form-control select2me deliverState">
+                        <option selected value=" ">发货状态</option>
+						<option value="0">未发货</option>
+						<option value="1">已发货</option>
+						<option value="2">部分发货</option>
+					</select>
+	            </div>
+	        </div>
+
+
+        </div>
+        <div class="col-md-2">
+	        <div class="btn-group">
+				<button type="button" class="btn blue" ng-click="d2porder.getPageByFilter()">
+					搜索
+				</button>
+			</div>
+	    </div>
+
+    </div>
+
+	<div class="search-form btnGroup">
+		<!--<button type="button" class="btn btn-default" ng-click="purchase.toCreatePurchase()" style="font-weight: inherit">批量导出-->
+		<!--</button>-->
+		<!--<button type="button" class="btn btn-default" ng-click="purchase.editPurchase()" style="font-weight: inherit">批量打印</button>-->
+		<!--<button type="button" class="btn btn-default" ng-click="purchase.examinePurchase()" style="font-weight: inherit">审核</button>-->
+		<!--<button type="button" class="btn btn-default" ng-click="purchase.removePurchase()" style="font-weight: inherit">删除</button>-->
+	</div>
+
+	<table-expandable table-column="d2porder.column"  table-page="d2porder.getPage()" table-data="d2porder.data" table-conf="d2porder.pageParams" self-page="false" entity="d2porder.entity">
+	</table-expandable>
+
+
+</div>
+</div>
+
+
+

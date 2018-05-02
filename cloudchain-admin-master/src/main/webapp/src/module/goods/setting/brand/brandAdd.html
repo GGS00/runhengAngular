@@ -1,0 +1,142 @@
+<div class="portlet light bordered">
+    <div class="portlet-body form">
+        <form role="form" class="form-horizontal">
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name">品牌名称</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="add.name" id="name" placeholder="请填写品牌名称">
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name">Logo</label>
+                    <div class="col-md-2 control-label" style="text-align: left">
+                        <a href="javascript:;" class="btn btn-xs grey-cascade" ng-click="showAddImg()">
+                            <i class="fa fa-link"></i>
+                            上传图片
+                        </a>
+                    </div>
+                    <div class="col-md-4 control-label">
+                        <img class="img-responsive" style="width: 100px;height: 100px" ng-src="{{add.currentImg.img}}"  alt="" ng-click="showAddImg($index)">
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name">品牌描述</label>
+                    <div class="col-md-4">
+                        <textarea type="text" class="form-control input-sm" ng-model="add.description"  placeholder="请填写品牌描述"></textarea>
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label">适用商品分类</label>
+                    <div class="col-md-10">
+                        <div class="md-radio-list">
+                            <div class="md-radio  has-success">
+                                <input type="radio" id="radio50" ng-model="add.isApplyAll" value="1" name="radio211" class="md-radiobtn">
+                                <label for="radio50">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全部商品分类</label>
+                            </div>
+                            <div class="md-radio has-warning">
+                                <input type="radio" id="radio51" ng-model="add.isApplyAll" value="0" name="radio211" class="md-radiobtn" checked="">
+                                <label for="radio51">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>部分商品分类</label>
+                                <a ng-click="add.setShowClassify()">选择商品分类</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions margin-top-10">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="button" class="btn blue" ng-click="add.save()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div class="portlet-body">
+                        <div id="categoryTree" class="tree-demo"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

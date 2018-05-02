@@ -1,0 +1,55 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>提取余额到银行卡</span>
+    <div class="portlet-body row">
+        <form  id="dataForm" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" >选择银行卡：</label>
+                        <div class="col-sm-4" >
+                           <select class="form-control js-data-example-ajax"
+                                    id="bankId" name="bankId"
+                                   ng-model="defaultUserBank"
+                                   ng-options="userBank.id as userBank.name for userBank in userBankList" >
+                               <option value="">请选择</option>
+                           </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >提现金额：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="amount" name="amount" data-required="1" class="form-control" autocomplete="off" />
+                        </div>
+                        <div class="col-sm-1" style="padding-top:7px;padding-left:0px;width:auto;">
+                            元
+                        </div>
+                        <div class="col-sm-4" style="padding-top:7px;padding-left:10px;width:auto;">
+                            <a ng-click="withdraw.allWithdraw()" >全部提现</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >&nbsp;</label>
+                        <div class="col-sm-4" style="color:#B1AFAF;">可提现金额{{withdraw.amount}}元</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >支付密码：</label>
+                        <div class="col-sm-4">
+                            <input type="password" id="payPwd" name="payPwd" data-required="1" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="withdraw.submit()">下一步</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

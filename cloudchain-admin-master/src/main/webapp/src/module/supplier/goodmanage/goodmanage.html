@@ -1,0 +1,288 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>商品管理</span>
+    <div class="row firstRow">
+        <div class="col-md-11">
+            <div class="col-md-3" style="padding-left: 0px; height: 49px">
+                <div class="form-group">
+                    <input type="text" id="skuId_id" class="form-control" placeholder="商品sku编号"></div>
+            </div>
+            <!--<div class="col-md-3">-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text" id="skuTitle" class="form-control" placeholder="商品名称"></div>-->
+            <!--</div>-->
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" id="supplierId_id" class="form-control" placeholder="供应商编号"></div>
+            </div>
+            <!--<div class="col-md-3" >-->
+                <!--<div class="form-group">-->
+                    <!--<select class="form-control" id="urgent2">-->
+                        <!--<option selected value="">当前状态</option>-->
+                        <!--<option value="1">是</option>-->
+                        <!--<option value="0">否</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-md-3" style="padding-left: 0px;">-->
+                <!--<div class="form-group">-->
+                    <!--<input type="text" id="code5" class="form-control" placeholder="公司简称"></div>-->
+            <!--</div>-->
+            <!--<div class="col-md-9" style="padding-left: 0px;  height: 49px">-->
+                <!--<div class="form-group">-->
+                    <!--<label class="control-label col-md-2 bold">商品分类-->
+                    <!--</label>-->
+                    <!--<div class="col-md-3">-->
+                        <!--<select class="form-control select2me" ng-change="add.selectRoleChange()"-->
+                                <!--ng-model="add.roleSelect">-->
+                            <!--<option selected value="">全部</option>-->
+                            <!--&lt;!&ndash;<option ng-repeat="list in add.roleList" value="{{list.roleId}}">{{list.roleName}}</option>&ndash;&gt;-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3">-->
+                        <!--<select class="form-control select2me" ng-change="add.selectNameChange()"-->
+                                <!--ng-model="add.nameSelect">-->
+                            <!--<option selected value="">全部</option>-->
+                            <!--&lt;!&ndash;<option ng-repeat="list in add.nameList" value="{{list.empId}}">{{list.realName}}</option>&ndash;&gt;-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="col-md-3">-->
+                        <!--<select class="form-control select2me" ng-change="add.selectNameChange()"-->
+                                <!--ng-model="add.nameSelect">-->
+                            <!--<option selected value="">全部</option>-->
+                            <!--&lt;!&ndash;<option ng-repeat="list in add.nameList" value="{{list.empId}}">{{list.realName}}</option>&ndash;&gt;-->
+                        <!--</select>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+
+
+        <div class="col-md-1">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="goodmanage.GoodManageFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="search-form  divline  divdistance">
+    <button type="button" class="btn btn-default pusht" ng-click="goodmanage.toCreateWaybill()"
+            style="font-weight: inherit">添加供应商品
+    </button>
+    <button type="button" class="btn btn-default" ng-click="allshow(1)" style="font-weight: inherit">批量改价格
+    </button>
+    <button type="button" class="btn btn-default" ng-click="allshow(2)" style="font-weight: inherit">批量改库存
+    </button>
+    <!--<button type="button" class="btn btn-default" style="font-weight: inherit" data-toggle="modal" href="#large">-->
+        <!--添加供应商品-->
+    <!--</button>-->
+    <!--<button type="button" class="btn btn-default pusht" disabled="disabled" ng-click="goodmanage.ActiveOutbound()"-->
+            <!--style="font-weight: inherit">审核通过-->
+    <!--</button>-->
+    <!--<button type="button" class="btn btn-default pusht"  disabled="disabled" style="font-weight: inherit"-->
+            <!--ng-click="goodmanage.outboundDelete()">审核不通过-->
+    <!--</button>-->
+    <!--<button type="button" class="btn btn-default pusht"  disabled="disabled" style="font-weight: inherit"-->
+            <!--ng-click="goodmanage.outboundDelete()">强制下架-->
+    <!--</button>-->
+    <button type="button" class="btn btn-default pusht" ng-click="goodmanage.returnButton()"
+            style="font-weight: inherit">返回
+    </button>
+</div>
+<table-expandable table-column="goodmanage.column" table-page="goodmanage.getPage()"
+                  table-data="goodmanage.data" table-conf="goodmanage.params"
+                  self-page="false" entity="goodmanage.entity">
+</table-expandable>
+</div>
+</div>
+
+
+<div class="modal fade" id="priceEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>修改价格
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form name="sp" class="modal-body-content" style="margin-top: 20px;">
+                    <md-input-container class="md-block">
+                        <label for="price">填写批量价格</label>
+                        <input name="listPrice" type="number" id="price" ng-model="goodmanage.listPrice"  min="0" md-autofocus>
+                        <div ng-messages="sp.listPrice.$error" ng-show="sp.listPrice.$dirty">
+                            <div ng-message="number">必须是数字</div>
+                        </div>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="batchPrice()" data-dismiss="modal" >
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="qtyEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>修改库存
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form name="sp" class="modal-body-content" style="margin-top: 20px;">
+                    <md-input-container class="md-block">
+                        <label for="qty">填写批量库存</label>
+                        <input name="listQty" type="number" id="qty" ng-model="goodmanage.listQty"  min="0" md-autofocus>
+                        <div ng-messages="sp.listQty.$error" ng-show="sp.listQty.$dirty">
+                            <div ng-message="number">必须是数字</div>
+                            <div ng-message="min">必须正数</div>
+                        </div>
+                    </md-input-container>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="batchQty()" data-dismiss="modal" >
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-modal-lg" id="large" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-md-3">
+                            <div id="categoryTree" class="tree-demo"> </div>
+                        </div>
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9">
+                            <table-expandable table-column="goodmanage.column2"  table-page="goodmanage.getList()" table-conf="goodmanage.params2" table-data="goodmanage.data2" entity="goodmanage.entity" self-page="true">
+                            </table-expandable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">Close</button>
+                <button type="button" class="btn green">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!--<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"-->
+<!--aria-hidden="true">-->
+<!--<div class="modal-dialog" style="margin-top:100px;">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close"-->
+<!--data-dismiss="modal" aria-hidden="true">-->
+<!--&times;-->
+<!--</button>-->
+<!--<h4 class="modal-title" id="myModalLabel">-->
+<!--<i class="fa fa-plus" style="margin-right: 10px;">添加供应商品</i>-->
+<!--</h4>-->
+<!--</div>-->
+<!--<div class="modal-body">-->
+<!--<div class="row">-->
+<!--<div class="col-sm-6 col-sm-offset-3">-->
+<!--<div class="form-group">-->
+<!--<input type="hidden" id="id_goods"-->
+<!--value="{{goodmanage.goodsEntity.getSelectedRows()[0].title}}"/>-->
+<!--<select-table st-combo="test()" st-text="goodmanage.placeholder_goodsName"-->
+<!--st-icon="goodmanage.icon_goodsName"-->
+<!--st-value="goodmanage.goodsEntity.getSelectedRows()[0].title">-->
+<!--<table-expandable table-column="goodmanage.goodscolumn"-->
+<!--table-page="goodmanage.getGoodsPage()"-->
+<!--table-data="goodmanage.goods_data"-->
+<!--table-conf="goodmanage.goodsParams" self-page="true"-->
+<!--entity="goodmanage.goodsEntity">-->
+<!--</table-expandable>-->
+<!--</select-table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col-sm-6 col-sm-offset-3">-->
+<!--<div class="form-group">-->
+<!--<input type="text" id="id_quantity" class="form-control" placeholder="请输入数量">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col-sm-6 col-sm-offset-3">-->
+<!--<div class="form-group">-->
+<!--<select class="form-control" id="id_intensify">-->
+<!--<option selected value="">库存状态</option>-->
+<!--<option value="GOOD">良品</option>-->
+<!--<option value="GOOD">不良品</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col-sm-6 col-sm-offset-3">-->
+<!--<div class="form-group">-->
+<!--<input type="hidden" id="id_deal"-->
+<!--value="{{goodmanage.dealEntity.getSelectedRows()[0].nickName}}"/>-->
+<!--<select-table st-combo="test()" st-text="goodmanage.placeholder_dealer"-->
+<!--st-icon="goodmanage.icon_dealer"-->
+<!--st-value="goodmanage.dealEntity.getSelectedRows()[0].nickName">-->
+<!--<table-expandable table-column="goodmanage.dealcolumn"-->
+<!--table-page="goodmanage.getdealPage()"-->
+<!--table-data="goodmanage.deal_data"-->
+<!--table-conf="goodmanage.dealerParams" self-page="true"-->
+<!--entity="goodmanage.dealEntity">-->
+<!--</table-expandable>-->
+<!--</select-table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="col-sm-6 col-sm-offset-3">-->
+<!--<div class="form-group">-->
+<!--<input type="text" id="Id_weight" class="form-control" placeholder="请输入重量">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-default"-->
+<!--data-dismiss="modal">关闭-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary" ng-click="goodmanage.OutboundDetailSure()">-->
+<!--添加-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+

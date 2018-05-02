@@ -1,0 +1,257 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>更新物流公司</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group">
+                        <input type="hidden" value="{{updateLogisticsComp.data.id}}" name="id">
+                        <label class="col-md-2 control-label">公司名称<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" name="name" placeholder="请输入公司名称" value="{{updateLogisticsComp.data.name}}">
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="updateLogisticsComp.citySwitch==0">
+                        <label class="control-label col-md-2 ">公司地址<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-3">
+
+                            <input id="addr_id" type="text" readonly class="form-control"/>
+                        </div>
+                        <button type="button" class="btn btn-default" style=" height: 34px"
+                                ng-click="updateLogisticsComp.updateAddr()">修改地址
+                        </button>
+                    </div>
+                    <div class="form-group companyAddress" ng-show="updateLogisticsComp.citySwitch==1">
+                        <label class="col-md-2 control-label">公司网点<span class="required" aria-required="true"> * </span></label>
+                        <city-select ></city-select>
+                        <button type="button" class="btn btn-default" style=" height: 34px"
+                                ng-click="updateLogisticsComp.cancelAddr()">取消修改
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">详细地址<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="address" placeholder="请输入公司详细地址" value="{{updateLogisticsComp.data.address}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" >对应电商物流</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="parentLogisticCompId" ng-model="updateLogisticsComp.parentLogisticCompId"
+                                    ng-options="y.dataValue as y.dataName for y in updateLogisticsComp.logisticsList">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">面单类型<span class="required" aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="radio13" name="sheetType" class="md-radiobtn"
+                                           ng-model="updateLogisticsComp.sheetTypeVal" value="10" ng-change="updateLogisticsComp.getPrintTemplatePage()">
+                                    <label for="radio13">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>普通面单</label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio" id="radio14" name="sheetType" class="md-radiobtn"
+                                           ng-model="updateLogisticsComp.sheetTypeVal" value="11" ng-change="updateLogisticsComp.getPrintTemplatePage()">
+                                    <label for="radio14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 电子面单 </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label sheetOriginId" >单号来源</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="sheetOriginId">
+                                <option value="{{updateLogisticsComp.data.sheetOriginId}}" selected>{{updateLogisticsComp.data.sheetOriginId}}</option>
+                                <option value="1">普通面单线下获取-手动填写/扫描上传</option>
+                                <option value="2">电子面单选择已完成对接的第三方系统</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label sheetTemplateId" >打印模板</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="sheetTemplateId" ng-model="updateLogisticsComp.templateId"
+                                    ng-options="y.templateId as y.templateName for y in updateLogisticsComp.templateList">
+                                <option value="1">对应面单类型提供选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+               <!-- <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">物流费用设置
+                        </label>
+                    </div>
+                    <div class=""   ng-repeat="list in addLogisticsComp.logisticsFeeSettings track by $order" style="border:3px solid #000">
+                        <div class="form-group">
+                            <div class="sendAddress_{{$index}}"
+                                 ng-repeat="list1 in list.sendAddressList1">
+                                <label class="col-md-2 control-label">适用地区
+                                    <span style="font-weight: bold">({{$index+1}})</span>
+                                </label>
+                                <multicity-select></multicity-select>
+                                <div class="col-sm-2 pull-left addDiv">
+                                    <i class="fa fa-plus plus" ng-click="addLogisticsComp.addNewSend($order)"></i>
+                                </div>
+                                <div class="col-sm-2 pull-left addDiv">
+                                    <i class="fa fa-remove remove" ng-click="addLogisticsComp.removeSend($order$index)"
+                                       ng-if="addLogisticsComp.sendAddressList.length>1"></i>
+                                </div>
+
+                            </div>
+                            <label class="col-md-1 control-label">首重(kg)</label>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" value="" ng-model="list.initialWeight">
+                            </div>
+                            <label class="col-md-1 control-label" >首重单价(元)</label>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" value=""  ng-model="list.initialUnitPrice">
+                            </div>
+                            <label class="col-md-1 control-label" >kg</label>
+
+                            <label class="col-md-2 control-label">续重(kg)</label>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" value=""  ng-model="list.continuedWeight">
+                            </div>
+                            <label class="col-md-1 control-label" >续重单价(元)</label>
+                            <div class="col-md-1">
+                                <input type="text" class="form-control" value=""  ng-model="list.continuedUnitPrice">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <div class="col-sm-2">
+                            <a  class="btn btn-xs blue" ng-click="addLogisticsComp.addNewSetting()"> 添加设置
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a  class="btn btn-xs blue" ng-click="addLogisticsComp.removeNewSetting()"> 删除
+                                <i class="fa fa-remove "></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">物流费用结算周期(天)</label>
+                        <div class="col-md-4">
+                            <input type="number" class="form-control" name="logisticsFeeSettleDay" placeholder="请输入物流费用结算周期" value="{{updateLogisticsComp.data.logisticsFeeSettleDay}}">
+                        </div>
+                    </div>
+                </div>-->
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">物流费用转账账户
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">公司名称</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="toCompanyName" placeholder="请输入公司名称" value="{{updateLogisticsComp.data.toCompanyName}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">法人</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="toCompanyLegelPerson" placeholder="请输入法人" value="{{updateLogisticsComp.data.toCompanyLegelPerson}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">开户银行</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="toBankName" placeholder="请输入开户银行" value="{{updateLogisticsComp.data.toBankname}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">银行账号</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="toBankAccount" placeholder="请输入银行账号" value="{{updateLogisticsComp.data.toBankAccount}}">
+                        </div>
+                    </div>
+                </div>
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">联系人信息
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">联系人</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="contactorName" placeholder="请输入联系人" value="{{updateLogisticsComp.data.contactorName}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">联系电话</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="contactorMobile" placeholder="请输入联系电话" value="{{updateLogisticsComp.data.contactorMobile}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">联系邮箱</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="contactorMail" placeholder="请输入联系邮箱" value="{{updateLogisticsComp.data.contactorMail}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">合作状态<!--<span class="required" aria-required="true"> * --></span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio"  name="status" class="md-radiobtn"
+                                           ng-model="updateLogisticsComp.statusVal" value="ACTIVE">
+                                    <label for="radio13">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>有效</label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio" name="status" class="md-radiobtn"
+                                           ng-model="updateLogisticsComp.statusVal" value="INVALID">
+                                    <label for="radio14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 无效 </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  <div class="form-group" style="margin-bottom:0px;">
+                          <div class="col-sm-2">
+                              <a  class="btn btn-xs blue" ng-click="addLogisticsComp.addNewCompany()"> 添加
+                                  <i class="fa fa-plus"></i>
+                              </a>
+                          </div>
+                      </div>-->
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="form-actions">
+        <div class="row" style="margin-left: 15px">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn blue" ng-click="updateLogisticsComp.update()">确定</button>
+                <button type="cancel" class="btn white" ng-click="updateLogisticsComp.return()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-user"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-user"></i>新增联系人</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="padding-bottom: 12px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司名
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="company" data-required="1" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">联系人
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="cneeName" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">联系方式
+                        </label>
+                        <div class="col-md-3">
+                            <input name="cneeMobile" type="tel"  class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group address">
+                        <label class="control-label col-md-3 bold">地址
+                        </label>
+                        <city-select></city-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">详细地址
+                        </label>
+                        <div class="col-md-3">
+                            <input name="address" type="text" class="form-control" />
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="addContacts.submitContacts()">确定</button>
+                            <button type="cancel" class="btn white" ng-click="addContacts.toContacts()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

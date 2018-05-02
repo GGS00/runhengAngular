@@ -1,0 +1,58 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-users"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-users"></i>新增常用联系人</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="padding-bottom: 12px;">
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">联系人
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="name" data-required="1" class="form-control" placeholder="姓名"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司名
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="companyName" data-required="1" class="form-control" placeholder="公司名"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">联系方式
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="mobile" data-required="1" class="form-control" placeholder="电话"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="comContactsSet.commitComContacts()">添加</button>
+                            <button type="submit" class="btn white" ng-click="comContactsSet.backComContacts()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

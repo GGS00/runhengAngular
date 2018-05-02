@@ -1,0 +1,15 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-map-pin"></i>常用地址</span>
+
+    <div class="search-form btnGroup" style="margin-top: 12px;">
+        <button type="button" class="btn btn-default"  ng-click="comAddress.addcomAddress()" style="font-weight: inherit">新增</button>
+        <button type="button" class="btn btn-default"  ng-click="comAddress.removeComAddress()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="comAddress.column"  table-page="comAddress.getPage()" table-data="comAddress.data" table-conf="comAddress.pageParams" self-page="false" entity="comAddress.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

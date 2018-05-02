@@ -1,0 +1,197 @@
+<style>
+    #fake-app {
+        position: relative;
+        height: 400px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid rgba(0,0,0,0.2); }
+    #fake-app .sidebar {
+        position: absolute;
+        width: 40%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background: #FFF;
+        border-right: 1px solid rgba(0,0,0,0.2);
+        overflow: auto; }
+    #fake-app .sidebar md-icon {
+        display: block;
+        color: #ddd;
+        margin-top: 15px; }
+    #fake-app .app-body {
+        position: absolute;
+        left: 40%;
+        width: 60%;
+        top: 0;
+        bottom: 0;
+        background-color: white;
+        padding: 10px;
+        overflow: auto; }
+    .packCheck{
+        margin-bottom:0px;
+    }
+
+    .packCheck tbody tr:first-child td{
+        border-top:none;
+    }
+
+    .packCheck thead th {
+        vertical-align: middle !important;
+        text-align: center;
+        font-size: 13px !important;
+        color: #666;
+    }
+
+    .packCheck tbody td {
+        text-align: center;
+        word-break: break-all;
+        vertical-align: middle !important;
+        font-size: 12px !important;
+    }
+
+    .ibox-content .packCheck tr:nth-child(odd) {
+
+    }
+    .md-b-active {
+        background-color:#e2f8ff
+    }
+</style>
+
+<md-card>
+    <md-card-title>
+        <md-card-title-media>
+            <div class="md-media-sm card-media" style="margin-right: 10px"><img ng-src="{{imgs?imgs[0].img:'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image'}}" style="width:100%;"></div>
+        </md-card-title-media>
+        <md-card-title-text>
+            <span class="md-headline">{{spu.spuName}}</span>
+            <span class="md-subhead">库存 : {{totalSpuInv}}</span>
+        </md-card-title-text>
+        <md-card-title-text flex="30">
+            <md-button onclick="javascript:history.back(-1);">返回</md-button>
+        </md-card-title-text>
+    </md-card-title>
+</md-card>
+
+<div id="fake-app">
+    <div class="sidebar">
+        <md-list flex>
+            <md-list-item ng-repeat="list in sku" class="md-3-line" style="background: {{list.active?'#e2f8ff':'#FFF'}}" ng-click="getList(list.skuId)">
+                <div class="md-list-item-text" layout="column">
+                    <h4>{{list.skuTitle}}</h4>
+                    <p>规格:{{list.specDesc}}</p>
+                    <p>总库存:{{list.totalInv}}</p>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+    </div>
+
+    <div class="app-body">
+        <div class="portlet-body">
+            <div class="portlet light bordered">
+                <div class="portlet-body">
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <a href="#{{list.skuId}}_2_1" onclick="return false;" data-toggle="tab"> 自有仓 ({{selfInvCount}})</a>
+                        </li>
+                        <li>
+                            <a href="#{{list.skuId}}_2_2" onclick="return false;" data-toggle="tab"> 供应商仓 ({{supplierInvCount}})</a>
+                        </li>
+                        <li>
+                            <a href="#{{list.skuId}}_2_3" onclick="return false;" data-toggle="tab"> 门店仓 ({{shopInvCount}})</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="{{list.skuId}}_2_1">
+                            <table class="table table-striped table-bordered table-hover order-column packCheck">
+                                <thead class="flip-content">
+                                <tr>
+                                    <th width="60%"> 仓库名称 ({{selfWh.length}}) </th>
+                                    <th> 仓库库存 ({{selfInvCount}}) </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in selfWh">
+                                    <td >{{item.whName}} </td>
+                                    <td>{{item.qty}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="{{list.skuId}}_2_2">
+                            <table class="table table-striped table-bordered table-hover order-column packCheck">
+                                <thead class="flip-content">
+                                <tr>
+                                    <th width="60%"> 供应商 ({{supplierWh.length}}) </th>
+                                    <th> 库存 ({{supplierInvCount}}) </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in supplierWh">
+                                    <td>{{item.whName}} </td>
+                                    <td>{{item.qty}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="{{list.skuId}}_2_3">
+                            <table class="table table-striped table-bordered table-hover order-column packCheck">
+                                <thead class="flip-content">
+                                <tr>
+                                    <th width="60%"> 门店名称 ({{shopWh.length}}) </th>
+                                    <th> 库存 ({{shopInvCount}})</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="item in shopWh">
+                                    <td> </td>
+                                    <td> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>修改库存
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-3 control-label">库存
+                        <span class="required" aria-required="true">*</span>
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" ng-model="stock.quantity" placeholder="设置库存数量">
+                        <div class="form-control-focus"> </div>
+                        <span class="help-block">设置库存数量</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="add()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

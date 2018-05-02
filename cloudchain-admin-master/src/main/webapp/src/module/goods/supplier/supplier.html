@@ -1,0 +1,183 @@
+<style>
+    #fake-app {
+        position: relative;
+        height: 400px;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        border: 1px solid rgba(0,0,0,0.2); }
+    #fake-app .sidebar {
+        position: absolute;
+        width: 40%;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        background: #FFF;
+        border-right: 1px solid rgba(0,0,0,0.2);
+        overflow: auto; }
+    #fake-app .sidebar md-icon {
+        display: block;
+        color: #ddd;
+        margin-top: 15px; }
+    #fake-app .app-body {
+        position: absolute;
+        left: 40%;
+        width: 60%;
+        top: 0;
+        bottom: 0;
+        background-color: white;
+        padding: 10px;
+        overflow: auto; }
+    .packCheck{
+        margin-bottom:0px;
+    }
+
+    .packCheck tbody tr:first-child td{
+        border-top:none;
+    }
+
+    .packCheck thead th {
+        vertical-align: middle !important;
+        text-align: center;
+        font-size: 13px !important;
+        color: #666;
+    }
+
+    .packCheck tbody td {
+        text-align: center;
+        word-break: break-all;
+        vertical-align: middle !important;
+        font-size: 12px !important;
+    }
+
+    .ibox-content .packCheck tr:nth-child(odd) {
+
+    }
+
+</style>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase">供应商设置</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btnGroup">
+                                <button data-toggle="modal" data-target="#show" class="btn sbold green" style="font-weight: inherit"> 添加供应商
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                                <button type="button" class="btn btn-default" style="font-weight: inherit"  onclick="javascript:history.back(-1);">返回
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tools"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="fake-app">
+    <div class="sidebar">
+        <md-list flex>
+            <md-list-item ng-repeat="list in skus" class="md-3-line" style="background: {{list.active?'#e2f8ff':'#FFF'}}" ng-click="getSpList(list.skuId)">
+                <div class="md-list-item-text" layout="column">
+                    <h4>SKU编号:{{list.skuId}}</h4>
+                    <p>规格:{{list.specDesc}}</p>
+                    <p>供应商数量:{{list.supplierCount}}</p>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+
+        </md-list>
+    </div>
+
+    <div class="app-body">
+        <table class="table table-striped table-bordered table-hover order-column packCheck" id="table">
+            <thead>
+            <tr>
+                <th>供应商编号</th>
+                <th>供应商名称</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr ng-if="spList[0].relId != null" ng-repeat="list in spList track by $index" finish-repeat="initTable()">
+                    <td ng-bind-html="list.supplierId"></td>
+                    <td ng-bind-html="list.supplierName"></td>
+                    <td><md-button ng-click="delSupplier(list.relId)"><span style="color: #FF4A4A">删除</span></md-button></td>
+                </tr>
+                <tr ng-if="spList[0].relId == null">
+                    <td colspan="3">未绑定供应商</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+<div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <table-expandable table-column="supplier.column"  table-page="supplier.getList()" table-conf="supplier.pageParams" table-data="supplier.data" entity="supplier.entity" self-page="false">
+                </table-expandable>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addSupplier()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                是否删除？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn red" ng-click="delSupplier()">
+                    删除
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

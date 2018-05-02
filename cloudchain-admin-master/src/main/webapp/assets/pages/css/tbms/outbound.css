@@ -1,0 +1,44 @@
+
+.divline{
+    background: #fff!important;
+    margin-left: 0px;
+    margin-right: auto;
+    border: 1px solid #f2f2fa;
+    padding: 5px;
+    _z-index: 30;
+    font-weight: inherit;
+}
+
+.divdistance{
+    margin-top: 8px;
+    margin-bottom: -22px;
+    margin-left: -6px;
+     border-color: #ffffff;
+}
+.col-left{
+    margin-left: -22px;
+    margin-top: 8px;
+    height: 50px;
+    margin-bottom: -11px;
+}
+.col-left2{
+    margin-left: -22px;
+}
+.pTitle{
+    margin: 3px;
+    margin-left: -8px;
+    margin-top: 1px;
+    font-size: 15px;
+}
+#selectCommonContacts .modal-dialog{
+    min-width:970px;
+}
+#selectCommonContacts2 .modal-dialog{
+    min-width:700px;
+}
+.selectCommonContacts .modal-dialog{
+    min-width:700px;
+}
+.selectCommonContacts2 .modal-dialog{
+    min-width:970px;
+}

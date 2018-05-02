@@ -1,0 +1,174 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>调拨单管理</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-3" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="code" class="form-control" placeholder="调拨单号"></div>
+            </div>
+            <div class="col-sm-3" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="in_code" class="form-control" placeholder="入库单编号"></div>
+            </div>
+            <div class="col-sm-3" style="padding-left: 0px;">
+                <div class="form-group">
+                        <input type="text" id="out_code" class="form-control" placeholder="出库单编号"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" id="status">
+                        <option selected value="">调拨单状态</option>
+                        <option value="0">打开</option>
+                        <option value="1">待出库</option>
+                        <option value="2">出库中</option>
+                        <option value="3"> 待入库</option>
+                        <option value="4"> 入库中</option>
+                        <option value="5"> 完成</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-10" style="    padding-bottom: 13px;">
+                <label class="col-sm-3" style="padding-top: 9px;">调拨单时间
+                </label>
+                <div class="col-sm-6 senderTime" style="margin-left: -165px">
+                    <single-time-picker></single-time-picker>
+                </div>
+            </div>
+            <div class="col-sm-10" style="    padding-bottom: 13px;">
+                <label class="col-sm-3" style="padding-top: 9px;">入库单时间
+                </label>
+                <div class="col-sm-6 inboundFinishTime" style="margin-left: -165px">
+                    <single-time-picker></single-time-picker>
+                </div>
+            </div>
+            <div class="col-sm-10" style="    padding-bottom: 13px;">
+                <label class="col-sm-3" style="padding-top: 9px;">出库单时间
+                </label>
+                <div class="col-sm-6 outboundFinishTime" style="margin-left: -165px">
+                    <single-time-picker></single-time-picker>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="requisition.OutboundFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<div class="search-form  divline  divdistance">
+    <button type="button" class="btn btn-default pusht" ng-click="requisition.toCreateWaybill()"
+            style="font-weight: inherit">新建调拨单
+    </button>
+    <button type="button" class="btn btn-default pusht" ng-click="requisition.ActiveOutbound()"
+            style="font-weight: inherit">生效
+    </button>
+    <button type="button" class="btn btn-default pusht" ng-click="requisition.invalidOutbound()"
+            style="font-weight: inherit">失效
+    </button>
+    <!--<button type="button" class="btn btn-default pusht" style="font-weight: inherit"-->
+            <!--ng-click="requisition.outboundDelete()">删除-->
+    <!--</button>-->
+
+</div>
+<table-expandable table-column="requisition.column" table-page="requisition.getOutboundPage()"
+                  table-data="requisition.data" table-conf="requisition.outbound_params"
+                  self-page="false" entity="requisition.entity">
+</table-expandable>
+</div>
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加货品出库明细</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" id="id_goods"
+                                   value="{{requisition.goodsEntity.getSelectedRows()[0].title}}"/>
+                            <select-table st-combo="test()" st-text="requisition.placeholder_goodsName"
+                                          st-icon="requisition.icon_goodsName"
+                                          st-value="requisition.goodsEntity.getSelectedRows()[0].title">
+                                <table-expandable table-column="requisition.goodscolumn"
+                                                  table-page="requisition.getGoodsPage()"
+                                                  table-data="requisition.goods_data"
+                                                  table-conf="requisition.goodsParams" self-page="true"
+                                                  entity="requisition.goodsEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="id_quantity" class="form-control" placeholder="请输入数量">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <select class="form-control" id="id_intensify">
+                                <option selected value="">库存状态</option>
+                                <option value="GOOD">良品</option>
+                                <option value="GOOD">不良品</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" id="id_deal"
+                                   value="{{requisition.dealEntity.getSelectedRows()[0].nickName}}"/>
+                            <select-table st-combo="test()" st-text="requisition.placeholder_dealer"
+                                          st-icon="requisition.icon_dealer"
+                                          st-value="requisition.dealEntity.getSelectedRows()[0].nickName">
+                                <table-expandable table-column="requisition.dealcolumn"
+                                                  table-page="requisition.getdealPage()"
+                                                  table-data="requisition.deal_data"
+                                                  table-conf="requisition.dealerParams" self-page="true"
+                                                  entity="requisition.dealEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="Id_weight" class="form-control" placeholder="请输入重量">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="requisition.OutboundDetailSure()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

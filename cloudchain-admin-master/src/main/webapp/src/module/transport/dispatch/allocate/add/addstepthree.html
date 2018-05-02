@@ -1,0 +1,286 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-road"></i>货物配载</span><span style="color:#949494">(<span class="badge badge-success" style="margin: 0px 5px 3px 5px;"> 3 </span>货物配载到载具: )</span>
+
+
+    <form  id="finalDispatch" class="form-horizontal ng-pristine ng-invalid ng-invalid-required">
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <label class="control-label col-sm-1">
+                </label>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        载具
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        主司机
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        副司机
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="divTableHeader">
+                        运单
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        说明
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group vehicleOrder_{{$index}}" ng-repeat="list in finalDispatch.vehicleDList">
+                <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                    <span class="badge badge-default">{{$index+1}}</span>
+                </label>
+                <div class="col-sm-2">
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].vehicleId" value="{{list.vehicleId}}"/>
+                    <input type="hidden" name="segmentDrivers[{{$index}}].driverId" value="{{list.mainDriverId}}"/>
+                    <div class="showInfo">{{list.vehicleInfo}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].mainDriverName" value="{{list.mainDriverName}}"/>
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].mainDriverId" value="{{list.mainDriverId}}"/>
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].mainDriverMobile" value="{{list.mainDriverMobile}}"/>
+                    <div class="showInfo">{{list.mainDriverName}}({{list.mainDriverMobile}})</div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].secondDriverName" value="{{list.secondDriverName}}"/>
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].secondDriverId" value="{{list.secondDriverId}}"/>
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].secondDriverMobile" value="{{list.secondDriverMobile}}"/>
+                    <div class="showInfo">{{list.secondDriverName}}({{list.secondDriverMobile==""?list.secondDriverMobile='-':list.secondDriverMobile}})</div>
+                </div>
+                <div class="col-sm-3">
+                    <div ng-if="finalDispatch.orderFinSelect[$index] == '' || finalDispatch.orderFinSelect[$index] == undefined" class="showInfo segmentIds_{{$index}}" style="cursor: pointer" ng-click="finalDispatch.addLines($index)"><i class="fa fa-plus"></i></div>
+                    <div ng-if="finalDispatch.orderFinSelect[$index] != undefined" class="showInfo segmentIds_{{$index}}" style="height: 53px;overflow: scroll;overflow-x: hidden;" >
+                        <input type="hidden" name="segmentDrivers[{{$index}}].segmentIds" id="segmentIds{{$index}}"/>
+                        <span style="display:block" class="orderNumShow" ng-repeat="listOrder in finalDispatch.orderFinSelect[$index]" segmentId="{{listOrder.split('!')[0]}}"><span style="font-weight: bold">{{$index+1}}. </span>{{listOrder.split('!')[1]}}</span>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <input type="hidden" name="dispatchDriverList[{{$index}}].description" value="{{list.description}}"/>
+                    <div class="showInfo">{{list.description}}</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <label class="control-label col-sm-1">司机费用
+                </label>
+                <div class="col-sm-2">
+                    <select class="form-control select2me" name="dispatchFee.apportionType">
+                        <option selected value=" ">分摊规则</option>
+                        <option value="0">件数</option>
+                        <option value="1">重量</option>
+                        <option value="2">订单金额</option>
+                        <option value="3">订单票数</option>
+                    </select>
+                </div>
+            </div>
+           <!-- <div class="form-group">
+                <label class="control-label col-sm-1">订单金额
+                </label>
+                <div class="col-sm-4">
+                    <div class="md-radio-inline">
+                        <div class="md-radio">
+                            <input type="radio" id="checkbox1_3" name="pay" value="1" class="md-radiobtn" ng-model="finalDispatch.payWay">
+                            <label for="checkbox1_3">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                按单价
+                            </label>
+                        </div>
+                        <div class="md-radio">
+                            <input type="radio" id="checkbox1_4" name="pay" value="0"  class="md-radiobtn" ng-model="finalDispatch.payWay">
+                            <label for="checkbox1_4">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                按整单
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!--按单价的计算方式页面-->
+            <div ng-if="finalDispatch.payWay == 1" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">
+                    </label>
+                    <div class="col-sm-2">
+                        <div class="divTableHeader">
+                            计费科目
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="divTableHeader">
+                            单价（元）
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="divTableHeader">
+                            小计（元）
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="divTableHeader">
+                            说明
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-repeat="list in finalDispatch.payList">
+                    <label class="control-label col-sm-1" style="font-weight: bold">{{$index+1}}
+                    </label>
+                    <div class="col-sm-2">
+
+                        <select class="form-control select2me">
+                            <option selected value="0">选择方式</option>
+                            <option value="2">手动</option>
+                            <option value="3">自动1</option>
+                            <option value="4">自动2</option>
+                            <option value="5">自动3</option>
+                        </select>
+
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="number" name="singleUnitPrice" data-required="1" class="form-control" placeholder="单价" />
+                    </div>
+
+                    <div class="col-sm-2">
+                        <input type="number" name="singleSubtotal" data-required="1" class="form-control" placeholder="小计" />
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" name="singleDescribe" data-required="1" class="form-control" placeholder="说明" />
+                    </div>
+                    <div class="col-sm-2 pull-left addDiv"><i class="fa fa-remove remove" ng-click="finalDispatch.removePay($index)" ng-if="finalDispatch.payList.length>1"></i></div>
+
+                </div>
+                <div class="form-group" style="margin-bottom:0px;">
+                    <label class="control-label col-sm-1">
+                    </label>
+                    <div class="col-sm-2">
+                        <a  class="btn btn-xs blue" ng-click="finalDispatch.addNewPay()"> 添加
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="totalMoney">总计：<span class="font-red singleMoneyNum"></span>元</div>
+                    </div>
+                </div>
+            </div>
+            <!--按整单的计算方式页面-->
+            <div ng-if="finalDispatch.payWay == 0">
+                <div class="form-group">
+                    <label class="control-label col-sm-1">总运费
+                    </label>
+                    <div class="col-sm-2">
+                        <input type="number" ng-model="finalDispatch.wholeMoneyNum"  name="dispatchFee.totalFee"   data-required="1" class="form-control" placeholder="小计（元）" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label class="control-label totalMoney">总计：<span class="font-red wholeMoneyNum">{{finalDispatch.wholeMoneyNum}}</span>元</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1">付款方式
+                </label>
+                <div class="col-sm-2">
+                    <input type="number" name="dispatchFee.cashFee" data-required="1" class="form-control" placeholder="现付" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="number"  name="dispatchFee.toPayFee" data-required="1" class="form-control" placeholder="到付" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="number"  name="dispatchFee.receiptFee" data-required="1" class="form-control" placeholder="回单付" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="number"  name="dispatchFee.monthlyFee" data-required="1" class="form-control" placeholder="月结" />
+                </div>
+                <div class="col-sm-2">
+                    <input type="number"  name="dispatchFee.receiverPayFee" data-required="1" class="form-control" placeholder="收货方付" />
+                </div>
+            </div>
+        </div>
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <label class="control-label col-sm-1">发车时间
+                </label>
+                <div class="col-sm-2 planDepartureTime">
+                    <single-time-picker></single-time-picker>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1">到达时间
+                </label>
+                <div class="col-sm-2 planArrivalTime">
+                    <single-time-picker></single-time-picker>
+                </div>
+            </div>
+
+            <input type="hidden" name="dispatchBill.truckLoadType" id="truckLoadType"/>
+            <input type="hidden" name="dispatchBill.transType" id="transType"/>
+            <input type="hidden" name="dispatchBill.planDepartureTime" id="planDepartureTime"/>
+            <input type="hidden" name="dispatchBill.planArrivalTime" id="planArrivalTime"/>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn blue" ng-click="finalDispatch.submit()">保存</button>
+                    <button type="cancel" class="btn white"  ng-click="finalDispatch.backToDispatch()">取消</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
+    <!--<table-expandable table-column="finalDispatch.column"  table-page="finalDispatch.getPage()" table-data="finalDispatch.data" table-conf="finalDispatch.pageParams" self-page="false" entity="finalDispatch.entity">
+    </table-expandable>-->
+
+</div>
+
+<div class="modal fade" id="selectLines" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-user" style="margin-right: 10px;"></i>选择运单
+                </h4>
+            </div>
+            <div class="modal-body" style="max-height: 300px;overflow-y: scroll;">
+
+                <form  class="form-horizontal ng-pristine ng-invalid ng-invalid-required" style="margin: 10px;">
+                    <div class="md-checkbox-list">
+                        <div class="md-checkbox has-success" ng-repeat="list in finalDispatch.orderSelectList">
+                            <input type="checkbox" id="checkbox{{$index}}" class="md-check">
+                            <label for="checkbox{{$index}}" class="orderNum{{$index}}" orderNum="{{list.id}}!{{list.way_bill_code}}" style="color:#909090">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span> 运单号: {{list.way_bill_code}} {{list.FROM_PROVINCE_NAME}}{{list.FROM_CITY_NAME}}{{list.FROM_DISTRICT_NAME}}-{{list.TO_PROVINCE_NAME}}{{list.TO_CITY_NAME}}{{list.TO_DISTRICT_NAME}}</label>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="finalDispatch.confirmOrders(finalDispatch.indexList)">
+                    下一步
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

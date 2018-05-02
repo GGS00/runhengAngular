@@ -1,0 +1,284 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>出库单详情</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+
+        <div class=" form-horizontal ">
+            <div class="form-group">
+                <input id="outboundStatus" type="hidden" value="{{outboundDetail.objData.status}}">
+                <input id="outboundId" type="hidden" value="{{outboundDetail.objData.id}}">
+                <label class="col-md-2 control-label">出库单号
+                </label>
+                <div class="col-md-4 col-left2 ">
+                    <input type="text" name="code" class="form-control" value="{{outboundDetail.objData.code}}"
+                           readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">数量
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="code" class="form-control"
+                           value="{{outboundDetail.objData.expectedQuantityBu}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <!--<label class="col-md-2 control-label">价格-->
+            <!--</label>-->
+                <!--<div class="col-md-4 col-left2">-->
+                    <!--<input type="text" name="code" class="form-control" value="{{outboundDetail.objData.price}}"-->
+                           <!--readonly="readonly">-->
+                <!--</div>-->
+                <label class="col-md-2 control-label">总金额
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="code" class="form-control" value="{{outboundDetail.resultMap.totalMoney}}"
+                           readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">总吨数
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="code" class="form-control" value="{{outboundDetail.resultMap.totalWeight}}"
+                           readonly="readonly">
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">收货人
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="code" class="form-control"
+                           value="{{outboundDetail.receverName}}" readonly="readonly">
+                </div>
+
+                <label class="col-md-2 control-label">加急
+                </label>
+                <div class="col-md-4 col-left2">
+                    <select class="form-control" id="mySelect">
+                        <option value="1">加急</option>
+                        <option value="0">不加急</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">单据类型
+                </label>
+                <div class="col-md-4 col-left2">
+                    <select class="form-control" id="id_billType" ng-model="outboundDetail.objData.billTypeId">
+                        <option selected value="">单据类型</option>
+                        <option ng-repeat="billTypeList in outboundDetail.billTypeList"
+                                value="{{billTypeList.dataValue}}">
+                            {{billTypeList.dataName}}
+                        </option>
+                    </select>
+                </div>
+                <label class="col-md-2 control-label">描述
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" id="id_descript" class="form-control"
+                           value="{{outboundDetail.objData.description}}">
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="outboundDetail.UpdateOutboundSure()">确定
+                        </button>
+                        <button id="inboundCancelButton" type="cancel" ui-sref="wms.outbound.order" class="btn white">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" id="addItemDetail" class="btn btn-default pusht"
+                ng-click="outboundDetail.addOutboundDetail()"
+                style="font-weight: inherit">添加明细
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundDetail.UpdateDetailSure()"
+                style="font-weight: inherit">修改明细
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundDetail.delGoodDetail()"
+                style="font-weight: inherit">删除明细
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundDetail.onBack()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="outboundDetail.column" table-page="outboundDetail.getPage()"
+                      table-data="outboundDetail.data" table-conf="outboundDetail.pageParams" self-page="false"
+                      entity="outboundDetail.entity">
+    </table-expandable>
+</div>
+</div>
+
+<div class="modal fade" id="selectCommonContacts2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel2">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加货品出库明细</i>
+                </h4>
+            </div>
+            <div class="modal-body" ng-if="outboundDetail.showSwitch==1">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" id="id_deal"
+                                   value="{{outboundDetail.dealEntity.getSelectedRows()[0].nickName}}"/>
+                            <div  ng-click="outboundDetail.qryGoods()"
+                                 style="border:none;outline:none;">
+                                <select-table st-combo="test()" st-text="outboundDetail.placeholder_dealer"
+                                              st-icon="outboundDetail.icon_dealer"
+                                              st-value="outboundDetail.dealEntity.getSelectedRows()[0].nickName">
+                                    <table-expandable table-column="outboundDetail.dealcolumn"
+                                                      table-page="outboundDetail.getdealPage()"
+                                                      table-data="outboundDetail.deal_data"
+                                                      table-conf="outboundDetail.dealerParams" self-page="true"
+                                                      entity="outboundDetail.dealEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="button" id="goods1"   class="form-control" value="请选择商品" ng-click="outboundDetail.aaaa()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="id_quantity2" class="form-control" placeholder="请输入数量">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <select class="form-control" id="id_intensify">
+                                <!--<option selected value="">库存状态</option>-->
+                                <option selected value="GOOD">商品状态：良品</option>
+                                <option value="BAD">商品状态：不良品</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-sm-6 col-sm-offset-3">-->
+                        <!--<div class="form-group">-->
+                            <!--<input type="text" id="Id_weight" class="form-control" placeholder="请输入重量">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundDetail.OutboundDetailSure()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="lar11ge" tabindex="-1" role="dialog" aria-labelledby="myModal2Label" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-md-3">
+                            <div id="categoryTree" class="tree-demo"
+                                 style="height: 100%;overflow: hidden;overflow-y: scroll;"></div>
+                        </div>
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9"
+                             style="padding: 10px">
+                            <!--<table-expandable table-column="outboundDetail.column2"  table-page="outboundDetail.getList()" table-conf="outboundDetail.params2" table-data="outboundDetail.data2" entity="outboundDetail.entity" self-page="true">-->
+                            <!--</table-expandable>-->
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-icon input-icon-sm">
+                                        <i class="fa fa-search"></i>
+                                        <input class="form-control input-sm" type="text" ng-model="skuName"
+                                               placeholder="输入商品名搜索">
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" ng-click="outboundDetail.serachGoods()"
+                                                type="button">
+                                            <i class="fa fa-arrow-left fa-fw"></i> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <table-expandable table-column="outboundDetail.goodscolumn"
+                                              table-page="outboundDetail.getGoodsPage()"
+                                              table-data="outboundDetail.goods_data"
+                                              table-conf="outboundDetail.goodsParams"
+                                              self-page="false"
+                                              entity="outboundDetail.goodsEntity">
+                            </table-expandable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="outboundDetail.overClick()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改货品</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="id_quantity" class="form-control" placeholder="数量">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundDetail.updateGoodDetal()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

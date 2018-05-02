@@ -1,0 +1,123 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>库内转移管理</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-10 form-group">
+                <div class="col-sm-2" style="padding-left: 0px;">
+                    <div class="form-group">
+                        <input type="text" name="ownerId" class="form-control" placeholder="货主"></div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="supplierId" class="form-control" placeholder="供应商">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="oriCode" class="form-control" placeholder="相关单据">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="productId" class="form-control" placeholder="商品名称">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10 form-group" style=" padding-left: 0px;">
+
+                <div class="col-sm-3" ng-click="inventoryMvLoc.warehouseLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text=" inventoryMvLoc.placeholder_warehouseName"
+                                  st-icon=" inventoryMvLoc.icon_warehouse"
+                                  st-value=" inventoryMvLoc.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column=" inventoryMvLoc.warehouseColumn"
+                                          table-page=" inventoryMvLoc.warehousePage()"
+                                          table-data=" inventoryMvLoc.warehouseData"
+                                          table-conf=" inventoryMvLoc.warehouseParams"
+                                          self-page="true"
+                                          entity=" inventoryMvLoc.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+
+                <div class="col-sm-3" style="border:none;outline:none;">
+                    <div ng-click="inventoryMvLoc.regionLinsener()">
+
+                        <select-table st-combo="test()" st-text="inventoryMvLoc.placeholder_regionName"
+                                      st-icon="inventoryMvLoc.icon_region"
+                                      st-value="inventoryMvLoc.regionEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="inventoryMvLoc.regionColumn"
+                                              table-page="inventoryMvLoc.regionPage()"
+                                              table-data="inventoryMvLoc.regionData"
+                                              table-conf="inventoryMvLoc.region_params"
+                                              self-page="true"
+                                              entity="inventoryMvLoc.regionEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-sm-3" ng-click="inventoryMvLoc.locationLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text="inventoryMvLoc.placeholder_locationName"
+                                  st-icon="inventoryMvLoc.icon_location"
+                                  st-value="inventoryMvLoc.locationEntity.getSelectedRows()[0].name">
+                        <table-expandable table-column="inventoryMvLoc.locationColumn"
+                                          table-page="inventoryMvLoc.locationPage()"
+                                          table-data="inventoryMvLoc.locationrData"
+                                          table-conf="inventoryMvLoc.locationrParams"
+                                          self-page="true"
+                                          entity="inventoryMvLoc.locationEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_status">
+                            <option selected value=" ">状态</option>
+                            <option value="OPEN">待审核</option>
+                            <option value="ACTIVE">审核通过</option>
+                            <option value="INVALID">驳回</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-sm-2">-->
+            <!--<div class="form-group">-->
+            <!--<input type="text" name="areaId" class="form-control" placeholder="原库区编号">-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-2">-->
+            <!--<div class="form-group">-->
+            <!--<input type="text" name="locationId" class="form-control" placeholder="原库位编号">-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="col-sm-2 form-group">
+                <div class="col-sm-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn blue" ng-click="inventoryMvLoc.getPageByFilter()">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryMvLoc.pass()"
+                style="font-weight: inherit">通过
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryMvLoc.rebut()"
+                style="font-weight: inherit">驳回
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryMvLoc.delete()"
+                style="font-weight: inherit">删除
+        </button>
+    </div>
+    <table-expandable table-column="inventoryMvLoc.column" table-page="inventoryMvLoc.getPage()"
+                      table-data="inventoryMvLoc.data" table-conf="inventoryMvLoc.pageParams" self-page="false"
+                      entity="inventoryMvLoc.entity">
+    </table-expandable>
+
+</div>
+
+
+
+

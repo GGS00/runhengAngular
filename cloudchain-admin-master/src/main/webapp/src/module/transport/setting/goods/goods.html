@@ -1,0 +1,15 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-cubes"></i>常用货品</span>
+
+    <div class="search-form btnGroup" style="margin-top: 12px;">
+        <button type="button" class="btn btn-default"  ng-click="comGoods.addComGoods()" style="font-weight: inherit">新增</button>
+        <button type="button" class="btn btn-default"  ng-click="comGoods.removeComGoods()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="comGoods.column"  table-page="comGoods.getPage()" table-data="comGoods.data" table-conf="comGoods.pageParams" self-page="false" entity="comGoods.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

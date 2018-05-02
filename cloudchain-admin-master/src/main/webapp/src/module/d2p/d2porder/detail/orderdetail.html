@@ -1,0 +1,254 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-chain"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-sticky-note-o"></i>订单详情</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace">
+                    <div class="orderTitle">订单号：{{d2pOrderDetail.orderId}} &nbsp;&nbsp;<span class='label label-{{d2pOrderDetail.orderState=="0"?"warning":(d2pOrderDetail.orderState=="1"?"danger":(d2pOrderDetail.orderState=="2"?"primary":(d2pOrderDetail.orderState=="3"?"danger":(d2pOrderDetail.orderState=="4"?"default":""))))}}' style='margin: 5px'>{{d2pOrderDetail.orderState=='0'?'待支付':(d2pOrderDetail.orderState=='1'?'待发货':(d2pOrderDetail.orderState=='2'?'待确认收货':(d2pOrderDetail.orderState=='3'?'已完成':(d2pOrderDetail.orderState=='4'?'关闭':''))))}}</span></div>
+
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <p class="bold">发货信息</p>
+                            <p class="font-grey">配送方式：{{d2pOrderDetail.distributionWay==0?'柴米配送':(d2pOrderDetail.distributionWay==1?'自提':'')}}</p>
+                            <p class="font-grey">联系人：{{d2pOrderDetail.logistics.cneeName}} {{d2pOrderDetail.logistics.cneeMobile}} </p>
+                            <p class="font-grey">联系地址：{{d2pOrderDetail.logistics.province}}{{d2pOrderDetail.logistics.city}}{{d2pOrderDetail.logistics.county}}{{d2pOrderDetail.logistics.street}}{{d2pOrderDetail.logistics.address}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group formTableHeader">
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                商品序号
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                商品名称
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                商品属性
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                单价
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                数量
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                金额小计
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-repeat="list in d2pOrderDetail.itemList">
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{$index+1}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.skuTitle}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.spec}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                ￥{{list.price/100}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.count}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                ￥{{list.price*list.count/100}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px">
+                        <div class="col-sm-8">
+                            <div class="divTableHeader">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="divTableRight font-grey">
+                                运费：
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableRight font-grey">
+                                ￥{{d2pOrderDetail.transFee/100}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px">
+                        <div class="col-sm-8">
+                            <div class="divTableHeader">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="divTableRight font-grey">
+                                优惠金额：
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableRight font-grey">
+                                ￥{{d2pOrderDetail.subtractMoney/100}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px">
+                        <div class="col-sm-8">
+                            <div class="divTableHeader">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="divTableRight font-grey">
+                                应付金额：
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableRight font-grey">
+                                ￥{{d2pOrderDetail.actualMoney/100}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace" ng-if="d2pOrderDetail.isInvoice==1">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+
+                            发票类型 ： {{d2pOrderDetail.invoice.invoiceType==0?'个人发票':(d2pOrderDetail.invoice.invoiceType==1?'公司发票':'')}}
+
+                        </div>
+                        <div class="col-sm-3">
+
+                            发票号 ： {{d2pOrderDetail.invoice.invoiceCode}}
+
+                        </div>
+
+                        <div class="col-sm-3">
+
+                            抬头 ： {{d2pOrderDetail.invoice.invoiceTitle}}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace" ng-if="d2pOrderDetail.payList.length > 0">
+                    <div class="form-group formTableHeader">
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                序号
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                支付流水
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                支付金额
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                支付时间
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                支付方式
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                状态
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-repeat="list in d2pOrderDetail.payList">
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{$index+1}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.payNo}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                ￥{{list.payMoney/100}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.payTime}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.payWay==0?'在线支付':(list.payWay==1?'货到付款':(list.payWay==2?'转账汇款':''))}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.state==0?'正常':(list.state==1?'作废':'')}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            备注：<span class="font-grey">{{d2pOrderDetail.remark}}</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-default pusht" ng-click="d2pOrderDetail.returnButton()" style="font-weight: inherit">返回
+        </button>
+    </div>
+
+
+
+</div>

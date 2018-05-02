@@ -1,0 +1,213 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>新建调拨单</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <div class="col-sm-3  col-left"  style="border:none;outline:none;">
+                <div class="form-group from-group2">
+                    <input type="hidden" value="{{requisitionAdd.ownerEntity.getSelectedRows()[0].nickName}}"
+                           id="id_owner">
+                    <select-table st-combo="test()" st-text="requisitionAdd.placeholder_ownerName"
+                                  st-icon="requisitionAdd.icon_owner"
+                                  st-value="requisitionAdd.ownerEntity.getSelectedRows()[0].nickName">
+                        <table-expandable table-column="requisitionAdd.ownerColumn"
+                                          table-page="requisitionAdd.ownerPage()"
+                                          table-data="requisitionAdd.ownerData"
+                                          table-conf="requisitionAdd.ownerParams"
+                                          self-page="true"
+                                          entity="requisitionAdd.ownerEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-sm-3 col-left">
+                <div class="form-group from-group2">
+                    <input type="hidden" value="{{requisitionAdd.warehouseEntity.getSelectedRows()[0].ID}}"
+                           id="id_warehouse">
+                    <input type="hidden" value="{{requisitionAdd.warehouseEntity.getSelectedRows()[0].NAME}}"
+                           id="id_warehouseName">
+                    <select-table st-combo="test()" st-text="requisitionAdd.placeholder_warehouseName"
+                                  st-icon="requisitionAdd.icon_warehouse"
+                                  st-value="requisitionAdd.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="requisitionAdd.warehouseColumn"
+                                          table-page="requisitionAdd.warehousePage()"
+                                          table-data="requisitionAdd.warehouseData"
+                                          table-conf="requisitionAdd.warehouseParams"
+                                          self-page="true"
+                                          entity="requisitionAdd.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-sm-3 col-left">
+                <div class="form-group from-group2">
+                    <input type="hidden" value="{{requisitionAdd.warehouseInEntity.getSelectedRows()[0].ID}}"
+                           id="id_warehouse_receive">
+                    <input type="hidden" value="{{requisitionAdd.warehouseInEntity.getSelectedRows()[0].NAME}}"
+                           id="id_warehouse_receiveName">
+                    <select-table st-combo="test()" st-text="requisitionAdd.placeholder_warehouseInName"
+                                  st-icon="requisitionAdd.icon_warehouse"
+                                  st-value="requisitionAdd.warehouseInEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="requisitionAdd.warehouseColumn"
+                                          table-page="requisitionAdd.warehousePage()"
+                                          table-data="requisitionAdd.warehouseInData"
+                                          table-conf="requisitionAdd.warehouseParams"
+                                          self-page="true"
+                                          entity="requisitionAdd.warehouseInEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-sm-3 col-left">
+                <div class="form-group from-group2">
+                    <input type="text" id="id_description" class="form-control" placeholder="描述">
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="inboundConfirmButton" type="button" class="btn blue"
+                            ng-click="requisitionAdd.SaveOutbound()">确定
+                    </button>
+                    <button id="inboundCancelButton" type="cancel"  ng-click="requisitionAdd.returnButton()" class="btn white">返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="requisitionAdd.addOutboundDetail()" style="font-weight: inherit">添加明细
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="requisitionAdd.returnButton()" style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="requisitionAdd.column" table-page="requisitionAdd.getPage()"
+                      table-data="requisitionAdd.data" table-conf="requisitionAdd.pageParams" self-page="false"
+                      entity="requisitionAdd.entity">
+    </table-expandable>
+</div>
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加货品出库明细</i>
+                </h4>
+            </div>
+            <div class="modal-body"  ng-if="requisitionAdd.showSwitch==1">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group"  ng-click="requisitionAdd.qryGoods()">
+                            <input type="hidden" id="id_deal"
+                                   value="{{requisitionAdd.dealEntity.getSelectedRows()[0].nickName}}"/>
+                            <select-table st-combo="test()" st-text="requisitionAdd.placeholder_dealer"
+                                          st-icon="requisitionAdd.icon_dealer"
+                                          st-value="requisitionAdd.dealEntity.getSelectedRows()[0].nickName">
+                                <table-expandable table-column="requisitionAdd.dealcolumn"
+                                                  table-page="requisitionAdd.getdealPage()"
+                                                  table-data="requisitionAdd.deal_data"
+                                                  table-conf="requisitionAdd.dealerParams" self-page="true"
+                                                  entity="requisitionAdd.dealEntity">
+                                </table-expandable>
+                            </select-table>
+                            <!--<button type="button" class="btn btn-primary" ng-click="requisitionAdd.qryGoods()">查询商品</button>-->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="button" id="goods1"   class="form-control" value="请选择商品" ng-click="requisitionAdd.aaaa()">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="id_quantity" class="form-control" placeholder="请输入数量">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <select class="form-control" id="id_instock">
+                                <!--<option selected value="">库存状态</option>-->
+                                <option selected value="GOOD">商品状态：良品</option>
+                                <option value="BAD">商品状态：不良品</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="requisitionAdd.OutboundDetailSure()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lar11ge" tabindex="-1" role="dialog" aria-labelledby="myModal2Label" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-md-3">
+                            <div id="categoryTree" class="tree-demo"
+                                 style="height: 100%;overflow: hidden;overflow-y: scroll;"></div>
+                        </div>
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9"
+                             style="padding: 10px">
+                            <!--<table-expandable table-column="requisitionAdd.column2"  table-page="requisitionAdd.getList()" table-conf="requisitionAdd.params2" table-data="requisitionAdd.data2" entity="requisitionAdd.entity" self-page="true">-->
+                            <!--</table-expandable>-->
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-icon input-icon-sm">
+                                        <i class="fa fa-search"></i>
+                                        <input class="form-control input-sm" type="text" ng-model="skuName"
+                                               placeholder="输入商品名搜索">
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" ng-click="requisitionAdd.serachGoods()"
+                                                type="button">
+                                            <i class="fa fa-arrow-left fa-fw"></i> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <table-expandable table-column="requisitionAdd.goodscolumn"
+                                              table-page="requisitionAdd.getGoodsPage()"
+                                              table-data="requisitionAdd.goods_data"
+                                              table-conf="requisitionAdd.goodsParams"
+                                              self-page="false"
+                                              entity="requisitionAdd.goodsEntity">
+                            </table-expandable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="requisitionAdd.overClick()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

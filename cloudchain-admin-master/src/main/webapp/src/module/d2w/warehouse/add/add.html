@@ -1,0 +1,426 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>新增仓源</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <!--<form  id="newWayCommit" class="form-horizontal">-->
+            <div class="form-body">
+
+                <div class="divSpace row" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">选择库区
+                            <i class="fa fa-plus" style="font-size: 18px;color: #909090;margin-left: 10px;cursor: pointer" ng-click="addwsource.addWarehouse()"></i>
+                        </label>
+                    </div>
+
+                    <div id="houseInfo" style="display: none">
+
+                        <div class="form-group" style="height: 100px;">
+                            <label class="textHouse">
+                                仓库图片
+                                <span class="required" aria-required="true">
+                                    *
+                                </span>
+                            </label>
+                            <div class="textInput d2wtext">
+                                <div class="d2wAddImg" style="position: relative;" ng-repeat="list in addwsource.imgs"><img class="media-object" ng-src="{{list.img}}" alt="{{list.img}}" style="width:100%;height:100%"><i class="fa fa-close" style="position: absolute;top: 2px;right: 2px;color: #CF1C1C;cursor:pointer" ng-click="addwsource.removeImg($index)" ng-if="addwsource.imgs.length > 1"></i></div>
+                                <div class="addD2wImg" ng-click="showAddImg()"><i class="fa fa-plus"></i>
+                                    <span class="addText">最多5张</span></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                仓库地址：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <span>{{addwsource.houseInfo.provinceName}}{{addwsource.houseInfo.cityName}}{{addwsource.houseInfo.districtName}}{{addwsource.houseInfo.address}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                库区类型：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <span>{{addwsource.houseInfo.areaType==01?"普通":(addwsource.houseInfo.areaType==02?"冷藏":(addwsource.houseInfo.areaType==03?"恆溫":(addwsource.houseInfo.areaType==04?"特种":(addwsource.houseInfo.areaType==05?"气调":""))))}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                存放物品：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <span>{{addwsource.goods}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                仓源名称：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <input type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" value="{{addwsource.houseInfo.name}}" name="warehouseName">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                可用库容：
+                            </label>
+                            <div class="textInput">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" placeholder="平方米" name="storageSqm"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                服务需求：
+                            </label>
+                            <div class="textInput">
+                                <div class="mt-radio-list">
+                                    <label class="mt-radio mt-radio-outline">
+                                        仓储租赁
+                                        <input type="radio" value="0" ng-model="addwsource.serviceRequest" name="serviceRequest">
+                                        <span>
+                                </span>
+                                    </label>
+                                    <label class="mt-radio mt-radio-outline" style="margin-left: 16px;">
+                                        货物保管
+                                        <input type="radio" value="1" ng-model="addwsource.serviceRequest" name="serviceRequest">
+                                        <span>
+                                </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                温度范围：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" placeholder="请输入温度范围" name="temperatureRangeStart"/>
+                                    <span class="input-group-addon">℃</span>
+                                </div>
+                            </div>
+                            <div class="rangeLine">—</div>
+                            <div class="textInput d2wtext">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" placeholder="请输入温度范围" name="temperatureRangeEnd"/>
+                                    <span class="input-group-addon">℃</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                湿度范围：
+                            </label>
+                            <div class="textInput d2wtext">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" placeholder="请输入湿度范围" name="humidityRangeStart"/>
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                            <div class="rangeLine">—</div>
+                            <div class="textInput d2wtext">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" placeholder="请输入湿度范围" name="humidityRangeEnd"/>
+                                    <span class="input-group-addon">%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">-->
+                            <!--<label class="textHouse">-->
+                                <!--增值服务：-->
+                            <!--</label>-->
+                            <!--<div class="textInput d2wtext" style="width: 700px;">-->
+                                <!--<div class="input-group">-->
+                                    <!--<label class="mt-checkbox mt-checkbox-outline" ng-repeat="list in addwsource.addServiceList" style="display: inline-block;width: 100px">-->
+                                        <!--<input type="checkbox" value="{{list.dataValue}}" name="addService_{{dataValue}}" ng-model="list.checkState"/>-->
+                                        <!--<span></span>{{list.dataName}}-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="form-group">-->
+                            <!--<label class="textHouse">-->
+                            <!--</label>-->
+                            <!--<div class="textInput d2wtext">-->
+                                <!--<div class="input-group">-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                仓源描述：
+                            </label>
+                            <div class="textInput">
+                                <div class="input-group">
+                                    <textarea class="form-control remarks" id="remark" cols="60" rows="3"></textarea>
+                                    <!--<span class="input-group-addon">m<sup>2</sup></span>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace row" id="orderInfo" style="margin-top:18px;display:none;height: auto;">
+                    <div ng-if="addwsource.serviceRequest==0">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">仓储租赁
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                计算单位：
+                            </label>
+                            <div class="textInput">
+                                <div class="mt-radio-list">
+                                    <label class="mt-radio mt-radio-outline">
+                                        按库位
+                                        <input type="radio" ng-model="addwsource.unit1" value="2" name="unit">
+                                        <span>
+                                        </span>
+                                    </label>
+                                    <label class="mt-radio mt-radio-outline" style="margin-left: 16px;" >
+                                        按面积
+                                        <input type="radio" ng-model="addwsource.unit1" value="3" name="unit">
+                                        <span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                计费规则：
+                            </label>
+                            <div class="textInput">
+                                <div class="mt-radio-list">
+                                    <label class="mt-radio mt-radio-outline">
+                                        按每天收取
+                                        <input type="radio" value="1" ng-model="addwsource.chargeRule1" name="chargeRule">
+                                        <span>
+                   </span>
+                                    </label>
+                                    <label class="mt-radio mt-radio-outline"  style="margin-left: 16px;"  >
+                                        按月收取
+                                        <input type="radio" value="2" ng-model="addwsource.chargeRule1" name="chargeRule">
+                                        <span>
+                   </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                单价：
+                            </label>
+                            <div class="textInput" style="width: 248px;">
+                                <input name="wareprice" type="number" min="0" class="form-control">
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <span class="goodstips"></span>
+                        </div>
+
+                    </div>
+
+                    <div ng-if="addwsource.serviceRequest==1">
+                        <div class="form-group">
+                            <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">货物保管
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                计算单位：
+                            </label>
+                            <div class="textInput">
+                                <div class="mt-radio-list">
+                                    <label class="mt-radio mt-radio-outline">
+                                        按吨
+                                        <input type="radio" ng-model="addwsource.unit" value="0" name="unit">
+                                        <span>
+                                        </span>
+                                    </label>
+                                    <label class="mt-radio mt-radio-outline"  style="margin-left: 16px;"  >
+                                        按件
+                                        <input type="radio" value="1" ng-model="addwsource.unit" name="unit">
+                                        <span>
+                                        </span>
+                                    </label>
+                                    <label class="mt-radio mt-radio-outline" style="margin-left: 16px;" >
+                                        按库位
+                                        <input type="radio" ng-model="addwsource.unit" value="2" name="unit">
+                                        <span>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                计费规则：
+                            </label>
+                            <div class="textInput" style="width:500px;">
+                                <div class="mt-radio-list">
+                                    <label class="mt-radio mt-radio-outline">
+                                        按每天收取
+                                        <input type="radio" value="1" ng-model="addwsource.chargeRule" name="chargeRule">
+                                        <span>
+                   </span>
+                                    </label>
+                                    <label class="mt-radio mt-radio-outline"  style="margin-left: 16px;"  >
+                                        按月收取
+                                        <input type="radio" value="2" ng-model="addwsource.chargeRule" name="chargeRule">
+                                        <span>
+                   </span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group" ng-if="addwsource.chargeRule==1">-->
+                            <!--<label class="textHouse">-->
+                                <!--周期：-->
+                            <!--</label>-->
+                            <!--<div class="textInput" style="width: 248px;" >-->
+                                <!--<input name="cycle" value="1" readonly="readonly" type="number" min="0" class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="form-group" ng-if="addwsource.chargeRule==0">-->
+                            <!--<label class="textHouse">-->
+                                <!--周期：-->
+                            <!--</label>-->
+                            <!--<div class="textInput" style="width: 248px;">-->
+                                <!--<input name="cycle" value="1" type="number" min="0" class="form-control">-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <div class="form-group">
+                            <label class="textHouse">
+                                单价：
+                            </label>
+                            <div class="textInput" style="width: 248px;">
+                                <input name="wareprice" type="number" min="0" class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--</div>-->
+            <!--</div>-->
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="addwsource.submit()">提交</button>
+                        <button type="submit" class="btn blue" ng-click="addwsource.cancel()">取消</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+
+
+</div>
+
+</div>
+
+
+<div class="modal fade" id="selectWarehouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>库区
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <table-expandable table-column="addwsource.column"  table-page="addwsource.getWarehouse()" table-data="addwsource.data" table-conf="addwsource.pageWarehouseParams"  entity="addwsource.entity" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="addwsource.confirmWarehouse()">
+                    选择
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,235 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>地址库
+      </span>
+
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="owneraddress.addAddress()"
+                style="font-weight: inherit">添加
+        </button>
+        <button type="button" class="btn btn-default" ng-click="owneraddress.updateAddress()"
+                style="font-weight: inherit;margin-left: 10px">修改</button>
+        <button type="button" class="btn btn-default" ng-click="owneraddress.removeAddress()"
+                style="font-weight: inherit;margin-left: 10px">删除</button>
+        <button type="button" class="btn btn-default" ng-click="owneraddress.returnButton()"
+                style="font-weight: inherit;margin-left: 10px">返回
+        </button>
+    </div>
+
+    <table-expandable table-column="owneraddress.column_addr" table-page="owneraddress.getAddrPage()"
+                      table-data="owneraddress.addr_data" table-conf="owneraddress.addr_params"
+                      self-page="false" entity="owneraddress.addrEntity">
+    </table-expandable>
+
+</div>
+<div class="modal fade" id="addAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:120px;width:1007px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加地址</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div  class="row">
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">联系人<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_contacts" class="form-control" placeholder="请输入联系人">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">联系电话<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_phone" class="form-control" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">所在地区<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-9 provideAddress" style="margin-left: -15px;">
+                            <city-select></city-select>
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">详细地址<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_streetAddr" class="form-control" placeholder="请输入街道地址">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">邮编</span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_postcode" class="form-control" placeholder="请输入邮编">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">设为默认<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="radio14" name="radio22" class="md-radiobtn" ng-model="owneraddress.radioFlag" value="1">
+                                    <label for="radio14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>是 </label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio" id="radio15" name="radio22" class="md-radiobtn" ng-model="owneraddress.radioFlag" value="0">
+                                    <label for="radio15">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 否 </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="owneraddress.btaddAddress()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="updateAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:120px;width:1007px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改地址</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div  class="row">
+                    <div class="form-group">
+
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">联系人<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_update_contacts" class="form-control" placeholder="请输入联系人">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">联系电话<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_update_phone" class="form-control" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                </div>
+
+                <div  class="row" ng-show="look.citySwitch==0">
+                    <div class="form-group" style="margin-bottom:0px">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">所在地区<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" id="id_area" class="form-control" readonly>
+                        </div>
+                        <button type="button" class="btn btn-default" style=" height: 34px" ng-click="look.updateArea()">修改地区
+                        </button>
+                    </div>
+                </div>
+                <div  class="row" ng-show="look.citySwitch==1">
+                    <div class="form-group provideAddress2" style="margin-bottom:0px">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">所在地区<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <city-select></city-select>
+                        <button type="button" class="btn btn-default" style=" height: 34px" ng-click="look.cancelArea()">取消修改
+                        </button>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">详细地址<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_update_streetAddr" class="form-control" placeholder="请输入街道地址">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">邮编 </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_update_postcode" class="form-control" placeholder="请输入邮编">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">设为默认<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="radio16" name="radio33" class="md-radiobtn" ng-model="owneraddress.upradioFlag" value="1">
+                                    <label for="radio16">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>是 </label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio"  id="radio17"  name="radio33" class="md-radiobtn" ng-model="owneraddress.upradioFlag" value="0">
+                                    <label for="radio17">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 否 </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="owneraddress.btupdateAddress()">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

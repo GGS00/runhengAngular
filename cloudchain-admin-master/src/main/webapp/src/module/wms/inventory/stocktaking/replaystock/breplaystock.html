@@ -1,0 +1,51 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>复盘</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-10 form-group">
+                <label class=" col-sm-1" style="  margin-top: 7px;">单据编号
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_code" class="form-control" readonly >
+                </div>
+                <label class=" col-sm-1" style="margin-top: 7px;">仓库名称
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_warehouseName" class="form-control" readonly >
+                </div>
+                <label class=" col-sm-1" style="margin-top: 7px;">创建人
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_creater" class="form-control" readonly >
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="breplaystock.initSure()"
+                style="font-weight: inherit">确定
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="breplaystock.back()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="  breplaystock.column" table-page="  breplaystock.getPage()"
+                      table-data="  breplaystock.data" table-conf="  breplaystock.pageParams" self-page="false"
+                      entity="  breplaystock.entity">
+    </table-expandable>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

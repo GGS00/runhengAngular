@@ -1,0 +1,55 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf">银行账号</i></span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="bankName" class="form-control" placeholder="开户行"></div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="accountName" class="form-control" placeholder="账号名"></div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="bankAccount" class="form-control" placeholder="银行账号"></div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_status">
+                        <option selected value=" ">状态</option>
+                        <option value="ACTIVE">生效</option>
+                        <option value="INVALID">失效</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="bankAccount.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="bankAccount.newCustomer()" style="font-weight: inherit">新建</button>
+        <button type="button" class="btn btn-default pusht" ng-click="bankAccount.updateCustomer()" style="font-weight: inherit">修改</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="bankAccount.operateEffect()" style="font-weight: inherit">生效</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="bankAccount.invalid()" style="font-weight: inherit">失效</button>
+    </div>
+
+    <table-expandable table-column="bankAccount.column" table-page="bankAccount.getPage()"
+                      table-data="bankAccount.data" table-conf="bankAccount.pageParams" self-page="false"
+                      entity="bankAccount.entity">
+    </table-expandable>
+
+</div>
+</div>
+</div>
+
+
+

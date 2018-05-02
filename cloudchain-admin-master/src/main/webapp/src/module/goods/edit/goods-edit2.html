@@ -1,0 +1,337 @@
+<style>
+    .mt-list-item.done:hover {
+        background-color: #FFFFFF!important;
+    }
+    ul > .mt-list-item.done{
+        border:none!important;
+    }
+    .list-toggle{
+        background-color: #94A0B2!important;
+        /*color: #666!important;*/
+    }
+    .dz-image {
+        border-radius: 5px;
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+        position: relative;
+        display: block;
+        z-index: 10;
+        border: 1px solid #0a6aa1;
+        float: left;
+        margin-right: 5px;
+        text-align: center;
+        line-height: 120px;
+        cursor:hand;
+    }
+
+    .ibox-content{
+        height: 660px;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        position: relative;
+        padding: 12px;
+        padding-top: 0px;
+        margin-bottom: 24px;
+    }
+
+    .packPagination{
+        position: relative;
+    }
+
+    /*.pagination-prev-large{
+        margin: 20px 30px;
+    }*/
+
+    .selectNum{
+        width: 140px;
+        position: absolute;
+        bottom: 22px;
+        right: 58px;
+        display: inline-flex;
+    }
+
+    .selectNum .selectText{
+        font-size: 14px;
+        line-height: 34px;
+        margin-left: 5px;
+    }
+
+    .packTableHeader{
+        padding-right: 20px;
+        padding-left: 12px;
+    }
+
+    .packCheck{
+        margin-bottom:0px;
+    }
+
+    .packCheck tbody tr:first-child td{
+        border-top:none;
+    }
+
+    .packCheck thead th {
+        vertical-align: middle !important;
+        text-align: center;
+        font-size: 13px !important;
+        color: #666;
+    }
+
+    .packCheck tbody td {
+        text-align: center;
+        word-break: break-all;
+        vertical-align: middle !important;
+        font-size: 12px !important;
+    }
+
+    .ibox-content .packCheck tr:nth-child(odd) {
+
+    }
+
+
+
+</style>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <h2 flex md-truncate>修改商品</h2>
+
+        <md-button class="md-raised" aria-label="Learn More" onclick="javascript:history.back(-1);">
+            返回
+        </md-button>
+        <md-button class="md-raised" aria-label="Learn More" ng-click="edit.addGoods()">
+            修改
+        </md-button>
+    </div>
+</md-toolbar>
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="销售信息">
+                <md-content class="md-padding">
+                    <h5 ng-if="edit.specList.length > 0"><span>选择规格<md-tooltip md-direction="right">已经选定的规格不能取消</md-tooltip></span></h5>
+                    <div layout-gt-xs="row" style="margin-bottom: 0px;padding-top: 0px;!important;" ng-repeat="list in edit.specList track by $index">
+                        <label flex="20"  flex-gt-xs style="padding: 10px 0;" class="col-md-2 control-label">{{list.name}}</label>
+                        <div flex-gt-xs>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox" ng-repeat="val in list.specVals">
+                                    <input type="checkbox" id="{{val.specValId}}" ng-click="edit.checkSpec(val.specValId)" ng-model="val.checked"  ng-disabled="val.disable" value="{{val.specVal}}">{{val.specVal}}
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs>销售库存</h5>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="edit.isRelate" ng-true-value="1" ng-false-value="0">
+                            <md-tooltip md-direction="top">开启绑定仓库不能自定义销售库存</md-tooltip>
+                            销售库存绑定仓库
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="edit.isShareInv" ng-true-value="1" ng-false-value="0" >
+                            销售库存渠道共享
+                        </md-switch>
+                    </div>
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs>选择销售渠道</h5>
+                        <md-switch flex-gt-xs  class="md-primary" ng-model="checkbox" ng-change="edit.getUserFunc(checkbox,'d2p',0)" ng-true-value="1" ng-false-value="0">
+                            在批发商城进行销售
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox1"  ng-true-value="1" ng-false-value="0">
+                            在零售商城进行销售
+                        </md-switch>
+                    </div>
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs></h5>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox2" ng-true-value="1" ng-false-value="0">
+                            支持门店预约下单
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox3" ng-change="edit.getUserFunc(checkbox3,'d2d',3)"  ng-true-value="1" ng-false-value="0">
+                            在柴米采购联盟进行销售
+                        </md-switch>
+                    </div>
+
+                    <form name="goods" layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20"  flex-gt-xs>批量填充</h5>
+                        <div layout-gt-xs="row" flex-gt-xs>
+                        <md-input-container class="md-block"  flex="80" flex-gt-xs>
+                            <label>销售库存</label>
+                            <input name="quantity" type="number"   min="0" ng-model="quantity" ng-disabled="edit.isRelate" style="cursor: {{edit.isRelate == 1?'not-allowed':''}}">
+                            <div ng-messages="goods.quantity.$error" ng-show="goods.quantity.$dirty">
+                                <div ng-message="min">销售库存不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block"  flex-gt-xs>
+                            <label>销售价格</label>
+                            <input name="price" type="number" min="0"  ng-model="edit.price" >
+                            <div ng-messages="goods.price.$error" ng-show="goods.price.$dirty">
+                                <div ng-message="min">销售价格不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container  class="md-block"  flex-gt-xs>
+                            <label>物流重量</label>
+                            <input name="weight" type="number" min="0" ng-model="weight">
+                            <div ng-messages="goods.weight.$error" ng-show="goods.weight.$dirty">
+                                <div ng-message="min">物流重量不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block"  flex-gt-xs>
+                            <label>物流体积</label>
+                            <input name="volume" type="number" min="0" ng-model="volume">
+                            <div ng-messages="goods.volume.$error" ng-show="goods.volume.$dirty">
+                                <div ng-message="min">物流体积不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container ng-if="edit.specList.length > 0" class="md-block" style="margin-top: 0"  flex-gt-xs>
+                            <md-button class="md-raised" ng-click="edit.setInfo()">填充</md-button>
+                        </md-input-container>
+                        </div>
+                    </form>
+
+
+                    <div class="portlet-body table-both-scroll" ng-if="edit.sku.length">
+                        <table class="table table-striped table-bordered table-hover order-column packCheck" id="sample_3">
+                            <thead class="iboxHeader">
+                            <tr>
+                                <th ng-if="edit.sku.length" ng-repeat="list in edit.head track by $index" > {{list}} </th>
+                                <th> 主图 </th>
+                                <!--<th> <span class="required font-red"> * </span>标题 </th>-->
+                                <th>
+                                    <!--<span class="required font-red"> * </span>-->
+                                    销售价格
+                                </th>
+                                <th ng-if="!edit.isRelate">
+                                    <!--<span class="required font-red"> * </span>-->
+                                    销售库存
+                                </th>
+                                <th>称重(kg)</th>
+                                <th>体积(m³)</th>
+                                <th>
+                                    <!--<span class="required font-red"> * </span>-->
+                                    sku商家编码
+                                </th>
+                                <th> 条形码</th>
+                                <!--<th class="sorting" ng-repeat="list in form.spuSpecs track by $index" >{{list.specName}}</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr  ng-repeat="list in edit.sku">
+                                <td ng-if="item.specVal" ng-repeat="item in list.skuSpecValModels">
+                                    {{item.specVal}}
+                                </td>
+                                <td style="width: 100px">
+                                    <a class="fancybox-button" data-rel="fancybox-button">
+                                        <img class="img-responsive" ng-src="{{list.skuImgs[0].img !=''?list.skuImgs[0].img:'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image'}}"  alt=""  ng-click="showAddImg(0,$index)">
+                                    </a>
+                                </td>
+                                <!--<td>-->
+                                <!--<input type="text" class="form-control" ng-model="list.title" value="">-->
+                                <!--</td>-->
+
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.price"  value="">
+                                </td>
+                                <td  ng-show="!edit.isRelate">
+                                    <input type="text" class="form-control" ng-model="list.quantity"  value="">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.weight" value=""> </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.volume" value=""> </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.bn" value=""> </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.skuBarcode" value=""> </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
+
+
+
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div class="portlet-body">
+                        <div id="categoryTree" class="tree-demo"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

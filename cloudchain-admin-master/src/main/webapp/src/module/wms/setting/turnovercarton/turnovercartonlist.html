@@ -1,0 +1,239 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>周转箱管理</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="id_code" class="form-control" placeholder="周转箱号"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="hidden" id="search_warehouseId"
+                           value="{{carton.warehouseEntity1.getSelectedRows()[0].ID}}"
+                           id="search_warehouse">
+                    <select-table st-combo="test()" st-text="carton.placeholder_warehouseName"
+                                  st-icon="carton.icon_warehouse"
+                                  st-value="carton.warehouseEntity1.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="carton.warehouseColumn"
+                                          table-page="carton.warehousePage()"
+                                          table-data="carton.warehouseData"
+                                          table-conf="carton.warehouseParams"
+                                          self-page="true"
+                                          entity="carton.warehouseEntity1">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_Status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="ACTIVE">有效</option>
+                        <option value="INVALID">失效</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="carton.cartonFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="carton.newcarton()"
+                style="font-weight: inherit">新建
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="carton.updatecarton()"
+                style="font-weight: inherit">修改
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="carton.deleteCarton()"
+                style="font-weight: inherit">删除
+        </button>
+
+    </div>
+    <table-expandable table-column="carton.column" table-page="carton.getPage()"
+                      table-data="carton.data" table-conf="carton.carton_params"
+                      self-page="false" entity="carton.entity">
+    </table-expandable>
+</div>
+
+
+<div class="modal fade" id="addCarton" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加周转箱</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden"
+                                   value="{{carton.warehouseEntity.getSelectedRows()[0].ID}}"
+                                   id="id_warehouse">
+                            <select-table st-combo="test()" st-text="carton.placeholder_warehouseName"
+                                          st-icon="carton.icon_warehouse"
+                                          st-value="carton.warehouseEntity.getSelectedRows()[0].NAME">
+                                <table-expandable table-column="carton.warehouseColumn"
+                                                  table-page="carton.warehousePage()"
+                                                  table-data="carton.warehouseData"
+                                                  table-conf="carton.warehouseParams"
+                                                  self-page="true"
+                                                  entity="carton.warehouseEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="number" id="id_quantity" class="form-control" placeholder="请输入数量"  min="1" max="10">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="carton.addCarton()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="updateCarton" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改周转箱</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">仓库名称
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.warehouseName" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">周转箱编号
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.code" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">状态
+                        </label>
+                        <div class="col-sm-5">
+                            <select class="form-control select2me status" id="status" ng-model="carton.status" >
+                                <option value="ACTIVE">有效</option>
+                                <option value="INVALID">失效</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">长度(cm)
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.length" id="length"  class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">宽度(cm)
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.width" id="width" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">高度(cm)
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.height" id="height" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">体积(cm³)
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.volume" id="volume" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">重量(kg)
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.weight" id="weight" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">描述
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" ng-model="carton.description" id="description" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="carton.confirmModify()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

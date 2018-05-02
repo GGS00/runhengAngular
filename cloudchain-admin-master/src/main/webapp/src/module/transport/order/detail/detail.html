@@ -1,0 +1,264 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-chain"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-sticky-note-o"></i>运单详情</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace">
+                    <div class="orderTitle">订单号：{{orderDetail.orderMap.code}} &nbsp;&nbsp;<span class='label label-{{orderDetail.orderMap.status=="OPEN"?"warning":(orderDetail.orderMap.status=="ACTIVE"?"danger":(orderDetail.orderMap.status=="ENTERED"?"primary":(orderDetail.orderMap.status=="DISPATCHED"?"danger":(orderDetail.orderMap.status=="ONWAY"?"info":(orderDetail.orderMap.status=="ARRIVED"?"danger":(orderDetail.orderMap.status=="SIGNED"?"success":(orderDetail.orderMap.status=="CANCEL"?"default":"")))))))}}' style='margin: 5px'>{{orderDetail.orderMap.status=='OPEN'?'打开':(orderDetail.orderMap.status=='ACTIVE'?'生效':(orderDetail.orderMap.status=='ENTERED'?'入场':(orderDetail.orderMap.status=='DISPATCHED'?'已调度':(orderDetail.orderMap.status=='ONWAY'?'在途':(orderDetail.orderMap.status=='ARRIVED'?'运抵':(orderDetail.orderMap.status=='SIGNED'?'签收':(orderDetail.orderMap.status=='CANCEL'?'取消':'')))))))}}</span></div>
+                    <div class="orderTitle" style="font-size: 13px;margin-top: 9px;color: #9A9A9A;">运单号：{{orderDetail.orderMap.wayBillCode}}</div>
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <p class="bold">委托人</p>
+                            <p class="font-grey">{{orderDetail.orderMap.ownerName}}</p>
+                           <!-- <p class="font-grey">联系人：润恒测试物流商 13218067165 </p>-->
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="bold">承运人</p>
+                            <p class="font-grey">{{orderDetail.orderMap.carrierName}}</p>
+                            <!--<p class="font-grey">业务员：润恒测试物流商业务员 13218067165 </p>
+                            <p class="font-grey">联系人：润恒测试物流商 13218067165 </p>-->
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-6">
+                            <p class="bold">{{orderDetail.orderMap.fromReceiverContact.country}}{{orderDetail.orderMap.fromReceiverContact.address}}</p>
+                            <p class="bold">发货方  <i class="fa fa-hourglass-1" style="color:#98743E"></i></p>
+                            <p class="font-grey">{{orderDetail.orderMap.fromReceiverName}}</p>
+                            <p class="font-grey">联系人：{{orderDetail.orderMap.fromReceiverContact.contactor}} {{orderDetail.orderMap.fromReceiverContact.mobile}} </p>
+                            <p class="font-grey">发货时间：{{orderDetail.orderMap.planShipTime}}</p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p class="bold">{{orderDetail.orderMap.toReceiverContact.country}}{{orderDetail.orderMap.toReceiverContact.address}}</p>
+                            <p class="bold">收货人  <i class="fa fa-hourglass-3" style="color:#98743E"></i></p>
+                            <p class="font-grey">{{orderDetail.orderMap.toReceiverName}}</p>
+                            <p class="font-grey">联系人：{{orderDetail.orderMap.toReceiverContact.contactor}} {{orderDetail.orderMap.toReceiverContact.mobile}} </p>
+                            <p class="font-grey">到货时间：{{orderDetail.orderMap.planArrivalTime}}</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group formTableHeader">
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                货物序号
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                货物名称
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                描述
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                数量
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                重量(吨)
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                体积(m<sup>3</sup>)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-repeat="list in orderDetail.goodsList">
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{$index+1}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.goods_name}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.goods_type}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.box_quantity}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.weight}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                {{list.volume}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0px">
+                        <div class="col-sm-4">
+                            <div class="divTableHeader">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                合计
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader font-red">
+                                {{orderDetail.orderMap.boxQuantity}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader font-red">
+                                {{orderDetail.orderMap.weight}}
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="divTableHeader font-red">
+                                {{orderDetail.orderMap.volume}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+
+                        <div class="col-sm-3">
+
+                                回单要求 ： {{orderDetail.orderMap.receiptType==0?'不要回单':(orderDetail.orderMap.receiptType==1?'货物托运单':'发货单（客户文件）')}}
+
+                        </div>
+                        <div class="col-sm-3">
+
+                                签收状态 ： {{orderDetail.orderMap.signStatus =='UN_SIGN'?'未签收':(orderDetail.orderMap.signStatus =='SIGNED'?'正常签收':(orderDetail.orderMap.signStatus =='ALL_DENIAL'?'全部拒签':(orderDetail.orderMap.signStatus =='PART_SIGNED'?'部分签收':(orderDetail.orderMap.signStatus =='NOT_HURL'?'未妥投':(orderDetail.orderMap.signStatus =='DENIAL_SIGNED'?'正常退签':'')))))}}
+
+                        </div>
+
+                        <div class="col-sm-3">
+
+                            状态 ： {{orderDetail.orderMap.status=='OPEN'?'打开':(orderDetail.orderMap.status=='ACTIVE'?'生效':(orderDetail.orderMap.status=='ENTERED'?'入场':(orderDetail.orderMap.status=='DISPATCHED'?'已调度':(orderDetail.orderMap.status=='ONWAY'?'在途':(orderDetail.orderMap.status=='ARRIVED'?'运抵':(orderDetail.orderMap.status=='SIGNED'?'签收':(orderDetail.orderMap.status=='CANCEL'?'取消':'')))))))}}
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            订单金额：
+                        </div>
+                        <div class="col-sm-6">
+                            支付方式【{{orderDetail.fee.cash_fee!=0?"现付 "+ orderDetail.fee.cash_fee +" 元,":''}}{{orderDetail.fee.monthly_fee!=0?"月付 "+ orderDetail.fee.monthly_fee+" 元,":''}}{{orderDetail.fee.to_pay_fee!=0?"到付 "+ orderDetail.fee.to_pay_fee+" 元,":''}}{{orderDetail.fee.receipt_fee!=0?"回单付 "+ orderDetail.fee.receipt_fee+" 元,":''}}{{orderDetail.fee.receiver_pay_fee!=0?"收货方付 "+ orderDetail.fee.receiver_pay_fee+" 元,":''}}总计 <span class="font-red">{{orderDetail.fee.total_fee}} 元</span>】
+                        </div>
+                        <div class="col-sm-3">
+                            发票：开票
+                        </div>
+                    </div>
+
+                    <div class="form-group formTableHeader">
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+                                序号
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="divTableHeader">
+                                计费科目
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="divTableHeader">
+                                结算金额（元）
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <div class="divTableBody">
+                                    {{orderDetail.fee.fee_type==0?"1":"1"}}
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="divTableBody">
+                                 总金额
+                            </div>
+                        </div>
+
+                        <div class="col-sm-5">
+                            <div class="divTableBody">
+                                {{orderDetail.fee.total_fee}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <div class="divTableHeader">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="divTableHeader">
+                                合计
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="divTableHeader font-red">
+                                {{orderDetail.fee.total_fee}}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="divSpace">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            备注：<span class="font-grey">{{orderDetail.orderMap.description}}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+          <!--      <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue">调度</button>
+                            <button type="submit" class="btn blue">调整结算价</button>
+                            <button type="submit" class="btn blue">评价</button>
+                            <button type="submit" class="btn blue">跟踪</button>
+                            &lt;!&ndash;<button type="cancel" class="btn white">取消</button>&ndash;&gt;
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

@@ -1,0 +1,115 @@
+<div class="portlet light bordered">
+    <div class="portlet-body form">
+        <form role="form" class="form-horizontal">
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name">规格项名称</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="spec.name" id="name" placeholder="请填写规格项名称">
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name">规格值名称</label>
+                    <div class="col-md-8" style="padding: 0;">
+                        <div class="col-md-4"  ng-repeat="list in spec.specVals track by $index">
+                            <input type="text" class="form-control input-sm" ng-model="list.specVal" placeholder="规格值{{$index}}">
+                            <div class="form-control-focus"> </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name"></label>
+                    <div class="col-md-3">
+                        <a ng-click="spec.addList()">添加规格值</a>
+                    </div>
+                    <div class="col-md-3">
+                        <a ng-click="spec.rmList()">删除规格值</a>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label">适用商品分类</label>
+                    <div class="col-md-10">
+                        <div class="md-radio-list">
+                            <div class="md-radio  has-success">
+                                <input type="radio" id="radio50" ng-model="spec.isApplyAll" value="1" name="radio211" class="md-radiobtn">
+                                <label for="radio50">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全部商品分类</label>
+                            </div>
+                            <div class="md-radio has-warning">
+                                <input type="radio" id="radio51" ng-model="spec.isApplyAll" value="0" name="radio211" class="md-radiobtn" checked="">
+                                <label for="radio51">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>部分商品分类</label>
+                                <a ng-click="spec.setShowClassify()">选择商品分类</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label">是否作为筛选条件</label>
+                    <div class="col-md-4">
+                        <div class="md-radio-inline">
+                            <div class="md-radio has-success">
+                                <input type="radio" id="radio1"  ng-model="spec.isFilter" value="1" name="radio" class="md-radiobtn">
+                                <label for="radio1">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>是</label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="radio2"  ng-model="spec.isFilter" value="0" name="radio" class="md-radiobtn">
+                                <label for="radio2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>否</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions margin-top-10">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="button" class="btn blue" ng-click="spec.addSpec()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div class="portlet-body">
+                        <div id="categoryTree" class="tree-demo"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

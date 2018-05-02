@@ -1,0 +1,307 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>编辑仓源</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group" style="height: auto;">
+                        <label class="control-label col-md-3 bold">
+                            仓库图片
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-6">
+                            <div class="d2wAddImg" style="position: relative;" ng-repeat="list in updatewsource.wsourceSelect[0].imgs"><img class="media-object" ng-src="{{list.img}}" alt="{{list.img}}" style="width:100%;height:100%"><i class="fa fa-close" style="position: absolute;top: 2px;right: 2px;color: #CF1C1C;cursor:pointer" ng-click="updatewsource.removeImg($index)" ng-if="updatewsource.wsourceSelect[0].imgs.length > 1"></i></div>
+                            <div class="addD2wImg" ng-click="showAddImg()"><i class="fa fa-plus"></i>
+                                <span class="addText">最多5张</span></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            仓库编号
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3 d2wtext">
+                            <span>{{updatewsource.wsourceSelect[0].id}}</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            仓库名称
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input name="warehouseName" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="请输入仓库名称" aria-invalid="false" value="{{updatewsource.wsourceSelect[0].warehouseName}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            仓库地址
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-6 d2wtext">
+                            <span>{{updatewsource.wsourceSelect[0].provinceName}}{{updatewsource.wsourceSelect[0].cityName}}{{updatewsource.wsourceSelect[0].districtName}}{{updatewsource.wsourceSelect[0].address}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            仓库类型
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio" ng-repeat="list in updatewsource.wtypeList">
+                                    <input type="radio" id="checkbox1_{{$index}}" name="type" dataname="{{list.dataName}}" value="{{list.dataValue}}" ng-model="updatewsource.wsourceSelect[0].type" checked class="md-radiobtn">
+                                    <label for="checkbox1_{{$index}}">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        {{list.dataName}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            库区
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3 d2wtext">
+                            <span>{{updatewsource.wsourceSelect[0].warehouseAreaName}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            库区类型
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3 d2wtext">
+                            <span>{{updatewsource.wsourceSelect[0].warehouseAreaType==01?"普通":(updatewsource.wsourceSelect[0].warehouseAreaType==02?"冷藏":(updatewsource.wsourceSelect[0].warehouseAreaType==03?"恆溫":(updatewsource.wsourceSelect[0].warehouseAreaType==04?"特种":(updatewsource.wsourceSelect[0].warehouseAreaType==05?"气调":""))))}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            温度范围
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入温度范围" value="{{updatewsource.wsourceSelect[0].temperatureRange.split('-')[0]}}" name="temperatureRangeStart"/>
+                                <span class="input-group-addon">℃</span>
+                            </div>
+                        </div>
+                        <div class="rangeLine">—</div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入温度范围" value="{{updatewsource.wsourceSelect[0].temperatureRange.split('-')[1]}}" name="temperatureRangeEnd"/>
+                                <span class="input-group-addon">℃</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            湿度范围
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入湿度范围" value="{{updatewsource.wsourceSelect[0].humidityRange.split('-')[0]}}" name="humidityRangeStart"/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="rangeLine">—</div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入湿度范围" value="{{updatewsource.wsourceSelect[0].humidityRange.split('-')[1]}}" name="humidityRangeEnd"/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            存放物品种类
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3 d2wtext">
+                            <span>{{updatewsource.wsourceSelect[0].warehouseAreaStore}}</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            可用库容
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="平方米" value="{{updatewsource.wsourceSelect[0].storageSqm}}" name="storageSqm"/>
+                                <span class="input-group-addon">m<sup>2</sup></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="立方米" value="{{updatewsource.wsourceSelect[0].storageCum}}" name="storageCum"/>
+                                <span class="input-group-addon">m<sup>3</sup></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            租赁价格
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入租赁价格" value="{{updatewsource.wsourceSelect[0].rentPrice/100}}" name="rentPrice"/>
+                        </div>
+                        <div style="display: flex;padding-left: 0px;width: 74px;float: left;">
+                            <span class="d2wunit">元/天/m<sup>3</sup></span>
+                        </div>
+                        <label class="mt-checkbox mt-checkbox-outline" style="margin-top: 7px;">
+                            <input type="checkbox" value="1" name="test" ng-model="updatewsource.rentPriceState" />
+                            <span></span>面议
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            保管价格
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input type="number"  data-required="1" class="form-control" placeholder="请输入保管价格" value="{{updatewsource.wsourceSelect[0].keepPrice/100}}" name="keepPrice"/>
+                        </div>
+                        <div style="display: flex;padding-left: 0px;width: 150px;float: left;">
+                            <span class="d2wunit">元/天/</span>
+
+                            <select class="form-control select2me goodsUnit" name="goodsUnit">
+                                <option ng-repeat="list in updatewsource.unitList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                            </select>
+                        </div>
+                        <label class="mt-checkbox mt-checkbox-outline" style="margin-top: 7px;">
+                            <input type="checkbox" value="1" name="test" ng-model="updatewsource.keepPriceState" />
+                            <span></span>面议
+                        </label>
+                    </div>
+
+                    <div class="form-group" style="height: auto;">
+                        <label class="control-label col-md-3 bold">
+                            增值服务
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-6" style="margin-left: 15px;">
+                            <div class="form-group" style="margin-bottom: -11px;margin-top: 8px;height: auto;">
+                                <div class="mt-checkbox-list">
+                                    <label class="mt-checkbox mt-checkbox-outline" ng-repeat="list in updatewsource.addServiceList" style="display: inline-block;width: 100px">
+                                        <input type="checkbox" value="{{list.dataValue}}" name="addService_{{dataValue}}" ng-model="list.checkState"/>
+                                        <span></span>{{list.dataName}}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-4 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="updatewsource.submit()">保存</button>
+                        <button type="cancel" class="btn white"  ng-click="updatewsource.tod2w()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

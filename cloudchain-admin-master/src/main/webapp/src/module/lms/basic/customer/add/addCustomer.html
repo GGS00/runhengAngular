@@ -1,0 +1,255 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>新建客户</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="lmsCustomer">
+            <div class="col-md-12">
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="code" class="form-control" placeholder="编码">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="名称">
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].name}}"
+                               id="id_name" name ="loanRuleName">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].code}}"
+                               id="id_code" name ="loanRuleCode">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].id}}"
+                               id="id_id" name ="loanRuleId">
+                        <select-table st-combo="test()" st-text="addCustomer.placeholder_loanRuleName"
+                                      st-icon="addCustomer.icon_loanRule"
+                                      st-value="addCustomer.loanRuleEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="addCustomer.loanRuleColumn"
+                                              table-page="addCustomer.loanRulePage()"
+                                              table-data="addCustomer.loanRuleData"
+                                              table-conf="addCustomer.loanRuleParams"
+                                              self-page="true"
+                                              entity="addCustomer.loanRuleEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity2.getSelectedRows()[0].id}}"
+                               id="id_excessId" name ="excessRuleId">
+                        <select-table st-combo="test()" st-text="addCustomer.placeholder_excessRuleName"
+                                      st-icon="addCustomer.icon_loanRule"
+                                      st-value="addCustomer.loanRuleEntity2.getSelectedRows()[0].name">
+                            <table-expandable table-column="addCustomer.loanRuleColumn"
+                                              table-page="addCustomer.loanRulePage()"
+                                              table-data="addCustomer.loanRuleData"
+                                              table-conf="addCustomer.loanRuleParams"
+                                              self-page="true"
+                                              entity="addCustomer.loanRuleEntity2">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="basicAmount" class="form-control" placeholder="基础额度">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="type" name="type" class="form-control">
+                            <option value="" selected>--客户类型--</option>
+                            <option value="PERSON">个人</option>
+                            <option value="LEGAL">法人</option>
+                            <option value="COMPANY">公司</option>
+                            <option value="GROUP">集团</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <!--  <input type="text" name="certType" class="form-control" placeholder="证件类型">-->
+                        <select class="form-control"  name="certType">
+                            <option selected value="">证件类型</option>
+                            <option value="ID">身份证</option>
+                            <option value="BUSINESS">营业执照</option>
+                            <option value="PASSPORT">护照</option>
+                            <option value="OFFICERS">军官证</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="certNo" class="form-control" placeholder="证件号">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="sex" name="sex" class="form-control">
+                            <option value="" selected>--性别--</option>
+                            <option value="1">男</option>
+                            <option value="0">女</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="age" class="form-control" placeholder="年龄">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="maritalStatus" name="maritalStatus" class="form-control">
+                            <option value="" selected>--婚姻状况--</option>
+                            <option value="MARRIED">已婚</option>
+                            <option value="UNMARRIED">未婚</option>
+                            <option value="DIVORCE">离异</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="nativePlace" class="form-control" placeholder="籍贯">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="residentCity" class="form-control" placeholder="户口所在地">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="postcode" class="form-control" placeholder="邮编">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="联系电话">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="address" class="form-control" placeholder="地址">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="loanType" name="loanType"  class="form-control" >
+                            <option value="" selected>--贷款品种--</option>
+                            <option value="ORDER_FINANCE">单好贷</option>
+                            <option value="INVENTORY_FINANCE">货好贷</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-left">
+                    <div class="form-group">
+                        <input  type="hidden"  name="accountName"
+                                value="{{addCustomer.accountEntity.getSelectedRows()[0].account_name}}" >
+                        <select-table st-combo="test()" st-text="addCustomer.placeholder_accountName"
+                                      st-icon="addCustomer.icon_account"
+                                      st-value="addCustomer.accountEntity.getSelectedRows()[0].account_name">
+                            <table-expandable table-column="addCustomer.accountColumn"
+                                              table-page="addCustomer.accountPage()"
+                                              table-data="addCustomer.accountData"
+                                              table-conf="addCustomer.accountParams"
+                                              self-page="true"
+                                              entity="addCustomer.accountEntity">
+                            </table-expandable>
+                        </select-table>
+
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="text" name="bankAccount"  placeholder="银行卡号"
+                               class="form-control" value="{{addCustomer.accountEntity.getSelectedRows()[0].bank_account}}"/>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="text" name="bankName"  placeholder="开户行"
+                               class="form-control"  value="{{addCustomer.accountEntity.getSelectedRows()[0].bank_name}}"/>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <p class="pTitle">单位信息</p>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="businessLicenseNo" class="form-control" placeholder="营业执照号">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgCode" class="form-control" placeholder="工作单位代码">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgName" class="form-control" placeholder="工作单位名称">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgPostcode" class="form-control" placeholder="工作单位邮编">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgTel" class="form-control" placeholder="工作单位联系电话">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgAddress" class="form-control" placeholder="工作单位地址">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="legelPersonIdNo" class="form-control" placeholder="法人身份证号">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgAccountName" class="form-control" placeholder="工作单位账号名">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgBankAccount" class="form-control" placeholder="工作单位银行账号">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgBankName" class="form-control" placeholder="工作单位开户行">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" placeholder="备注">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="inboundConfirmButton" type="submit" class="btn blue" ng-click="addCustomer.saveNewCustomer()">保存</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white" ng-click="addCustomer.returnButton()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

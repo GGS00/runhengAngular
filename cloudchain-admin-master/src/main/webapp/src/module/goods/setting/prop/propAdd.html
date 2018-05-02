@@ -1,0 +1,233 @@
+ <div class="portlet light bordered">
+    <div class="portlet-body form">
+        <form role="form" class="form-horizontal">
+            <div class="form-body">
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label" for="name">属性名称</label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control input-sm" ng-model="prop.propName" id="name" placeholder="请填写属性名称">
+                        <div class="form-control-focus"> </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label">适用商品分类</label>
+                    <div class="col-md-10">
+                        <div class="md-radio-list">
+                            <div class="md-radio  has-success">
+                                <input type="radio" id="radio50" ng-model="prop.isApplyAll" value="1" name="radio211" class="md-radiobtn">
+                                <label for="radio50">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全部商品分类</label>
+                            </div>
+                            <div class="md-radio has-warning">
+                                <input type="radio" id="radio51" ng-model="prop.isApplyAll" value="0"  name="radio211" class="md-radiobtn" checked="">
+                                <label for="radio51">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>部分商品分类</label>
+                                <a ng-click="prop.setShowClassify()">选择商品分类</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet light bordered" style="padding: 0px" ng-repeat="list in prop.propList track by $index">
+                    <div class="form-group form-md-line-input">
+                        <label class="col-md-2 control-label">参数组名称</label>
+                        <div class="col-md-3">
+                            <input type="text" class="form-control input-sm" ng-model="list.groupName" placeholder="请填写参数组名称">
+                            <div class="form-control-focus"> </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="md-checkbox-inline has-error">
+                                <div class="md-checkbox">
+                                    <input type="checkbox" id="{{$parent.$index}}{{$index}}main" ng-model="list.isCore" ng-true-value="1" ng-false-value="0"  class="md-check">
+                                    <label for="{{$parent.$index}}{{$index}}main">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>核心参数</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-md-line-input" ng-repeat="item in list.items track by $index">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-2">
+                            <div class="input-group">
+                                <span class="input-group-addon">参数名称:  |</span>
+                                <input type="text" class="form-control input-sm" ng-model="item.paramName"  placeholder="请填写参数名称">
+                                <div class="form-control-focus"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">设置方式:  |</span>
+                                <select class="form-control" ng-model="item.settingType">
+                                    <option ng-selected="item.settingType == 0" value="0">输入框</option>
+                                    <option ng-selected="item.settingType == 1" value="1">单选</option>
+                                    <option ng-selected="item.settingType == 2" value="2">多选</option>
+                                    <option ng-selected="item.settingType == 3" value="3">日期控件</option>
+                                </select>
+                                <div class="form-control-focus"> </div>
+                                <span ng-show="item.settingType == 1 ||item.settingType == 2" class="input-group-btn btn-right">
+                                    <button class="btn yellow-gold" type="button" ng-click="prop.showAddValue(item)">设置选择项</button>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-md-4 control-label">是否必填</label>
+                            <div class="col-md-6">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio has-success">
+                                        <input type="radio" id="radio{{$parent.$index}}{{$index}}1"  ng-model="item.isRequired" value="1" name="radio{{$parent.$index}}{{$index}}" class="md-radiobtn">
+                                        <label for="radio{{$parent.$index}}{{$index}}1">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>是</label>
+                                    </div>
+                                    <div class="md-radio has-error">
+                                        <input type="radio" id="radio{{$parent.$index}}{{$index}}2"  ng-model="item.isRequired" value="0" name="radio{{$parent.$index}}{{$index}}" class="md-radiobtn">
+                                        <label for="radio{{$parent.$index}}{{$index}}2">
+                                            <span></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group form-md-line-input">
+                        <label class="col-md-2 control-label"></label>
+                        <div class="col-md-4">
+                            <a ng-click="prop.addItem(list.items)">添加参数</a>
+                        </div>
+                        <div class="col-md-4">
+                            <a ng-click="prop.rmItem(list.items)">删除参数</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label"><a ng-click="prop.addList()">添加参数组</a></label>
+                </div>
+            </div>
+            <div class="form-actions margin-top-10">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="button" class="btn blue" ng-click="prop.addProp()">保存</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+ <div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close"
+                         data-dismiss="modal" aria-hidden="true">
+                     &times;
+                 </button>
+                 <h4 class="modal-title">
+                     <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                 </h4>
+             </div>
+             <div class="modal-body">
+                 <div class="modal-body-content" style="margin-top: 20px;">
+                     <div class="portlet-body">
+                         <div id="categoryTree" class="tree-demo"> </div>
+                     </div>
+                 </div>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default"
+                         data-dismiss="modal">关闭
+                 </button>
+                 <button type="button" class="btn btn-primary" data-dismiss="modal">
+                     确认修改
+                 </button>
+             </div>
+         </div>
+     </div>
+ </div>
+
+
+ <div class="modal fade" id="showValue" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close"
+                         data-dismiss="modal" aria-hidden="true">
+                     &times;
+                 </button>
+                 <h4 class="modal-title">
+                     <i class="fa fa-file-o" style="margin-right: 10px;"></i>设置选择项
+                 </h4>
+             </div>
+             <div class="modal-body">
+                 <form role="form" class="form-horizontal">
+                     <div class="form-body">
+                         <div class="form-group form-md-line-input">
+                             <label class="col-md-2 control-label" for="name">参数名称</label>
+                             <div class="col-md-4">
+                                 <input type="text" class="form-control input-sm" ng-model="prop.settingValue.paramName" placeholder="请填写参数名称">
+                                 <div class="form-control-focus"> </div>
+                             </div>
+                         </div>
+                         <div class="form-group form-md-line-input">
+                             <label class="col-md-2 control-label" for="name">选择项名称</label>
+                             <div class="col-md-10" style="padding: 0;">
+                                 <div class="col-md-4"  ng-repeat="list in prop.settingValue.values track by $index">
+                                     <input type="text" class="form-control input-sm" ng-model="list.value" placeholder="选择项{{$index}}">
+                                     <div class="form-control-focus"> </div>
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="form-group form-md-line-input">
+                             <label class="col-md-2 control-label" for="name"></label>
+                             <div class="col-md-4">
+                                 <a ng-click="prop.addSettingValue()">添加选择项</a>
+                             </div>
+                             <div class="col-md-4">
+                                 <a ng-click="prop.rmSettingValue()">删除选择项</a>
+                             </div>
+                         </div>
+                         <div class="form-group form-md-line-input">
+                             <label class="col-md-4 control-label">是否作为筛选条件</label>
+                             <div class="col-md-6">
+                                 <div class="md-radio-inline">
+                                     <div class="md-radio has-success">
+                                         <input type="radio" id="filter1"  ng-model="prop.settingValue.isFilter" value="1" name="filter" class="md-radiobtn">
+                                         <label for="filter1">
+                                             <span></span>
+                                             <span class="check"></span>
+                                             <span class="box"></span>是</label>
+                                     </div>
+                                     <div class="md-radio has-error">
+                                         <input type="radio" id="filter2"  ng-model="prop.settingValue.isFilter" value="0" name="filter" class="md-radiobtn">
+                                         <label for="filter2">
+                                             <span></span>
+                                             <span class="check"></span>
+                                             <span class="box"></span>否</label>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </form>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default"
+                         data-dismiss="modal">关闭
+                 </button>
+                 <button type="button" class="btn btn-primary" data-dismiss="modal">
+                     确认修改
+                 </button>
+             </div>
+         </div>
+     </div>
+ </div>

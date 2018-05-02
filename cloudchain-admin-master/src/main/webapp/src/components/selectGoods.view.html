@@ -1,0 +1,48 @@
+<button type="button" class="btn btn-default" style="font-weight: inherit" data-toggle="modal" href="#large">
+    {{sg.text}}
+</button>
+
+<div class="modal fade bs-modal-lg" id="large" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-md-3">
+                            <div id="categoryTree" class="tree-demo" style="height: 100%;overflow: hidden;overflow-y: scroll;"> </div>
+                        </div>
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9" style="padding: 10px">
+                            <!--<table-expandable table-column="sg.column2"  table-page="sg.getList()" table-conf="sg.params2" table-data="sg.data2" entity="sg.entity" self-page="true">-->
+                            <!--</table-expandable>-->
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-icon input-icon-sm">
+                                        <i class="fa fa-search"></i>
+                                        <input id="newpassword" class="form-control input-sm" type="text" ng-model="skuName" placeholder="输入商品名搜索">
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button id="genpassword" class="btn btn-sm btn-default" ng-click="sg.serachGoods()" type="button">
+                                            <i class="fa fa-arrow-left fa-fw"></i> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div ui-grid="gridOptions" ui-grid-selection ui-grid-pagination ui-grid-resize-columns ui-grid-auto-resize class="grid"></div>
+                            <uib-pagination class="pagination-prev-sm pagination-sm" total-items="total" items-per-page="sg.params.rows" ng-change="sg.getList()" ng-model="sg.params.page" max-size="10" boundary-link-numbers="true" rotate="false" previous-text="上一页" next-text="下一页">
+                            </uib-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="sg.overClick()" data-dismiss="modal">确定</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

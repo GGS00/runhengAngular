@@ -1,0 +1,9 @@
+<div class="col-sm-2">
+    <select class="form-control select2me selectPro"  ng-change="citySelect.selectProChange()" ng-model="citySelect.proSelect" ng-options="x.regionId as x.regionName for x in citySelect.provinceList"></select>
+</div>
+<div class="col-sm-2">
+    <select class="form-control select2me selectCity"  ng-change="citySelect.selectCityChange()" ng-model="citySelect.citySelect" ng-options="x.regionId as x.regionName for x in citySelect.cityList"></select>
+</div>
+<div class="col-sm-2">
+    <select class="form-control select2me selectArea"  ng-change="citySelect.selectAreaChange()" ng-model="citySelect.areaSelect" ng-options="x.regionId as x.regionName for x in citySelect.areaList"></select>
+</div>

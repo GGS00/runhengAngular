@@ -1,0 +1,290 @@
+.headerShow{
+    color: #96A9BC;
+    font-size: 14px;
+}
+.headerTips{
+    margin-right: 30px;
+}
+
+.headerTips .fa{
+    color: #13C19F;
+    margin-right: 5px;
+}
+
+.contentShow{
+    margin-top: 44px;
+}
+
+.flowTitle{
+    font-size: 18px;
+    color: #657789;
+}
+
+.flowContent{
+    height: 150px;
+    width: 88%;
+    margin: 40px auto;
+}
+
+.flowStep{
+    height: 120px;
+    width: 70px;
+    float: left;
+}
+
+
+.flowStep img{
+    height: 70px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.stepDescPoint{
+    color: #93A6B7;
+    margin-top: 18px;
+    display: block;
+    cursor: pointer;
+}
+
+.stepDescPoint i{
+    margin-right:2px;
+}
+
+.stepDesc{
+    color: #93A6B7;
+    margin-left: 8px;
+    margin-top: 18px;
+    display: block;
+}
+
+.lineToStep{
+    float: left;
+    width: 46px;
+    border: #E6ECF2 1px solid;
+    height: 2px;
+    background: #E6ECF2;
+    margin-top: 34px;
+}
+
+.dialogTitle{
+    color: #969696;
+}
+
+.personInAccess{
+    color: #969696;
+    border: #ccc solid 1px;
+    border-radius: 6px;
+    padding: 2px 26px;
+    padding-left: 18px;
+    margin-right: 10px;
+    position: relative;
+    display: block;
+    float: left;
+    margin-top: 5px;
+    background: #fff;
+}
+
+.personInAccess .fa-remove{
+    position: absolute;
+    top: 5px;
+    right: 7px;
+    cursor: pointer;
+    color: #EC4141;
+}
+
+.personContent{
+    background: #ECECEC;
+    height: 66px;
+    overflow-y: scroll;
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+.addBtn{
+    text-align: center;
+}
+
+.receiveAddress .col-sm-2{
+    padding-left:5px;
+}
+
+.receiveAddress .col-sm-2:nth-child(1){
+    padding-right:20px;
+}
+
+.receiveAddress .col-sm-2:nth-child(2){
+    padding-left:10px;
+}
+
+.receiveAddress .col-sm-2:nth-child(3){
+    padding-left:15px;
+    padding-right: 10px;
+}
+
+.addPurchaseTable thead th{
+    text-align: center;
+}
+
+.addPurchaseTable tr{
+    text-align: center;
+    word-break:break-all;
+}
+
+.addPurchaseTable th{
+    vertical-align: middle!important;
+}
+
+.addPurchaseTable td{
+    vertical-align: middle!important;
+}
+
+.modal—title{
+    float:left;
+    color: #909090;
+    font-size: 14px;
+    width: 33%;
+}
+
+.receiveAddress .md-radio{
+    display: block;
+    margin-bottom: 4px;
+}
+
+.customerInfo{
+    color: #929292;
+    margin-left: 0px !important;
+}
+
+.customerInfo span{
+    margin-left:15px;
+}
+
+
+.ibox-content{
+    height: 450px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    padding: 12px;
+    padding-top: 0px;
+    margin-bottom: 24px;
+}
+
+.packPagination{
+    position: relative;
+}
+
+/*.pagination-prev-large{
+    margin: 20px 30px;
+}*/
+
+.selectNum{
+    width: 140px;
+    position: absolute;
+    bottom: 22px;
+    right: 58px;
+    display: inline-flex;
+}
+
+.selectNum .selectText{
+    font-size: 14px;
+    line-height: 34px;
+    margin-left: 5px;
+}
+
+.packTableHeader{
+    padding-right: 20px;
+    padding-left: 12px;
+}
+
+.packCheck{
+    margin-bottom:0px;
+}
+
+.packCheck tbody tr:first-child td{
+    border-top:none;
+}
+
+.lineTable tbody tr td:first-child{
+    border-left: 1px solid #B1B1B1;
+}
+
+.lineTable tbody tr td{
+   border-right: 1px solid #B1B1B1;
+}
+.packCheck thead th {
+    vertical-align: middle !important;
+    text-align: center;
+    font-size: 12px!important;
+}
+
+.packCheck tbody td {
+    text-align: center;
+    word-break: break-all;
+    vertical-align: middle!important;
+    font-size: 12px!important;
+}
+
+.ibox-content .packCheck tr:nth-child(odd) {
+    background-color: #E6E6E6;
+}
+
+.goodsLine{
+    display: block;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+}
+
+.goodsLine:last-child{
+    border-bottom: none;
+}
+
+.supplierLine{
+    display: block;
+    padding: 16px;
+    border-bottom: 1px solid #ccc;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.editWareRule{
+    cursor: pointer;
+    color: #F14E4E;
+    outline: none;
+}
+
+.table-striped.warsetTable > tbody > tr:nth-of-type(odd) {
+    background-color: #FFFFFF;
+}
+
+.warsetTable .fa-arrow-down,.warsetTable .fa-arrow-up{
+    cursor:pointer
+}
+
+.warsetTable .fa-close{
+    cursor: pointer;
+    color: #F35555;
+}
+
+.changeSort{
+    position: absolute;
+    color: #A6A6A6;
+    top: 6px;
+    right: -4px;
+    cursor: pointer;
+    outline:none;
+}
+.changeSort i{
+    outline:none;
+}
+
+.wareSort{
+    display: block;
+    background: #F06B6B;
+    padding: 7px 16px 7px 17px;
+    text-align: center;
+    color: #fff;
+    border-radius: 17px;
+}
+

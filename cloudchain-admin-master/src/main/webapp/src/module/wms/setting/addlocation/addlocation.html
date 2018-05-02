@@ -1,0 +1,155 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>新建库位</span>
+    <div class="portlet-body">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">所属仓库<span class="required"
+                                                                    aria-required="true"> * </span></label>
+                    <input type="hidden" id="id_WarehouseId"
+                           value="{{ addlocation.warehouseEntity.getSelectedRows()[0].ID}}">
+                    <div class="col-md-4 " ng-click="addlocation.warelinsener()" style="border:none;outline:none;">
+                        <select-table st-combo="test()" st-text=" addlocation.placeholder_warehouseName"
+                                      st-icon=" addlocation.icon_warehouse"
+                                      st-value=" addlocation.warehouseEntity.getSelectedRows()[0].NAME">
+                            <table-expandable table-column=" addlocation.warehouseColumn"
+                                              table-page=" addlocation.warehousePage()"
+                                              table-data=" addlocation.warehouseData"
+                                              table-conf=" addlocation.warehouseParams"
+                                              self-page="true"
+                                              entity=" addlocation.warehouseEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">所属库区<span class="required"
+                                                                    aria-required="true"> * </span></label>
+                    <input type="hidden" value="{{ addlocation.regionEntity.getSelectedRows()[0].name}}"
+                           id="id_region">
+                    <div class="col-md-4 ">
+                        <select-table st-combo="test()" st-text=" addlocation.placeholder_regionName"
+                                      st-icon=" addlocation.icon_region"
+                                      st-value=" addlocation.regionEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column=" addlocation.regionColumn"
+                                              table-page=" addlocation.regionPage()"
+                                              table-data=" addlocation.regionData"
+                                              table-conf=" addlocation.regionParams"
+                                              self-page="true"
+                                              entity=" addlocation.regionEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class=" " ng-repeat="list in  addlocation.regList track by $index">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">库位名称<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-2">
+                            <input type="text" class="form-control" id="id_wareNamee" ng-model="list.Name"
+                                   placeholder="请输入库位名称">
+                        </div>
+                        <label class="col-md-1 control-label">库存状态<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-2">
+                            <select class="form-control" id="id_wareType" name="inventoryStatus" ng-model="list.mark">
+                                <option value="0">良品</option>
+                                <option value="1">不良品</option>
+                            </select>
+                        </div>
+                        <label style="margin-left: -60px" class="col-md-2  control-label">存放商品<span class="required"
+                                                                                                    aria-required="true"> * </span>
+                        </label>
+                        <div class="md-radio-inline col-md-3">
+                            <div class="md-radio">
+                                <input type="radio" id="radioId{{$index}}" name="radio{{$index}}" class="md-radiobtn"
+                                       ng-model="list.radioFlag" value="1">
+                                <label for="radioId{{$index}}">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全部</label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="radioId{{$index}}2" name="radio{{$index}}" class="md-radiobtn"
+                                       ng-model="list.radioFlag" value="0">
+                                <label for="radioId{{$index}}2">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 部分</label>
+                                <a style="margin-left: 10px" ng-show="list.radioFlag ==0"
+                                   ng-click=" addlocation.setShowClassify($index)">选择商品分类</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group form-md-line-input">
+                    <label class="col-md-2 control-label"></label>
+                    <div class="col-md-2">
+                        <a ng-click=" addlocation.addList()">添加库位</a>
+                        <a style="margin-left: 20px" ng-click=" addlocation.rmList()">删除库位</a>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">库位类型<span class="required"
+                                                                    aria-required="true"> * </span></label>
+                    <div class="col-md-3">
+                        <select class="form-control" id="locationType">
+                            <option selected value="">选择库位类型</option>
+                            <option value="RECEIVE">收获库位</option>
+                            <option value="STOREAGE">存货库位</option>
+                            <option value="SHIP">发货库位</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row" style="margin-left: 15px">
+                    <div class="col-md-offset-3 col-md-9">
+
+                        <button type="cancel" class="btn white" ng-click="addlocation">取消</button>
+                        <button type="submit" class="btn blue" ng-click=" addlocation.add()">添加</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div class="portlet-body">
+                        <div id="categoryTree" class="tree-demo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="" class="btn btn-primary" data-dismiss="modal">
+                    确认修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

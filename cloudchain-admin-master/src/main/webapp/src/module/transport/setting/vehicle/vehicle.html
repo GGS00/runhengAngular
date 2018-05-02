@@ -1,0 +1,184 @@
+
+<div>
+    <span class="pageTitle"><i class="fa fa-rocket"></i>载具管理</span>
+
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="no" class="form-control" placeholder="车牌号"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="title" class="form-control" placeholder="标题"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me type">
+                        <option selected value=" ">服务类型</option>
+                        <option value="0">仓储租赁</option>
+                        <option value="1">货物保管</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="0">待报价</option>
+                        <option value="1">待择库</option>
+                        <option value="2">完成</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me warehouseAreaType" name="warehouseAreaType">
+                        <option selected value=" ">库区类型</option>
+                        <option value="01">普通</option>
+                        <option value="02">冷藏</option>
+                        <option value="03">恆溫</option>
+                        <option value="04">特种</option>
+                        <option value="05">气调</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="tmsVehicle.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10" style="padding-left: 0px;">
+            <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">仓库区域</label>
+            <multicity-select></multicity-select>
+        </div>
+
+
+
+    </div>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="tmsVehicle.addVehicle()" style="font-weight: inherit">新增
+        </button>
+        <button type="button" class="btn btn-default" ng-click="tmsVehicle.editVehicle()" style="font-weight: inherit">修改</button>
+        <button type="button" class="btn btn-default" ng-click="tmsVehicle.delete()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="tmsVehicle.column"  table-page="tmsVehicle.getPage()" table-data="tmsVehicle.data" table-conf="tmsVehicle.pageParams" self-page="false" entity="tmsVehicle.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-pencil" style="margin-right: 10px;"></i>修改
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form  id="editDriversInfo" class="form-horizontal">
+                    <div class="form-body">
+
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">发动机编号
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="engineNo" ng-model="tmsVehicle.editInfo.engineNo" data-required="1" class="form-control" placeholder="发动机编号" />
+                            </div>
+                            <label class="control-label col-sm-2" style="padding-top: 7px">GPS设备号
+                            </label>
+                            <div class="col-sm-3">
+                                <input name="gpsNo" type="text" ng-model="tmsVehicle.editInfo.gpsNo" class="form-control" placeholder="GPS设备号" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">车辆型号
+                            </label>
+                            <div class="col-sm-3">
+                                <input name="vehicleModel" type="text"  ng-model="tmsVehicle.editInfo.vehicleModel" class="form-control" placeholder="车辆型号(选填)" />
+                            </div>
+                            <label class="control-label col-sm-2" style="padding-top: 7px">车辆属性
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="vehicleProperty" ng-model="tmsVehicle.editInfo.vehicleProperty"  data-required="1" class="form-control" placeholder="车辆属性" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">常驻城市
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="cityId" data-required="1"  ng-model="tmsVehicle.editInfo.cityId" class="form-control" placeholder="常驻城市" />
+                            </div>
+                            <label class="control-label col-sm-2" style="padding-top: 7px">描述
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="description" data-required="1"  ng-model="tmsVehicle.editInfo.description" class="form-control" placeholder="描述" />
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">车牌号
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="no" data-required="1"  ng-model="tmsVehicle.editInfo.no" class="form-control" placeholder="车牌号" />
+                            </div>
+                            <label class="control-label col-sm-2" style="padding-top: 7px">车辆识别码
+                            </label>
+                            <div class="col-sm-3">
+                                <input name="vin" type="text" class="form-control" ng-model="tmsVehicle.editInfo.vin"  placeholder="车辆识别码" />
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">行驶证一维码
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text" name="drivingLisenceCode" ng-model="tmsVehicle.editInfo.drivingLisenceCode"  data-required="1" class="form-control" placeholder="行驶证一维码(选填)" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--<input type="hidden" name="userSex" id="userSex"/>-->
+                    <input type="hidden" name="id" value="{{tmsVehicle.id}}"/>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="tmsVehicle.confirmModify()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

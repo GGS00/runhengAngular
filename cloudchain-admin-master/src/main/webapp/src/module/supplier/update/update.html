@@ -1,0 +1,183 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>修改供应商</span>
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司名称<span class="required"
+                                                                             aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input  id="company_id" type="text"
+                                   class="form-control"
+                                   placeholder="请输入公司名"/>
+                        </div>
+                    </div>
+
+                    <input ng-model="provideForm.nickName" type="hidden" class="form-control"/>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司简称
+                        </label>
+                        <div class="col-md-3">
+                            <input   id="nickName_id" type="text"
+                                   class="form-control"
+                                   placeholder="选填"/>
+                        </div>
+                    </div>
+                    <div class="form-group"   ng-show="update.citySwitch==0">
+                        <label class="control-label col-md-3 bold">公司地址<span class="required"
+                                                                             aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-3">
+
+                            <input id="addr_id" type="text" readonly   class="form-control"/>
+                        </div>
+                        <button type="button" class="btn btn-default" style=" height: 34px" ng-click="update.updateAddr()">修改地址
+                        </button>
+                    </div>
+
+                    <div class="form-group provideAddress"  ng-show="update.citySwitch==1">
+                        <label class="control-label col-md-3 bold">公司地址<span class="required"
+                                                                             aria-required="true"> * </span>
+                        </label>
+                        <city-select></city-select>
+                        <button type="button" class="btn btn-default" style=" height: 34px" ng-click="update.cancelAddr()">取消修改
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司地址
+                        </label>
+                        <div class="col-md-3">
+                            <input  id="companyAddr_id" type="text"
+                                   class="form-control"
+                                   placeholder="选填"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="divSpace" style="padding-bottom: 12px;">
+                <div class="form-group" id="ext9_id">
+                    <label class="control-label col-md-3 bold">是否供货
+                    </label>
+                    <div class="col-md-8">
+                        <div class="radio-list">
+                            <div class="radio col-md-8"><span><input type="radio" name="ext9" ng-model="update.ext9"
+                                                                     ng-change="update.radioChecked1()"
+                                                                     value="1"></span><label>是（供应商不仅可以在平台销售商品也可以提供货物给我发）</label>
+                            </div>
+                            <div class="radio  col-md-8"><span><input type="radio" name="ext9"
+                                                                      ng-model="update.ext9"
+                                                                      ng-change="update.radioChecked1()"
+                                                                      value="0"></span><label>否（供应商仅在平台销售商品，不给我方供货）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="ext10_id">
+                    <label class="control-label col-md-3 bold">是否必须采购
+                    </label>
+                    <div class="col-md-8">
+                        <div class="radio-list">
+                            <div class="radio col-md-8"><span><input type="radio" name="ext10"
+                                                                     ng-model="update.ext10"
+                                                                     ng-change="update.radioChecked2()" value="1"
+                            ></span><label>是（销售订单供应商完全不协助拣发货）</label>
+                            </div>
+
+                            <div class="radio  col-md-8"><span><input type="radio" name="ext10"
+                                                                      ng-model="update.ext10"
+
+                                                                      ng-change="update.radioChecked2()" value="0"
+                            ></span><label>否（销售订单供应商可以协助拣货或者发货）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="ext11_id">
+                    <label class="control-label col-md-3 bold">是否铺仓
+                    </label>
+                    <div class="col-md-8">
+                        <div class="radio-list">
+                            <div class="radio col-md-8"><span><input type="radio" name="ext11"
+                                                                     ng-model="update.ext11"
+                                                                     ng-change="update.radioChecked3()" value="1"
+                            ></span><label>是（供应商货物存放在我方控制仓库）</label>
+                            </div>
+
+                            <div class="radio  col-md-8"><span><input type="radio" name="ext11"
+                                                                      ng-model="update.ext11"
+                                                                      ng-change="update.radioChecked3()" value="0"
+                            ></span><label>否（供应商货物不存放在我方控制仓库）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" id="ext12_id">
+                    <label class="control-label col-md-3 bold">是否代发货
+                    </label>
+                    <div class="col-md-8">
+                        <div class="radio-list">
+                            <div class="radio col-md-8"><span><input type="radio" name="ext12"
+                                                                     ng-model="update.ext12"
+
+                                                                     ng-change="update.radioChecked4()"
+                                                                     value="1"></span><label>是（不使用我方物流，供应商可自行发货）</label>
+                            </div>
+
+                            <div class="radio  col-md-8"><span><input type="radio" name="ext12"
+                                                                      ng-model="update.ext12"
+                                                                      ng-change="update.radioChecked4()"
+                                                                      value="0"></span><label>否（使用我方物流，由我方统一发货）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div  class="form-group sendAddress_{{$index}}"  ng-repeat="list in update.sendAddressList"  ng-show="update.fahuoflag==0">
+                    <label class="control-label col-md-3 bold">发货区域<span
+                            style="font-weight: bold">({{$index+1}})</span><span class="required"
+                                                                                 aria-required="true"> * </span>
+                    </label>
+                    <multicity-select  ng-show="update.fahuoSwitch[$index]==$index+1"></multicity-select>
+                    <div class="col-md-3"   ng-show="update.fahuoSwitch[$index]==$index">
+                        <input id="fahuoAddr_id{{$index}}" type="text" readonly   class="form-control" value="{{update.fahuoVal[$index]}}" />
+                    </div>
+
+                    <button type="button" class="btn btn-default" ng-show="update.fahuoSwitch[$index]==$index" style=" height: 34px" ng-click="update.updateFahuoAddr($index)">修改地址
+                    </button>
+                    <button type="button" class="btn btn-default" ng-show="update.fahuoSwitch[$index]==$index+1" style=" height: 34px" ng-click="update.cancelFahuoAddr($index)">取消修改
+                    </button>
+                    <div class="col-md-1 pull-left addDiv" ng-show="update.fahuoSwitch[$index]==$index+1"><i class="fa fa-remove remove"
+                                                              ng-click="update.removeSend($index)"
+                                                              ng-if="update.sendAddressList.length>1"></i></div>
+
+                </div>
+                <div id="fahuo_add_id" ng-show="update.fahuoflag==0"  class="form-group" style="margin-bottom:0px;">
+                    <label class="control-label col-md-3">
+                    </label>
+                    <div class="col-md-3">
+                        <a class="btn btn-xs blue" ng-click="update.addNewSend()"> 添加
+                            <i class="fa fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row" style="margin-left: 15px">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="submitUser()">确定</button>
+                        <button type="cancel" class="btn white" ui-sref="supplier.manage">取消</button>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </form>
+    <!-- END FORM-->
+</div>
+</div>

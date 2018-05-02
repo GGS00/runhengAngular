@@ -1,0 +1,110 @@
+<div>
+   <div class="headerShow">
+     <span class="headerTips"><i class="fa fa-circle-o"></i>表示此订单步骤不允许调整</span>
+     <span class="headerTips"><i class="fa fa-circle"></i>表示已启用此订单步骤</span>
+     <span class="headerTips"><i class="fa fa-circle-o" style="color:#E7ECF2"></i>表示已禁用此订单步骤</span>
+   </div>
+
+    <div class="contentShow">
+      <div class="orderFlow">
+        <span class="flowTitle">订货流程设置</span>
+        <div class="flowContent">
+          <div ng-repeat="list in flow.flowList">
+            <div class="flowStep">
+              <img ng-if="list.modifyAble==0" src="../assets/pages/img/order/{{list.icon}}.png">
+              <img ng-if="list.modifyAble==1&&list.isOpen==1" src="../assets/pages/img/order/{{list.icon}}1.png" ng-click="flow.changeStatus($index,1)">
+              <img ng-if="list.modifyAble==1&&list.isOpen==0" src="../assets/pages/img/order/{{list.icon}}2.png" ng-click="flow.changeStatus($index,0)">
+              <span ng-if="list.bindEmpAble==1" class="stepDescPoint" ng-click="flow.showDialog(list.flowId)"><i class="fa fa-hand-o-up"></i>{{list.flowName}}</span>
+              <span ng-if="list.bindEmpAble==0" class="stepDesc">{{list.flowName}}</span>
+            </div>
+            <div ng-if="$index+1 < flow.flowList.length" class="lineToStep"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footerShow">
+      <button type="button" class="btn green-meadow" ng-click="flow.saveFlow()" style="margin-left:7%">保存</button>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="margin-top: 120px;width: 900px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title">
+          <i class="fa fa-file-o" style="margin-right: 10px;"></i>权限控制
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-header">
+          <span class="dialogTitle">已有权限人员:</span>
+          <div class="personContent">
+             <span class="personInAccess" ng-repeat="list in flow.personList">{{list.empName}}<i class="fa fa-remove" ng-click="flow.removePerson($index)"></i></span>
+          </div>
+        </div>
+        <div class="addBtn">
+          <button class="btn btn-primary" style="margin-bottom:-12px;margin-top:12px;margin-right: 146px;" ng-click="flow.addPerson()">添加到权限表中</button>
+        </div>
+        <div class="modal-body-content" style="margin-top: 20px;">
+          <div class="col-md-4">
+            <div class="portlet-body">
+              <div id="categoryTree" class="tree-demo"> </div>
+            </div>
+          </div>
+
+          <div class="col-md-8" style="margin-bottom: 20px;">
+            <div class="portlet-body">
+              <div class="tab-content">
+                <table-expandable table-column="column" table-page="getList()" table-data="data" table-conf="params"  entity="entity" self-page="true">
+                </table-expandable>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="flow.confirmEdit()">
+          确认修改
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" style="margin-top:300px;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title">
+          <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>确认
+        </h4>
+      </div>
+      <div class="modal-body">
+        确定要删除么?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default"
+                data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="flow.confirmDelete(flow.deleteIndex)">
+          确定
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+

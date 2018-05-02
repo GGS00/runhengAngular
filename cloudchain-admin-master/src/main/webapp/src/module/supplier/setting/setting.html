@@ -1,0 +1,151 @@
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption font-dark">
+                    <i class="icon-settings font-dark"></i>
+                    <span class="caption-subject bold uppercase">供应商设置</span>
+                </div>
+
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button data-toggle="modal" data-target="#show" class="btn sbold green"> 添加供应商
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="tools"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--<table class="table table-striped table-bordered table-hover table-checkable order-column" id="table">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th>-->
+                            <!--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">-->
+                                <!--<input type="checkbox" class="group-checkable" data-set="#table .checkboxes" />-->
+                                <!--<span></span>-->
+                            <!--</label>-->
+                        <!--</th>-->
+                        <!--<th>商品标题</th>-->
+                        <!--<th>商品信息</th>-->
+                        <!--<th>供应商</th>-->
+                        <!--<th>成本价</th>-->
+                        <!--<th>操作</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+
+                    <!--<tr ng-repeat="list in list track by $index" finish-repeat="initTable()">-->
+                        <!--<td>-->
+                            <!--<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">-->
+                                <!--<input type="checkbox" class="checkboxes" value="1" />-->
+                                <!--<span></span>-->
+                            <!--</label>-->
+                        <!--</td>-->
+                        <!--<td ng-bind-html="list.skuTitle"></td>-->
+                        <!--<td ng-bind-html="list.spec"></td>-->
+                        <!--<td ng-bind-html="list.supplierName"></td>-->
+                        <!--<td><input type="text" class="form-control" ng-model="list.price" placeholder="请填写供应商提供的成本价"></td>-->
+                        <!--<td><a ng-click="showDel(list.relId)">删除</a></td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <table-expandable table-column="column" table-conf="pageParams" table-data="data" entity="entity" self-page="false">
+                </table-expandable>
+
+                <div class="text-center">
+                    <button  class="btn sbold green" ng-click="batchSupplier()"> 保存价格
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="modal fade" id="show" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tools"></div>
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="supplier">
+                    <thead>
+                    <tr>
+                        <th>
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="group-checkable" data-set="#supplier .checkboxes" />
+                                <span></span>
+                            </label>
+                        </th>
+                        <th>编号</th>
+                        <th>供应商名称</th>
+                        <th>联系人</th>
+                        <th>联系电话</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="list in data track by $index" finish-repeat="initSupplier()">
+                        <td>
+                            <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                <input type="checkbox" class="checkboxes" ng-model="list.select" />
+                                <span></span>
+                            </label>
+                        </td>
+                        <td ng-bind-html="list.userId"></td>
+                        <td ng-bind-html="list.nickName"></td>
+                        <td ng-bind-html="list.ownerSubacctExt.ext3"></td>
+                        <td ng-bind-html="list.ownerSubacctExt.ext4"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addSupplier()">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body">
+                是否删除？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn red" ng-click="delSupplier()">
+                    删除
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

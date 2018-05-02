@@ -1,0 +1,149 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-chain"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-sticky-note-o"></i>采购单</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="packTableHeader">
+                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                        <thead class="iboxHeader">
+                        <tr>
+                            <th style="width:8%">商品编号</th>
+                            <th style="width:18%">商品</th>
+                            <th style="width:8%">订购量<br/>(销售单位)</th>
+                            <th style="width:8%">发货仓库</th>
+                            <th style="width:8%">供应商</th>
+                            <th style="width:8%">采购量</th>
+                            <th style="width:8%">采购单价<br/>(元/销售单位)</th>
+                            <th style="width:8%">小计</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="ibox-content firstLoad" style="height:initial">
+                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                        <tbody>
+                        <tr ng-repeat="list in neworderpurchase.goodsList" class="goodsPrice_{{$index}}" start-foo-table>
+                            <td style="width:8%">
+                                <input type="hidden" name="skuId" value="{{list.skuId}}"/>
+                                <input type="hidden" name="spuId" value="{{list.spuId}}"/>
+                                {{list.skuId}}</td>
+                            <td style="width:18%">{{list.skuName}}</td>
+                            <td style="width:8%">{{list.count}}</td>
+                            <td style="width:8%">
+
+                                <select class="form-control select2me warehouseId" name="warehouseId" ng-model="neworderpurchase.wareHouseID"
+                                        ng-options="y.warehouseId as y.warehouseName for y in neworderpurchase.wList">
+                                </select>
+                            </td>
+                            <td style="width:8%">
+                                <div class="showInfo segmentIds_{{$index}}" style="cursor: pointer" ng-click="neworderpurchase.addLines($index)">
+                                    <span ng-if="list.supplierName">{{list.supplierName}}<span style="color: #0095FF;margin-left: 5px;">修改</span></span><i class="fa fa-plus" ng-if="list.supplierName==''"></i>
+                                </div></td>
+                            <td style="width:8%"><input type="text" style="width:100%" ng-model="list.buycount" name="buycount" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" ></td>
+                            <td style="width:8%"><input type="number" ng-model="list.price" name="price" style="width:100%"></td>
+                            <td style="width:8%"><input type="hidden" name="subTotal" class="form-control" value="{{((list.buycount*list.price) | totwo)*100 | tozero}}">{{list.price*list.buycount|currency:'￥'}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+        <div class="arrivalDate" style="display: none">
+            <single-time-picker></single-time-picker>
+        </div>
+        <div class="divSpace" style="height: 80px">
+
+            <div class="form-group">
+                <label class="control-label col-sm-1">交割方式
+                </label>
+                <div class="col-sm-2">
+                    <select class="form-control select2me goodsDeliveryWay" name="goodsDeliveryWay">
+                        <option value="0">仓库内货权转移</option>
+                        <option value="1">自提</option>
+                        <option selected value="2">供应商送货</option>
+                    </select>
+                </div>
+                <label class="control-label col-sm-1">结款方式
+                </label>
+                <div class="col-sm-2">
+                    <select class="form-control select2me settlementWay" name="settlementWay">
+                        <option selected value="1">到货结算</option>
+                    </select>
+                </div>
+               <!-- <label class="control-label col-sm-1">预付比例
+                </label>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <input type="number" name="prepayProportion" data-required="1" class="form-control"/>
+                        <span class="input-group-addon">%</span>
+                    </div>
+                </div>
+                <label class="control-label col-sm-1">余款结算
+                </label>
+                <div class="col-sm-2">
+                    <div class="input-group">
+                        <input type="number" name="balanceSettlementDays" data-required="1" class="form-control"/>
+                        <span class="input-group-addon">天</span>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="divSpace" style="height: 117px;margin-bottom: 35px;">
+            <div class="form-group">
+                <label class="control-label col-sm-1">备注
+                </label>
+                <div class="col-sm-4">
+                    <textarea class="form-control remarks" name="remark" rows="3"></textarea>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-md-offset-4 col-md-9">
+                <button type="submit" class="btn blue" ng-click="neworderpurchase.commitPurchase()">生成采购单</button>
+                <button type="cancel" class="btn white"  ng-click="neworderpurchase.toNewOrder()">返回</button>
+            </div>
+        </div>
+        <!-- END FORM-->
+    </div>
+
+
+</div>
+
+<div class="modal fade" id="selectSupplier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>供应商选择
+                </h4>
+            </div>
+            <div class="modal-body" ng-if="neworderpurchase.supplierSwitch == 1">
+
+                <table-expandable table-column="neworderpurchase.column" table-page="neworderpurchase.getPage()" table-data="neworderpurchase.data" table-conf="neworderpurchase.pageParams"  entity="neworderpurchase.entity" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="neworderpurchase.addSupplier()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

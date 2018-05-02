@@ -1,0 +1,16 @@
+<div>
+    <span class="pageTitle"><i class="fa  fa-ticket"></i>单据类型</span>
+
+    <div class="search-form btnGroup" style="margin-top: 12px;">
+        <button type="button" class="btn btn-default"  ng-click="billType.addBillType()" style="font-weight: inherit">新增</button>
+        <button type="button" class="btn btn-default"  ng-click="billType.removeBillType()" style="font-weight: inherit">删除</button>
+
+    </div>
+    <table-expandable table-column="billType.column"  table-page="billType.getPage()" table-data="billType.data" table-conf="billType.pageParams" self-page="false" entity="billType.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

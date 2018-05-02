@@ -1,0 +1,66 @@
+    <div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>出入库汇总</span>
+        <div class="row firstRow">
+            <div class="col-md-10">
+                <div class="col-sm-2" style="padding-left: 0px;">
+                    <div class="form-group">
+                        <input type="text" id="id_areaName" class="form-control" placeholder="库区名称"></div>
+                </div>
+                <div class="col-sm-2" >
+                    <div class="form-group">
+                        <input type="text" id="id_wareName" class="form-control" placeholder="仓库名称"></div>
+                </div>
+
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_areaType">
+                            <option selected value=" ">库区类型</option>
+                            <option value="01">普通</option>
+                            <option value="02">冷藏</option>
+                            <option value="03">恒温</option>
+                            <option value="04">特种</option>
+                            <option value="05">气调</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_Status">
+                            <option selected value=" ">当前状态</option>
+                            <option value="ACTIVE">有效</option>
+                            <option value="INVALID">无效</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="outincollect.outincollectFind()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="outincollect.newoutincollect()"
+                style="font-weight: inherit">新建
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outincollect.updataoutincollect()"
+                style="font-weight: inherit">修改
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outincollect.activeoutincollect()"
+                style="font-weight: inherit">生效
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outincollect.invalidoutincollect()"
+                style="font-weight: inherit">失效
+        </button>
+    </div>
+    <table-expandable table-column="outincollect.column" table-page="outincollect.getPage()"
+                      table-data="outincollect.data" table-conf="outincollect.outincollect_params"
+                      self-page="false" entity="outincollect.entity">
+    </table-expandable>
+</div>
+
+</div>
+

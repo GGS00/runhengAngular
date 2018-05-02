@@ -1,0 +1,35 @@
+<div>
+    <span class="pageTitle"><i class="icon-pointer"></i>站点管理</span>
+
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="名称"> </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="point.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="point.addPoint()" style="font-weight: inherit">新增
+        </button>
+        <button type="button" class="btn btn-default"  ng-click="point.removePoint()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="point.column"  table-page="point.getPage()" table-data="point.data" table-conf="point.pageParams" self-page="false" entity="point.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

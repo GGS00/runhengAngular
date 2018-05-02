@@ -1,0 +1,101 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-pencil-square"></i>拣货单管理</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-md-3"  style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="code" class="form-control" placeholder="发运单号"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" id="outboundCode" class="form-control" placeholder="出库单号"></div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="hidden" id="warehouseId"
+                           value="{{outboundPick.warehouseEntity.getSelectedRows()[0].ID}}"
+                           id="id_warehouse">
+                    <select-table st-combo="test()" st-text="outboundPick.placeholder_warehouseName"
+                                  st-icon="outboundPick.icon_warehouse"
+                                  st-value="outboundPick.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="outboundPick.warehouseColumn"
+                                          table-page="outboundPick.warehousePage()"
+                                          table-data="outboundPick.warehouseData"
+                                          table-conf="outboundPick.warehouseParams"
+                                          self-page="true"
+                                          entity="outboundPick.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+
+            <!--/span-->
+            <div class="col-md-3">
+                <input type="hidden" id="ownerId"
+                       value="{{outboundPick.ownerEntity.getSelectedRows()[0].userId}}"/>
+                <div class="form-group">
+                    <select-table st-combo="test()" st-text="outboundPick.placeholder_ownerName"
+                                  st-icon="outboundPick.icon_owner"
+                                  st-value="outboundPick.ownerEntity.getSelectedRows()[0].nickName">
+                        <table-expandable table-column="outboundPick.ownerColumn"
+                                          table-page="outboundPick.ownerPage()"
+                                          table-data="outboundPick.ownerData"
+                                          table-conf="outboundPick.ownerParams"
+                                          self-page="true"
+                                          entity="outboundPick.ownerEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-md-3"  style="padding-left: 0px;">
+                <div class="form-group">
+                    <select class="form-control" id="status">
+                        <option selected value="">订单状态</option>
+                        <option value="NOT_FINISH">未完成</option>
+                        <option value="OPEN">打开</option>
+                        <option value="PART_ALLOCATED">部分分配</option>
+                        <option value="ALLOCATED">全部分配</option>
+                        <option value="WORKING">工作中</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" id="urgent">
+                        <option selected value="">是否加急</option>
+                        <option value="1">加急</option>
+                        <option value="0">不加急</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="outboundPick.pickFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="outboundPick.automatic()" style="font-weight: inherit">自动分配</button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundPick.pickActive()" style="font-weight: inherit">生效</button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundPick.pickInvalid()" style="font-weight: inherit">失效</button>
+    </div>
+    <table-expandable table-column="outboundPick.column" table-page="outboundPick.getPage()"
+                      table-data="outboundPick.data" table-conf="outboundPick.pageParams" self-page="false"
+                      entity="outboundPick.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<!--	<select-table st-combo="test()" st-value="outboundPick.entity[0].goods_name" st-text="outboundPick.placeholder" st-icon="outboundPick.icon">
+                    <table-expandable  table-column="outboundPick.column"  table-page="outboundPick.getPage()" table-data="outboundPick.data" table-conf="outboundPick.pageParams" self-page="true" entity="outboundPick.entity">
+                    </table-expandable>
+                </select-table>-->
+
+

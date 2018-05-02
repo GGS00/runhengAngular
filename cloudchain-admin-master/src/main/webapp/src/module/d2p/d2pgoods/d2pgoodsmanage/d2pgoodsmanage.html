@@ -1,0 +1,276 @@
+<div>
+	<span class="pageTitle"><i class="fa fa-sticky-note-o"></i>商品管理</span>
+    <div class="row firstRow">
+    	<div class="col-md-10" style="padding-left: 0px;">
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <input type="text" name="spuId" class="form-control" placeholder="商品编号"> </div>
+	        </div>
+
+			<div class="col-sm-3">
+				<div class="form-group">
+					<input type="text" name="goodsName" class="form-control" placeholder="商品名称">
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="form-group">
+					<select class="form-control select2me brand">
+						<option selected value=" ">品牌</option>
+						<option ng-repeat="list in d2pgoodsmanage.brandList" value="{{list.bId}}">{{list.name}}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-sm-3">
+				<div class="form-group">
+					<select class="form-control select2me state">
+						<option selected value=" ">当前状态</option>
+						<option value="0">待上架</option>
+						<option value="1">已上架</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-sm-12"  style="height: 49px;">
+				<label class="control-label col-sm-2" style="padding-top: 5px;text-align: center;font-weight: bold;">商品分类
+				</label>
+				<div class="col-sm-3">
+					<!--<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectGOneChange()" ng-model="d2pgoodsmanage.goodsOneSelect" ng-options="x.cId as x.name for x in d2pgoodsmanage.goodsOneList"></select>-->
+
+					<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectGOneChange()" ng-model="d2pgoodsmanage.goodsOneSelect">
+						<option selected value=" ">全部</option>
+						<option ng-repeat="list in d2pgoodsmanage.goodsOneList" value="{{list.cId}}">{{list.name}}</option>
+					</select>
+
+				</div>
+				<div class="col-sm-3">
+					<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectGTwoChange()" ng-model="d2pgoodsmanage.goodsTwoSelect">
+						<option selected value=" ">全部</option>
+						<option ng-repeat="list in d2pgoodsmanage.goodsTwoList" value="{{list.cId}}">{{list.name}}</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectGThreeChange()" ng-model="d2pgoodsmanage.goodsThreeSelect">
+						<option selected value=" ">全部</option>
+						<option ng-repeat="list in d2pgoodsmanage.goodsThreeList" value="{{list.cId}}">{{list.name}}</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="col-sm-12" style="height: 49px;">
+				<label class="control-label col-sm-2" style="padding-top: 5px;text-align: center;font-weight: bold;">展示分类
+				</label>
+				<div class="col-sm-3">
+					<!--<select class="form-control select2me selectPro"  ng-change="d2pgoodsmanage.selectSOneChange()" ng-model="d2pgoodsmanage.showOneSelect" ng-options="x.cId as x.name for x in d2pgoodsmanage.showOneList"></select>-->
+
+					<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectSOneChange()" ng-model="d2pgoodsmanage.showOneSelect">
+						<option selected value=" ">全部</option>
+						<option ng-repeat="list in d2pgoodsmanage.showOneList" value="{{list.cId}}">{{list.name}}</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectSTwoChange()" ng-model="d2pgoodsmanage.showTwoSelect">
+						<option selected value=" ">全部</option>
+						<option ng-repeat="list in d2pgoodsmanage.showTwoList" value="{{list.cId}}">{{list.name}}</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<select class="form-control select2me"  ng-change="d2pgoodsmanage.selectSThreeChange()" ng-model="d2pgoodsmanage.showThreeSelect">
+						<option selected value=" ">全部</option>
+						<option ng-repeat="list in d2pgoodsmanage.showThreeList" value="{{list.cId}}">{{list.name}}</option>
+					</select>
+				</div>
+			</div>
+
+
+        </div>
+        <div class="col-md-2">
+	        <div class="btn-group">
+				<button type="button" class="btn blue" ng-click="d2pgoodsmanage.getPageByFilter()">
+					搜索
+				</button>
+			</div>
+	    </div>
+
+    </div>
+
+	<div class="search-form btnGroup">
+		<button type="button" class="btn btn-default" ng-click="d2pgoodsmanage.setShowClassify()" style="font-weight: inherit">设置展示分类
+		</button>
+		<button type="button" class="btn btn-default" ng-click="d2pgoodsmanage.onSale()" style="font-weight: inherit">上架</button>
+		<button type="button" class="btn btn-default" ng-click="d2pgoodsmanage.unSale()" style="font-weight: inherit">下架</button>
+		<button type="button" class="btn btn-default" ng-click="d2pgoodsmanage.modifySale()" style="font-weight: inherit">修改销售价格</button>
+	</div>
+
+	<table-expandable table-column="d2pgoodsmanage.column"  table-page="d2pgoodsmanage.getPage()" table-data="d2pgoodsmanage.data" table-conf="d2pgoodsmanage.pageParams" self-page="false" entity="d2pgoodsmanage.entity">
+	</table-expandable>
+
+
+</div>
+</div>
+
+
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">
+					<i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+				</h4>
+			</div>
+			<div class="modal-body">
+				<div class="modal-body-content" style="margin-top: 20px;">
+					<div class="portlet-body">
+						<div id="categoryTree" class="tree-demo"> </div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+						data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="d2pgoodsmanage.confirmEdit()">
+					确认修改
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="confirmPrice" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top:180px;min-width: 1100px;">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">
+					<i class="fa fa-money" style="margin-right: 10px;"></i>商品设价
+				</h4>
+			</div>
+			<div class="modal-body" style="position: relative;padding: 15px;">
+				<div class="md-radio-inline">
+					<div class="md-radio">
+						<input type="radio" id="checkbox3" name="settingWay" value="0" ng-model="d2pgoodsmanage.settingWay" class="md-radiobtn">
+						<label for="checkbox3">
+							<span class="inc"></span>
+							<span class="check"></span>
+							<span class="box"></span>
+							根据规格设置价格
+						</label>
+					</div>
+					<div class="md-radio">
+						<input type="radio" id="checkbox4" name="settingWay" value="1" ng-model="d2pgoodsmanage.settingWay" class="md-radiobtn">
+						<label for="checkbox4">
+							<span class="inc"></span>
+							<span class="check"></span>
+							<span class="box"></span>
+							根据数量设置价格
+						</label>
+					</div>
+				</div>
+				<div class="portlet-body">
+				  <div ng-if="d2pgoodsmanage.settingWay == 0">
+					 <form id="settingWayZero">
+						<div class="packTableHeader">
+							<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+								<thead class="iboxHeader">
+								<tr>
+									<th style="width:60%">规格</th>
+									<th style="width:20%">最小起订量<br/><span>全部相同<input type="checkbox" ng-model="d2pgoodsmanage.checkCountState" ng-click="d2pgoodsmanage.countChange()" style="margin-left: 4px;"/></span></th>
+									<th style="width:20%">设置销售价格(元)<br/><span>全部相同<input type="checkbox" ng-model="d2pgoodsmanage.checkPriceState" ng-click="d2pgoodsmanage.priceChange()" style="margin-left: 4px;"/></span></th>
+								</tr>
+								</thead>
+							</table>
+						</div>
+						<div class="ibox-content firstLoad">
+							<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+								<tbody>
+								<tr ng-repeat="list in d2pgoodsmanage.goodsList" class="goodsPrice_{{$index}}" start-foo-table>
+									<td style="width:60%">
+										<input type="hidden" name="specPriceList[{{$index}}].id" value="{{list.specPriceId}}">
+										<input type="hidden" name="specPriceList[{{$index}}].shelvesId" value="{{list.shelvesId}}">
+										<input type="hidden" name="specPriceList[{{$index}}].specId" value="{{list.specId}}">
+										<input type="hidden" name="specPriceList[{{$index}}].userId" value="{{list.userId}}">
+										{{list.skuDesc}}
+									</td>
+									<td style="width:20%">
+										<input type="number" name="specPriceList[{{$index}}].minBookingNum" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" class="form-control" value="{{list.minBookingNum}}">
+									</td>
+									<td style="width:20%">
+										<input type="number" name="specPriceList[{{$index}}].price" class="form-control" value="{{list.salePrice/100}}">
+									</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="packPagination">
+							<uib-pagination class="pagination-prev-large" total-items="d2pgoodsmanage.pageCount" items-per-page="d2pgoodsmanage.pageSize" ng-change="d2pgoodsmanage.getGoodsList()" ng-model="d2pgoodsmanage.page" max-size="d2pgoodsmanage.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+							</uib-pagination>
+
+							<div class="selectNum">
+								<select class="form-control" style="width:80px" ng-model="d2pgoodsmanage.selected" ng-options="x.id as x.name for x in d2pgoodsmanage.pages" ng-change="d2pgoodsmanage.packChange(d2pgoodsmanage.selected)"></select>
+								<span class="selectText">条记录</span>
+							</div>
+						</div>
+					</form>
+					</div>
+
+
+				<div ng-if="d2pgoodsmanage.settingWay == 1" class="form-group" style="margin-bottom:0px;">
+					<form id="settingWayOne">
+						<table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+						<thead>
+						<tr>
+							<th style="width:20%">购买数量</th>
+							<th style="width:20%">默认售价(元)</th>
+							<th style="width:30%">最终售价(元)</th>
+							<th style="width:10%">操作</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="list in d2pgoodsmanage.priceList"  class="goodsNum_{{$index}}" finish-repeat>
+							<td style="width:20%">>=
+								<input type="text" name="numPriceList[{{$index}}].bookingNum" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" value="{{list.bookingNum?list.bookingNum:''}}"/></td>
+							<td style="width:20%">
+								<input type="hidden" name="numPriceList[{{$index}}].shelvesId" value="{{d2pgoodsmanage.resultMap.shelveId}}"/>
+								<input type="hidden" name="numPriceList[{{$index}}].defaultPrice" value="{{d2pgoodsmanage.resultMap.defaultPrice/100}}"/>
+								￥{{d2pgoodsmanage.resultMap.defaultPrice/100}}</td>
+							<td style="width:30%">
+								<input type="number" name="numPriceList[{{$index}}].price" value="{{list.salePrice?list.salePrice/100:''}}"/>
+							</td>
+							<td style="width:10%"><i class="fa fa-remove remove" ng-click="d2pgoodsmanage.removeGoods($index)"></i></td>
+						</tr>
+						</tbody>
+					</table>
+					</form>
+					<div class="col-sm-12">
+						<a  class="btn btn-xs blue" ng-if="d2pgoodsmanage.priceList.length<5" ng-click="d2pgoodsmanage.addCountPrice()"> 添加
+							<i class="fa fa-plus"></i>
+						</a>
+						<span style="color: #A7A7A7;margin-left: 6px;">(最多可设置5个阶梯区间)</span>
+					</div>
+				</div>
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+						data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="d2pgoodsmanage.confirmSetPrice()">
+					确定提交
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

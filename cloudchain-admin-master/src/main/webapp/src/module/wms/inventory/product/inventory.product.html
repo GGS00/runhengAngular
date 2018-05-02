@@ -1,0 +1,36 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>商品库存</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="ownerId" class="form-control" placeholder="货主编号"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="wareHouseId" class="form-control" placeholder="仓库编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="productId" class="form-control" placeholder="商品编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="inventoryProduct.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+   <table-expandable table-column="inventoryProduct.column" table-page="inventoryProduct.getPage()"
+                      table-data="inventoryProduct.data" table-conf="inventoryProduct.pageParams" self-page="false"
+                      entity="inventoryProduct.entity">
+    </table-expandable>
+</div>
+
+
+
+

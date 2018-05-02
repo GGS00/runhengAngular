@@ -1,0 +1,162 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>贷款申请审批(产品部)</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <form id="productcheck">
+                <div class="form-group">
+                    <input  type="hidden" value="{{productCheck.objData.id}}" name="id" >
+                    <input  type="hidden" value="{{productCheck.objData.applyLoanId}}" name="applyLoanId" >
+                    <input  type="hidden" value="{{productCheck.objData.customerId}}" name="customerId" >
+                    <label class="col-md-2 control-label">客户编号
+                    </label>
+                    <div class="col-md-2 col-left2 ">
+                        <input type="text" class="form-control" name="customer.code" value="{{productCheck.objData.customer.code}}"
+                               readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">客户名称
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control"
+                               value="{{productCheck.objData.customerName}}" readonly="readonly" name="customerName">
+                    </div>
+                    <label class="col-md-2 control-label">贷款品种
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="loanType" class="form-control"
+                               value="{{productCheck.objData.loan_type=='INVENTORY_FINANCE'?'货好贷':(productCheck.objData.loan_type=='ORDER_FINANCE'?'单好贷':productCheck.objData.loan_type)}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">申请金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" id="id_remark" class="form-control" name="applyLoanRecord.applyAmount"
+                               value="{{productCheck.objData.applyLoanRecord.applyAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">申请时间
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.applyTime"
+                               value="{{productCheck.objData.applyLoanRecord.applyTime}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">订单起始时间</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.orderBeginTime"
+                               value="{{productCheck.objData.applyLoanRecord.orderBeginTime}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">库存时间节点
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.applyTime"
+                               value="{{productCheck.objData.applyLoanRecord.applyTime}}" readonly="readonly">
+                    </div>
+                   <!-- <label class="col-md-2 control-label">产品数量
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.totalQuantity"
+                               value="{{productCheck.objData.applyLoanRecord.totalQuantity}}" readonly="readonly">
+                    </div>-->
+                    <label class="col-md-2 control-label">已贷总金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.loanedAmount"
+                               value="{{productCheck.objData.applyLoanRecord.loanedAmount}}" readonly="readonly">
+                    </div>
+                </div>
+              <!--  <div class="form-group">
+                   &lt;!&ndash; <label class="col-md-2 control-label">产品总价
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.applyAmount"
+                               value="{{productCheck.objData.applyLoanRecord.totalAmount}}" readonly="readonly">
+                    </div>&ndash;&gt;
+                    <label class="col-md-2 control-label">已贷总金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.loanedAmount"
+                               value="{{productCheck.objData.applyLoanRecord.loanedAmount}}" readonly="readonly">
+                    </div>
+                   &lt;!&ndash; <label class="col-md-2 control-label">近期销售额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.nearSaleAmount"
+                               value="{{productCheck.objData.applyLoanRecord.nearSaleAmount}}" readonly="readonly">
+                    </div>&ndash;&gt;
+                </div>-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label">折扣率
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.discountRate"
+                               value="{{productCheck.objData.applyLoanRecord.discountRate}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">可申请金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.maxApplyAmount"
+                               value="{{productCheck.objData.applyLoanRecord.maxApplyAmount}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">实际产品数量
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realTotalQuantity" class="form-control"
+                               value="{{productCheck.objData.realTotalQuantity}}" >
+                    </div>
+                    <label class="col-md-2 control-label">实际产品总价
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realTotalAmount" class="form-control"
+                               value="{{productCheck.objData.realTotalAmount}}" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">审核结果
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <select id="checkStatus1" name="checkStatus1" class="form-control">
+                            <option value="STATUS_CHECK_PASS" selected>通过</option>
+                            <option value="CHECK_FAIL">不通过</option>
+                        </select>
+                    </div>
+                    <label class="col-md-2 control-label">审核意见
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkOption1" class="form-control"
+                               value="{{productCheck.objData.checkOption1}}" >
+                    </div>
+
+                </div>
+            </form>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="productCheck.approve()">审批确定
+                        </button>
+                    </div>
+
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="productCheck.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        <table-expandable table-column="productCheck.column" table-page="productCheck.getPage()"
+                          table-data="productCheck.data" table-conf="productCheck.pageParams" self-page="false"
+                          entity="productCheck.entity">
+        </table-expandable>
+    </div>
+</div>

@@ -1,0 +1,127 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-excel-o"></i>导入入库单</span>
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    表单信息有误,请检查.
+                </div>
+                <div class="alert alert-success display-hide">
+                    <button class="close" data-close="alert"></button>
+                    表单信息验证通过!
+                </div>
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">1、下载入库模板
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group" >
+                                <button type="button"  ng-click="InboundImport.download()" class="btn green btn-outline">入库模板下载</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">2、&nbsp;选&nbsp;&nbsp;择&nbsp;&nbsp;货&nbsp;&nbsp;主
+                        </label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <select-table st-combo="test()" st-text="InboundImport.placeholder_ownerName"
+                                              st-icon="InboundImport.icon_owner"
+                                              st-value="InboundImport.ownerEntity.getSelectedRows()[0].nickName">
+                                    <table-expandable table-column="InboundImport.ownerColumn"
+                                                      table-page="InboundImport.ownerPage()"
+                                                      table-data="InboundImport.ownerData"
+                                                      table-conf="InboundImport.ownerParams"
+                                                      self-page="true"
+                                                      entity="InboundImport.ownerEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">3、选择单据类型
+                        </label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <select class="form-control" id="id_billType" ng-click="InboundImport.selectClickAction()">
+                                    <option selected value="">单据类型</option>
+                                    <option value="10006002">铺仓入库</option>
+                                    <option value="10006003">默认入库</option>
+                                    <option value="10006004">赠品入库</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">4、选&nbsp;择&nbsp;供&nbsp;应&nbsp;商
+                        </label>
+                        <div class="col-sm-2">
+                           <div class="form-group">
+                               <select-table st-combo="test()" st-text="InboundImport.placeholder_supliName"
+                                             st-icon="InboundImport.icon_supli"
+                                             st-value="InboundImport.supliEntity.getSelectedRows()[0].nickName">
+                                   <table-expandable table-column="InboundImport.supliColumn"
+                                                     table-page="InboundImport.supliPage()"
+                                                     table-data="InboundImport.supliData"
+                                                     table-conf="InboundImport.supliParams"
+                                                     self-page="true"
+                                                     entity="InboundImport.supliEntity">
+                                   </table-expandable>
+                               </select-table>
+                           </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">5、选择导入仓库
+                        </label>
+                        <div class="col-sm-2">
+                            <div class="form-group">
+                                <select-table st-combo="test()" st-text="InboundImport.placeholder_warehouseName"
+                                              st-icon="InboundImport.icon_warehouse"
+                                              st-value="InboundImport.warehouseEntity.getSelectedRows()[0].NAME"
+                                              ng-model="InboundImport.selectedWareHouseId">
+                                    <table-expandable table-column="InboundImport.warehouseColumn"
+                                                      table-page="InboundImport.warehousePage()"
+                                                      table-data="InboundImport.warehouseData"
+                                                      table-conf="InboundImport.warehouseParams"
+                                                      self-page="true"
+                                                      entity="InboundImport.warehouseEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">4、选择导入文件</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="excelFile" name="excelFile"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" ng-click="InboundImport.save()" class="btn blue">保存</button>
+                        <button type="cancel" ng-click="InboundImport.returnButton()" class="btn white">返回</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+</div>
+
+

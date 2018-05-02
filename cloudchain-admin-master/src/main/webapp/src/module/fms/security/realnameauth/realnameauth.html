@@ -1,0 +1,99 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle">实名认证</span>
+    <div class="portlet-body row">
+        <form id="authForm" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">姓名</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="realName" name="realName" data-required="1" class="form-control" autocomplete="off" maxlength="18"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">身份证号</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="certificateNo" name="certificateNo" data-required="1" autocomplete="off" class="form-control" maxlength="18"/>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <label class="control-label col-sm-1">
+                            证件照片
+                        </label>
+                        <div class="col-sm-4">
+                            <div style="text-align:center; margin-top:14px;">
+                                <img src="{{realnameauth.zhengImg.img}}" style="width: 300px; height: 200px;" ng-click="realnameauth.selectPicture(1)"/>
+                                <p>正面</p>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <div style="text-align:center; margin-top:14px;">
+                                <img src="{{realnameauth.fanImg.img}}" style="width: 300px; height: 200px;" ng-click="realnameauth.selectPicture(2)"/>
+                                <p>反面</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="certificateType"     name="certificateType" value="1"/>
+            <input type="hidden" id="certificateFrontPic" name="certificateFrontPic" />
+            <input type="hidden" id="certificateBackPic"  name="certificateBackPic" />
+            <input type="hidden" id="certificateHoldPic"  name="certificateHoldPic" />
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="realnameauth.submit()">提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="cancel" class="btn white"  ng-click="realnameauth.toParent()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                            </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
+                            <div>
+                                <span class="btn default btn-file">
+                                    <span class="fileinput-new"> 选一张 </span>
+                                    <span class="fileinput-exists"> 换一张 </span>
+                                    <input id="file" type="file" name="...">
+                                </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="addImg()">确定上传</button>
+            </div>
+        </div>
+    </div>
+</div>

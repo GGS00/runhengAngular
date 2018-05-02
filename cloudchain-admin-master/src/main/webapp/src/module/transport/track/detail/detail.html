@@ -1,0 +1,49 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-truck"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>物流信息</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <span class="orderTitle" style="margin-bottom: 24px;display: block;">订单号：{{logisticsInfo.logisticsInfoList[0].wayBillCode}}</span>
+                    <ul class="timeline">
+                        <li ng-repeat="list in logisticsInfo.logisticsInfoList">
+                            <i  ng-if="$index > 0" class="fa fa-clock-o bg-aqua">
+                            </i>
+                            <i  ng-if="$index == 0" class="fa fa-clock-o" style="background: #DD4B39">
+                            </i>
+                            <div class="timeline-item">
+                                <span class="time">
+                                    <span class='label label-default'>{{list.status=='OPEN'?'打开':(list.status=='ACTIVE'?'生效':(list.status=='ENTERED'?'入场':(list.status=='DISPATCHED'?'已调度':(list.status=='ONWAY'?'在途':(list.status=='ARRIVED'?'运抵':(list.status=='SIGNED'?'签收':(list.status=='CANCEL'?'取消':(list.status=='TRUCKED'?'已装车':''))))))))}}</span>
+                                    <i class="fa fa-clock-o">
+                                    </i>
+                                    {{list.operatorTime}}
+                                </span>
+
+                                <h3 ng-if="$index == 0" class="timeline-header" style="font-size:14px;color:#DD4B39;font-weight: bold">
+                                    {{list.description}}
+                                </h3>
+                                <h3 ng-if="$index > 0" class="timeline-header" style="font-size:14px">
+                                    {{list.description}}
+                                </h3>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

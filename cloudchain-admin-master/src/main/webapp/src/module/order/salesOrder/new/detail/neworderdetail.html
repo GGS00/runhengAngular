@@ -1,0 +1,188 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>新订单</span>
+
+    <md-content style="margin-top: 25px;background: #fff">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="订单信息" ng-click="newOrderDetail.showTabs(0)">
+                <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                    <div class="portlet-body row">
+                        <form  id="form_sample_1" class="form-horizontal">
+                            <div class="form-body">
+
+                                <div class="divSpace">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">订单信息</span>
+                                            <p>订单编号：{{newOrderDetail.repData.orderId}}</p>
+                                            <p>订单状态：{{newOrderDetail.repData.orderState==0?'待确认':(newOrderDetail.repData.orderState==1?'待财务审核':(newOrderDetail.repData.orderState==2?'待出库审核':(newOrderDetail.repData.orderState==10?'待配仓':(newOrderDetail.repData.orderState==4?'待发货':(newOrderDetail.repData.orderState==5?'待确认收货':(newOrderDetail.repData.orderState==6?'已完成':(newOrderDetail.repData.orderState==7?'已关闭':'')))))))}}</p>
+                                            <p>最新操作时间：{{newOrderDetail.repData.lastOperatedTime}}</p>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">原始订单</span>
+                                            <p><a>{{newOrderDetail.repData.originOrder}}</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">收货信息</span>
+                                            <p>收件人：{{newOrderDetail.repData.logisticses[0].cneeName}}</p>
+                                            <p>联系方式：{{newOrderDetail.repData.logisticses[0].cneeMobile}}</p>
+                                            <p>收件地址：{{newOrderDetail.repData.logisticses[0].province}}{{newOrderDetail.repData.logisticses[0].city}}{{newOrderDetail.repData.logisticses[0].county}}{{newOrderDetail.repData.logisticses[0].address}}</p>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">交货日期</span>
+                                            <p>交货时间：{{newOrderDetail.repData.deliveryTime}}</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="cancel" class="btn white"  ng-click="newOrderDetail.toNewOrder()">返回</button>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="商品信息" ng-click="newOrderDetail.showTabs(1)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="portlet-body row">
+                        <form class="form-horizontal">
+                            <div class="form-body">
+                                <div class="divSpace">
+                                    <div class="portlet-body">
+                                        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                                            <thead>
+                                            <tr>
+                                                <th style="width:20%">商品编号</th>
+                                                <th style="width:20%">商品</th>
+                                                <th style="width:20%">数量</th>
+                                                <th style="width:10%">单价(元)</th>
+                                                <th style="width:10%">总额(元)</th>
+                                                <th style="width:20%">优惠</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="list in newOrderDetail.repData.items"  class="goods_{{$index}}"finish-repeat>
+                                                <td style="width:20%">{{list.skuId}}</td>
+                                                <td style="width:20%">{{list.skuName}}</td>
+                                                <td style="width:20%">{{list.count}}</td>
+                                                <td style="width:10%">{{list.price/100}}</td>
+                                                <td style="width:10%">{{list.subTotal/100}}</td>
+                                                <td style="width:20%">{{list.discountMoney/100}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="cancel" class="btn white"  ng-click="newOrderDetail.toNewOrder()">返回</button>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="审单信息" ng-click="newOrderDetail.showTabs(2)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="portlet-body row">
+                        <form class="form-horizontal">
+                            <div class="form-body">
+                                <div class="divSpace">
+                                    <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;color: #8A8A8A;">审单</span>
+                                    <div class="portlet-body">
+                                        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                                            <thead>
+                                            <tr>
+                                                <th style="width:20%">行为</th>
+                                                <th style="width:20%">操作时间</th>
+                                                <th style="width:20%">操作人</th>
+                                                <th style="width:40%">结果</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="list in newOrderDetail.repData.operateLogs"  class="goods_{{$index}}"finish-repeat>
+                                                <td style="width:20%">{{list.operateType == 2 ? '确认' : (list.operateType == 3 ? '财务审核' : (list.operateType == 4 ? '仓库审核' : '其他') )}}</td>
+                                                <td style="width:20%">{{list.operateTime}}</td>
+                                                <td style="width:20%">{{list.operatorName}}</td>
+                                                <td style="width:40%">{{list.operateContent}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="cancel" class="btn white"  ng-click="newOrderDetail.toNewOrder()">返回</button>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="配仓信息" ng-click="newOrderDetail.showTabs(3)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="portlet-body row">
+                        <form class="form-horizontal">
+                            <div class="form-body">
+                                <div class="divSpace">
+                                    <div class="form-group">
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">配仓</span>
+                                            <p>发货仓库：{{newOrderDetail.repData.warehouses[0].warehouseName}}</p>
+                                            <!--<p>配仓方式：xxxxxxxxxx</p>-->
+                                            <!--<p>配仓时间：xxxxxxxxxx</p>-->
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">发货</span>
+                                            <p>发货单生成方式：手动</p>
+                                            <!--<p>生成发货单时间：xxxxxxxxxx</p>-->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-6" ng-if="newOrderDetail.repData.stockUpStatus==1">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">备货信息</span>
+                                            <p>备货方：{{newOrderDetail.repData.stockUpName}}</p>
+                                            <p>备货信息：{{newOrderDetail.repData.stockUpRemark}}</p>
+                                            <p>备货完成时间：{{newOrderDetail.repData.stockUpTime}}</p>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">配送方式</span>
+                                            <p>快递：{{newOrderDetail.repData.logisticses[0].distributionWay==1?'自营物流(TMS发运)':(newOrderDetail.repData.logisticses[0].distributionWay==2?'合作承运商送货':(newOrderDetail.repData.logisticses[0].distributionWay==3?'买家自提':''))}}</p>
+                                            <p>发货时间：{{newOrderDetail.repData.logisticses[0].deliverTime}}</p>
+                                        </div>
+
+                                        <div class="col-sm-6">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">收货</span>
+                                            <p>确认收货时间：{{newOrderDetail.repData.receiptTime}}</p>
+                                        </div>
+
+                                        <div class="col-sm-6" ng-if="newOrderDetail.repData.reissueStatus==1">
+                                            <span class="bold" style="display:block;margin-bottom:8px;font-size:15px;">补发</span>
+                                            <p>补发原因：{{newOrderDetail.repData.reissueReason}}</p>
+                                            <p>补发订单号：{{newOrderDetail.repData.reissueOrderId}}</p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="cancel" class="btn white"  ng-click="newOrderDetail.toNewOrder()">返回</button>
+                        </div>
+                    </div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+
+</div>

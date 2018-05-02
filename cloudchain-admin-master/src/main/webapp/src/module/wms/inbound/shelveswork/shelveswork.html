@@ -1,0 +1,49 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>上架作业</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="作业单号"></div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-group">
+                    <input type="text" name="original_bill_code" class="form-control" placeholder="订单号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status">
+                        <option selected value=" ">作业状态</option>
+                        <option value="OPEN">打开</option>
+                        <option value="FINISHED">完成</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="shelfTaskManage.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht"  ng-click="shelfTaskManage.tasksure()" style="font-weight: inherit">作业确认</button>
+    </div>
+    <table-expandable table-column="shelfTaskManage.column" table-page="shelfTaskManage.getPage()"
+                      table-data="shelfTaskManage.data" table-conf="shelfTaskManage.pageParams" self-page="false"
+                      entity="shelfTaskManage.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<!--	<select-table st-combo="test()" st-value="shelfTaskManage.entity[0].goods_name" st-text="shelfTaskManage.placeholder" st-icon="shelfTaskManage.icon">
+                    <table-expandable  table-column="shelfTaskManage.column"  table-page="shelfTaskManage.getPage()" table-data="shelfTaskManage.data" table-conf="shelfTaskManage.pageParams" self-page="true" entity="shelfTaskManage.entity">
+                    </table-expandable>
+                </select-table>-->
+
+

@@ -1,0 +1,81 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>按单结算</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <div class="form-group">
+                <!--<input  type="hidden" value="{{approveOutbound.objData.id}}" name="outboundId" >
+                <input  type="hidden" value="{{approveOutbound.objData.customerId}}" name="customerId" >
+                <input  type="hidden" value="{{approveOutbound.objData.customerName}}" name="customerName" >
+                <input  type="hidden" value="{{approveOutbound.objData.arrivalBankId}}" name="arrivalBankId" >-->
+                <label class="col-md-2 control-label">转入账户名
+                </label>
+                <div class="col-md-2  col-left">
+                    <div class="form-group">
+                        <input  type="hidden"  name="accountName"
+                                value="{{settleByOrder.accountEntity.getSelectedRows()[0].account_name}}" >
+                        <select-table st-combo="test()" st-text="settleByOrder.placeholder_accountName"
+                                      st-icon="settleByOrder.icon_account"
+                                      st-value="settleByOrder.accountEntity.getSelectedRows()[0].account_name">
+                            <table-expandable table-column="settleByOrder.accountColumn"
+                                              table-page="settleByOrder.accountPage()"
+                                              table-data="settleByOrder.accountData"
+                                              table-conf="settleByOrder.accountParams"
+                                              self-page="true"
+                                              entity="settleByOrder.accountEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <label class="col-md-2 control-label">转入银行账号
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" name="bankAccount"
+                           value="{{settleByOrder.accountEntity.getSelectedRows()[0].bank_account}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">转入账号开户行
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" name="bankName"
+                           value="{{settleByOrder.accountEntity.getSelectedRows()[0].bank_name}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">实际付款金额
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" name="payAmount">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">实际还款日期
+                </label>
+                <div class="col-md-2 col-left2 payTime ">
+                    <single-time-picker></single-time-picker>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="settleByOrder.confirmSettlement()">确认结算
+                        </button>
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="settleByOrder.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        <table-expandable table-column="settleByOrder.column" table-page="settleByOrder.getPage()"
+                          table-data="settleByOrder.data" table-conf="settleByOrder.pageParams" self-page="false"
+                          entity="settleByOrder.entity">
+        </table-expandable>
+    </div>
+</div>

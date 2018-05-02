@@ -1,0 +1,89 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-puzzle-piece"></i>上架单分配</span>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="shelfAllotManage.allocate()"
+                style="font-weight: inherit">分配
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="shelfAllotManage.returnButton()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column=" shelfAllotManage.column" table-page=" shelfAllotManage.getPage()"
+                      table-data=" shelfAllotManage.data" table-conf=" shelfAllotManage.pageParams" self-page="false"
+                      entity=" shelfAllotManage.entity">
+    </table-expandable>
+</div>
+</div>
+
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">手工分配信息登记</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货品
+                            </label>
+                            <div class="col-md-4">
+                                <input name="id" type="hidden">
+                                <input name="productName" type="text" class="form-control" readonly>
+                                <input name="destLocationId" type="hidden">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">库存类型
+                            </label>
+                            <div class="col-md-4">
+                                <input name="inventoryStatus" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">库区/库位
+                            </label>
+                            <linkage-select ng-if="shelfAllotManage.warehouse!=undefined" warehouse="shelfAllotManage.warehouse"></linkage-select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">分配数量
+                            </label>
+                            <div class="col-md-4">
+                                <input name="allocatedQuantityBu" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="shelfAllotManage.confirmAllocate()">
+                    确认分配
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

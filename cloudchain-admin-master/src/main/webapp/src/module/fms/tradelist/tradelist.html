@@ -1,0 +1,120 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>交易管理</span>
+    <div class="portlet-body" style="margin-top: 26px;">
+        <div class="tabbable-bordered">
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active">
+                    <a href="#withdraw" ng-click="tradelist.showTabs('withdraw')">提现记录</a>
+                </li>
+                <li>
+                    <a href="#transfer" ng-click="tradelist.showTabs('transfer')">转账记录</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" style="padding: 0px 20px 20px 20px;">
+
+                <div class="tab-pane fade in active" id="withdraw">
+
+                    <div class="row firstRow">
+                        <div class="col-md-10"  style="padding-left: 0px;">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="text" ng-model="tradelist.withdrawOrderNumber" class="form-control" placeholder="交易单号">
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query" ng-model="tradelist.withdrawStatus" >
+                                        <option selected value=" ">状态</option>
+                                        <option value="0">提现中</option>
+                                        <option value="1">成功</option>
+                                        <option value="2">失败</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6" style="margin-bottom:16px;">
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label" style="margin-top: 7px;">申请时间</label>
+                                    <div class="col-md-9 withdrawApplyTimeDiv" style="padding-left: 0px;">
+                                        <time-picker></time-picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="tradelist.getWithdrawByFilter()">
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <table-expandable table-column="tradelist.withdrawColumn"
+                                      table-page="tradelist.getWithdrawPage()"
+                                      table-data="tradelist.withdrawData"
+                                      table-conf="tradelist.withdrawParams"
+                                      self-page="false"
+                                      entity="tradelist.withdrawEntity">
+                    </table-expandable>
+                </div>
+
+                <div class="tab-pane fade" id="transfer">
+
+                    <div class="row firstRow">
+                        <div class="col-md-10"  style="padding-left: 0px;">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="text" ng-model="tradelist.transferOrderNumber" class="form-control" placeholder="交易单号">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <input type="text" ng-model="tradelist.transferPhone" class="form-control" placeholder="对方账户">
+                                </div>
+                            </div>
+
+                            <!--<div class="col-sm-3">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query" ng-model="tradelist.transferStatus">
+                                        <option selected value=" ">状态</option>
+                                        <option value="0">发货单</option>
+                                        <option value="1">发货单</option>
+                                    </select>
+                                </div>
+                            </div>-->
+
+                            <div class="col-sm-6" style="margin-bottom:16px;">
+                                <div class="form-group">
+                                    <input name="startTime" type="hidden">
+                                    <label class="col-md-3 control-label" style="margin-top: 7px;">转账时间</label>
+                                    <div class="col-md-9 transferApplyTimeDiv" style="padding-left: 0px;">
+                                        <time-picker></time-picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="tradelist.getTransferByFilter()">
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <table-expandable table-column="tradelist.transferColumn"
+                                      table-page="tradelist.getTransferPage()"
+                                      table-data="tradelist.transferData"
+                                      table-conf="tradelist.transferParams"
+                                      self-page="false"
+                                      entity="tradelist.transferEntity">
+                    </table-expandable>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

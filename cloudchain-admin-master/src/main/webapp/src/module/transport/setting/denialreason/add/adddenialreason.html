@@ -1,0 +1,58 @@
+<div>
+    <div class="icon">
+        <i class="fa  fa-chain-broken"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-chain-broken"></i>新增常用联系人</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="padding-bottom: 12px;">
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">拒签码
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="code" data-required="1" class="form-control" placeholder="数字、字母、下划线"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">拒签原因
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="name" data-required="1" class="form-control" placeholder="拒签原因"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">拒签描述
+                        </label>
+                        <div class="col-md-3">
+                            <textarea class="form-control" maxlength="30" id="description" placeholder="拒签描述(30字以内)" name="description" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="denialReasonSet.commitDenialReason()">添加</button>
+                            <button type="submit" class="btn white" ng-click="denialReasonSet.backDenialReason()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

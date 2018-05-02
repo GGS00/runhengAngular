@@ -1,0 +1,57 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle">验证手机号</span>
+    <div class="portlet-body row">
+        <form id="authForm" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <input type="hidden" id="checkUuid" />
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">手机号码：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="mobile" data-required="1" class="form-control" disabled style="font-size: large"/>
+                        </div>
+                        <div class="col-sm-2" style="padding-top: 7px;padding-left: 1px;">
+                            <a ng-click="validatemobile.gotoArtificialAuditPage()" >手机无法验证？</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">&nbsp;</label>
+                        <div class="col-sm-7">
+                            <button type="button" class="btn btn-primary dd-getCheckCode getCheckCode"
+                                    id="checkCodeBtn" ng-click="validatemobile.sendCheckCode()">免费获取短信验证码</button>
+                            <button type="button" class="btn btn-default dd-getCheckCode getCheckCode dd-hide"
+                                    id="checkCodeTime" disabled="disabled" style="margin-left: 10px;"></button>
+                            <span class="dd-glyphicon dd-input-true dd-hide" id="checkCodeSuccess"
+                                  style="margin-left: 10px;">验证码发送成功</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">&nbsp;</label>
+                        <div class="col-sm-4">
+                            短信验证码仅能使用一次，1分钟内有效。
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">短信验证码：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="code" data-required="1" autocomplete="off" maxlength="6" class="form-control" style="font-size: large"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="validatemobile.submit()">下一步</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="cancel" class="btn white"  ng-click="validatemobile.toParent()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

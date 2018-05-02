@@ -1,0 +1,108 @@
+<div class="first-content">
+    <div class="first-content-list">
+        <div class="first-content-box" style="margin-right: 30px;" ng-click="toWare()">
+            <img src="../assets/pages/img/d2w/left.png" class="first-content-img">
+            <div class="first-content-content">
+                <div class="first-content-show">
+                    <span class="first-content-text">我要仓</span>
+                <!--    <span class="first-content-fun">立即发布</span>-->
+                </div>
+                <div class="first-content-desc">发布需求后系统可自动匹配库房</div>
+            </div>
+            <div class="first-content-content" style="padding-left: 28px;padding-top: 27px;">
+                <i class="iconfont icon-jiantou-copy-copy"></i>
+            </div>
+        </div>
+        <div class="first-content-box" ng-click="toGoods()">
+            <img src="../assets/pages/img/d2w/right.png" class="first-content-img">
+            <div class="first-content-content">
+                <div class="first-content-show">
+                    <span class="first-content-text">我有仓</span>
+                 <!--   <span class="first-content-fun">立即发布</span>-->
+                </div>
+                <div class="first-content-desc">发布库房后系统可自动匹配需求</div>
+            </div>
+            <div class="first-content-content" style="padding-left: 28px;padding-top: 27px;">
+                <i class="iconfont icon-jiantou-copy-copy"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="second-content">
+    <h3>热门仓储推荐</h3>
+    <div class="bottomLine"></div>
+    <div style="margin-top:24px;">
+        <ul>
+            <li ng-repeat="list in homeIndex.dataList" style="cursor:pointer;{{$index=='3'?'clear: both':''}}" ng-click="toWareDetail(list.id)">
+                <div>
+                    <div>
+                        <img ng-if="list.imgs!=''&&list.imgs[0].img!=null" ng-src="{{list.imgs[0].img}}"/>
+                        <img ng-if="list.imgs==''||list.imgs[0].img==null"  src="../assets/pages/img/d2w/warehouse.jpg"/>
+                    </div>
+                    <div class="second-content-desc">
+                        <div class="second-content-text"><span class="second-content-name">{{list.warehouseName}}</span><span class="second-content-square" title="{{list.storageSqm}}平方米">{{list.storageSqm}}m<sup>2</sup></span><span class="second-content-type">{{list.warehouseAreaType==01?"普通":(list.warehouseAreaType==02?"冷藏":(list.warehouseAreaType==03?"恆溫":(list.warehouseAreaType==04?"特种":(list.warehouseAreaType==05?"气调":""))))}}</span></div>
+                        <div class="second-content-loc"><i class="iconfont icon-dizhi"></i><span>{{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}</span></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="second-content">
+    <h3>最新仓储需求</h3>
+    <div class="bottomLine"></div>
+    <div class="wareTable">
+        <div style="background: #F8F8F8">
+            <div class="portlet-body" style="margin-right: 8px;">
+                <table class="table table-striped wareHeader">
+                    <thead>
+                        <tr>
+                            <th style="width:25%;padding-left: 24px;">地点</th>
+                            <th style="width:10%">仓储类型</th>
+                            <th style="width:35%">仓储需求类型</th>
+                            <th style="width:20%">信息编号</th>
+                            <th style="width:10%">商务联系</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        <div class="portlet-body" style="height: 233px;overflow-y: scroll;">
+            <table class="table">
+                <tbody>
+                    <tr ng-repeat="list in homeIndex.goodsdataList" style="cursor: pointer;" ng-click="toGoodsDetail(list.id)">
+                        <td style="width:25%;padding-left: 24px;">{{list.provinceName}}{{list.cityName}}{{list.districtName}}</td>
+                        <td style="width:10%">{{list.warehouseAreaType==01?"普通":(list.warehouseAreaType==02?"冷藏":(list.warehouseAreaType==03?"恆溫":(list.warehouseAreaType==04?"特种":(list.warehouseAreaType==05?"气调":""))))}}</td>
+                        <td style="width:35%">{{list.temperatureRange.replace('-', '~');}}℃ , {{list.humidityRange.replace('-', '~');}}% , {{list.storageSqm}}m<sup>2</sup>库容 , {{list.storageTime}}入库 , {{list.intentPrice/100}}/元/天/{{list.unit}}</td>
+                        <td style="width:20%">{{list.id}}</td>
+                        <td style="width:10%;padding-left: 30px;"><i class="iconfont icon-dianhua1"></i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="third-content">
+    <div class="container">
+        <div class="c-content-feature-3-grid">
+            <h3 class="c-title c-font-uppercase c-font-bold">柴米云仓全国100城市仓储合伙人计划</h3>
+            <h4 class="c-title c-font-uppercase c-font-bold">National 100 urban storage partnership program of mi yun warehouse</h4>
+        </div>
+    </div>
+</div>
+
+<div class="forth-content">
+    <div class="container">
+        <div class="c-content-feature-3-grid">
+            <h3 class="c-title c-font-uppercase c-font-bold">柴米云仓供应链生态圈</h3>
+            <p>Chaimi warehouse supply chain cloud ecosystem partners</p>
+            <img src="../assets/pages/img/d2w/home_two.jpg" class="imgDe" style="width: 1150px;">
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -1,0 +1,57 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>库位管理</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="id_Name" class="form-control" placeholder="库位名称"></div>
+            </div>
+            <div class="col-sm-2" >
+                <div class="form-group">
+                    <input type="text" id="id_wareName" class="form-control" placeholder="仓库名称"></div>
+            </div>
+            <div class="col-sm-2" >
+                <div class="form-group">
+                    <input type="text" id="id_areaName" class="form-control" placeholder="库区"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_Status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="ACTIVE">有效</option>
+                        <option value="INVALID">失效</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="location.locationFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="location.newlocation()"
+                style="font-weight: inherit">新建
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="location.updatalocation()"
+                style="font-weight: inherit">修改
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="location.activelocation()"
+                style="font-weight: inherit">生效
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="location.invalidlocation()"
+                style="font-weight: inherit">失效
+        </button>
+    </div>
+    <table-expandable table-column="location.column" table-page="location.getPage()"
+                      table-data="location.data" table-conf="location.location_params"
+                      self-page="false" entity="location.entity">
+    </table-expandable>
+</div>
+
+
+

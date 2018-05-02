@@ -1,0 +1,240 @@
+<!--<div id="d2dNav">
+	<ul>
+		<li class="" ng-click="toPage(1)">
+			<h3>01</h3>
+			<a href="javascript:void(0)">商品</a>
+		</li>
+		<li class="on" ng-click="toPage(3)">
+			<h3>03</h3>
+			<a href="javascript:void(0)">购物车</a>
+		</li>
+		<li class="" ng-click="toPage(4)">
+			<h3>04</h3>
+			<a href="javascript:void(0)">订单</a>
+		</li>
+	</ul>
+</div>-->
+<div ng-if="shopcart.cartSwitch == 0">
+	<div class="nullInfo" ng-if="shopcart.cartList==''">
+		请去商品添加
+	</div>
+	<div class="row firstRow" ng-if="shopcart.cartList!=''">
+		<form id="settingWayZero">
+			<div class="packTableHeader">
+				<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+					<thead class="iboxHeader">
+					<tr>
+						<th style="width:55%">商品</th>
+						<th style="width:15%">数量</th>
+						<th style="width:5%">单位</th>
+						<th style="width:5%">单价</th>
+						<th style="width:10%">合计</th>
+						<th style="width:10%">操作</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="ibox-content firstLoad">
+				<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+					<tbody>
+					<tr ng-repeat="list in shopcart.cartList" class="goodsPrice_{{$index}}" start-foo-table>
+						<td style="width:55%;text-align: left">
+							<div class="media">
+								<div class="media-left">
+									<img class="media-object" ng-src="{{list.img}}" alt="{{list.spec}}">
+								</div>
+								<div class="media-body" style="vertical-align: middle;">
+									<h6 class="media-heading">
+										<a href="javascript:;">
+												<span>
+													{{list.skuTitle}}
+												</span>
+										</a>
+									</h6>
+									<span class="text-danger">
+											{{list.spec}}
+										</span>
+								</div>
+							</div>
+						</td>
+						<td style="width:15%">
+							<div class="numBox">
+								<a class="minus min_{{$index}}" ng-click="reduce($index)" href="javascript:;"><i class="fa fa-minus"></i></a>
+								<input readonly class="text_box_{{$index}}" type="text" ng-model="list.count" value="{{list.count}}" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}"
+									   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+								<a class="plus add_{{$index}}" ng-click="add($index)" href="javascript:;"><i class="fa fa-plus"></i></a>
+							</div>
+						</td>
+						<td style="width:5%">
+							{{list.unit}}
+						</td>
+						<td style="width:5%">
+							￥{{list.price/100}}
+						</td>
+						<td style="width:10%" class="redPrice">
+							￥{{(list.count*list.price)/100 | totwo}}
+						</td>
+						<td style="width:10%">
+							<input type="hidden" name="skuId_{{$index}}" value="{{list.skuId}}"/>
+							<input type="hidden" name="spuId_{{$index}}" value="{{list.spuId}}"/>
+							<input type="hidden" name="userId_{{$index}}" value="{{list.userId}}"/>
+							<button class="btn btn-danger addBuy" ng-click="shopcart.removeCart($index)">删除</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</form>
+	</div>
+	<div class="totalInfo" ng-if="shopcart.cartList!=''">
+		<div class="leftInfo">
+			<div class="left_Check">
+				<span class="left_text">商品种类：<span class="left_show">{{shopcart.cartData.total}}</span> 种</span>
+				<span class="left_text">数量总计：<span class="left_show">{{shopcart.countTotal}}</span> 件</span>
+				<span class="left_text">总计：￥<span class="left_show">{{shopcart.priceCount/100 | totwo}}</span></span>
+			</div>
+		</div>
+		<div class="rightInfo" ng-click="shopcart.goToFee()">去结算</div>
+	</div>
+</div>
+
+<div ng-if="shopcart.cartSwitch == 1">
+	<div class="row firstRow" ng-if="shopcart.cartList!=''">
+		<div class="feeInfo" style="margin-top:22px;padding-left: 50px;width:40%;">
+
+			<div class="btn-group" data-toggle="buttons" style="margin-top: 12px;">
+				<label class="btn btn-default active" style="margin-right: 20px;">
+					<input type="radio" name="paytype" autocomplete="off" value="0">
+					<span>
+						柴米配送
+					</span>
+				</label>
+				<!--<label class="btn btn-default">
+                    <input type="radio" name="paytype" autocomplete="off" value="1">
+                    <span>
+                        自提
+                    </span>
+                </label>-->
+			</div>
+
+			<div class="md-radio-inline" style="margin-top: 30px;">
+				<div class="md-radio addressRadio" ng-repeat="list in shopcart.addressData">
+					<input type="radio" id="checkbox1_{{$index}}" name="address" value="{{list.addressId}}" class="md-radiobtn" cneeName={{list.contactName}} cneeMobile="{{list.mobile}}" proId="{{list.province}}" proName="{{list.provinceName}}" cityId="{{list.city}}"  cityName="{{list.cityName}}"  countyId="{{list.county}}"  countyName="{{list.countyName}}" address="{{list.address}}" street="{{list.streetName}}">
+					<label for="checkbox1_{{$index}}">
+						<span class="inc"></span>
+						<span class="check"></span>
+						<span class="box"></span>
+						{{list.provinceName}} {{list.cityName}} {{list.countyName}} {{list.address}} ({{list.contactName}} 收) {{list.mobile}}
+					</label>
+				</div>
+			</div>
+
+			<div  style="margin-top: 22px;">
+				<textarea class="form-control remarks" name="orderRemark" rows="3" placeholder="订单备注(100字以内)" maxlength="100" style="width: 45%;"></textarea>
+			</div>
+
+		</div>
+		<div class="feeInfo">
+			<div class="packTableHeader">
+				<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+					<thead class="iboxHeader">
+					<tr>
+						<th style="width:50%">商品</th>
+						<th style="width:10%">数量</th>
+						<th style="width:10%">单位</th>
+						<th style="width:15%">单价</th>
+						<th style="width:15%">合计</th>
+					</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="ibox-content firstLoad">
+				<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+					<tbody>
+					<tr ng-repeat="list in shopcart.feeInfo" class="confirmInfo_{{$index}}" start-foo-table>
+						<td style="width:50%;text-align: left">
+							<div class="media">
+								<div class="media-left">
+									<img class="media-object" ng-src="{{list.img}}" alt="{{list.spec}}">
+								</div>
+								<div class="media-body" style="vertical-align: middle;">
+									<h6 class="media-heading">
+										<a href="javascript:;">
+												<span>
+													{{list.skuTitle}}
+												</span>
+										</a>
+									</h6>
+									<span class="text-danger">
+											{{list.spec}}
+										</span>
+								</div>
+							</div>
+						</td>
+						<td style="width:10%">
+							{{list.count}}
+						</td>
+						<td style="width:10%">
+							{{list.unit}}
+						</td>
+						<td style="width:15%" class="redPrice">
+							￥{{list.price/100}}
+						</td>
+						<td style="width:15%" class="redPrice">
+							￥{{list.subTotal/100}}
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="totalInfo" ng-if="shopcart.cartList!=''">
+		<div class="leftInfo">
+			<div class="left_Check">
+				<span class="left_text">商品种类：<span class="left_show">{{shopcart.cartData.total}}</span> 种</span>
+				<span class="left_text">数量总计：<span class="left_show">{{shopcart.countTotal}}</span> 件</span>
+				<span class="left_text">总计：￥<span class="left_show">{{shopcart.feeData.total/100}}</span></span>
+			</div>
+		</div>
+		<div class="rightInfo"  ng-click="shopcart.cofirmOrder()">提交订单</div>
+	</div>
+</div>
+
+
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top: 120px;width: 360px;">
+		<div class="modal-content" style="border-radius: 8px;">
+			<div class="modal-header">
+				<button type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" style="text-align: center;color: #9B9B9B;font-weight: bold;font-size: 16px;">
+					登入
+				</h4>
+			</div>
+			<div class="modal-body" style="height: 117px;">
+
+				<div class="form-group" style="width: 65%;margin-left: auto;margin-right: auto;">
+					<input class="form-control form-control-solid placeholder-no-fix" type="text" autocomplete="off" placeholder="用户名" name="username" />
+				</div>
+				<div class="form-group" style="width: 65%;margin-left: auto;margin-right: auto;">
+					<input class="form-control form-control-solid placeholder-no-fix" type="password" autocomplete="off" placeholder="密码" name="password" />
+				</div>
+
+			</div>
+			<div class="modal-footer" style="text-align: center;">
+				<button type="button" class="btn btn-default"
+						data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="shopcart.confirmAddNode()" style="background: #36C5D3;border: #36C5D3;">
+					登入
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+

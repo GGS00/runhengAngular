@@ -1,0 +1,163 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>出库申请审批</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <div class="form-group">
+                <input  type="hidden" value="{{approveOutbound.objData.id}}" name="outboundId" >
+                <input  type="hidden" value="{{approveOutbound.objData.customerId}}" name="customerId" >
+                <input  type="hidden" value="{{approveOutbound.objData.customerName}}" name="customerName" >
+                <input  type="hidden" value="{{approveOutbound.objData.arrivalBankId}}" name="arrivalBankId" >
+                <label class="col-md-2 control-label">申请单号
+                </label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text"  class="form-control" value="{{approveOutbound.objData.code}}"
+                           readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">订单总额
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control"
+                           value="{{approveOutbound.objData.orderAmount}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">下单时间
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" class="form-control"
+                           value="{{approveOutbound.objData.orderTime}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">支付方式
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" class="form-control"
+                           value="{{approveOutbound.objData.payMethod}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">银行账户名
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="bankAccount" class="form-control"
+                           value="{{approveOutbound.objData.bankAccount}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">银行账号
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="accountName" class="form-control"
+                           value="{{approveOutbound.objData.accountName}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">开户行名称
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="bankName" class="form-control"
+                           value="{{approveOutbound.objData.bankName}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">配送方式
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" id="deliveryMethod" class="form-control"
+                           value="{{approveOutbound.objData.deliveryMethod}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">到账银行账户名
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control"
+                           value="{{approveOutbound.objData.lmsBankAccount.bankAccount}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">到账银行账号
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control"
+                           value="{{approveOutbound.objData.lmsBankAccount.accountName}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">到账开户行名称
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control"
+                           value="{{approveOutbound.objData.lmsBankAccount.bankName}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">保价金额
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control"
+                           value="{{approveOutbound.objData.lmsBankAccount.retainAmount}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">仓储费
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="storageCost" class="form-control"
+                           value="{{approveOutbound.objData.lmsBankAccount.storageCost}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">状态
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control"
+                           value="{{approveOutbound.objData.status}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">备注
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" class="form-control"
+                           value="{{approveOutbound.objData.remark}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">实际付款金额
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" name="payAmount"
+                           value="{{approveOutbound.objData.payAmount}}" readonly="readonly" >
+                </div>
+                <label class="col-md-2 control-label">实际付款时间
+                </label>
+                <div class="col-md-2 col-left2 payTime">
+                    <single-time-picker></single-time-picker>
+                </div>
+                <label class="col-md-2 control-label">审核结果
+                </label>
+                <div class="col-md-2 col-left2">
+                    <select id="checkStatus" name="checkStatus" class="form-control">
+                        <option value="STATUS_CHECK_PASS" selected>通过</option>
+                        <option value="CHECK_FAIL">不通过</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">审核意见
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="checkOpinion" class="form-control"
+                           value="{{approveOutbound.objData.checkOpinion}}" >
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="approveOutbound.approve()">审批确定
+                        </button>
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="approveOutbound.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        <table-expandable table-column="approveOutbound.column" table-page="approveOutbound.getPage()"
+                          table-data="approveOutbound.data" table-conf="approveOutbound.pageParams" self-page="false"
+                          entity="approveOutbound.entity">
+        </table-expandable>
+    </div>
+</div>

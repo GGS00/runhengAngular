@@ -1,0 +1,162 @@
+
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block"><i class="fa fa-truck"></i>新增载具</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="tmsAddVehicle" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">车辆信息
+                        </label>
+                        <div class="col-sm-4 typeId">
+                            <select-table st-combo="test()" st-value="tmsAddVehicle.entity.getSelectedRows()[0].name" st-text="tmsAddVehicle.placeholder" st-icon="tmsAddVehicle.icon">
+                                <table-expandable  table-column="tmsAddVehicle.column"  table-page="tmsAddVehicle.getPage()" table-data="tmsAddVehicle.data" table-conf="tmsAddVehicle.pageParams" self-page="true" entity="tmsAddVehicle.entity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="engineNo" data-required="1" class="form-control" placeholder="发动机编号" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input name="gpsNo" type="text" class="form-control" placeholder="GPS设备号" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input name="vehicleModel" type="text" class="form-control" placeholder="车辆型号(选填)" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="vehicleProperty" data-required="1" class="form-control" placeholder="车辆属性" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="cityId" data-required="1" class="form-control" placeholder="常驻城市" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="description" data-required="1" class="form-control" placeholder="描述" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="no" data-required="1" class="form-control" placeholder="车牌号" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input name="vin" type="text" class="form-control" placeholder="车辆识别码" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">生产日期
+                        </label>
+                        <div class="col-sm-2 produceDate">
+                            <!--<input type="text" name="name" data-required="1" class="form-control"/>-->
+                            <single-time-picker></single-time-picker>
+                        </div>
+                        <label class="control-label col-sm-1">购买日期
+                        </label>
+                        <div class="col-sm-2 purchaseDate">
+                            <!--<input type="text" name="name" data-required="1" class="form-control"/>-->
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">司机
+                        </label>
+                        <div class="col-sm-4 mainDriverId">
+                            <select-table st-combo="testOne()" st-value="tmsAddVehicle.entityOne.getSelectedRows()[0].nickName" st-text="tmsAddVehicle.placeholderOne" st-icon="tmsAddVehicle.iconOne">
+                                <table-expandable  table-column="tmsAddVehicle.columnOne"  table-page="tmsAddVehicle.getPageOne()" table-data="tmsAddVehicle.dataOne" table-conf="tmsAddVehicle.pageParamsOne" self-page="true" entity="tmsAddVehicle.entityOne">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                        <div class="col-sm-4 secondDriverId">
+                            <select-table st-combo="testTwo()" st-value="tmsAddVehicle.entityTwo.getSelectedRows()[0].nickName" st-text="tmsAddVehicle.placeholderTwo" st-icon="tmsAddVehicle.iconTwo">
+                                <table-expandable  table-column="tmsAddVehicle.columnTwo"  table-page="tmsAddVehicle.getPageTwo()" table-data="tmsAddVehicle.dataTwo" table-conf="tmsAddVehicle.pageParamsTwo" self-page="true" entity="tmsAddVehicle.entityTwo">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">行驶证注册
+                        </label>
+                        <div class="col-sm-2 drivingLisenceRegisTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">行驶证到期
+                        </label>
+                        <div class="col-sm-2 drivingLisenceReceiveTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">行驶证
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="drivingLisenceCode" data-required="1" class="form-control" placeholder="行驶证一维码(选填)" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <input type="hidden" name="produceDate" id="produceDate"/>
+                <input type="hidden" name="purchaseDate" id="purchaseDate"/>
+                <input type="hidden" name="drivingLisenceRegisTime" id="drivingLisenceRegisTime"/>
+                <input type="hidden" name="drivingLisenceReceiveTime" id="drivingLisenceReceiveTime"/>
+                <input type="hidden" name="typeId" id="typeId"/>
+                <input type="hidden" name="mainDriverId" id="mainDriverId"/>
+                <input type="hidden" name="secondDriverId" id="secondDriverId"/>
+                <input type="hidden" name="mainDriverName" id="mainDriverName"/>
+                <input type="hidden" name="secondDriverName" id="secondDriverName"/>
+
+            </div>
+
+            <div class="form-actions">
+                <div class="row" style="margin-left: 15px">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="tmsAddVehicle.submitVehicle()">添加</button>
+                        <button type="cancel" class="btn white" ng-click="tmsAddVehicle.toTmsVehicle()">取消</button>
+                    </div>
+                </div>
+            </div>
+
+    </form>
+    <!-- END FORM-->
+</div>
+
+
+
+
+</div>

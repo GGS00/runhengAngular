@@ -1,0 +1,89 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-excel-o"></i>批量导入防伪码</span>
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    表单信息有误,请检查.
+                </div>
+                <div class="alert alert-success display-hide">
+                    <button class="close" data-close="alert"></button>
+                    表单信息验证通过!
+                </div>
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">模板
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group" >
+                                <button type="button"  ng-click="import.download()" class="btn green btn-outline">防伪码模板下载</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">商品名
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_goods" value="{{import.goodsEntity.getSelectedRows()[0].title}}"/>
+                                <select-table st-combo="test()" st-text="import.placeholder_goodsName"
+                                              st-icon="import.icon_goodsName"
+                                              st-value="import.goodsEntity.getSelectedRows()[0].title">
+                                    <table-expandable table-column="import.goodscolumn"
+                                                      table-page="import.getGoodsPage()"
+                                                      table-data="import.goods_data"
+                                                      table-conf="import.goodsParams" self-page="true"
+                                                      entity="import.goodsEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">经销商
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_deal" value="{{import.dealEntity.getSelectedRows()[0].nickName}}"/>
+                                <select-table st-combo="test()" st-text="import.placeholder_dealer"
+                                              st-icon="import.icon_dealer"
+                                              st-value="import.dealEntity.getSelectedRows()[0].nickName">
+                                    <table-expandable table-column="import.dealcolumn"
+                                                      table-page="import.getdealPage()"
+                                                      table-data="import.deal_data"
+                                                      table-conf="import.dealerParams" self-page="true"
+                                                      entity="import.dealEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">Excel</label>
+                        <div class="col-sm-9">
+                            <input type="file" id="excelFile" style="padding-top: 7px;" name="excelFile"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" ng-click="import.save()" class="btn blue">保存</button>
+                        <button type="cancel" ng-click="import.returnButton()" class="btn white">返回</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+</div>
+
+

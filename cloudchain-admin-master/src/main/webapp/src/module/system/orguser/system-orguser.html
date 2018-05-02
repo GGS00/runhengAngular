@@ -1,0 +1,304 @@
+<div class="col-md-4">
+    <div js-tree="treeConfig" ng-model="treeData" should-apply="ignoreModelChanges()" tree="treeInstance" tree-events-obj="treeObject"></div>
+</div>
+<div class="col-md-8">
+    <div class="portlet-body">
+        <div class="tab-content">
+            <table-expandable table-column="column" search-switch="searchSwitch"  table-page="getList()" table-data="data" table-conf="params"  entity="entity" self-page="true">
+            </table-expandable>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" >
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加部门
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" ng-model="orgform">
+                    <div class="form-group">
+                        <label class="control-label">父节点</label>
+                        <select class="form-control" ng-model="orgform.orgParentId">
+                            <option value="{{clickedNode.id}}">{{clickedNode.text}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">部门名称</label>
+                        <input type="text" placeholder="部门名称" ng-model="orgform.orgName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">备注</label>
+                        <input type="text" placeholder="备注" ng-model="orgform.remark" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addNode()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>删除部门
+                </h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn red" ng-click="delNode()">
+                    删除
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>删除部门信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" ng-model="orgEditform">
+                    <div class="form-group">
+                        <label class="control-label">父节点</label>
+                        <select class="form-control" ng-model="orgEditform.orgParentId">
+                            <option value="{{clickedParent.id}}">{{clickedParent.text}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">部门名称</label>
+                        <input type="text" placeholder="部门名称" ng-model="orgEditform.orgName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">备注</label>
+                        <input type="text" placeholder="备注" ng-model="orgEditform.remark" class="form-control">
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="editNode()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showUserAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加员工
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" ng-model="form">
+                    <div class="form-group">
+                        <label class="control-label">登录账号</label><span class="required"aria-required="true"> * </span>
+                        <input type="text" placeholder="登录账号" ng-model="form.userName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">密码</label><span class="required"aria-required="true"> * </span>
+                        <input type="password" placeholder="密码" ng-model="form.password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">真实姓名</label><span class="required"aria-required="true"> * </span>
+                        <input type="text" placeholder="用户名" ng-model="form.realName" class="form-control">
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">性别</label><span class="required"aria-required="true"> * </span>-->
+                        <!--<select class="form-control" ng-model="form.userSex" ng-options="list.type as list.name for list in sexType">-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">手机号码</label>-->
+                        <!--<input type="text" placeholder="手机号码" ng-model="form.mobile" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">邮箱</label>-->
+                        <!--<input type="text" placeholder="邮箱" ng-model="form.email" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">照片</label>-->
+                        <!--<input type="text" placeholder="照片" ng-model="form.userPhoto" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">职位名称</label>-->
+                        <!--<input type="text" placeholder="职位名称" ng-model="form.jobTitle" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">用户工号</label>-->
+                        <!--<input type="text" placeholder="用户工号" ng-model="form.jobNumber" class="form-control">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <label class="control-label">部门</label><span class="required"aria-required="true"> * </span>
+                        <select class="form-control" ng-model="form.orgId">
+                            <option value="{{clickedNode.id}}">{{clickedNode.text}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">岗位权限</label><span class="required"aria-required="true"> * </span>
+                        <select class="form-control" ng-model="form.roleId" ng-options="list.roleId as list.roleName for list in roleList">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">备注</label>
+                        <input type="text" placeholder="备注" ng-model="form.remark" class="form-control"> </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addEmylee()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="showUserDel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="xxxx">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>删除员工
+                </h4>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn red" ng-click="delEmylee()">
+                    删除
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="showUserEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>修改员工信息
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" ng-model="formEdit">
+                    <div class="form-group">
+                        <label class="control-label">真实姓名</label><span class="required"aria-required="true"> * </span>
+                        <input type="text" placeholder="用户名" ng-model="formEdit.realName" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">性别</label><span class="required"aria-required="true"> * </span>
+                        <select class="form-control" ng-model="formEdit.userSex" ng-options="list.type as list.name for list in sexType">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">手机号码</label>
+                        <input type="text" placeholder="手机号码" ng-model="formEdit.mobile" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">邮箱</label>
+                        <input type="text" placeholder="邮箱" ng-model="formEdit.email" class="form-control">
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">照片</label>-->
+                        <!--<input type="text" placeholder="照片" ng-model="formEdit.userPhoto" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">职位名称</label>-->
+                        <!--<input type="text" placeholder="职位名称" ng-model="formEdit.jobTitle" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label class="control-label">用户工号</label>-->
+                        <!--<input type="text" placeholder="用户工号" ng-model="formEdit.jobNumber" class="form-control">-->
+                    <!--</div>-->
+                    <div class="form-group">
+                        <label class="control-label">部门</label><span class="required"aria-required="true"> * </span>
+                        <select class="form-control" ng-model="formEdit.orgId">
+                            <option value="{{clickedNode.id}}">{{clickedNode.text}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">角色</label><span class="required"aria-required="true"> * </span>
+                        <select class="form-control" ng-model="formEdit.roleId" ng-options="list.roleId as list.roleName for list in roleList">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">备注</label>
+                        <input type="text" placeholder="备注" ng-model="formEdit.remark" class="form-control"> </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="editEmylee()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

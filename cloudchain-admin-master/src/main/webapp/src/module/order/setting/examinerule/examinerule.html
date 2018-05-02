@@ -1,0 +1,118 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>审单规则</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            是否开启自动审单功能：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_2" name="autoExamine"  ng-model="examineRule.autoExamine" value="0"  class="md-radiobtn">
+                                    <label for="checkbox1_2">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        否
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_1" name="autoExamine"  ng-model="examineRule.autoExamine" value="1"  class="md-radiobtn">
+                                    <label for="checkbox1_1">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        是
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">
+                            是否自动生成发货单：
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox2_2" name="autoDelivery"  ng-model="examineRule.autoDelivery" value="0"  class="md-radiobtn">
+                                    <label for="checkbox2_2">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        否
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox2_1" name="autoDelivery"  ng-model="examineRule.autoDelivery" value="1"  class="md-radiobtn">
+                                    <label for="checkbox2_1">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        是
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="examineRule.saveExamineRule()">保存</button>
+                        <!--<button type="cancel" class="btn white"  ng-click="warerule.tod2w()">取消</button>-->
+                    </div>
+                </div>
+            </div>
+            <!-- END FORM-->
+        </form>
+    </div>
+
+</div>
+
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    确定删除？
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="warerule.confirmDelete()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

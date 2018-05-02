@@ -1,0 +1,47 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-map-signs"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-map-signs"></i>新增常用地址</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="padding-bottom: 12px;">
+
+                    <div class="form-group commonAddress">
+                        <label class="control-label col-md-3 bold">地址
+                        </label>
+                        <city-select></city-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">详细地址
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text" name="address" data-required="1" class="form-control" placeholder="详细地址"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="comAddressSet.commitComAddress()">添加</button>
+                            <button type="submit" class="btn white" ng-click="comAddressSet.backComAddress()">返回</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

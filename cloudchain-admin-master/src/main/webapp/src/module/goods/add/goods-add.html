@@ -1,0 +1,484 @@
+<style>
+    .mt-list-item.done:hover {
+         background-color: #FFFFFF!important;
+    }
+    ul > .mt-list-item.done{
+        border:none!important;
+    }
+    .list-toggle{
+        background-color: #94A0B2!important;
+        /*color: #666!important;*/
+    }
+    .dz-image {
+        border-radius: 5px;
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+        position: relative;
+        display: block;
+        z-index: 10;
+        border: 1px solid #0a6aa1;
+        float: left;
+        margin-right: 5px;
+        text-align: center;
+        line-height: 120px;
+        cursor:hand;
+    }
+    md-input-container.md-default-theme:not(.md-input-focused):not(.md-input-invalid) label.md-required:after,
+    md-input-container:not(.md-input-focused):not(.md-input-invalid) label.md-required:after {
+        color: rgb(221,44,0) !important;
+    }
+    .packCheck{
+        margin-bottom:0px;
+    }
+
+    .packCheck tbody tr:first-child td{
+        border-top:none;
+    }
+
+    .packCheck thead th {
+        vertical-align: middle !important;
+        text-align: center;
+        font-size: 13px !important;
+        color: #666;
+    }
+
+    .packCheck tbody td {
+        text-align: center;
+        word-break: break-all;
+        vertical-align: middle !important;
+        font-size: 12px !important;
+    }
+
+    .ibox-content .packCheck tr:nth-child(odd) {
+
+    }
+</style>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <h2 flex md-truncate>添加商品</h2>
+
+        <md-button class="md-raised" aria-label="Learn More" onclick="javascript:history.back(-1);">
+            返回
+        </md-button>
+        <md-button class="md-raised" aria-label="Learn More" ng-click="add.addGoods()">
+           添加
+        </md-button>
+    </div>
+</md-toolbar>
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="商品基本信息">
+                <md-content layout-padding>
+                    <form name="goods" layout-align="center center">
+                        <div layout-gt-xs="row" >
+                            <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                                <h5>基本信息</h5>
+                            </md-input-container>
+                            <div layout-gt-xs="row" flex-gt-xs>
+                                <md-input-container class="md-block"  flex-gt-xs>
+                                    <label>商品标题</label>
+                                    <input name="spuName" ng-model="add.spuName" required md-maxlength="60" maxlength="60">
+                                    <div ng-messages="goods.spuName.$error" ng-show="goods.spuName.$dirty">
+                                        <div ng-message="required">商品标题不能为空</div>
+                                    </div>
+                                </md-input-container>
+
+                                <div flex="10" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+
+                                <div layout-gt-xs="row"  flex-gt-xs>
+                                    <md-input-container class="md-block" flex-gt-xs>
+                                        <label>商品分类</label>
+                                        <input name="cName" ng-model="cName" required disabled style="cursor: not-allowed">
+                                        <div ng-messages="goods.cName.$error" ng-show="goods.cName.$dirty">
+                                            <div ng-message="required">商品分类不能为空</div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block" flex-gt-xs>
+                                    <span class="input-group-btn btn-right">
+                                        <button type="button" class="btn btn-xs default" ng-click="add.setShowClassify()">
+                                            选择分类
+                                        </button>
+                                    </span>
+                                    </md-input-container>
+                                </div>
+
+                                <div flex="10" hide-xs hide-sm>
+                                    <!-- Spacer //-->
+                                </div>
+                            </div>
+                        </div>
+                        <div layout-gt-xs="row" style="margin-top: 10px;" >
+                            <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                            </md-input-container>
+                            <md-input-container flex-gt-xs>
+                                <label>计量单位</label>
+                                <md-select ng-model="add.unit">
+                                    <md-option ng-repeat="list in add.unitList track by $index" value="{{list.dataValue}}">{{list.dataName}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div flex="10" hide-xs >
+                                <!-- Spacer //-->
+                            </div>
+                            <md-input-container flex-gt-xs>
+                                <label>品牌</label>
+                                <md-select ng-model="add.bId">
+                                    <md-option ng-repeat="list in add.brandList track by $index" value="{{list.bId}}">{{list.name}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div flex="10" hide-xs>
+                                <!-- Spacer //-->
+                            </div>
+                        </div>
+                        <div layout-gt-xs="row">
+                            <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                                <h5>关键字</h5>
+                            </md-input-container>
+                            <md-chips flex-gt-xs
+                                      ng-model="add.keywords"
+                                      md-removable="ctrl.removable"
+                                      placeholder="输入后按回车"
+                                      delete-button-label="Remove Tag"
+                                      delete-hint="Press delete to remove tag"
+                                      secondary-placeholder="+输入后按回车添加"></md-chips>
+                            <div flex="10" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+                        </div>
+                        <div layout-gt-xs="row" >
+                            <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                                <h5>商品码</h5>
+                            </md-input-container>
+                            <md-input-container class="md-block"  flex-gt-xs>
+                                <label>商家编码</label>
+                                <input name="bn" ng-model="add.bn" >
+                                <div ng-messages="goods.bn.$error" ng-show="goods.bn.$dirty">
+                                    <div ng-message="required">商家编码不能为空</div>
+                                </div>
+                            </md-input-container>
+
+                            <div flex="10" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+
+                            <md-input-container class="md-block"  flex-gt-xs>
+                                <label>商家条码</label>
+                                <input name="barCode" ng-model="add.barCode" >
+                                <div ng-messages="goods.barCode.$error" ng-show="goods.barCode.$dirty">
+                                    <div ng-message="required">商家条码不能为空</div>
+                                </div>
+                            </md-input-container>
+
+                            <div flex="10" hide-xs hide-sm>
+                                <!-- Spacer //-->
+                            </div>
+                        </div>
+                        <div layout-gt-xs="row" >
+                            <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                            </md-input-container>
+                            <md-switch class="md-primary" ng-model="add.isSn" ng-true-value="1" ng-false-value="0" aria-label="isSn">
+                                是否使用唯一码
+                            </md-switch>
+                        </div>
+                        <div layout-gt-xs="row" >
+                            <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                                <h5>商品主图</h5>
+                            </md-input-container>
+                            <div flex-gt-xs>
+                                <div class="dz-image" ng-repeat="list in add.spuImgs">
+                                    <img data-dz-thumbnail="" style="width: 100%;" ng-src="{{list.img}}">
+                                </div>
+                                <div class="dz-image" ng-click="showAddImg(1)">
+                                    点击添加
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </md-content>
+            </md-tab>
+            <md-tab label="销售信息">
+                <md-content class="md-padding">
+                    <h5 ng-if="add.specList.length > 0">选择规格</h5>
+                    <div layout-gt-xs="row" style="margin-bottom: 0px;padding-top: 0px;!important;" ng-repeat="list in add.specList track by $index">
+                        <label flex="20"  flex-gt-xs style="padding: 10px 0;" class="col-md-2 control-label">{{list.name}}</label>
+                        <div flex-gt-xs>
+                            <div class="mt-checkbox-inline">
+                                <label class="mt-checkbox" ng-repeat="val in list.specVals">
+                                    <input type="checkbox" id="{{val.specValId}}" ng-click="add.checkSpec()" ng-model="val.checked" value="{{val.specVal}}">{{val.specVal}}
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs>销售库存</h5>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="add.isRelate" ng-true-value="1" ng-false-value="0">
+                            <md-tooltip md-direction="top">开启绑定仓库不能自定义销售库存</md-tooltip>
+                            销售库存绑定仓库
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="add.isShareInv" ng-true-value="1" ng-false-value="0" >
+                            销售库存渠道共享
+                        </md-switch>
+                    </div>
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs>选择销售渠道</h5>
+                        <md-switch flex-gt-xs  class="md-primary" ng-model="checkbox" ng-change="add.getUserFunc(checkbox,'d2p',0)" ng-true-value="1" ng-false-value="0">
+                            在批发商城进行销售
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox1"  ng-true-value="1" ng-false-value="0">
+                            在零售商城进行销售
+                        </md-switch>
+                    </div>
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs></h5>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox2" ng-true-value="1" ng-false-value="0">
+                            支持门店预约下单
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox3"  ng-change="add.getUserFunc(checkbox3,'d2d',3)"  ng-true-value="1" ng-false-value="0">
+                            在柴米采购联盟进行销售
+                        </md-switch>
+                    </div>
+
+                    <form name="goods" layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20"  flex-gt-xs>批量填充</h5>
+                        <div layout-gt-xs="row" flex-gt-xs>
+                        <md-input-container class="md-block"  flex-gt-xs>
+                            <label>销售库存</label>
+                            <input name="quantity" type="number"   min="0" ng-model="quantity" ng-disabled="add.isRelate" style="cursor: {{add.isRelate == 1?'not-allowed':''}}">
+                            <div ng-messages="goods.quantity.$error" ng-show="goods.quantity.$dirty">
+                                <div ng-message="min">销售库存不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block"  flex-gt-xs>
+                            <label>销售价格</label>
+                            <input name="price" type="number" min="0"  ng-model="add.price" >
+                            <div ng-messages="goods.price.$error" ng-show="goods.price.$dirty">
+                                <div ng-message="min">销售价格不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container  class="md-block"  flex-gt-xs>
+                            <label>物流重量</label>
+                            <input name="weight" type="number" min="0" ng-model="weight">
+                            <div ng-messages="goods.weight.$error" ng-show="goods.weight.$dirty">
+                                <div ng-message="min">物流重量不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block"  flex-gt-xs>
+                            <label>物流体积</label>
+                            <input name="volume" type="number" min="0" ng-model="volume">
+                            <div ng-messages="goods.volume.$error" ng-show="goods.volume.$dirty">
+                                <div ng-message="min">物流体积不能小于0</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container ng-if="add.specList.length > 0" class="md-block" style="margin-top: 0"  flex-gt-xs>
+                            <md-button class="md-raised" ng-click="add.setInfo()">填充</md-button>
+                        </md-input-container>
+                        </div>
+                    </form>
+
+
+                    <div class="portlet-body table-both-scroll" ng-if="add.sku.length">
+                        <table class="table table-striped table-bordered table-hover order-column packCheck" id="sample_3">
+                            <thead>
+                            <tr>
+                                <th ng-if="add.sku.length" ng-repeat="list in add.head track by $index" > {{list}} </th>
+                                <th> 主图 </th>
+                                <!--<th> <span class="required font-red"> * </span>标题 </th>-->
+                                <th>
+                                    <!--<span class="required font-red"> * </span>-->
+                                    销售价格
+                                </th>
+                                <th ng-if="!add.isRelate">
+                                    <!--<span class="required font-red"> * </span>-->
+                                    销售库存
+                                </th>
+                                <th>称重(kg)</th>
+                                <th>体积(m³)</th>
+                                <th>
+                                    <!--<span class="required font-red"> * </span>-->
+                                    sku商家编码
+                                </th>
+                                <th> 条形码</th>
+                                <!--<th class="sorting" ng-repeat="list in form.spuSpecs track by $index" >{{list.specName}}</th>-->
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr ng-if="new4D" ng-repeat="list in add.sku">
+                                <td ng-repeat="item in list.skuSpecValModels">
+                                    {{item.specVal}}
+                                </td>
+                                <td style="width: 100px">
+                                    <a class="fancybox-button" data-rel="fancybox-button">
+                                        <img class="img-responsive" ng-src="{{list.skuImgs[0].img}}"  alt=""  ng-click="showAddImg(0,$index)">
+                                    </a>
+                                </td>
+                                <!--<td>-->
+                                    <!--<input type="text" class="form-control" ng-model="list.title" value="">-->
+                                <!--</td>-->
+
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.price"  value="">
+                                </td>
+                                <td  ng-if="!add.isRelate">
+                                    <input type="text" class="form-control" ng-model="list.quantity"  value="">
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.weight" value=""> </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.volume" value=""> </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.bn" value=""> </td>
+                                <td>
+                                    <input type="text" class="form-control" ng-model="list.skuBarcode" value=""> </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="商品属性">
+                <div  ng-repeat="list in add.propList track by $index" ng-if="add.propList.length > 0">
+                    <div layout-gt-xs="row" ng-repeat="list in list.groupList track by $index">
+                        <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                            <h5 ng-if="$parent.$index == 0">{{list.groupName}}</h5>
+                        </md-input-container>
+                        <div flex-gt-xs>
+                        <div ng-repeat="item in list.paramList | filter: {settingType: 0 }" flex-gt-xs flex="50">
+                            <md-input-container class="md-block"  >
+                                <label>{{item.paramName}}</label>
+                                <input name="spuName" ng-model="item.val">
+                            </md-input-container>
+                        </div>
+                        <div ng-repeat="item in list.paramList | filter: {settingType: 1 }" flex-gt-xs flex="40">
+                            <md-input-container class="md-block" >
+                                <label>{{item.paramName}}</label>
+                                <md-select ng-model="item.val" style="min-width: 200px;">
+                                    <md-optgroup label="单选">
+
+                                        <md-option ng-value="val.val" ng-repeat="val in item.valList track by $index">{{val.val}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div ng-repeat="item in list.paramList | filter: {settingType: 2 }" flex-gt-xs flex="40">
+                            <md-input-container class="md-block" >
+                                <label>{{item.paramName}}</label>
+                                <md-select ng-model="item.val" multiple style="min-width: 200px;">
+                                    <md-optgroup label="多选">
+                                        <md-option ng-value="val.val" ng-repeat="val in item.valList track by $index">{{val.val}}</md-option>
+                                    </md-optgroup>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                        <div ng-repeat="item in list.paramList | filter: {settingType: 3 }" style="margin-top: 15px" flex-gt-xs flex="40">
+                            <!--<md-input-container>-->
+                            <!--<label>{{item.paramName}}</label>-->
+                            <!--<time-picker></time-picker>-->
+                            <!--</md-input-container>-->
+                            <md-datepicker class="md-block"   ng-model="item.val" md-placeholder="{{item.paramName}}"></md-datepicker>
+                        </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </md-tab>
+            <md-tab label="详细描述" md-on-select="initEditor()">
+                <md-content class="md-padding">
+                    <script type="text/plain" id="myEditor" name="myEditor">
+                    </script>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
+
+
+
+<div class="modal fade" id="confirmEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>分类列表
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div class="portlet-body">
+                        <div id="categoryTree" class="tree-demo"> </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

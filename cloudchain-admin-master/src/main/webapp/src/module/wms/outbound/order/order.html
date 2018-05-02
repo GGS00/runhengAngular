@@ -1,0 +1,237 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>出库单管理</span>
+    <div class="row firstRow">
+            <div class="col-md-10">
+                <div class="col-sm-3"style="padding-left: 0px;">
+                    <div class="form-group">
+                        <input type="text" id="code" class="form-control" placeholder="出库单号"></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <select class="form-control" id="bill_type_id">
+                            <option selected value="">单据类型</option>
+                            <option ng-repeat="billTypeList in outboundOrder.billTypeList"
+                                    value="{{billTypeList.dataValue}}">
+                                {{billTypeList.dataName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select class="form-control" id="urgent">
+                                <option selected value="">是否加急</option>
+                                <option value="1">是</option>
+                                <option value="0">否</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select class="form-control" id="status">
+                                <option selected value="">出库单状态</option>
+                                <option value="OPEN">打开</option>
+                                <option value="ACTIVE">生效</option>
+                                <option value="UNFINISHED">未完成</option>
+                                <option value="FINISHED">完成</option>
+                            </select>
+                        </div>
+                    </div>
+                <div class="col-md-3" style="padding-left: 0px;">
+                    <input type="hidden" id="ownerId" value="{{outboundOrder.ownerEntity.getSelectedRows()[0].userId}}"/>
+                    <div class="form-group">
+                        <select-table st-combo="test()" st-text="outboundOrder.placeholder_ownerName"
+                                      st-icon="outboundOrder.icon_owner"
+                                      st-value="outboundOrder.ownerEntity.getSelectedRows()[0].nickName">
+                            <table-expandable table-column="outboundOrder.ownerColumn"
+                                              table-page="outboundOrder.ownerPage()"
+                                              table-data="outboundOrder.ownerData"
+                                              table-conf="outboundOrder.ownerParams"
+                                              self-page="true"
+                                              entity="outboundOrder.ownerEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <!--div class="col-md-3">
+                    <button type="button" class="btn blue" ng-click="outboundOrder.searchGoods()">查询商品</button>
+                </div-->
+                <div class="col-md-3">
+                    <input type="hidden" id="productName"
+                           value="{{outboundOrder.goodsEntity2.getSelectedRows()[0].skuId}}"/>
+                    <select-table st-combo="test()" st-text="outboundOrder.placeholder_goodsName"
+                                  st-icon="outboundOrder.icon_goodsName"
+                                  st-value="outboundOrder.goodsEntity2.getSelectedRows()[0].title">
+                        <table-expandable table-column="outboundOrder.goodscolumn"
+                                          table-page="outboundOrder.getGoodsPage()"
+                                          table-data="outboundOrder.goods_data"
+                                          table-conf="outboundOrder.goodsParams" self-page="true"
+                                          entity="outboundOrder.goodsEntity2">
+                        </table-expandable>
+                    </select-table>
+                </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <select class="form-control" id="allocateStatus">
+                                <option selected value="">分配状态</option>
+                                <option value="OPEN">待分配</option>
+                                <option value="PART_ALLOCATED">部分分配</option>
+                                <option value="ALLOCATED">分配完成</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3"  style="padding-left: 0px;">
+                        <div class="form-group">
+                            <select class="form-control" id="pickStatus ">
+                                <option selected value="">拣货状态</option>
+                                <option value="pickStatus UN_PICK">打开</option>
+                                <option value="PART_PICKED">部分拣货</option>
+                                <option value="PICKED">拣货完成</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3"  style="padding-left: 0px;">
+                        <div class="form-group">
+                            <select class="form-control" id="shipStatus">
+                                <option selected value="">发运状态</option>
+                                <option value="UN_SHIP">待发运</option>
+                                <option value="PART_SHIPPED">部分发运</option>
+                                <option value="SHIPPED">已发运</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-9">
+                        <label class="col-sm-3" style="padding-top: 12px;">创建时间
+                        </label>
+                        <div class="col-sm-9 createtime" style="margin-left: -95px">
+                            <time-picker></time-picker>
+                        </div>
+                    </div>
+            </div>
+
+           <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="outboundOrder.OutboundFind()">
+                    搜索
+                </button>
+                <!--<button type="button" class="btn blue dropdown-toggle" style="padding-left: 5px;padding-right:5px;"-->
+                        <!--ng-click="outboundOrder.menuLen > 4?  outboundOrder.menuLen =4:outboundOrder.menuLen =12">-->
+                    <!--<i class="fa fa-angle-down">-->
+                    <!--</i>-->
+                <!--</button>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="outboundOrder.toCreateWaybill()" style="font-weight: inherit">新建出库单</button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundOrder.addOperationFee()" style="font-weight: inherit">添加杂费</button>
+        <button id="quickOut_id" type="button" class="btn btn-default pusht" style="font-weight: inherit" ng-click="outboundOrder.quickPick(1)">一键出库</button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundOrder.ActiveOutbound()" style="font-weight: inherit">生效</button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundOrder.invalidOutbound()" style="font-weight: inherit">失效</button>
+        <button type="button" class="btn btn-default pusht" style="font-weight: inherit" ng-click="outboundOrder.outboundDelete()">删除</button>
+        <button id="quickPick_id" type="button" class="btn btn-default pusht" style="font-weight: inherit" ng-click="outboundOrder.quickPick(0)">一键生成作业单</button>
+        <button type="button" class="btn btn-default pusht" style="font-weight: inherit" ng-click="outboundOrder.print()">打印</button>
+
+        <button type="button" class="btn btn-default pusht" style="font-weight: inherit"
+                ng-click="outboundOrder.toImportFile()">导入</button>
+    </div>
+    <table-expandable table-column="outboundOrder.column" table-page="outboundOrder.getOutboundPage()"
+                      table-data="outboundOrder.data" table-conf="outboundOrder.outbound_params"
+                      self-page="false" entity="outboundOrder.entity">
+    </table-expandable>
+</div>
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加货品出库明细</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" id="id_goods"
+                                   value="{{outboundOrder.goodsEntity.getSelectedRows()[0].title}}"/>
+                            <select-table st-combo="test()" st-text="outboundOrder.placeholder_goodsName"
+                                          st-icon="outboundOrder.icon_goodsName"
+                                          st-value="outboundOrder.goodsEntity.getSelectedRows()[0].title">
+                                <table-expandable table-column="outboundOrder.goodscolumn"
+                                                  table-page="outboundOrder.getGoodsPage()"
+                                                  table-data="outboundOrder.goods_data"
+                                                  table-conf="outboundOrder.goodsParams" self-page="true"
+                                                  entity="outboundOrder.goodsEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="id_quantity" class="form-control" placeholder="请输入数量">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <select class="form-control" id="id_intensify">
+                                <option selected value="">库存状态</option>
+                                <option value="GOOD">良品</option>
+                                <option value="GOOD">不良品</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" id="id_deal"
+                                   value="{{outboundOrder.dealEntity.getSelectedRows()[0].nickName}}"/>
+                            <select-table st-combo="test()" st-text="outboundOrder.placeholder_dealer"
+                                          st-icon="outboundOrder.icon_dealer"
+                                          st-value="outboundOrder.dealEntity.getSelectedRows()[0].nickName">
+                                <table-expandable table-column="outboundOrder.dealcolumn"
+                                                  table-page="outboundOrder.getdealPage()"
+                                                  table-data="outboundOrder.deal_data"
+                                                  table-conf="outboundOrder.dealerParams" self-page="true"
+                                                  entity="outboundOrder.dealEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="text" id="Id_weight" class="form-control" placeholder="请输入重量">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundOrder.OutboundDetailSure()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

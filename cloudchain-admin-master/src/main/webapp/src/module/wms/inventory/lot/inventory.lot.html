@@ -1,0 +1,478 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>批次库存</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="ownerId" class="form-control" placeholder="货主编号"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="supplierId" class="form-control" placeholder="供应商编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="inboundCode" class="form-control" placeholder="相关单据编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="productId" class="form-control" placeholder="商品编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="wareHouseId" class="form-control" placeholder="仓库编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="areaId" class="form-control" placeholder="库区编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="locationId" class="form-control" placeholder="库位编号">
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="inventoryLot.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.viewDetail()" style="font-weight: inherit">查询库存明细</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.inventoryFrozen()" style="font-weight: inherit">冻结</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.inventoryUnFrozen()" style="font-weight: inherit">解冻</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.changeLocation()" style="font-weight: inherit">库内转移</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.changeOwner()" style="font-weight: inherit">货权转移</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.loss()" style="font-weight: inherit">损耗</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="inventoryLot.gain()" style="font-weight: inherit">增溢</button>
+    </div>
+   <table-expandable table-column="inventoryLot.column" table-page="inventoryLot.getPage()"
+                      table-data="inventoryLot.data" table-conf="inventoryLot.pageParams" self-page="false"
+                      entity="inventoryLot.entity">
+    </table-expandable>
+</div>
+
+<!--库内转移对话框-->
+<div class="modal fade" id="changeLocationModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">库内转移</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货商品名称
+                            </label>
+                            <div class="col-md-4">
+                                <input name="productName" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">移动到位置*
+                            </label>
+                            <linkage-select ng-if="inventoryLot.warehouse!=undefined" warehouse="inventoryLot.warehouse"></linkage-select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">转移数量*
+                            </label>
+                            <div class="col-md-4">
+                                <input name="moveQuantity" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">转移原因
+                            </label>
+                            <div class="col-md-4">
+                                <input name="description" type="text" class="form-control">
+                                <!--textarea name="description" class="form-control"/-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="inventoryLot.confirmChangeLocation()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--货权转移对话框-->
+<div class="modal fade" id="changeOwnerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">货权转移</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货品名称
+                            </label>
+                            <div class="col-md-4">
+                                <input name="productName" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">移动后货主*
+                            </label>
+                            <div class="col-md-4">
+                              <select-table st-combo="test()" st-text="inventoryLot.placeholder_ownerName"
+                                          st-icon="inventoryLot.icon_owner"
+                                          st-value="inventoryLot.ownerEntity.getSelectedRows()[0].nickName">
+                                <table-expandable table-column="inventoryLot.ownerColumn"
+                                                  table-page="inventoryLot.ownerPage()"
+                                                  table-data="inventoryLot.ownerData"
+                                                  table-conf="inventoryLot.ownerParams"
+                                                  self-page="true"
+                                                  entity="inventoryLot.ownerEntity">
+                                </table-expandable>
+                              </select-table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">转移数量*
+                            </label>
+                            <div class="col-md-4">
+                                <input name="moveOwnerQuantity" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">转移原因
+                            </label>
+                            <div class="col-md-4">
+                                <input name="mvOwnerDescription" type="text" class="form-control">
+                                <!--textarea name="description" class="form-control"/-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="inventoryLot.confirmChangeOwner()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--冻结对话框-->
+<div class="modal fade" id="inventoryFrozenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">冻结</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货品名称
+                            </label>
+                            <div class="col-md-4">
+                                <input name="productName" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">冻结数量*
+                            </label>
+                            <div class="col-md-4">
+                                <input name="frozenQuantity" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">冻结原因
+                            </label>
+                            <div class="col-md-4">
+                                <input name="frozenDescription" type="text" class="form-control">
+                                <!--textarea name="description" class="form-control"/-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">解冻方式*
+                            </label>
+                            <div class="col-md-4">
+                                <input type="radio" id="frozenType_0" name="frozenType" ng-model="inventoryLot.frozenType"
+                                                                         ng-checked="true"
+                                                                         ng-change="inventoryLot.frozenTypeChange()"
+                                                                         value="0"><label>手动</label>
+                                <input type="radio" name="frozenType" ng-model="inventoryLot.frozenType"
+                                                                          ng-change="inventoryLot.frozenTypeChange()"
+                                                                          value="1"><label>自动</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="form-group" ng-if="inventoryLot.auto_frozen_time_switch==1">
+                            <label class="col-md-2 control-label col-md-offset-3">自动解冻时间
+                            </label>
+                            <div class="col-md-4 autoFrozenTime">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="inventoryLot.confirmInventoryFrozen()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--解冻对话框-->
+<div class="modal fade" id="inventoryUnFrozenModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">解冻</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货品名称
+                            </label>
+                            <div class="col-md-4">
+                                <input name="productName" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">冻结数量
+                            </label>
+                            <div class="col-md-4">
+                                <input name="oriFreezeQuantity" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">解冻数量*
+                            </label>
+                            <div class="col-md-4">
+                                <input name="unFreezeQuantity" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">解冻原因
+                            </label>
+                            <div class="col-md-4">
+                                <input name="unFrozenDescription" type="text" class="form-control">
+                                <!--textarea name="description" class="form-control"/-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="inventoryLot.confirmInventoryUnFrozen()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--损耗对话框-->
+<div class="modal fade" id="lossModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">损耗</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货商品名称
+                            </label>
+                            <div class="col-md-4">
+                                <input name="productName" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">损耗数量*
+                            </label>
+                            <div class="col-md-4">
+                                <input name="lossQuantity" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">损耗原因
+                            </label>
+                            <div class="col-md-4">
+                                <input name="lossDescription" type="text" class="form-control">
+                                <!--textarea name="description" class="form-control"/-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="inventoryLot.confirmLoss()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--增溢对话框-->
+<div class="modal fade" id="gainModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">增溢</i>
+                </h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="allocateForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label  col-md-offset-3">货商品名称
+                            </label>
+                            <div class="col-md-4">
+                                <input name="productName" type="text" class="form-control" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">增溢数量*
+                            </label>
+                            <div class="col-md-4">
+                                <input name="gainQuantity" type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label col-md-offset-3">增溢原因
+                            </label>
+                            <div class="col-md-4">
+                                <input name="gainDescription" type="text" class="form-control">
+                                <!--textarea name="description" class="form-control"/-->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="inventoryLot.confirmGain()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

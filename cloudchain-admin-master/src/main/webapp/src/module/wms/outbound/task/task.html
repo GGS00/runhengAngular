@@ -1,0 +1,57 @@
+<div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="task.sure()" style="font-weight: inherit">任务分配</button>
+        <button type="button" class="btn btn-default pusht" ng-click="task.onBack()" style="font-weight: inherit">返回</button>
+    </div>
+    <table-expandable table-column="task.column" table-page="task.getPage()"
+                      table-data="task.data" table-conf="task.pageParams" self-page="false"
+                      entity="task.entity">
+    </table-expandable>
+</div>
+<div class="modal fade selectCommonContacts" id="Dialog1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">任务分配</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" value="{{task.userEntity.getSelectedRows()[0].userName}}"
+                                   id="id_warehouse">
+                            <select-table st-combo="test()" st-text="task.placeholder_userName"
+                                          st-icon="task.icon_user"
+                                          st-value="task.userEntity.getSelectedRows()[0].userName">
+                                <table-expandable table-column="task.userColumn"
+                                                  table-page="task.userPage()"
+                                                  table-data="task.userData"
+                                                  table-conf="task.userParams"
+                                                  self-page="true"
+                                                  entity="task.userEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="task.add1()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

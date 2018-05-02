@@ -1,0 +1,134 @@
+<div>
+    <div class="portlet-body row">
+
+        <!-- BEGIN FORM-->
+        <form id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button>
+                    表单信息有误,请检查.
+                </div>
+                <div class="alert alert-success display-hide">
+                    <button class="close" data-close="alert"></button>
+                    表单信息验证通过!
+                </div>
+                <span class="pageTitle"><i class="fa fa-scissors"></i>根据商品名来删除防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">商品名
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_goods" value="{{del.goodsEntity.getSelectedRows()[0].title}}"/>
+                                <select-table st-combo="test()" st-text="del.placeholder_goodsName"
+                                              st-icon="del.icon_goodsName"
+                                              st-value="del.goodsEntity.getSelectedRows()[0].title">
+                                    <table-expandable table-column="del.goodscolumn"
+                                                      table-page="del.getGoodsPage()"
+                                                      table-data="del.goods_data"
+                                                      table-conf="del.goodsParams" self-page="true"
+                                                      entity="del.goodsEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" ng-click="del.delete(1)" class="btn blue">确认删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <span class="pageTitle"><i class="fa fa-scissors"></i>根据批次号来删除防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">批次号
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_batch" value="{{del.batchEntity.getSelectedRows()[0].lot}}"/>
+                                <select-table st-combo="test()" st-text="del.placeholder_batchCode"
+                                              st-icon="del.icon_batchCode"
+                                              st-value="del.batchEntity.getSelectedRows()[0].lot">
+                                    <table-expandable table-column="del.batchcolumn"
+                                                      table-page="del.getbatchCodePage()"
+                                                      table-data="del.batch_data"
+                                                      table-conf="del.batchParams"
+                                                      self-page="true"
+                                                      entity="del.batchEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" ng-click="del.delete(2)" class="btn blue">确认删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="pageTitle"><i class="fa fa-scissors"></i>根据经销商来删除防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">经销商
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_deal" value="{{del.dealEntity.getSelectedRows()[0].nickName}}"/>
+                                <select-table st-combo="test()" st-text="del.placeholder_dealer"
+                                              st-icon="del.icon_dealer"
+                                              st-value="del.dealEntity.getSelectedRows()[0].nickName">
+                                    <table-expandable table-column="del.dealcolumn"
+                                                      table-page="del.getdealPage()"
+                                                      table-data="del.deal_data"
+                                                      table-conf="del.dealerParams" self-page="true"
+                                                      entity="del.dealEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" ng-click="del.delete(3)" class="btn blue">确认删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <span class="pageTitle"><i class="fa fa-scissors"></i>根据防伪码来删除防伪码</span>
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">防伪码
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="form-group">
+                                <input type="hidden" id="id_security" value="{{del.securityEntity.getSelectedRows()[0].code}}"/>
+                                <select-table st-combo="test()" st-text="del.placeholder_securityCode"
+                                              st-icon="del.icon_securityCode"
+                                              st-value="del.securityEntity.getSelectedRows()[0].code">
+                                    <table-expandable table-column="del.securitycolumn"
+                                                      table-page="del.getSecurityPage()"
+                                                      table-data="del.securitydata"
+                                                      table-conf="del.securityParams" self-page="true"
+                                                      entity="del.securityEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="submit" ng-click="del.delete(4)" class="btn blue">确认删除
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+</div>
+
+</div>
+

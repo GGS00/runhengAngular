@@ -1,0 +1,55 @@
+<div class="topLine"></div>
+<div class="row" style="color: #7E7E7E;padding: 20px 20px 10px 20px;width: 1190px;margin: 10px auto;">
+    <div class="mbxue">
+        <span ng-click="d2wgoodsdetail.toWaresource()" style="cursor:pointer">货源</span> >
+        <span class="toOrder" ng-click="toOrder()" ng-if="d2wgoodsdetail.isLogin == 1">报价</span>
+    </div>
+    <div class="col-md-4 col-sm-4" ng-if="d2wgoodsdetail.detailData.type==1">
+        <div class="portlet light portlet-fit bordered" style="min-height:460px;padding: 12px;overflow-y: scroll;height: 440px;">
+            <span class="detail-title">货物信息</span>
+            <div ng-repeat="list in d2wgoodsdetail.detailData.itemDetailModels">
+                <div class="wareGroup" style="margin-bottom: 8px;">
+                   <span class="wareText">货品图片 :</span>
+                   <div class="d2wDetailImg" ng-repeat="imglist in list.imgs">
+                     <img  ng-src="{{imglist.img}}" alt="{{imglist.img}}" style="width:100%;height:100%">
+                   </div>
+                </div>
+                <div class="wareGroup">
+                    <span class="wareInfo">货品名称 : {{list.goodsName}}</span>
+                </div>
+                <div class="wareGroup">
+                    <span class="wareInfo">所属品类 : {{list.goodsType}}</span>
+                </div>
+                <div class="wareGroup">
+                    <span class="wareInfo">入库数量 : {{list.count}}/{{list.unit}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <div class="portlet light portlet-fit bordered" style="min-height:460px;padding: 12px;">
+            <span class="detail-title">仓库要求</span>
+            <div class="wareGroup">
+                <span class="wareInfo">仓库所在地 : {{d2wgoodsdetail.detailData.provinceName}}{{d2wgoodsdetail.detailData.cityName}}{{d2wgoodsdetail.detailData.districtName}}</span>
+                <span class="wareInfo">库区类型 : {{d2wgoodsdetail.detailData.warehouseAreaType==01?"普通":(d2wgoodsdetail.detailData.warehouseAreaType==02?"冷藏":(d2wgoodsdetail.detailData.warehouseAreaType==03?"恆溫":(d2wgoodsdetail.detailData.warehouseAreaType==04?"特种":(d2wgoodsdetail.detailData.warehouseAreaType==05?"气调":""))))}}</span>
+                <span class="wareInfo">温度要求 : {{d2wgoodsdetail.detailData.temperatureRange.replace('-', '~')}}℃</span>
+                <span class="wareInfo">湿度要求 : {{d2wgoodsdetail.detailData.humidityRange.replace('-', '~')}}</span>
+                <span class="wareInfo">所需库容 : {{d2wgoodsdetail.detailData.storageSqm}}m<sup>2</sup></span>
+                <span class="wareInfo">入库时间 : {{d2wgoodsdetail.detailData.storageTime}}</span>
+                <span class="wareInfo">意向价格 : {{d2wgoodsdetail.detailData.intentPrice/100}}/元/天/{{d2wgoodsdetail.detailData.unit}}</span>
+                <span class="wareInfo">特殊说明 : {{d2wgoodsdetail.detailData.remark}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 col-sm-4">
+        <div class="portlet light portlet-fit bordered" style="min-height:460px;padding: 12px;">
+            <span class="detail-title">货主信息</span>
+            <div class="wareGroup">
+                <span class="wareInfo">公司名称 : {{d2wgoodsdetail.detailData.user.adminUserExt.company}}</span>
+                <span class="wareInfo">所属行业 : {{d2wgoodsdetail.detailData.user.industryNames}}</span>
+                <span class="wareInfo">联系人 : {{d2wgoodsdetail.detailData.user.nickName}}</span>
+                <span class="wareInfo">联系电话 : 025-52307887</span>
+            </div>
+        </div>
+    </div>
+</div>

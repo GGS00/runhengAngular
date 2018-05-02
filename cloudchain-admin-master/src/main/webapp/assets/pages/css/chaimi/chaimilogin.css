@@ -1,0 +1,225 @@
+.chaimisettle{
+    overflow: hidden;
+}
+
+.logo{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    position: relative;
+    width: 1000px;
+    margin: 0 auto;
+    height: 73px;
+}
+
+.logo_href{
+    float: left;
+    padding-right: 12px;
+    height: 50px;
+    display: block;
+    width: 204px;
+    line-height: 43px;
+    border-right: #EDEDED 1px solid;
+}
+
+.settleTitle{
+    float: left;
+    color: #0F0F0F;
+    font-size: 21px;
+    padding: 16px 7px 0px 17px;
+}
+
+.settleLogin{
+    float: right;
+    color: #2E2E2E;
+    font-size: 13px;
+    padding: 25px 7px 0px 17px;
+}
+
+.copyright{
+    text-align: center;
+    position: relative;
+    padding: 12px 0;
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 70px;
+    border-top: #E6E6E6 1px solid;
+    color: #AEAEAE;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    color: #EB6C6A;
+    font-weight: bold;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+
+.tabText:hover{
+    color: #838383;
+}
+
+.tabText{
+    font-weight: bold;
+    color: #838383;
+}
+
+.tab-content{
+    min-height: 654px;
+}
+
+.form-group{
+    height:35px;
+}
+
+.textDesc{
+    font-size: 14px;
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+    float: left;
+    margin-left: 238px;
+    color: #7E7E7E;
+    letter-spacing: 2px;
+    width: 133px;
+}
+
+.textInput{
+    float: left;
+    width: 304px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.textInput input{
+    border-radius: 0;
+}
+
+.contentTitle{
+    display: block;
+    margin-left: 240px;
+    color: #303030;
+    font-size: 14px;
+    margin-bottom: 19px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.select2-container--bootstrap .select2-selection{
+    border-radius: 0 ;
+}
+
+.settledBtn{
+    display: block;
+    background: #E2393C;
+    height: 33px;
+    width: 229px;
+    margin: 32px auto;
+    text-align: center;
+    line-height: 33px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    margin-left: 391px;
+}
+
+.settledSuccess{
+    height: 144px;
+}
+
+.successText{
+    margin: 42px auto;
+    width: 442px;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.successText .icon-chenggong{
+    font-size: 80px;
+    color: #54C50D;
+}
+
+.successText span{
+    font-size: 30px;
+    color: #626262;
+}
+
+.logintab {
+    position: absolute;
+    top: 41px;
+    right: 17%;
+    width: 346px;
+    height: 382px;
+    background: #fff;
+}
+
+.loginBg{
+    position: relative;
+    height: 475px;
+}
+
+.logintab .loginTop{
+    height: 58px;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 700;
+    color: #e4393c;
+    background-color: white;
+    padding: 17px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #f4f4f4;
+}
+
+.loginBody {
+    height: 162px;
+    padding: 36px 30px;
+}
+
+.loginBody .form-control{
+    height: 38px;
+    padding: 10px 0 10px 10px;
+}
+
+.loginFoot span{
+    margin: 20px auto;
+    text-align: center;
+    border: 1px solid #e85356;
+    display: block;
+    width: 287px;
+    background: #e4393c;
+    height: 40px;
+    line-height: 36px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.copyright {
+    text-align: center;
+    position: relative;
+    padding: 12px 0;
+    width: 1000px;
+    margin: 0 auto;
+    margin-top: 13px;
+    color: #AEAEAE;
+    border-top:none;
+}
+
+.loginFoot {
+    height: 95px;
+    margin-top: 18px;
+}
+
+.loginToSettled{
+    font-size: 14px;
+    color: #E4393C;
+    cursor: pointer;
+    text-align: right;
+    margin-right: 33px;
+}
+
+.loginToSettled i{
+    margin-right: 4px;
+}

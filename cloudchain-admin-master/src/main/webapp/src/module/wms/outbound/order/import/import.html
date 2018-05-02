@@ -1,0 +1,39 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>导入出库单</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <div class="col-sm-6 col-left">
+                <div class="form-group from-group2">
+                    <select class="form-control" id="id_billType" >
+                        <option selected value="">请选择单据类型</option>
+                        <option ng-repeat="billTypeList in outboundImport.billTypeList" value="{{billTypeList.dataValue}}">
+                            {{billTypeList.dataName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row divline">
+        <div class="col-md-12">
+            <div class="col-sm-6 col-left">
+                <input type="file" id="excelFile" style="padding-top: 7px;" name="excelFile">
+            </div>
+        </div>
+    </div>
+    <div class="row divline">
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button id="inboundConfirmButton" type="button" class="btn blue"
+                            ng-click="outboundImport.importFile()">确定</button>
+
+                    <button id="inboundCancelButton" type="cancel"  class="btn white"
+                            ng-click="outboundImport.toWmsOrder()" >返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

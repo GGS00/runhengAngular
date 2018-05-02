@@ -1,0 +1,64 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>账号管理
+      </span>
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="identity.addIdent()"style="font-weight: inherit">添加账号
+        </button>
+        <button type="button" class="btn btn-default" ng-click="identity.returnButton()"
+                style="font-weight: inherit;">返回
+        </button>
+    </div>
+    <table-expandable table-column="identity.Ident_column" table-page="identity.getIdentPage()"
+                      table-data="identity.identdata" table-conf="identity.identity_params"
+                      self-page="false" entity="identity.identEntity">
+    </table-expandable>
+
+</div>
+<div class="modal fade" id="addIdent" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加账号</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-3" style="margin-right: -31px;    margin-top: 7px;">账号名称<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_name" class="form-control" placeholder="请输入账号名称">
+                        </div>
+                    </div>
+                </div>
+                <div  class="row">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 col-md-offset-3" style="margin-right: -31px; margin-top: 7px;">初始密码<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <input type="text" id="id_passwd" class="form-control" placeholder="请输入密码">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="identity.btaddIdent()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

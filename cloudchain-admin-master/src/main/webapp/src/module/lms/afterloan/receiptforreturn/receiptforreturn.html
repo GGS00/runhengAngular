@@ -1,0 +1,121 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>核销列表</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-3"style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="customerName" class="form-control" placeholder="客户名称"></div>
+            </div>
+            <div class="col-sm-3"style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="applyLoanCode" class="form-control" placeholder="申请编号"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" id="id_status">
+                        <option selected value="">状态</option>
+                        <option value="UN_BACKED">未回款</option>
+                        <option value="NONE">无需回款</option>
+                        <option value="UN_CLEARED">未结清</option>
+                        <option value="CLEARED">已结清</option>
+                        <option value="NO_CLEARED">无需结清</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="receiptForReturn.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="receiptForReturn.settleByCustomer()" style="font-weight: inherit">按客户结算</button>
+        <!--<button type="button" class="btn btn-default" ng-click="receiptForReturn.settleByOrder()" style="font-weight: inherit">按单结算</button>-->
+    </div>
+    <table-expandable table-column="receiptForReturn.column" table-page="receiptForReturn.getReceiptForReturnPage()"
+                      table-data="receiptForReturn.data" table-conf="receiptForReturn.receiptForReturnParams"
+                      self-page="false" entity="receiptForReturn.entity">
+    </table-expandable>
+</div>
+</div>
+<div class="modal fade" id="settlement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">确认结算</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" id="id_goods"
+                                   value="{{outbound.entity.getSelectedRows()[0].title}}"/>
+                            <input type="hidden" id="id_goodsPrice"
+                                   value="{{outbound.entity.getSelectedRows()[0].price}}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                          转入账号名
+                            <input type="text"  class="form-control"  value="{{outbound.entity.getSelectedRows()[0].price}}">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            客户
+                            <input type="text"  class="form-control"  value="{{outbound.entity.getSelectedRows()[0].price}}" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            转入账号
+                            <input type="text"  class="form-control"  value="{{outbound.entity.getSelectedRows()[0].price}}" >
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            实际支付金额
+                            <input type="text"  class="form-control"  value="{{outbound.entity.getSelectedRows()[0].price}}" >
+                        </div>
+                    </div><div class="col-sm-6 col-sm-offset-3">
+                    <div class="form-group">
+                        转入账号开户行
+                        <input type="text"  class="form-control"  value="{{outbound.entity.getSelectedRows()[0].price}}" >
+                    </div>
+                </div>
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            实际支付日期
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="addOutbound.OutboundDetailSure()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

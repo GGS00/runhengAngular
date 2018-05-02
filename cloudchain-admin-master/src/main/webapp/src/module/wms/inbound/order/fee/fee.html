@@ -1,0 +1,194 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>入库单杂费详情</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+
+        <div class="form-horizontal">
+            <div class="form-group">
+                <input id="inboundStatus" type="hidden" value="{{fee.objData.status}}">
+                <label class="col-md-2 control-label">单号</label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="inboundCode" class="form-control" value="{{fee.objData.code}}"
+                           readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">货主</label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="nickName" class="form-control"
+                           value="{{fee.objData.owner.nickName}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">供应商</label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="nickName" class="form-control"
+                           value="{{fee.objData.supplier.nickName}}" readonly="readonly">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">货仓</label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text" name="warehouseName" class="form-control"
+                           value="{{fee.objData.warehouse.name}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">单据类型</label>
+                <div class="col-md-2 col-left2 ">
+                    <select class="form-control" id="id_billType" ng-model="fee.billType" disabled="true">
+                        <option ng-repeat="billTypeList in fee.billTypeList"
+                                value="{{billTypeList.dataValue}}">
+                            {{billTypeList.dataName}}
+                        </option>
+                    </select>
+                </div>
+                <label class="col-md-2 control-label">数量</label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text" name="totalBU" class="form-control"
+                           value="{{fee.objData.expectedQuantityBU}}" readonly="readonly">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">描述</label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text" name="upddesc" class="form-control"
+                           value="{{fee.objData.description}}">
+                </div>
+                <label class="col-md-2 control-label">相关单号1</label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text" name="updrelatedBillNo1" class="form-control"
+                           value="{{fee.objData.relatedBillNo1}}">
+                </div>
+                <label class="col-md-2 control-label">相关单号2</label>
+                <div class="col-md-2 col-left2 ">
+                    <input type="text" name="updrelatedBillNo2" class="form-control"
+                           value="{{fee.objData.relatedBillNo2}}">
+                </div>
+            </div>
+
+
+<!--            <div class="form-actions">
+                <div class="row" style="margin-left: 15px">
+                    <div class="col-md-offset-5 col-md-7">
+                        <button id="inboundUpdateButton" type="submit" class="btn blue"
+                                ng-click="fee.updInbound()">修改
+                        </button>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" id="addItemDetail" class="btn btn-default pusht" ng-click="fee.addItemDetail()"
+                style="font-weight: inherit">添加杂费
+        </button>
+        <button type="button" id="updItemDetail" class="btn btn-default pusht" ng-click="fee.updItemDetail()"
+                style="font-weight: inherit">修改杂费
+        </button>
+        <button type="button" id="delItemDetail" class="btn btn-default pusht" ng-click="fee.delItemDetail()"
+                style="font-weight: inherit">删除杂费
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="fee.returnButton()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="fee.column" table-page="fee.getPage()"
+                      table-data="fee.data" table-conf="fee.pageParams" self-page="false"
+                      entity="fee.entity">
+    </table-expandable>
+</div>
+</div>
+<div class="modal fade" id="add_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 80%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加明细</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="WmsInboundItem">
+                    <div class=" form-horizontal">
+                        <input name="inboundId" type="hidden">
+                        <input name="inboundCode" type="hidden">
+                        <div class="col-sm-3 col-left">
+                            <div class="form-group from-group2">
+                                <input type="hidden" value="{{fee.warehouseEntity.getSelectedRows()[0].fId}}"
+                                       id="id_warehouse">
+                                <select-table st-combo="test()" st-text="fee.placeholder_warehouseName"
+                                              st-icon="fee.icon_warehouse"
+                                              st-value="fee.warehouseEntity.getSelectedRows()[0].fName">
+                                    <table-expandable table-column="fee.warehouseColumn"
+                                                      table-page="fee.warehousePage()"
+                                                      table-data="fee.warehouseData"
+                                                      table-conf="fee.warehouseParams"
+                                                      self-page="true"
+                                                      entity="fee.warehouseEntity">
+                                    </table-expandable>
+                                </select-table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">计算数量<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-4 ">
+                                <input type="text" class="form-control" id="id_quantity"  name="expectedQuantityBu" value="{{fee.objData.expectedQuantityBU}}">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="fee.sumbitAddDeatil()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="upd_model" tabindex="-2" role="dialog" aria-labelledby="myModalLabel2"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改明细</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <input name="inboundCode" type="hidden">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">数量<span class="required"
+                                                                      aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="upd_quantity">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="fee.sumbitUpdDeatil()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

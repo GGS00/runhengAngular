@@ -1,0 +1,153 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>贷款申请审批(总监)</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <form id="managerCheck">
+                <div class="form-group">
+                    <input  type="hidden" value="{{managerCheck.objData.id}}" name="id" >
+                    <input  type="hidden" value="{{managerCheck.objData.applyLoanId}}" name="applyLoanId" >
+                    <input  type="hidden" value="{{managerCheck.objData.customerId}}" name="customerId" >
+                    <label class="col-md-2 control-label">客户编号
+                    </label>
+                    <div class="col-md-2 col-left2 ">
+                        <input type="text" class="form-control" name="customer.code" value="{{managerCheck.objData.customer.code}}"
+                               readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">客户名称
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control"
+                               value="{{managerCheck.objData.customerName}}" readonly="readonly" name="customerName">
+                    </div>
+                    <label class="col-md-2 control-label">贷款品种
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="loanType" class="form-control"
+                               value="{{managerCheck.objData.loanType}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">申请金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" id="id_remark" class="form-control" name="applyLoanRecord.applyAmount"
+                               value="{{managerCheck.objData.applyLoanRecord.applyAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">申请时间
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.applyTime"
+                               value="{{managerCheck.objData.applyLoanRecord.applyTime}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">实际产品数量
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realTotalQuantity" class="form-control"
+                               value="{{managerCheck.objData.realTotalQuantity}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">实际产品总价
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realTotalAmount" class="form-control"
+                               value="{{managerCheck.objData.realTotalAmount}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">产品部审核人姓名
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkPersonName1" class="form-control"
+                               value="{{managerCheck.objData.checkPersonName1}}" readonly="readonly" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">产品部审核时间
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkTime1" class="form-control"
+                               value="{{managerCheck.objData.checkTime1}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">实际可申请额度
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realMaxApplyAmount" class="form-control"
+                               value="{{managerCheck.objData.realMaxApplyAmount}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">产品部审核人意见
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkOption1" class="form-control"
+                               value="{{managerCheck.objData.checkOption1}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">金融部审核人姓名
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkPersonName2" class="form-control"
+                               value="{{managerCheck.objData.checkPersonName2}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">金融部审核意见
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkOption2" class="form-control"
+                               value="{{managerCheck.objData.checkOption1}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">金融部审核时间
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkTime2" class="form-control"
+                               value="{{managerCheck.objData.checkTime2}}" readonly="readonly" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">金融部审批额度
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control"
+                               value="{{managerCheck.objData.checkedAmount}}" readonly="readonly" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">审批额度
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkedAmount" class="form-control"
+                               value="{{managerCheck.objData.checkedAmount}}" >
+                    </div>
+                    <label class="col-md-2 control-label">审核结果
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <select id="checkStatus3" name="checkStatus3" class="form-control" >
+                            <option value="STATUS_CHECK_PASS" selected>通过</option>
+                            <option value="CHECK_FAIL">不通过</option>
+                        </select>
+                    </div>
+                    <label class="col-md-2 control-label">审核意见
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkOption3" class="form-control"
+                               value="{{managerCheck.objData.checkOption3}}" >
+                    </div>
+                </div>
+            </form>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="managerCheck.approve()">审批确定
+                        </button>
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="managerCheck.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

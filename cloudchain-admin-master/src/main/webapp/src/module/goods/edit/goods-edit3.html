@@ -1,0 +1,56 @@
+<style>
+    .mt-list-item.done:hover {
+        background-color: #FFFFFF!important;
+    }
+    ul > .mt-list-item.done{
+        border:none!important;
+    }
+    .list-toggle{
+        background-color: #94A0B2!important;
+        /*color: #666!important;*/
+    }
+    .dz-image {
+        border-radius: 5px;
+        overflow: hidden;
+        width: 120px;
+        height: 120px;
+        position: relative;
+        display: block;
+        z-index: 10;
+        border: 1px solid #0a6aa1;
+        float: left;
+        margin-right: 5px;
+        text-align: center;
+        line-height: 120px;
+        cursor:hand;
+    }
+</style>
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <h2 flex md-truncate>修改商品</h2>
+
+        <md-button class="md-raised" aria-label="Learn More" onclick="javascript:history.back(-1);">
+            返回
+        </md-button>
+        <md-button class="md-raised" aria-label="Learn More" ng-click="addInfo()">
+            修改
+        </md-button>
+    </div>
+</md-toolbar>
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="详细描述">
+                <md-content class="md-padding">
+                    <script type="text/plain" id="myEditor" name="myEditor">
+
+                    </script>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
+
+
+
+

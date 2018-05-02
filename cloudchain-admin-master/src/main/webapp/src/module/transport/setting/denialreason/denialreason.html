@@ -1,0 +1,39 @@
+<div>
+    <span class="pageTitle"><i class="fa  fa-chain-broken"></i>拒签原因</span>
+
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="拒签码"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="拒签原因"> </div>
+            </div>
+
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="denialReason.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form btnGroup" style="margin-top: 12px;">
+        <button type="button" class="btn btn-default"  ng-click="denialReason.addDenialReason()" style="font-weight: inherit">新增</button>
+        <button type="button" class="btn btn-default"  ng-click="denialReason.removeDenialReason()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="denialReason.column"  table-page="denialReason.getPage()" table-data="denialReason.data" table-conf="denialReason.pageParams" self-page="false" entity="denialReason.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

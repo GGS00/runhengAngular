@@ -1,0 +1,204 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>新订单配仓</span>
+    <div class="row firstRow" style="margin-top:20px;">
+        <md-content style="margin-top: 25px;background: #fff">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="自有仓" ng-click="neworderdistribute.showTabs(0)">
+                    <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                        <div class="col-md-3" style="height: 260px;overflow-x: scroll;">
+                            <div class="portlet-body">
+                                <div id="ownCategoryTree" class="tree-demo"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="portlet-body">
+                                <div class="packTableHeader">
+                                    <table class="table table-striped table-bordered table-hover order-column packCheck" data-page-size="15">
+                                        <thead class="iboxHeader">
+                                        <tr>
+                                            <th style="width:50%">供应商</th>
+                                            <th style="width:10%">库存</th>
+                                            <th  ng-if="neworderdistribute.clicked.itemId.split(',')[2] =='01'" style="width:10%">成本价</th>
+                                            <th style="width:10%">操作</th>
+                                            <th style="width:20%">出库数量</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ibox-content firstLoad" style="height:200px">
+                                    <table class="table table-striped table-bordered table-hover order-column packCheck" data-page-size="15" style="table-layout: fixed">
+                                        <tbody>
+                                        <tr ng-repeat="list in neworderdistribute.supplierList" class="goodsDis_{{$index}}" start-foo-table>
+                                            <td style="width:50%">
+                                                {{list.supplierName}}
+                                            </td>
+                                            <td style="width:10%">
+                                                {{list.quantity}}
+                                            </td>
+                                            <td ng-if="neworderdistribute.clicked.itemId.split(',')[2] =='01'" style="width:10%">
+                                                {{list.cost}}
+                                            </td>
+                                            <td style="width:10%">
+                                                <input ng-if="list.allotQuantity>0" type="checkbox" name="operateC" checked style="margin-left: 4px;"/>
+                                                <input ng-if="list.allotQuantity==0" type="checkbox" name="operateC"  style="margin-left: 4px;"/>
+                                            </td>
+                                            <td style="width:20%">
+                                                <input type="hidden" name="supplierAllotQuantity" value="{{list.allotQuantity}}"/>
+                                                <input type="hidden" name="supplierCost" value="{{neworderdistribute.clicked.itemId.split(',')[2] =='01'?list.cost:0}}"/>
+                                                <input type="hidden" name="supplierId" value="{{list.supplierId}}"/>
+                                                <input type="hidden" name="supplierName" value="{{list.supplierName}}"/>
+                                                <input type="hidden" name="maxquantity" value="{{list.quantity}}"/>
+                                                <input type="text" name="quantity" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" class="form-control" value="{{list.allotQuantity}}">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="button" class="btn blue" ng-click="neworderdistribute.submitOwnSupplier()">确定</button>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+                <md-tab label="供应商仓" ng-click="neworderdistribute.showTabs(1)">
+                    <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                        <div class="col-md-3" style="height: 260px;overflow-x: scroll;">
+                            <div class="portlet-body">
+                                <div id="supplierCategoryTree" class="tree-demo"> </div>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="portlet-body">
+                                <div class="packTableHeader">
+                                    <table class="table table-striped table-bordered table-hover order-column packCheck" data-page-size="15">
+                                        <thead class="iboxHeader">
+                                        <tr>
+                                            <th style="width:50%">供应商</th>
+                                            <th style="width:10%">库存</th>
+                                            <th  ng-if="neworderdistribute.clicked.itemId.split(',')[2] =='01'" style="width:10%">成本价</th>
+                                            <th style="width:10%">操作</th>
+                                            <th style="width:20%">出库数量</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ibox-content firstLoad" style="height:200px">
+                                    <table class="table table-striped table-bordered table-hover order-column packCheck" data-page-size="15" style="table-layout: fixed">
+                                        <tbody>
+                                        <tr ng-repeat="list in neworderdistribute.supplierList" class="supplier_GoodsDis_{{$index}}" start-foo-table>
+                                            <td style="width:50%">
+                                                {{list.supplierName}}
+                                            </td>
+                                            <td style="width:10%">
+                                                {{list.quantity}}
+                                            </td>
+                                            <td ng-if="neworderdistribute.clicked.itemId.split(',')[2] =='01'" style="width:10%">
+                                                {{list.cost}}
+                                            </td>
+                                            <td style="width:10%">
+                                                <input ng-if="list.allotQuantity>0" type="checkbox" name="operateC" checked style="margin-left: 4px;"/>
+                                                <input ng-if="list.allotQuantity==0" type="checkbox" name="operateC"  style="margin-left: 4px;"/>
+                                            </td>
+                                            <td style="width:20%">
+                                                <input type="hidden" name="supplierAllotQuantity" value="{{list.allotQuantity}}"/>
+                                                <input type="hidden" name="supplierCost" value="{{neworderdistribute.clicked.itemId.split(',')[2] =='01'?list.cost:0}}"/>
+                                                <input type="hidden" name="supplierId" value="{{list.supplierId}}"/>
+                                                <input type="hidden" name="supplierName" value="{{list.supplierName}}"/>
+                                                <input type="hidden" name="maxquantity" value="{{list.quantity}}"/>
+                                                <input type="text" name="quantity" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" class="form-control" value="{{list.allotQuantity}}">
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-md-offset-5 col-md-9">
+                                <button type="button" class="btn blue" ng-click="neworderdistribute.submitSupplier()">确定</button>
+                            </div>
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+    <div class="firstRow" style="margin-top: 50px;">
+        <span style="color: #929292;font-size: 14px;">已选仓库:{{neworderdistribute.warehouseName}}</span>
+        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable" style="margin-top: 10px;">
+            <thead>
+            <tr>
+                <th style="width:20%">商品编号</th>
+                <th style="width:20%">商品</th>
+                <th style="width:20%">订购数量<br/>(销售单位)</th>
+                <th style="width:10%">已配数量<br/>(销售单位)</th>
+                <th style="width:20%">供应商</th>
+                <th style="width:10%">配货数量<br/>(计量单位)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="list in neworderdistribute.pendConfirmGoodsList"  class="pendConfirmGoods_{{$index}}"finish-repeat>
+                <td style="width:20%">{{list.itemId}}</td>
+                <td style="width:20%">{{list.skuName}}</td>
+                <td style="width:20%">{{list.count}}</td>
+                <td style="width:10%">
+                    {{list.totalCount}}
+                </td>
+                <td style="width:20%;padding:0px">
+                    <span ng-repeat="supplierList in list.suppliers" class="goodsLine">
+                        {{supplierList.supplierName}}
+                    </span>
+                </td>
+                <td style="width:10%;padding:0px">
+                    <span ng-repeat="supplierList in list.suppliers" class="goodsLine">
+                        {{supplierList.allotQuantity}}
+                    </span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="col-md-offset-5 col-md-9">
+            <button type="button" class="btn blue" ng-click="neworderdistribute.submitDis()">提交</button>
+            <button type="button" class="btn default" ng-click="neworderdistribute.cancelDis()">重新配仓</button>
+            <button type="button" class="btn white" ng-click="neworderdistribute.backToOrder()">返回</button>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="confirmCancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>重新配仓确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    确定重新配仓？
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="neworderdistribute.confirmCancel()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+

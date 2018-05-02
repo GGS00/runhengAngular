@@ -1,0 +1,80 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>转账到账户</span>
+    <div id="page1" class="portlet-body row">
+        <form id="dataForm" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" >对方账户：</label>
+                        <div class="col-sm-4" >
+                            <input type="text" id="phone" name="phone" data-required="1" placeholder="请输入手机号码" style="font-size: larger"
+                                   class="form-control" autocomplete="off" maxlength="11" />
+                        </div>
+                    </div>
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" >&nbsp;</label>
+                        <div class="col-sm-4" style="color:#B1AFAF;">钱将实时转入对方账户，无法退款</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="transfer.nextStep()">下一步</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="page2" class="portlet-body row" style="display: none">
+        <form class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group" >
+                        <label class="control-label col-sm-2" >对方账户：</label>
+                        <div class="col-sm-4" style="padding-top: 7px;">
+                            {{transfer.account}}
+                        </div>
+                    </div>
+                </div>
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >转账金额：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="amount" name="amount" data-required="1" class="form-control" style="font-size: larger;" autocomplete="off" />
+                        </div>
+                        <div class="col-sm-1" style="padding-top:7px;padding-left:0px;width:auto;">
+                            元
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >&nbsp;</label>
+                        <div class="col-sm-4" style="color:#B1AFAF;">可转账金额{{transfer.cashAmount}}元</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >备注：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="remark" name="remark" data-required="1" class="form-control" maxlength="30" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" >支付密码：</label>
+                        <div class="col-sm-4">
+                            <input type="password" id="payPwd" name="payPwd" data-required="1" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <button type="submit" class="btn blue" ng-click="transfer.previousStep()">上一步</button>
+                        <button type="submit" class="btn blue" style="margin-left: 30px;" ng-click="transfer.submit()">确认转账</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

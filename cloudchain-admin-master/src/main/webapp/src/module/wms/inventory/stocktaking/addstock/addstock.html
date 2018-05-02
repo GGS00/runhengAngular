@@ -1,0 +1,302 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>盘点计划</span>
+    <div class="portlet-body">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="control-label col-sm-2 ">盘点仓库<span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-5">
+                        <div class="md-radio-inline">
+                            <div class="md-radio">
+                                <input type="radio" id="checkboxall" class="md-radiobtn"
+                                       ng-click="addstock.warelinsener(1)" ng-model="addstock.radioFlag" value="1">
+                                <label for="checkboxall">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全部仓库 </label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="checkboxsect" class="md-radiobtn"
+                                       ng-click="addstock.warelinsener(0)" ng-model="addstock.radioFlag" value="0">
+                                <label for="checkboxsect">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 部分仓库 </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2 ">选择仓库<span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-5">
+                        <div class="md-checkbox-inline">
+                            <div class="md-checkbox has-success"
+                                 ng-repeat="list in addstock.checkList.clist track by $index">
+                                <input type="checkbox" id="checkbox{{$index}}" ng-disabled=" addstock.checkList.dis"
+                                       ng-change="addstock.selectWare({{$index}})" ng-model="list.flag" value="list.val"
+                                       class="md-check">
+                                <label for="checkbox{{$index}}">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> {{list.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2 ">盘点类型<span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-5">
+                        <div class="md-radio-inline">
+                            <div class="md-radio">
+                                <input type="radio" id="stockAll" class="md-radiobtn"
+                                       ng-click="addstock.stockTypeLinsener(1)" ng-model="addstock.stockType" value="01">
+                                <label for="stockAll">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>全盘（盘点仓库中所有商品） </label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="stockMove" class="md-radiobtn"
+                                       ng-click="addstock.stockTypeLinsener(2)" ng-model="addstock.stockType" value="02">
+                                <label for="stockMove">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 动碰盘（盘点仓库中最近一个月内库存变动的商品） </label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="stockTake" class="md-radiobtn"
+                                       ng-click="addstock.stockTypeLinsener(3)" ng-model="addstock.stockType" value="03">
+                                <label for="stockTake">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 抽盘（抽取仓库中部分商品进行盘点）</label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="addstock.stockType==02">
+                    <label class="col-sm-2 control-label">动碰时间<span class="required"
+                                                                    aria-required="true"> * </span>
+                    </label>
+
+                    <div class="col-sm-2  rotorStartTime">
+                        <single-time-picker ></single-time-picker>
+                    </div>
+                    <span style="float: left;"> -</span>
+                    <div class="col-sm-2 rotorEndTime">
+                        <single-time-picker></single-time-picker>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-left: -85px;">  （最近一个月之内至今天范围）
+                    </label>
+
+                </div>
+                <div class="form-group" ng-show="addstock.stockType==03">
+                    <label class="col-sm-2 control-label">盘点商品<span class="required"
+                                                                    aria-required="true"> * </span>
+                    </label>
+                    <a ng-click="addstock.goodselectDialog()" style="margin-left: -52px"
+                       class="col-sm-1 control-label ">选择商品</a>
+                </div>
+                <div class="form-group" ng-show="addstock.stockType==03">
+                    <div class="col-sm-5  col-md-offset-2">
+                        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable"
+                               style="table-layout: fixed;width: 750px;">
+                            <thead>
+                            <tr style="background: #509EFF;">
+                                <th style="width:20%">商品编码</th>
+                                <th style="width:60%">商品名称</th>
+                                <th style="width:20%">商品分类</th>
+                                <th style="width:20%">计量单位</th>
+                                <th style="width:10%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in addstock.goodsList" class="goods_{{$index}}">
+                                <td style="width:20%">{{list.spuId}}</td>
+                                <td style="width:60%;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                                    {{list.spName}}
+                                </td>
+                                <td style="width:20%">{{list.spType}}</td>
+                                <td style="width:20%">{{list.spUnit}}</td>
+                                <td style="width:10%"><i class="fa fa-remove remove"
+                                                         ng-click="addstock.removeGoods(list.spuId)"></i></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">盘点时间<span class="required"
+                                                                    aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-2  stockStartTime">
+                        <single-time-picker></single-time-picker>
+                    </div>
+                    <span style="float: left;"> -</span>
+                    <div class="col-sm-2 stockEndTime">
+                        <single-time-picker></single-time-picker>
+                    </div>
+                    <label class="col-sm-2 control-label" style="margin-left: -55px;">   （今天至未来一个月范围）
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2 ">是否轮盘<span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-5">
+                        <div class="md-checkbox-inline">
+                            <div class="md-checkbox has-success">
+                                <input type="checkbox" id="rotationstock"
+                                       ng-model="addstock.rotationFlag" class="md-check" ng-click="addstock.areaLinsener()">
+                                <label for="rotationstock">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 库区轮盘（分库区轮流盘点）</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" ng-show="addstock.rotationFlag==true">
+                    <label class="col-sm-2 control-label">库区顺序<span class="required"
+                                                                    aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-10">
+                        <div class="row"  ng-repeat="list in addstock.goodsList2  track by $index">
+
+                            <div class="col-sm-6">
+                                <table class="table table-striped table-bordered table-hover order-column addPurchaseTable"
+                                     >
+                                    <thead>
+                                    <tr style="background: #509EFF;">
+                                        <th style="width:10%;">所属仓库</th>
+                                        <th style="width:10%">库区</th>
+                                        <th style="width:10%">顺序</th>
+                                        <th style="width:20%">盘点时间</th>
+
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr   ng-repeat="list2 in list.wmsStockTakeAreas track by $index">
+                                        <td style="width:10%">{{list.wareHouseName}}</td>
+                                        <td style="width:10%">{{list2.areaName}}</td>
+                                        <td style="width:10%"><a ng-show="$index!=0"
+                                                                 ng-click="addstock.topMove($parent.$index,$index)">上移</a>
+                                            <a ng-show=" list.arealist.length==1">无</a>
+                                            <a ng-show="$index!=list.arealist.length-1"
+                                                   ng-click="addstock.downMove($parent.$index,$index)">下移</a></td>
+                                        <td style="width:30%">
+                                            <div class="col-sm-5  stockSTime{{ $parent.$index}}{{ $index}}">
+                                                <single-time-picker></single-time-picker>
+                                            </div>
+                                            <span style="float: left;"> -</span>
+                                            <div class="col-sm-5 stockETime{{ $parent.$index}}{{ $index}}">
+                                                <single-time-picker></single-time-picker>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2 ">盘点方式<span class="required" aria-required="true"> * </span>
+                    </label>
+                    <div class="col-sm-5">
+                        <div class="md-checkbox-inline">
+                            <div class="md-radio">
+                                <input type="radio" id="stockwayAll" class="md-radiobtn"
+                                       ng-click="addstock.stockway(1)" ng-model="addstock.stockwaya" value="01">
+                                <label for="stockwayAll">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>明盘(盘点单显示账面库存数量) </label>
+                            </div>
+                            <div class="md-radio has-error">
+                                <input type="radio" id="stockwayMove" class="md-radiobtn"
+                                       ng-click="addstock.stockway(2)" ng-model="addstock.stockwaya" value="02">
+                                <label for="stockwayMove">
+                                    <span class="inc"></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span>暗盘(盘点单不显示账面库存数量) </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+
+                            <button type="cancel" class="btn white" ng-click="addstock.cancel()">取消</button>
+                            <button type="submit" class="btn blue" ng-click=" addstock.add()">添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<div class="modal fade" id="lar11ge" tabindex="-1" role="dialog" aria-labelledby="myModal2Label" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-md-3">
+                            <div id="categoryTree" class="tree-demo"
+                                 style="height: 100%;overflow: hidden;overflow-y: scroll;"></div>
+                        </div>
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9"
+                             style="padding: 10px">
+                            <!--<table-expandable table-column="addstock.column2"  table-page="addstock.getList()" table-conf="addstock.params2" table-data="addstock.data2" entity="addstock.entity" self-page="true">-->
+                            <!--</table-expandable>-->
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-icon input-icon-sm">
+                                        <i class="fa fa-search"></i>
+                                        <input class="form-control input-sm" type="text" ng-model="skuName"
+                                               placeholder="输入商品名搜索">
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" ng-click="addstock.serachGoods()"
+                                                type="button">
+                                            <i class="fa fa-arrow-left fa-fw"></i> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <table-expandable table-column="addstock.skuColumn"
+                                              table-page="addstock.skuPage()"
+                                              table-data="addstock.skuData"
+                                              table-conf="addstock.skuParams"
+                                              self-page="false"
+                                              entity="addstock.skuEntity">
+                            </table-expandable>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="addstock.overClick()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

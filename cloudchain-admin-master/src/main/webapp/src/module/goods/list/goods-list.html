@@ -1,0 +1,144 @@
+<md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right">
+
+    <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools" style="color:#FFF">搜索条件</h1>
+    </md-toolbar>
+    <md-content ng-controller="RightCtrl" layout-padding>
+        <form>
+            <md-input-container class="md-block">
+                <label for="spuId">商品编号</label>
+                <input type="text" id="spuId" ng-model="list.spuId" md-autofocus>
+            </md-input-container>
+            <md-input-container class="md-block">
+                <label for="spuName">商品名称</label>
+                <input type="text" id="spuName" ng-model="list.spuName">
+            </md-input-container>
+
+            <div  layout="row">
+                <md-input-container flex-gt-xs>
+                    <label>1级分类</label>
+                    <md-select ng-model="list.cId1" md-on-close="list.oneChange()">
+                        <md-option ng-repeat="item in list.cList1 track by $index" ng-value="item.cId">{{item.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex-gt-xs ng-if="list.cList2.length > 0">
+                    <label>2级分类</label>
+                    <md-select ng-model="list.cId2" md-on-close="list.twoChange()">
+                        <md-option ng-repeat="item in list.cList2 track by $index" ng-value="item.cId">{{item.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-input-container flex-gt-xs ng-if="list.cList3.length > 0">
+                    <label>3级分类</label>
+                    <md-select ng-model="list.cId3">
+                        <md-option ng-repeat="item in list.cList3 track by $index" ng-value="item.cId">{{item.name}}</md-option>
+                    </md-select>
+                </md-input-container>
+            </div>
+
+            <md-input-container flex-gt-xs>
+                <label>商品品牌</label>
+                <md-select ng-model="list.bId">
+                    <md-option ng-repeat="list in list.brandList track by $index" value="{{list.bId}}">{{list.name}}</md-option>
+                </md-select>
+            </md-input-container>
+        </form>
+        <div layout="row" layout-align="center center" >
+            <md-button  ng-click="close()" class="md-primary">
+                确认搜索
+            </md-button>
+            <md-button  ng-click="clear()" class="">
+               清除
+            </md-button>
+        </div>
+
+    </md-content>
+
+</md-sidenav>
+
+<div class="row">
+    <div class="portlet light bordered">
+        <div class="portlet-title">
+            <div class="caption font-green-sharp">
+                <i class="icon-settings font-green-sharp"></i>
+                <span class="caption-subject bold uppercase">商品 列表 </span>
+                <span class="caption-helper hide"></span>
+            </div>
+        </div>
+
+        <div class="search-form btnGroup" style="margin-top: 15px;">
+            <button type="button" class="btn btn-default" ng-click="list.updateInfo()" style="font-weight: inherit">修改基本信息
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.updateSpec()" style="font-weight: inherit">修改销售信息
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.updateProp()" style="font-weight: inherit">修改属性信息
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.updateHtml()" style="font-weight: inherit">修改商品描述
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.sale()" style="font-weight: inherit">设置销售库存
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.channelEdit()" style="font-weight: inherit">设置销售渠道
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.supplier()" style="font-weight: inherit">设置供应商
+            </button>
+            <button type="button" class="btn btn-default" ng-click="list.stock()" style="font-weight: inherit">查看仓库库存
+            </button>
+            <button type="button" class="btn blue" ng-click="toggleRight()" ng-hide="isOpenRight()">
+                搜索
+            </button>
+
+        </div>
+
+        <table-expandable table-column="list.column"  table-page="list.getList()" table-conf="list.params" table-data="list.data" entity="list.entity" self-page="false">
+        </table-expandable>
+
+        <!--<button class="btn btn-danger" ng-click="list.bb()">测试获取勾选项</button>-->
+    </div>
+</div>
+
+</div>
+
+
+
+<div class="modal fade" id="channelEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 120px;width: 600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-file-o" style="margin-right: 10px;"></i>修改销售渠道
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-content" style="margin-top: 20px;">
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs>选择销售渠道</h5>
+                        <md-switch flex-gt-xs  class="md-primary" ng-model="checkbox" ng-change="list.getUserFunc(checkbox,'d2p',0)" ng-true-value="1" ng-false-value="0">
+                            在批发商城进行销售
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox1"  ng-true-value="1" ng-false-value="0">
+                            在零售商城进行销售
+                        </md-switch>
+                    </div>
+                    <div layout-gt-xs="row">
+                        <h5 class="md-block"  flex="20" style="padding-top: 14px"  flex-gt-xs></h5>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox2" ng-true-value="1" ng-false-value="0">
+                            支持门店预约下单
+                        </md-switch>
+                        <md-switch flex-gt-xs class="md-primary" ng-model="checkbox3"  ng-change="list.getUserFunc(checkbox3,'d2d',3)"  ng-true-value="1" ng-false-value="0">
+                            在柴米采购联盟进行销售
+                        </md-switch>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="list.saveChannel()" data-dismiss="modal" >
+                    确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

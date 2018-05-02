@@ -1,0 +1,6 @@
+<div class="numBox">
+    <a class="minus min_{{pcIndex}}" ng-click="reduce(pcIndex)"><i class="fa fa-minus"></i></a>
+    <input class="text_box_{{pcIndex}}" type="text" value="1" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'1')}else{this.value=this.value.replace(/\D/g,'1')}"
+           onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+    <a class="plus add_{{pcIndex}}" ng-click="add(pcIndex)"><i class="fa fa-plus"></i></a>
+</div>

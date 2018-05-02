@@ -1,0 +1,244 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>盘点分配</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-10 form-group">
+                <label class=" col-sm-1" style="  margin-top: 7px;">单据编号
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_code" class="form-control" readonly>
+                </div>
+                <label class=" col-sm-1" style="margin-top: 7px;">仓库名称
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_warehouseName" class="form-control" readonly>
+                </div>
+                <label class="col-sm-1 " style="margin-top: 7px;">开始时间
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_startTime" class="form-control" readonly>
+                </div>
+            </div>
+            <div class="col-sm-10 form-group">
+                <label class=" col-sm-1" style="  margin-top: 7px;">结束时间
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_endTime" class="form-control" readonly>
+                </div>
+                <label class=" col-sm-1 " style=" margin-top: 7px;">创建时间
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_createTime" class="form-control" readonly>
+                </div>
+                <label class=" col-sm-1 " style=" margin-top: 7px;">选择货主
+                </label>
+                <div class="col-sm-3">
+                    <select-table st-combo="test()" st-text="allocation.placeholder_ownerName"
+                                  st-icon="allocation.icon_owner"
+                                  st-value="allocation.ownerEntity.getSelectedRows()[0].nickName">
+                        <table-expandable table-column="allocation.ownerColumn"
+                                          table-page="allocation.ownerPage()"
+                                          table-data="allocation.ownerData"
+                                          table-conf="allocation.ownerParams"
+                                          self-page="true"
+                                          entity="allocation.ownerEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-sm-10 form-group">
+                <label class=" col-sm-1 " style=" margin-top: 7px;">选择库区
+                </label>
+                <div class="col-sm-3" ng-click="allocation.regionLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text="allocation.placeholder_regionName"
+                                  st-icon="allocation.icon_region"
+                                  st-value="allocation.regionEntity.getSelectedRows()[0].name">
+                        <table-expandable table-column="allocation.regionColumn"
+                                          table-page="allocation.regionPage()"
+                                          table-data="allocation.regionData"
+                                          table-conf="allocation.region_params"
+                                          self-page="true"
+                                          entity="allocation.regionEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+                <label class=" col-sm-1 " style=" margin-top: 7px;">选择库位
+                </label>
+                <div class="col-sm-3">
+                    <select-table st-combo="test()" st-text="allocation.placeholder_locationName"
+                                  st-icon="allocation.icon_location"
+                                  st-value="allocation.locationEntity.getSelectedRows()[0].name">
+                        <table-expandable table-column="allocation.locationColumn"
+                                          table-page="allocation.locationPage()"
+                                          table-data="allocation.locationrData"
+                                          table-conf="allocation.locationrParams"
+                                          self-page="true"
+                                          entity="allocation.locationEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+                <label class=" col-sm-1 " style=" margin-top: 7px;">选择状态
+                </label>
+                <div class="col-sm-3">
+                    <select class="form-control select2me status" id="id_Status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="01">待分配</option>
+                        <option value="02">待生效</option>
+                        <option value="03">已生效</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-10 form-group">
+                <label class=" col-sm-1" style="  margin-top: 7px;">商品编号
+                </label>
+                <div class="col-sm-3">
+                    <input type="text" id="id_goodsCode" class="form-control" placeholder="请输入商品编号">
+                </div>
+                <!--<label class=" col-sm-1" style="  margin-top: 7px;">商品名称-->
+                <!--</label>-->
+                <!--<div class="col-sm-3">-->
+                <!--<input type="text" id="id_goodsName" class="form-control" placeholder="请输入商品名称">-->
+                <!--</div>-->
+            </div>
+            <!--<div class="col-sm-10 form-group">-->
+                <!--<label class=" col-sm-1" style="  margin-top: 7px;">商品分类-->
+                <!--</label>-->
+                <!--<div class="col-sm-3">-->
+                    <!--&lt;!&ndash;<select class="form-control select2me"  ng-change="allocation.selectGOneChange()" ng-model="allocation.goodsOneSelect" ng-options="x.cId as x.name for x in allocation.goodsOneList"></select>&ndash;&gt;-->
+
+                    <!--<select class="form-control select2me" ng-change="allocation.selectGOneChange()"-->
+                            <!--ng-model="allocation.goodsOneSelect">-->
+                        <!--<option selected value=" ">全部</option>-->
+                        <!--<option ng-repeat="list in allocation.goodsOneList" value="{{list.cId}}">{{list.name}}</option>-->
+                    <!--</select>-->
+
+                <!--</div>-->
+                <!--<div class="col-sm-3">-->
+                    <!--<select class="form-control select2me" ng-change="allocation.selectGTwoChange()"-->
+                            <!--ng-model="allocation.goodsTwoSelect">-->
+                        <!--<option selected value=" ">全部</option>-->
+                        <!--<option ng-repeat="list in allocation.goodsTwoList" value="{{list.cId}}">{{list.name}}</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <!--<div class="col-sm-3">-->
+                    <!--<select class="form-control select2me" ng-change="allocation.selectGThreeChange()"-->
+                            <!--ng-model="allocation.goodsThreeSelect">-->
+                        <!--<option selected value=" ">全部</option>-->
+                        <!--<option ng-repeat="list in allocation.goodsThreeList" value="{{list.cId}}">{{list.name}}-->
+                        <!--</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="col-sm-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="allocation.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="allocation.viewDetail()"
+                style="font-weight: inherit">分配
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="allocation.viewDetail2()"
+                style="font-weight: inherit">重新分配
+        </button>
+        <!-- 不可用 disabled="true"-->
+        <button type="button" class="btn btn-default pusht" ng-click="allocation.allocatioActive()"
+                style="font-weight: inherit">生效
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="allocation.back()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="allocation.column" table-page="allocation.getPage()"
+                      table-data="allocation.data" table-conf="allocation.pageParams" self-page="false"
+                      entity="allocation.entity">
+    </table-expandable>
+</div>
+
+<!---->
+<!--&lt;!&ndash;货权转移对话框&ndash;&gt;-->
+<!--<div class="modal fade" id="changeOwnerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"-->
+<!--aria-hidden="true">-->
+<!--<div class="modal-dialog" style="margin-top:100px;width: 700px">-->
+<!--<div class="modal-content">-->
+<!--<div class="modal-header">-->
+<!--<button type="button" class="close"-->
+<!--data-dismiss="modal" aria-hidden="true">-->
+<!--&times;-->
+<!--</button>-->
+<!--<h4 class="modal-title" id="myModalLabel">-->
+<!--<i class="fa fa-plus" style="margin-right: 10px;">货权转移</i>-->
+<!--</h4>-->
+<!--</div>-->
+
+<!--<div class="modal-body">-->
+<!--<form id="allocateForm">-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label  col-md-offset-3">货品名称-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<input name="productName" type="text" class="form-control" readonly>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label  col-md-offset-3">移动后货主-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<select-table st-combo="test()" st-text="allocation.placeholder_ownerName"-->
+<!--st-icon="allocation.icon_owner"-->
+<!--st-value="allocation.ownerEntity.getSelectedRows()[0].nickName">-->
+<!--<table-expandable table-column="allocation.ownerColumn"-->
+<!--table-page="allocation.ownerPage()"-->
+<!--table-data="allocation.ownerData"-->
+<!--table-conf="allocation.ownerParams"-->
+<!--self-page="true"-->
+<!--entity="allocation.ownerEntity">-->
+<!--</table-expandable>-->
+<!--</select-table>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label col-md-offset-3">转移数量-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<input name="moveOwnerQuantity" type="text" class="form-control">-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--<div class="row">-->
+<!--<div class="form-group">-->
+<!--<label class="col-md-2 control-label col-md-offset-3">转移原因-->
+<!--</label>-->
+<!--<div class="col-md-4">-->
+<!--<input name="mvOwnerDescription" type="text" class="form-control">-->
+<!--&lt;!&ndash;textarea name="description" class="form-control"/&ndash;&gt;-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</form>-->
+<!--</div>-->
+<!--<div class="modal-footer">-->
+<!--<button type="button" class="btn btn-default"-->
+<!--data-dismiss="modal">关闭-->
+<!--</button>-->
+<!--<button type="button" class="btn btn-primary" ng-click="allocation.confirmChangeOwner()">-->
+<!--确定-->
+<!--</button>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+
+
+

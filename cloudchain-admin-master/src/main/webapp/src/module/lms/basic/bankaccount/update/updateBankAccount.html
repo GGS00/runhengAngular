@@ -1,0 +1,70 @@
+<div>
+    <span class="pageTitle"></i>修改银行账号</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="lmsCustomer">
+            <div class="col-md-12">
+                <input type="hidden" name="id"  value="{{editBankAccount.data.id}}">
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="accountName" class="form-control" placeholder="账号名" value="{{editBankAccount.data.accountName}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="bankName" class="form-control" placeholder="开户行" value="{{editBankAccount.data.bankName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="bankAccount" class="form-control" placeholder="银行账号" value="{{editBankAccount.data.bankAccount}}" >
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="type" name="type" class="form-control"  >
+                            <option value="{{editBankAccount.data.type}}" selected>{{editBankAccount.data.type=="BASE"?"基本存款账户":(editBankAccount.data.type=="GENERAL"?"一般存款账户":(editBankAccount.data.type=="TEMP"?"临时存款账户":(editBankAccount.data.type=="PRIVATE"?"专用存款账户":editBankAccount.data.type)))}}</option>
+                            <option value="BASE">基本存款账户</option>
+                            <option value="GENERAL">一般存款账户</option>
+                            <option value="TEMP">临时存款账户</option>
+                            <option value="PRIVATE">专用存款账户</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="ownerType" name="ownerType" class="form-control"  >
+                            <option value="{{editBankAccount.data.ownerType}}" selected>{{editBankAccount.data.ownerType=="PERSON"?"个人":(editBankAccount.data.ownerType=="LEGAL"?"法人":(editBankAccount.data.ownerType=="COMPANY"?"公司":(editBankAccount.data.ownerType=="GROUP"?"集团":editBankAccount.data.ownerType)))}}</option>
+                            <option value="PERSON">个人</option>
+                            <option value="LEGAL">法人</option>
+                            <option value="COMPANY">公司</option>
+                            <option value="GROUP">集团</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" placeholder="备注" value="{{editBankAccount.data.description}}" >
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="inboundConfirmButton" type="submit" class="btn blue" ng-click="editBankAccount.editBankAccount()">修改</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white" ng-click="editBankAccount.returnButton()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

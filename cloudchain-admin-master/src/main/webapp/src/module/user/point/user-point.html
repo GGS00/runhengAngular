@@ -1,0 +1,191 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>分销网点管理
+      </span>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ui-sref="user.addpoint" style="font-weight: inherit">新增
+        </button>
+        <button type="button" class="btn btn-default"ng-click="editUser()" style="font-weight: inherit">修改</button>
+        <button type="button" class="btn btn-default" ng-click="editAddress()" style="font-weight: inherit">地址管理</button>
+    </div>
+
+    <table-expandable table-column="column"  table-page="getPage()" table-data="data" table-conf="pageParams" self-page="false" entity="entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-pencil" style="margin-right: 10px;"></i>修改
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form  id="editDriversInfo" class="form-horizontal">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">分销网点信息
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text"  data-required="1" readonly ng-model="dataInfo.userName" class="form-control"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text"  data-required="1" readonly ng-model="dataInfo.nickName" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">拓展信息
+                            </label>
+                            <div class="col-sm-4">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" id="checkbox1_5" name="sex" value="1" checked class="md-radiobtn"  ng-model="extData.userSex">
+                                        <label for="checkbox1_5">
+                                            <span class="inc"></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            男
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" id="checkbox1_6" name="sex" value="0" class="md-radiobtn" ng-model="extData.userSex">
+                                        <label for="checkbox1_6">
+                                            <span class="inc"></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            女
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">网点等级
+                            </label>
+                            <div class="col-sm-6">
+                            <input type="text" name="grade" data-required="1" ng-model="extData.grade"  class="form-control" placeholder="网点等级"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">公司职位
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="company" data-required="1" ng-model="extData.company"  class="form-control" placeholder="公司(选填)"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="jobTitle" data-required="1"  ng-model="extData.jobTitle"  class="form-control" placeholder="职位(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">所在地址
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="province" data-required="1"  ng-model="extData.province"  class="form-control" placeholder="所在省(选填)"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="city" data-required="1"  ng-model="extData.city"  class="form-control" placeholder="所在市(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="area" data-required="1"  ng-model="extData.area"  class="form-control" placeholder="所在区(选填)"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="addressDetail" data-required="1"  ng-model="extData.addressDetail"  class="form-control" placeholder="详细地址(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">联系电话
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="mobile" data-required="1" ng-model="dataInfo.mobile"   class="form-control" placeholder="联系电话"/>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">qq
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="qq" data-required="1"  ng-model="dataInfo.qq"  class="form-control" placeholder="qq"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">邮箱
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="email" data-required="1" ng-model="dataInfo.email"   class="form-control" placeholder="邮箱"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">备注
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="remark" data-required="1"  ng-model="extData.remark"  class="form-control" placeholder="备注(选填)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="userSex" id="userSex"/>
+                    <input type="hidden" name="userId" value="{{userId}}"/>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="confirmModify()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                确定要删除么?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="point.confirmDelete()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,55 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-send-o"></i>上架作业单确认</span>
+
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click=" shelfTaskSureManage.singleShelve()"
+                style="font-weight: inherit">单一上架
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click=" shelfTaskSureManage.returnButton()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column=" shelfTaskSureManage.column" table-page=" shelfTaskSureManage.getPage()"
+                      table-data=" shelfTaskSureManage.data" table-conf=" shelfTaskSureManage.pageParams" self-page="false"
+                      entity=" shelfTaskSureManage.entity" >
+    </table-expandable>
+</div>
+</div>
+
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">作业单确认</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal col-sm-offset-3">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">上架/移位数量
+                        </label>
+                        <div class="col-md-4 col-left2 ">
+                            <input type="text" class="form-control" id="quantity">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="shelfTaskSureManage.confirmSingleShelve()">
+                    作业确认
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,13 @@
+<div>
+    <div class="input-group" ng-click="useInfo($event)">
+        <input type="text" class="form-control" readonly placeholder={{stText}} ng-model="st.test">
+        <span class="input-group-addon" >
+            <i class="fa fa-{{stIcon}}"></i>
+        </span>
+    </div>
+    <span class="fade-in-up" ng-if="stParam" style="position: absolute;color:red;">库存:{{invNum}}</span>
+
+    <div style="width: 100%;background-color: #FFFFFF;position:absolute;z-index:99;" ng-transclude ng-show="init">
+
+    </div>
+</div>

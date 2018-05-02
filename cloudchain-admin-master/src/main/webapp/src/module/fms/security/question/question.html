@@ -1,0 +1,69 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle">设置安全问题</span>
+    <div class="portlet-body row">
+        <form id="authForm" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">问题一：</label>
+                        <div class="col-sm-4">
+                            <select class="form-control js-data-example-ajax" id="question1" ng-model="form.id1" ng-change="changeQuestion()" >
+                                <option value="">请选择</option>
+                                <option value="{{list.id}}" ng-repeat="list in questionList1">{{list.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">答案：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="answer1" data-required="1" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">问题二：</label>
+                        <div class="col-sm-4">
+                            <select class="form-control js-data-example-ajax" id="question2" ng-model="form.id2" ng-change="changeQuestion()" >
+                                <option value="">请选择</option>
+                                <option value="{{list.id}}" ng-repeat="list in questionList2">{{list.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">答案：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="answer2" data-required="1" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">问题三：</label>
+                        <div class="col-sm-4">
+                            <select class="form-control js-data-example-ajax" id="question3" ng-model="form.id3" ng-change="changeQuestion()" >
+                                <option value="">请选择</option>
+                                <option value="{{list.id}}" ng-repeat="list in questionList3">{{list.name}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">答案：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="answer3" data-required="1" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="question.submit()">提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="cancel" class="btn white"  ng-click="question.toParent()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

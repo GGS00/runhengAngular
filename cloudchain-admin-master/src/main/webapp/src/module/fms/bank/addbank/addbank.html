@@ -1,0 +1,61 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle">新增银行卡</span>
+    <div class="portlet-body row">
+        <form id="bankForm" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">归属银行：</label>
+                        <div class="col-sm-4">
+                            <select class="form-control js-data-example-ajax" id="bankId" name="bankId">
+                                <option value="">请选择</option>
+                                <option value="{{list.id}}" ng-repeat="list in bankList">{{list.bankName}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">银行卡号：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="bankAccout" name="bankAccout" data-required="1" class="form-control" autocomplete="off" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">开户行地址：</label>
+                        <div class="col-sm-4">
+                            <input type="text" id="bankAddr" name="bankAddr" data-required="1" class="form-control" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">是否默认：</label>
+                        <div class="col-md-4">
+                            <div class="md-radio-inline">
+                                <div class="md-radio has-success">
+                                    <input type="radio" id="radio1" value="1" name="isDefault" class="md-radiobtn">
+                                    <label for="radio1"><span></span><span class="check"></span><span class="box"></span>是</label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio" id="radio2" value="0" name="isDefault" class="md-radiobtn" checked>
+                                    <label for="radio2"><span></span><span class="check"></span><span class="box"></span>否</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="addbank.submit()">提交</button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <button type="cancel" class="btn white"  ng-click="addbank.toParent()">返回</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,73 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>新建单条防伪码</span>
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="alert alert-danger display-hide">
+                    <button class="close" data-close="alert"></button> 表单信息有误,请检查. </div>
+                <div class="alert alert-success display-hide">
+                    <button class="close" data-close="alert"></button> 表单信息验证通过! </div>
+
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">防伪码
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" id="mCode" name="code" data-required="1" class="form-control" placeholder="请输入防伪码编码"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">商品名
+                        </label>
+                        <div class="col-sm-3">
+                                <input type="hidden" id="id_goods" value="{{add.goodsEntity.getSelectedRows()[0].title}}"/>
+                                <select-table st-combo="test()" st-text="add.placeholder_goodsName"
+                                              st-icon="add.icon_goodsName"
+                                              st-value="add.goodsEntity.getSelectedRows()[0].title">
+                                    <table-expandable table-column="add.column"
+                                                      table-page="add.getGoodsPage()"
+                                                      table-data="add.goods_data"
+                                                      table-conf="add.goodsParams" self-page="true"
+                                                      entity="add.goodsEntity">
+                                    </table-expandable>
+                                </select-table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">经销商
+                        </label>
+                        <div class="col-sm-3">
+                                <input type="hidden" id="id_deal" value="{{add.dealEntity.getSelectedRows()[0].nickName}}"/>
+                                <select-table st-combo="test()" st-text="add.placeholder_dealer"
+                                              st-icon="add.icon_dealer"
+                                              st-value="add.dealEntity.getSelectedRows()[0].nickName">
+                                    <table-expandable table-column="add.dealcolumn"
+                                                      table-page="add.getdealPage()"
+                                                      table-data="add.deal_data"
+                                                      table-conf="add.dealerParams" self-page="true"
+                                                      entity="add.dealEntity">
+                                    </table-expandable>
+                                </select-table>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-left: 1px;">
+                        <div class="row">
+                            <div class=" col-sm-3 col-sm-offset-1 ">
+                                <div class="form-group">
+                                <button type="submit" class="btn blue"  ng-click="add.save()">保存</button>
+                                <button type="cancel" class="btn white"  ng-click="add.toTmsOrder()">取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>
+</div>
+
+

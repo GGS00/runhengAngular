@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="MetronicApp" ng-cloak ng-controller="settledController as settled">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="../sass/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+    <link id="ng_load_plugins_before" />
+    <!-- END DYMANICLY LOADED CSS FILES -->
+    <link href="../assets/plugins/select2/css/select2.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/select2/sass/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet">
+    <!-- BEGIN THEME STYLES -->
+    <!-- DOC: To use 'rounded corners' style just load 'components-rounded.css' stylesheet instead of 'components.css' in the below style tag -->
+    <link href="../sass/global/components-md.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="../sass/global/plugins-md.css" rel="stylesheet" type="text/css" />
+    <link href="../sass/layouts/layout/layout.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/plugins/ui-grid/ui-grid.css" rel="stylesheet">
+    <link href="../assets/pages/css/home/home.css" rel="stylesheet">
+    <link href="http://at.alicdn.com/t/font_f1qabcwmictbj4i.css" rel="stylesheet">
+    <link href="../assets/pages/css/common.css" rel="stylesheet">
+    <link href="../assets/plugins/angularjs/angular-material.min.css" rel="stylesheet">
+    <link href="../assets/scripts/homepage/css/common.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/scripts/homepage/css/style.css" rel="stylesheet" type="text/css" />
+    <script src="../assets/scripts/homepage/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <!--  <script src="../assets/scripts/homepage/js/common_js.js" type="text/javascript"></script>-->
+    <script src="../assets/scripts/homepage/js/footer.js" type="text/javascript"></script>
+    <link href="../sass/global/login.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/pages/css/chaimi/chaimisettled.css" rel="stylesheet" type="text/css" />
+    <title>入驻</title>
+</head>
+
+<body class="chaimisettle">
+<div style="box-shadow: 0px 8px 14px #F3F3F3;">
+    <div class="logo">
+        <a href="/chaimihome"  class="logo_href">
+            <img src="../assets/scripts/homepage/images/logo.png"  alt="logo" class="logo-default" style="width: 215px;">
+        </a>
+        <div class="settleTitle">
+            申请入驻
+        </div>
+        <div class="settleLogin">
+            <span style="color: #A7A7A7;">已有账号？</span><span style="cursor: pointer;color: #5D5D5D;" ng-click="toHome()">请登录</span>
+        </div>
+    </div>
+</div>
+<div class="content" style="width: 1000px;margin: 0 auto;">
+    <div>
+        <div class="portlet-body" style="margin-top: 26px;">
+            <div class="tabbable-bordered">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a href="#company" class="tabText" ng-click="settled.showTabs(0)">企业用户</a></li>
+                    <li><a href="#person" class="tabText" ng-click="settled.showTabs(1)">个人用户</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane fade in active" id="company">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <sapn class="contentTitle">基本信息</sapn>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    企业类型：
+                                </label>
+                                <div class="textInput">
+                                    <select class="form-control select2me companyType" ng-model="settled.companyTypeSelect">
+                                        <option repeat-finish ng-repeat="list in settled.companyTypeList" value="{{list.id}}" >{{list.identityName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    所属行业：
+                                </label>
+                                <div class="textInput">
+                                    <select class="form-control select2me industry" ng-model="settled.industrySelect">
+                                        <option repeat-finish ng-repeat="list in settled.industryList" value="{{list.id}}" >{{list.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    企业名称：
+                                </label>
+                                <div class="textInput">
+                                    <input name="companyName" type="text" class="form-control" placeholder="请填写营业执照上面的公司名称">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    联系人：
+                                </label>
+                                <div class="textInput">
+                                    <input name="companyContactor" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    手机号码：
+                                </label>
+                                <div class="textInput">
+                                    <input name="companyMobile" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <sapn class="contentTitle" style="margin-top: 30px;">账号设置</sapn>
+
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    账号：
+                                </label>
+                                <div class="textInput">
+                                    <input name="companyLoginName" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    密码：
+                                </label>
+                                <div class="textInput">
+                                    <input name="companyLoginPassword" type="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    确认密码：
+                                </label>
+                                <div class="textInput">
+                                    <input name="companyLoginPasswordconfirm" type="password" class="form-control">
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="settledBtn" ng-click="companySettled()">申请入驻</span>
+                                <span class="companytips"></span>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="tab-pane fade" id="person">
+                        <form class="form-horizontal ng-pristine ng-valid">
+                            <sapn class="contentTitle">基本信息</sapn>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    您的身份：
+                                </label>
+                                <div class="textInput">
+                                    <select class="form-control select2me personType" ng-model="settled.companyTypeSelect">
+                                        <option repeat-finish ng-repeat="list in settled.companyTypeList" value="{{list.id}}" >{{list.identityName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    所属行业：
+                                </label>
+                                <div class="textInput">
+                                    <select class="form-control select2me personIndustry" ng-model="settled.industrySelect">
+                                        <option repeat-finish ng-repeat="list in settled.industryList" value="{{list.id}}" >{{list.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    联系人：
+                                </label>
+                                <div class="textInput">
+                                    <input name="personContactor" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    手机号码：
+                                </label>
+                                <div class="textInput">
+                                    <input name="personMobile" type="text" class="form-control">
+                                </div>
+                            </div>
+
+                            <sapn class="contentTitle" style="margin-top: 30px;">账号设置</sapn>
+
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    账号：
+                                </label>
+                                <div class="textInput">
+                                    <input name="personLoginName" type="text" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    密码：
+                                </label>
+                                <div class="textInput">
+                                    <input name="personLoginPassword" type="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="textDesc">
+                                    确认密码：
+                                </label>
+                                <div class="textInput">
+                                    <input name="personLoginPasswordconfirm" type="password" class="form-control">
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="settledBtn" ng-click="personSettled()">申请入驻</span>
+                                <span class="persontips"></span>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="copyright"> 2017 © cloudchain. chaimi  </div>
+
+<script src="../assets/plugins/respond.min.js"></script>
+<script src="../assets/plugins/excanvas.min.js"></script>
+<script src="../assets/plugins/ie8.fix.min.js"></script>
+<!--[if lt IE 9]>
+<script src="../assets/plugins/respond.min.js"></script>
+<script src="../assets/plugins/excanvas.min.js"></script>
+<![endif]-->
+<script src="../assets/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/js.cookie.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+
+
+<!-- END CORE JQUERY PLUGINS -->
+<!-- BEGIN CORE ANGULARJS PLUGINS -->
+<script src="../assets/plugins/angularjs/angular.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/angular-sanitize.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/angular-touch.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/angular-animate.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/angular-aria.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/angular-messages.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/angular-material.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/plugins/angular-ui-router.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/plugins/ocLazyLoad.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/angularjs/plugins/ui-bootstrap-tpls.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/datatables/datatables.all.min.js" type="text/javascript"></script>
+
+<script src="../assets/scripts/datatable.js" type="text/javascript"></script>
+
+<script src="../assets/plugins/ui-grid/ui-grid.js"></script>
+<script src="../assets/plugins/jstree/dist/jstree.js"></script>
+
+<!-- END CORE ANGULARJS PLUGINS -->
+<!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+<script src="../assets/pages/js/common.js" type="text/javascript"></script>
+
+<!-- END APP LEVEL ANGULARJS SCRIPTS -->
+<script src="../assets/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
+<script src="../assets/plugins/select2/js/i18n/zh-CN.js" type="text/javascript"></script>
+<script src="../assets/scripts/app.js" type="text/javascript"></script>
+<script type="text/javascript" src="../assets/plugins/RSA.js"></script>
+<script type="text/javascript" src="../assets/plugins/BigInt.js"></script>
+<script type="text/javascript" src="../assets/plugins/Barrett.js"></script>
+<script  type="text/javascript" src="../assets/plugins/ueditor/ueditor.config.js"></script>
+<script  type="text/javascript" src="../assets/plugins/ueditor/ueditor.all.min.js"></script>
+
+
+<script src="../assets/plugins/moment.min.js"></script>
+<script src="../assets/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+<script src="http://gosspublic.alicdn.com/aliyun-oss-sdk.min.js"></script>
+<script src="https://www.promisejs.org/polyfills/promise-6.1.0.js"></script>
+<!-- BEGIN APP LEVEL JQUERY SCRIPTS -->
+
+<script src="../assets/scripts/layout.js" type="text/javascript"></script>
+<script src="../assets/scripts/demo.js" type="text/javascript"></script>
+
+<script src="../dist/js/ajaxfileupload.js" type="text/javascript"></script>
+<script src="../dist/js/table-ajax.js" type="text/javascript"></script>
+<script src="../assets/scripts/chaimi.js" type="text/javascript"></script>
+<script src="../dist/js/constant.js" type="text/javascript"></script>
+<script src="../dist/js/router.js" type="text/javascript"></script>
+<script src="../dist/js/directives.js" type="text/javascript"></script>
+<script src="../dist/js/controllers.js" type="text/javascript"></script>
+<script src="../dist/js/components.js"></script>
+<script src="../dist/js/services.js"></script>
+<script src="../assets/scripts/settled.js" type="text/javascript"></script>
+</body>
+</html>
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 8px;border: none;">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+            </div>
+            <div class="modal-body settledSuccess">
+                <div class="successText">
+                   <i class="iconfont icon-chenggong"></i>
+                    <span>入驻成功</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green" ng-click="toHome()" style="background: #54C50D;border: #54C50D;">
+                    去登录
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

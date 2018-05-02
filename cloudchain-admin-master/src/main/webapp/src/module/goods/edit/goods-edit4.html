@@ -1,0 +1,63 @@
+<md-toolbar class="md-hue-2">
+    <div class="md-toolbar-tools">
+        <h2 flex md-truncate>修改商品</h2>
+
+        <md-button class="md-raised" aria-label="Learn More" onclick="javascript:history.back(-1);">
+            返回
+        </md-button>
+        <md-button class="md-raised" aria-label="Learn More" ng-click="edit.save()">
+            修改
+        </md-button>
+    </div>
+</md-toolbar>
+<div ng-cloak>
+    <md-content>
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="商品属性">
+                <div  ng-repeat="list in edit.propList track by $index" ng-if="edit.propList.length > 0">
+                    <div layout-gt-xs="row" ng-repeat="list in list.groupList track by $index">
+                        <md-input-container class="md-block"  flex="10"  flex-gt-xs>
+                            <h5 ng-if="$parent.$index == 0">商品属性</h5>
+                        </md-input-container>
+                        <div  layout-gt-xs="row" flex-gt-xs>
+                            <div ng-repeat="item in list.paramList | filter: {settingType: 0 }">
+                                <md-input-container class="md-block"  flex-gt-xs>
+                                    <label>{{item.paramName}}</label>
+                                    <input name="spuName" ng-model="item.val">
+                                </md-input-container>
+                            </div>
+                            <div ng-repeat="item in list.paramList | filter: {settingType: 1 }">
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>{{item.paramName}}</label>
+                                    <md-select ng-model="item.val" style="min-width: 200px;">
+                                        <md-optgroup label="单选">
+                                            <md-option ng-value="val.val" ng-repeat="val in item.valList track by $index">{{val.val}}</md-option>
+                                        </md-optgroup>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div ng-repeat="item in list.paramList | filter: {settingType: 2 }">
+                                <md-input-container class="md-block" flex-gt-xs>
+                                    <label>{{item.paramName}}</label>
+                                    <md-select ng-model="item.val" multiple style="min-width: 200px;">
+                                        <md-optgroup label="多选">
+                                            <md-option ng-value="val.val" ng-repeat="val in item.valList track by $index">{{val.val}}</md-option>
+                                        </md-optgroup>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <div ng-repeat="item in list.paramList | filter: {settingType: 3 }" style="margin-top: 15px">
+                                <!--<md-input-container>-->
+                                <!--<label>{{item.paramName}}</label>-->
+                                <!--<time-picker></time-picker>-->
+                                <!--</md-input-container>-->
+                                <md-datepicker class="md-block"  flex-gt-xs ng-model="item.val" md-placeholder="{{item.paramName}}"></md-datepicker>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>

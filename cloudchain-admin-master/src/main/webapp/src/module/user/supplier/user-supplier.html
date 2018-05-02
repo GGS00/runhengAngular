@@ -1,0 +1,146 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>供应商管理
+      </span>
+
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ui-sref="user.addsupplier" style="font-weight: inherit">新增
+        </button>
+        <!--<button type="button" class="btn btn-default"ng-click="editUser()" style="font-weight: inherit">修改</button>-->
+        <button type="button" class="btn btn-default" ng-click="supplier.editAddress()" style="font-weight: inherit">地址管理</button>
+    </div>
+
+    <table-expandable table-column="column"  table-page="getPage()" table-data="data" table-conf="pageParams" self-page="false" entity="entity">
+    </table-expandable>
+
+</div>
+
+
+
+<div class="modal fade" id="smodifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-pencil" style="margin-right: 10px;"></i>供应商新增地址
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 484px;overflow-y:scroll;">
+
+                <form  class="form-horizontal">
+                    <div class="divSpace-unwhite fade-in-up" style="border-top: 8px solid #88909a;">
+                        <span class="badge badge-default leftIcon"></span>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">货主
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" value="{{supplier.ownerName}}" readonly class="form-control"/>
+                            </div>
+                            <label class="control-label col-sm-2">联系方式
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1"  value="{{supplier.ownerMobile}}" readonly class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divSpace-unwhite fade-in-up">
+                        <span class="badge badge-primary leftIcon" style="position:absolute;top:15px;left:15px;">新增地址</span>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">联系人
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" name="newContact" class="form-control"/>
+                            </div>
+                            <label class="control-label col-sm-2">联系方式
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" name="newMobile" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group newAddAddress" style="margin-top: 24px;">
+                            <label class="control-label col-sm-2">地址
+                            </label>
+                            <city-select></city-select>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">详细地址
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" name="newAddress" class="form-control"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divSpace-unwhite fade-in-up" ng-repeat="list in supplier.addressData">
+                        <span class="badge badge-default leftIcon" style="position:absolute;top:15px;left:15px;">已有地址{{$index+1}}</span>
+                        <div class="form-group" style="margin-top: 24px;">
+                            <label class="control-label col-sm-2">联系人
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" readonly value="{{list.cneeName}}"  class="form-control"/>
+                            </div>
+                            <label class="control-label col-sm-2">联系方式
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" readonly value="{{list.cneeMobile}}"  class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">地址
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text"  data-required="1" readonly value="{{list.province}}{{list.city}}{{list.county}}{{list.address}}" class="form-control"/>
+                            </div>
+                        </div>
+                        <i class="fa fa-remove" ng-click="supplier.removeAddress(list.cId)" style="font-size: 18px;margin-left: 12px;color: #C50000;cursor: pointer;position: absolute;right: 15px;
+  top: 15px;"></i>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="supplier.confirmAddAddress()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmDelete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                确定要删除么?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="supplier.confirmDelete()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

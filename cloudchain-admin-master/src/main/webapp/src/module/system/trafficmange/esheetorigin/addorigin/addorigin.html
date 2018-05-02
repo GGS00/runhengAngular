@@ -1,0 +1,80 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>添加物流公司</span>
+
+
+    <div class="portlet-body row">
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">来源名称<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" value="" placeholder="请输入来源名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">来源类型</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control">
+                                <option value=" " selected>已完成对接的不同服务商</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">物流公司</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control">
+                                <option value=" " selected>服务商提供的物流公司/物流类型</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">来源类型</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control">
+                                <option value=" " selected>已完成对接的不同服务商</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">是否启用<span class="required" aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="radio13" name="radio22" class="md-radiobtn"
+                                           value="1">
+                                    <label for="radio13">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>是</label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio" id="radio14" name="radio22" class="md-radiobtn"
+                                           value="0">
+                                    <label for="radio14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 否 </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="form-actions">
+        <div class="row" style="margin-left: 15px">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn blue" ng-click="addOrigin.submitUser()">确定</button>
+                <button type="cancel" class="btn white" ng-click="addOrigin。return()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="page-sidebar left-sidebar navbar-collapse collapse" style="width: 180px;margin-top: 8px;">
+
+    <ul class="page-sidebar-menu left-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+        <li class="start nav-item" style="background: #DCDCDC;">
+            <a class="sidebar-toggler-menu" style="text-align: center">
+                <i class="fa fa-reorder"></i>
+            </a>
+        </li>
+        <!--<li class="indexhome nav-item">
+            <a  ng-click="toindex()">
+                <i class="icon-home"></i>
+                <span class="title">首页</span>
+            </a>
+        </li>-->
+       <li  class="nav-item" ng-repeat="list in menu track by $index">
+            <a href="javascript:;" class="nav-link nav-toggle">
+                <i class="{{list.iconClass}}"></i>
+                <span class="title">{{list.resoName}}</span>
+                <span class="arrow"></span>
+            </a>
+            <ul class="sub-menu" style="background: #F3F3F3">
+                <li ng-repeat="child in list.childMenu" class="nav-item">
+                    <a ng-click="extraBar(child.resoId)" ng-show="child.type == 0"><i class="{{child.iconClass}}"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{child.resoName}}</a>
+                    <a ng-click="toPage(child.url)" ng-show="child.type == 1"><i class="{{child.iconClass}}"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{child.resoName}}</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<div class="extra-sidebar page-sidebar navbar-collapse collapse">
+
+    <ul class="page-sidebar-menu right-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+        <li class="start nav-item">
+            <a style="font-size: 13px;font-weight: bold;text-indent: 1px;color: #2C2C2C;">
+                <span class="title">{{extraBarTitle}}</span>
+            </a>
+        </li>
+        <!--,'page-sidebar-menu-hover-submenu': settings.layout.pageSidebarMenuHover-->
+        <li  class="nav-item" ng-repeat="list in extraBarMenu track by $index">
+
+            <a ui-sref="{{list.url}}"  ng-show="list.childMenu.length == 0"><i class="{{list.iconClass}}"></i>{{list.resoName}}</a>
+            <a href="javascript:;" class="nav-link nav-toggle" ng-show="list.childMenu.length > 0">
+                <i class="{{list.iconClass}}"></i>{{list.resoName}}
+                <span class="arrow"></span>
+            </a>
+
+            <ul class="sub-menu" style="background: #EAEDF1 !important;">
+                <li ng-repeat="child in list.childMenu" class="nav-item">
+                    <a ui-sref="{{child.url}}" ng-show="child.childMenu.length == 0" style="padding-left: 33px;"><i class="{{child.iconClass}}"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{child.resoName}}</a>
+                    <a href="javascript:;" class="nav-link nav-toggle" ng-show="child.childMenu.length > 0">
+                        <i class="{{child.iconClass}}"></i>{{child.resoName}}
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub-menu" ng-if="child.childMenu.length > 0" style="background: #EAEDF1!important;">
+                        <li ng-class="{active: $state.includes('{{minlist.url}}')}" ng-repeat="minlist in child.childMenu">
+                            <a ui-sref="{{minlist.url}}" >
+                                <i class="{{minlist.iconClass}}"></i> {{minlist.resoName}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+
+    </ul>
+    <!-- END  SIDEBAR MENU -->
+    <div class="right-toggle-btn" ng-click="moveToLeft()">
+        <!--<i class="fa fa-outdent"></i>--><i class="iconfont icon-jiansuojin01"></i>
+    </div>
+</div>
+<div class="left-toggle-btn" ng-click="moveToRight()">
+    <!--<i class="fa  fa-chevron-right"></i>--><i class="iconfont icon-zengsuojin01"></i>
+</div>

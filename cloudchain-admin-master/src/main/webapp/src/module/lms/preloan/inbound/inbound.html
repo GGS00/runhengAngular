@@ -1,0 +1,41 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-sticky-note-o"></i>入库申请</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="入库单号"> </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_check_status">
+                        <option selected value="">审核状态</option>
+                        <option value="WAIT_COMMIT">待提交</option>
+                        <option value="WAIT_CHECK">待审核</option>
+                        <option value="CHECKING">审核中</option>
+                        <option value="WAIT_IN">待入库</option>
+                        <option value="FINISH_IN">入库完成</option>
+                        <option value="CHECK_FAIL">审核失败</option>
+                        <option value="STATUS_CHECK_PASS">审核通过</option>
+                    </select>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="inbound.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="inbound.approve()" style="font-weight: inherit">审批</button>
+    </div>
+    <table-expandable table-column="inbound.column" table-page="inbound.getPage()"
+                      table-data="inbound.data" table-conf="inbound.pageParams" self-page="false"
+                      entity="inbound.entity">
+    </table-expandable>
+</div>

@@ -1,0 +1,43 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-road"></i>新增调度</span><span style="color:#949494">(<span class="badge badge-success" style="    margin: 0px 5px 3px 5px;"> 1 </span>选择待运的货物: )</span>
+    <div class="row firstRow">
+        <div class="col-sm-2">
+            <div class="">
+                <input type="text" name="code" class="form-control" placeholder="订单号"> </div>
+        </div>
+        <!--/span-->
+        <div class="col-sm-2">
+            <div class="">
+                <input type="text" name="wayBillCode" class="form-control" placeholder="运单号">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <select class="form-control select2me truckLoadType">
+                <option selected value=" ">配置方式</option>
+                <option value="FTL">整车</option>
+                <option value="LTL">零担</option>
+                <option value="OTHER">其他</option>
+            </select>
+        </div>
+        <div class="col-sm-4">
+            <button type="button" class="btn blue" ng-click="addNewDispatch.getPageByFilter()">
+                搜索
+            </button>
+
+            <button type="button" class="btn blue" ng-click="addNewDispatch.nextToAddDrivers()">
+                下一步
+                <i class="fa fa-arrow-right"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+    <table-expandable table-column="addNewDispatch.column"  table-page="addNewDispatch.getPage()" table-data="addNewDispatch.data" table-conf="addNewDispatch.pageParams" self-page="false" entity="addNewDispatch.entity">
+    </table-expandable>
+
+
+</div>
+
+
+

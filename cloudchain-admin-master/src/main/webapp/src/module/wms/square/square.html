@@ -1,0 +1,54 @@
+<md-content style="margin-top: -16px;background: #fff;">
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="{{warelist.NAME}}" ng-click="square.showTabs(warelist.ID,warelist.store_unit)" ng-repeat="warelist in square.wareList">
+            <md-content layout-padding style="background: #fff;overflow-x: hidden">
+                <div style="min-width: 996px;">
+                    <div class="portlet light bordered" style="padding-bottom:4px" ng-if="square.houseUsageData['totalAcre']!=0">
+                        <h4 class="square_title">仓库使用情况分析</h4>
+                        <h4 class="square_title_t">容量总计{{square.houseUsageData['totalAcre']}}{{square.store_unit}}</h4>
+                        <highchart class="chart-container-big" title='square.charts.title' series="square.charts.series" options="square.charts.options">
+                        </highchart>
+                    </div>
+                    <div style="padding-bottom:4px" ng-if="square.houseUsageData['totalAcre']==0">
+                        <h4 class="square_title">暂无仓库使用数据</h4>
+                    </div>
+                    <div class="squareAreaDiv" ng-repeat="list in square.areaChartData" ng-init="outerIndex = $index" ng-if="list.totalAcre!=0">
+                        <div class="squareArea {{(list.usedAcre/list.totalAcre)<=0.25?'erwu':((list.usedAcre/list.totalAcre)<=0.5?'wushi':((list.usedAcre/list.totalAcre)<=0.75?'qiwu':((list.usedAcre/list.totalAcre)==1?'yibai':'')))}}" data-toggle="tooltip" data-html="true" data-original-title="<div><div>库区总容量： <strong>{{list.totalAcre}}</strong> {{square.store_unit}}</div><div>包仓使用量： <strong>{{list.contractAcre}}</strong> {{square.store_unit}}</div><div>零仓使用量： <strong>{{list.retailAcre}}</strong> {{square.store_unit}}</div><div>自用量： <strong>{{list.ownerAcre}}</strong> {{square.store_unit}}</div></div>" repeat-finish>
+                            <a class="dashboard-stat dashboard-stat-v2 {{(list.usedAcre/list.totalAcre)==0?'zero':((list.usedAcre/list.totalAcre)<=0.25?'green':((list.usedAcre/list.totalAcre)<=0.5?'blue':((list.usedAcre/list.totalAcre)<=0.75?'purple':((list.usedAcre/list.totalAcre)==1?'red':''))))}}" href="#" style="margin-bottom:0px;">
+                            </a>
+                            <div class="visual">
+                                <i class="iconfont icon-cangchu">
+                                </i>
+                            </div>
+                            <div class="details">
+                                <div class="number">
+                                    <span class="counter" data-counter="counterup" data-value="{{(list.usedAcre/list.totalAcre)*100}}">{{(list.usedAcre/list.totalAcre)*100}}</span>%
+                                </div>
+                                <div class="desc">
+                                    {{list.name}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="squarePosition">
+                            <ul class="squarePo">
+                                <li ng-repeat="arealist in list.warehouseLocations track by $index" ng-if="arealist.totalAcre!=0" data-toggle="tooltip" data-html="true" data-original-title="<div><div>库位： <strong>{{arealist.name}}</strong></div><div>库位用途： <strong>{{arealist.usageMode=='01'?'包仓':(arealist.usageMode=='02'?'零仓':(arealist.usageMode=='03'?'自用':'闲置'))}}</strong></div><div>库存总量： <strong>{{arealist.totalAcre}}</strong> {{square.store_unit}}</div><div>已用库存量： <strong>{{arealist.usedAcre}}</strong> {{square.store_unit}}</div></div>" repeat-finish>
+                                    <div class="squarePositionBox {{(list.usedAcre/list.totalAcre)<=0.25?'green':((list.usedAcre/list.totalAcre)<=0.5?'blue':((list.usedAcre/list.totalAcre)<=0.75?'purple':((list.usedAcre/list.totalAcre)==1?'red':'')))}} {{(arealist.usedAcre/arealist.totalAcre)==0?'zero':((arealist.usedAcre/arealist.totalAcre)<=0.25?'erwu':((arealist.usedAcre/arealist.totalAcre)<=0.5?'wushi':((arealist.usedAcre/arealist.totalAcre)<=0.75?'qiwu':((arealist.usedAcre/arealist.totalAcre)==1?'yibai':''))))}}">
+                                        <i class="fa fa-inbox"></i>
+                                        <div class="squarePositionText">{{arealist.name}}</div>
+                                        <div class="squarePositionPercent" ng-if="arealist.usedAcre!=0">{{arealist.usedAcre/arealist.totalAcre | percent}}%</div>
+                                        <div class="squarePositionPercent" ng-if="arealist.usedAcre==0">0%</div>
+                                    </div>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </md-content>
+        </md-tab>
+
+    </md-tabs>
+</md-content>

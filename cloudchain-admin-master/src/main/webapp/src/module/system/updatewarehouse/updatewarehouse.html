@@ -1,0 +1,285 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>修改仓库</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="padding-bottom: 12px;">
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">仓库编码</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="id_wareId" value=""
+                                   placeholder="如江苏南京仓,编码可输:JSNJ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">仓库名称<span class="required"
+                                                                        aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareName" value="" placeholder="请输入仓库名称">
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" ng-show="updatewarehouse.citySwitch==0">
+                        <label class="control-label col-md-2 ">公司地址<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-3">
+
+                            <input id="addr_id" type="text" readonly class="form-control"/>
+                        </div>
+                        <button type="button" class="btn btn-default" style=" height: 34px"
+                                ng-click="updatewarehouse.updateAddr()">修改地址
+                        </button>
+                    </div>
+
+                    <div class="form-group warehouseAddress" ng-show="updatewarehouse.citySwitch==1">
+                        <label class="control-label  col-md-2">公司地址<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <city-select></city-select>
+                        <button type="button" class="btn btn-default" style=" height: 34px"
+                                ng-click="updatewarehouse.cancelAddr()">取消修改
+                        </button>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">地址<span class="required"
+                                                                      aria-required="true"> * </span></label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="id_wareAddr" value="" placeholder="请输入仓库详细地址">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">使用范围<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-5">
+                            <div class="md-checkbox-inline">
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox11" name="range" value="01"
+                                           class="md-check">
+                                    <label for="checkbox11">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 营业</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox12" name="range" value="02" class="md-check">
+                                    <label for="checkbox12">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>自用</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">保管条件<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-5">
+                            <div class="md-checkbox-inline">
+
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox21" name="surely" value="01"
+                                           class="md-check">
+                                    <label for="checkbox21">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 普通</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox22" name="surely" value="02" class="md-check">
+                                    <label for="checkbox22">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>冷藏</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox23" name="surely" value="03" class="md-check">
+                                    <label for="checkbox23">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>恒温</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox24" name="surely" value="04" class="md-check">
+                                    <label for="checkbox24">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>特种</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox25" name="surely" value="05" class="md-check">
+                                    <label for="checkbox25">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>气调</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">仓库用途<span class="required"
+                                                                         aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-5">
+                            <div class="md-checkbox-inline">
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox31" name="use" value="01"
+                                           class="md-check">
+                                    <label for="checkbox31">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 发货</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox32" name="use" value="02" class="md-check">
+                                    <label for="checkbox32">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>备货</label>
+                                </div>
+                                <div class="md-checkbox has-success">
+                                    <input type="checkbox" id="checkbox33" name="use" value="03" class="md-check">
+                                    <label for="checkbox33">
+                                        <span></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>融资监管</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group sendAddress_{{$index}}" ng-repeat="list in updatewarehouse.sendAddressList"
+                         ng-show="updatewarehouse.fahuoflag==0">
+                        <label class="control-label col-md-2">发货区域<span
+                                style="font-weight: bold">({{$index+1}})</span><span class="required"
+                                                                                     aria-required="true"> * </span>
+                        </label>
+                        <multicity-select ng-show="updatewarehouse.fahuoSwitch[$index]==$index+1"></multicity-select>
+                        <div class="col-md-3" ng-show="updatewarehouse.fahuoSwitch[$index]==$index">
+                            <input id="fahuoAddr_id{{$index}}" type="text" readonly class="form-control"
+                                   value="{{updatewarehouse.fahuoVal[$index]}}"/>
+                        </div>
+
+                        <button type="button" class="btn btn-default"
+                                ng-show="updatewarehouse.fahuoSwitch[$index]==$index" style=" height: 34px"
+                                ng-click="updatewarehouse.updateFahuoAddr($index)">修改地址
+                        </button>
+                        <button type="button" class="btn btn-default"
+                                ng-show="updatewarehouse.fahuoSwitch[$index]==$index+1" style=" height: 34px"
+                                ng-click="updatewarehouse.cancelFahuoAddr($index)">取消修改
+                        </button>
+                        <div class="col-md-1 pull-left addDiv" ng-show="updatewarehouse.fahuoSwitch[$index]==$index+1">
+                            <i class="fa fa-remove remove"
+                               ng-click="updatewarehouse.removeSend($index)"
+                               ng-if="updatewarehouse.sendAddressList.length>1"></i></div>
+
+                    </div>
+                    <div id="fahuo_add_id" ng-show="updatewarehouse.fahuoflag==0" class="form-group"
+                         style="margin-bottom:0px;">
+                        <label class="control-label col-md-3">
+                        </label>
+                        <div class="col-md-3">
+                            <a class="btn btn-xs blue" ng-click="updatewarehouse.addNewSend()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">存放物品种类<span class="required"
+                                                                           aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="radio13" name="radio22" class="md-radiobtn"
+                                           ng-model="updatewarehouse.upradioFlag" value="1">
+                                    <label for="radio13">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>全部商品分类</label>
+                                </div>
+                                <div class="md-radio has-error">
+                                    <input type="radio" id="radio14" name="radio22" class="md-radiobtn"
+                                           ng-model="updatewarehouse.upradioFlag" value="0">
+                                    <label for="radio14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span> 部分商品分类 </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" ng-show="updatewarehouse.adminSwitch==0">
+                        <label class="control-label col-md-2 ">管理员<span class="required"
+                                                                        aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input id="admin_id" type="text" readonly class="form-control"/>
+                        </div>
+                        <button type="button" class="btn btn-default" style=" height: 34px"
+                                ng-click="updatewarehouse.updateAdmin()">修改信息
+                        </button>
+                    </div>
+
+                    <div class="form-group " ng-show="updatewarehouse.adminSwitch==1">
+                        <label class="col-md-2 control-label">管理员</label>
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="id_department" ng-change="updatewarehouse.Administrator()"
+                                    ng-model="updatewarehouse.grade">
+                                <option value="  " selected>请选择部门</option>
+                                <option ng-repeat="list in updatewarehouse.idepartmentList" value="{{list.orgId}}">
+                                    {{list.orgName}}
+                                </option>
+                            </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <select-table st-combo="test()" st-text="updatewarehouse.placeholder_adminName"
+                                          st-icon="updatewarehouse.icon_admin"
+                                          st-value="updatewarehouse.adminEntity.getSelectedRows()[0].realName">
+                                <table-expandable table-column="updatewarehouse.adminColumn"
+                                                  table-page="updatewarehouse.adminPage()"
+                                                  table-data="updatewarehouse.adminData"
+                                                  table-conf="updatewarehouse.adminParams"
+                                                  self-page="true"
+                                                  entity="updatewarehouse.adminEntity">
+                                </table-expandable>
+                        </div>
+                        <button type="button" class="btn btn-default" style=" height: 34px"
+                                ng-click="updatewarehouse.cancelAdmin()">取消修改
+                        </button>
+                    </div>
+
+                </div>
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="updatewarehouse.submitUser()">确定</button>
+                            <button type="cancel" class="btn white" ng-click="updateware()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+</div>

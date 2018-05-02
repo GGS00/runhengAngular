@@ -1,0 +1,552 @@
+<style>
+    md-tabs.md-default-theme md-tabs-wrapper, md-tabs md-tabs-wrapper {
+        width: 1200px;
+        margin: 0 auto;
+    }
+    .packCheck tbody td {
+        font-size: 13px !important;
+    }
+</style>
+<!--<div class="topLine"></div>-->
+<md-content style="background: #fff;padding: 0px 20px 10px 20px;width: 1190px;margin:0 auto">
+    <md-tabs md-dynamic-height md-border-bottom ng-if="d2wsource.type==0">
+        <md-tab label="仓源" class="wareSource" ng-click="d2wsource.showTabs(0)">
+            <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                <div>
+                    <div class="row firstRow" style="padding: 0;">
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">所在地区
+                            </label>
+                            <multicity-select></multicity-select>
+
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">保管条件
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control select2me storeMent" name="storeMent">
+                                    <option selected value=" ">保管条件</option>
+                                    <option value="01">普通</option>
+                                    <option value="02">冷藏</option>
+                                    <option value="03">恒温</option>
+                                    <option value="04">特种</option>
+                                    <option value="05">气调</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">可用库容
+                            </label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="storageMin"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="rangeLine" style="font-size: 19px;">~</div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="storageMax"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="d2wsource.getPageByFilter()" style="background: #DB3A2A;border: #DB3A2A;">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group" style="height: 33px;margin-bottom: 0;">-->
+                            <!--<label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">-->
+                                <!--增值服务-->
+                            <!--</label>-->
+                            <!--<div class="col-md-10">-->
+                                <!--<div class="mt-checkbox-list" style="height: 34px;padding-bottom: 0px;">-->
+                                    <!--<label class="mt-checkbox mt-checkbox-outline" ng-repeat="list in d2wsource.addServiceList" style="display: inline-block;width: 100px">-->
+                                        <!--<input type="checkbox" value="{{list.dataValue}}" name="addService_{{dataValue}}" ng-model="list.checkState" ng-change="d2wsource.serviceChange(list.checkState,list.dataName)"/>-->
+                                        <!--<span></span>{{list.dataName}}-->
+                                    <!--</label>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                    </div>
+
+
+
+                    <div>
+                        <div class="nullInfo" ng-if="d2wsource.dataList==''">
+                            暂无信息
+                        </div>
+                        <div class="row firstRow" ng-if="d2wsource.dataList!=''" style="padding: 1px 18px 16px 0px;">
+                            <form id="settingWayZero">
+                                <div class="packTableHeader" style="margin-top: 0px">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <thead class="iboxHeader">
+                                        <tr>
+                                            <th style="width:30%">仓库</th>
+                                            <th style="width:15%">保管条件</th>
+                                            <th style="width:10%">保管物品</th>
+                                            <th style="width:15%">可用库容</th>
+                                            <th style="width:15%">价格</th>
+                                            <th style="width:15%">发布时间</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ibox-contentx firstLoad" style="min-height: 300px;">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <tbody>
+                                        <tr ng-repeat="list in d2wsource.dataList" start-foo-table style="cursor:pointer" ng-click="d2wsource.toDetail(list.id)">
+                                            <td style="width:30%;text-align: left">
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <img style="width: 100px;height: 100px;" ng-if="list.imgs[0].img!=null" class="media-object" ng-src="{{list.imgs[0].img}}">
+                                                        <img style="width: 100px;height: 100px;" ng-if="list.imgs[0].img==null" class="media-object"  src="../assets/pages/img/d2w/warehouse.jpg"/>
+                                                    </div>
+                                                    <div class="media-body" style="vertical-align: top;">
+                                                        <h6 class="media-heading">
+                                                            <span style="font-size: 14px;">
+                                                                {{list.warehouseName}}
+                                                            </span>
+                                                        </h6>
+                                                        <span style="color: #A6A6A6;">
+                                                            {{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}
+                                                        </span>
+                                                        <span style="color: #A6A6A6;display: block;margin-top: 3px;">
+                                                            {{list.showService}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.storeMent}}
+                                            </td>
+                                            <td style="width:10%">
+                                                {{list.warehouseAreaStore}}
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.storageSqm}}m<sup>2</sup>
+                                            </td>
+                                            <td style="width:15%">
+                                               <span style="display: block;">
+                                                   {{list.rentPrice==-1?'':'仓库租赁：' + list.rentPrice/100}}<span ng-if="list.rentPrice!=-1">元/天/{{list.unit==0?"吨":(list.unit==1?"件":(list.unit==2?"库位":(list.unit==3?"平方":"")))}}</span>
+                                               </span>
+                                                <span style="display: block;margin-top: 3px;">
+                                                   {{list.keepPrice==-1?'':'货物保管：' + list.keepPrice/100}}<span ng-if="list.keepPrice!=-1">元/天/{{list.keepUnit==0?"吨":(list.keepUnit==1?"件":(list.keepUnit==2?"库位":(list.keepUnit==3?"平方":"")))}}</span>
+                                               </span>
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.shelveTime.split(' ')[0]}}<br/>{{list.shelveTime.split(' ')[1]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="packPagination">
+                                    <uib-pagination class="pagination-prev-large" total-items="d2wsource.pageCount" items-per-page="d2wsource.pageParams.rows" ng-change="d2wsource.getPage()" ng-model="d2wsource.pageParams.page" max-size="d2wsource.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                                    </uib-pagination>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </md-content>
+        </md-tab>
+        <md-tab label="货源" class="goodsSource" ng-click="d2wsource.showTabs(1)">
+            <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                <div>
+                    <div class="row firstRow" style="padding: 0;">
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">所在地区
+                            </label>
+                            <multicity-select></multicity-select>
+
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">库区类型
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control select2me warehouseAreaType" name="warehouseAreaType">
+                                    <option selected value=" ">库区类型</option>
+                                    <option value="01">普通</option>
+                                    <option value="02">冷藏</option>
+                                    <option value="03">恆溫</option>
+                                    <option value="04">特种</option>
+                                    <option value="05">气调</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">所需库容
+                            </label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="goodsstorageMin"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="rangeLine" style="font-size: 19px;">~</div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="goodsstorageMax"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="d2wsource.getGoodsPageByFilter()" style="background: #DB3A2A;border: #DB3A2A;">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 33px;margin-bottom: 0;">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">
+                                所需服务
+                            </label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list" style="height: 34px;padding-bottom: 0px;">
+                                    <label class="mt-checkbox mt-checkbox-outline" style="display: inline-block;width: 100px">
+                                        <input type="checkbox" value="0"  ng-model="d2wsource.cangchu" ng-change="d2wsource.goodsChange()"/>
+                                        <span></span>仓储租赁
+                                    </label>
+                                    <label class="mt-checkbox mt-checkbox-outline" style="display: inline-block;width: 100px">
+                                        <input type="checkbox" value="1"  ng-model="d2wsource.huowu" ng-change="d2wsource.goodsChange()"/>
+                                        <span></span>货物保管
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="nullInfo" ng-if="d2wsource.goodsdataList==''">
+                            暂无信息
+                        </div>
+                        <div class="row firstRow" ng-if="d2wsource.goodsdataList!=''">
+                            <form id="xsxa">
+                                <div class="packTableHeader" style="margin-top: 0px">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <thead class="iboxHeader">
+                                        <tr>
+                                            <th style="width:15%">所需服务</th>
+                                            <th style="width:30%">仓库要求</th>
+                                            <th style="width:20%">存放物品</th>
+                                            <th style="width:10%">所需库容(m<sup>2</sup>)</th>
+                                            <th style="width:10%">意向价格(元)</th>
+                                            <th style="width:15%">发布时间</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ibox-contentx firstLoad" style="min-height: 300px;">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <tbody>
+                                        <tr ng-repeat="list in d2wsource.goodsdataList" start-foo-table style="cursor:pointer" ng-click="d2wsource.toGoodsDetail(list.id)">
+                                            <td style="width:15%;">
+                                                {{list.type==0?"仓储租赁":(list.type==1?"货物保管":"")}}
+                                            </td>
+                                            <td style="width: 30%;padding: 22px 8px;letter-spacing: 1px;">
+                                                {{list.provinceName}}{{list.cityName}}{{list.districtName}} , {{list.warehouseAreaType==01?"普通":(list.warehouseAreaType==02?"冷藏":(list.warehouseAreaType==03?"恆溫":(list.warehouseAreaType==04?"特种":(list.warehouseAreaType==05?"气调":""))))}} , {{list.temperatureRange.replace('-', '~');}}℃ , {{list.humidityRange.replace('-', '~');}}% , {{list.storageSqm}}m<sup>2</sup>库容 , {{list.storageTime}}入库 , {{list.intentPrice/100}}/元/天/{{list.unit}}
+                                            </td>
+                                            <td style="width:20%">
+                                                {{list.goodsName}}
+                                            </td>
+                                            <td style="width:10%">
+                                                {{list.storageSqm}}
+                                            </td>
+                                            <td style="width:10%">
+                                                ￥{{list.intentPrice/100}}
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.createdTime.split(' ')[0]}}<br/>{{list.createdTime.split(' ')[1]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="packPagination">
+                                    <uib-pagination class="pagination-prev-large" total-items="d2wsource.goodspageCount" items-per-page="d2wsource.goodspageParams.rows" ng-change="d2wsource.getgoodsPage()" ng-model="d2wsource.goodspageParams.page" max-size="d2wsource.goodsmaxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                                    </uib-pagination>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+    <md-tabs md-dynamic-height md-border-bottom ng-if="d2wsource.type==1">
+        <md-tab label="货源" class="goodsSource" ng-click="d2wsource.showTabs(1)">
+            <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                <div>
+                    <div class="row firstRow" style="padding: 0;">
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">所在地区
+                            </label>
+                            <multicity-select></multicity-select>
+
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">库区类型
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control select2me warehouseAreaType" name="warehouseAreaType">
+                                    <option selected value=" ">库区类型</option>
+                                    <option value="01">普通</option>
+                                    <option value="02">冷藏</option>
+                                    <option value="03">恆溫</option>
+                                    <option value="04">特种</option>
+                                    <option value="05">气调</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">所需库容
+                            </label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="goodsstorageMin"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="rangeLine" style="font-size: 19px;">~</div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="goodsstorageMax"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="d2wsource.getGoodsPageByFilter()" style="background: #DB3A2A;border: #DB3A2A;">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="height: 33px;margin-bottom: 0;">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">
+                                所需服务
+                            </label>
+                            <div class="col-md-10">
+                                <div class="mt-checkbox-list" style="height: 34px;padding-bottom: 0px;">
+                                    <label class="mt-checkbox mt-checkbox-outline" style="display: inline-block;width: 100px">
+                                        <input type="checkbox" value="0"  ng-model="d2wsource.cangchu" ng-change="d2wsource.goodsChange()"/>
+                                        <span></span>仓储租赁
+                                    </label>
+                                    <label class="mt-checkbox mt-checkbox-outline" style="display: inline-block;width: 100px">
+                                        <input type="checkbox" value="1"  ng-model="d2wsource.huowu" ng-change="d2wsource.goodsChange()"/>
+                                        <span></span>货物保管
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="nullInfo" ng-if="d2wsource.goodsdataList==''">
+                            暂无信息
+                        </div>
+                        <div class="row firstRow" ng-if="d2wsource.goodsdataList!=''">
+                            <form id="xsxa">
+                                <div class="packTableHeader" style="margin-top: 0px">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <thead class="iboxHeader">
+                                        <tr>
+                                            <th style="width:15%">所需服务</th>
+                                            <th style="width:30%">仓库要求</th>
+                                            <th style="width:20%">存放物品</th>
+                                            <th style="width:10%">所需库容(m<sup>2</sup>)</th>
+                                            <th style="width:10%">意向价格(元)</th>
+                                            <th style="width:15%">发布时间</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ibox-contentx firstLoad" style="min-height: 300px;">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <tbody>
+                                        <tr ng-repeat="list in d2wsource.goodsdataList" start-foo-table style="cursor:pointer" ng-click="d2wsource.toGoodsDetail(list.id)">
+                                            <td style="width:15%;">
+                                                {{list.type==0?"仓储租赁":(list.type==1?"货物保管":"")}}
+                                            </td>
+                                            <td style="width: 30%;padding: 22px 8px;letter-spacing: 1px;">
+                                                {{list.provinceName}}{{list.cityName}}{{list.districtName}} , {{list.warehouseAreaType==01?"普通":(list.warehouseAreaType==02?"冷藏":(list.warehouseAreaType==03?"恆溫":(list.warehouseAreaType==04?"特种":(list.warehouseAreaType==05?"气调":""))))}} , {{list.temperatureRange.replace('-', '~');}}℃ , {{list.humidityRange.replace('-', '~');}}% , {{list.storageSqm}}m<sup>2</sup>库容 , {{list.storageTime}}入库 , {{list.intentPrice/100}}/元/天/{{list.unit}}
+                                            </td>
+                                            <td style="width:20%">
+                                                {{list.goodsName}}
+                                            </td>
+                                            <td style="width:10%">
+                                                {{list.storageSqm}}
+                                            </td>
+                                            <td style="width:10%">
+                                                ￥{{list.intentPrice/100}}
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.createdTime.split(' ')[0]}}<br/>{{list.createdTime.split(' ')[1]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="packPagination">
+                                    <uib-pagination class="pagination-prev-large" total-items="d2wsource.goodspageCount" items-per-page="d2wsource.goodspageParams.rows" ng-change="d2wsource.getgoodsPage()" ng-model="d2wsource.goodspageParams.page" max-size="d2wsource.goodsmaxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                                    </uib-pagination>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </md-content>
+        </md-tab>
+        <md-tab label="仓源" class="wareSource" ng-click="d2wsource.showTabs(0)">
+            <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                <div>
+                    <div class="row firstRow" style="padding: 0;">
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">所在地区
+                            </label>
+                            <multicity-select></multicity-select>
+
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">保管条件
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control select2me storeMent" name="storeMent">
+                                    <option selected value=" ">保管条件</option>
+                                    <option value="01">普通</option>
+                                    <option value="02">冷藏</option>
+                                    <option value="03">恒温</option>
+                                    <option value="04">特种</option>
+                                    <option value="05">气调</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group" style="height:33px">
+                            <label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">可用库容
+                            </label>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="storageMin"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="rangeLine" style="font-size: 19px;">~</div>
+                            <div class="col-md-2">
+                                <div class="input-group">
+                                    <input type="number"  data-required="1" class="form-control" name="storageMax"/>
+                                    <span class="input-group-addon">m<sup>2</sup></span>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="btn-group">
+                                    <button type="button" class="btn blue" ng-click="d2wsource.getPageByFilter()" style="background: #DB3A2A;border: #DB3A2A;">
+                                        搜索
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group" style="height: 33px;margin-bottom: 0;">-->
+                        <!--<label class="control-label col-sm-1" style="padding-top: 5px;text-align: center;">-->
+                        <!--增值服务-->
+                        <!--</label>-->
+                        <!--<div class="col-md-10">-->
+                        <!--<div class="mt-checkbox-list" style="height: 34px;padding-bottom: 0px;">-->
+                        <!--<label class="mt-checkbox mt-checkbox-outline" ng-repeat="list in d2wsource.addServiceList" style="display: inline-block;width: 100px">-->
+                        <!--<input type="checkbox" value="{{list.dataValue}}" name="addService_{{dataValue}}" ng-model="list.checkState" ng-change="d2wsource.serviceChange(list.checkState,list.dataName)"/>-->
+                        <!--<span></span>{{list.dataName}}-->
+                        <!--</label>-->
+                        <!--</div>-->
+                        <!--</div>-->
+                        <!--</div>-->
+
+                    </div>
+
+
+
+                    <div>
+                        <div class="nullInfo" ng-if="d2wsource.dataList==''">
+                            暂无信息
+                        </div>
+                        <div class="row firstRow" ng-if="d2wsource.dataList!=''" style="padding: 1px 18px 16px 0px;">
+                            <form id="settingWayZero">
+                                <div class="packTableHeader" style="margin-top: 0px">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <thead class="iboxHeader">
+                                        <tr>
+                                            <th style="width:30%">仓库</th>
+                                            <th style="width:15%">保管条件</th>
+                                            <th style="width:10%">保管物品</th>
+                                            <th style="width:15%">可用库容</th>
+                                            <th style="width:15%">价格</th>
+                                            <th style="width:15%">发布时间</th>
+                                        </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="ibox-contentx firstLoad" style="min-height: 300px;">
+                                    <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                                        <tbody>
+                                        <tr ng-repeat="list in d2wsource.dataList" start-foo-table style="cursor:pointer" ng-click="d2wsource.toDetail(list.id)">
+                                            <td style="width:30%;text-align: left">
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <img style="width: 100px;height: 100px;" ng-if="list.imgs[0].img!=null" class="media-object" ng-src="{{list.imgs[0].img}}">
+                                                        <img style="width: 100px;height: 100px;" ng-if="list.imgs[0].img==null" class="media-object"  src="../assets/pages/img/d2w/warehouse.jpg"/>
+                                                    </div>
+                                                    <div class="media-body" style="vertical-align: top;">
+                                                        <h6 class="media-heading">
+                                                            <span style="font-size: 14px;">
+                                                                {{list.warehouseName}}
+                                                            </span>
+                                                        </h6>
+                                                        <span style="color: #A6A6A6;">
+                                                            {{list.provinceName}}{{list.cityName}}{{list.districtName}}{{list.address}}
+                                                        </span>
+                                                        <span style="color: #A6A6A6;display: block;margin-top: 3px;">
+                                                            {{list.showService}}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.storeMent}}
+                                            </td>
+                                            <td style="width:10%">
+                                                {{list.warehouseAreaStore}}
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.storageSqm}}m<sup>2</sup>
+                                            </td>
+                                            <td style="width:15%">
+                                               <span style="display: block;">
+                                                   {{list.rentPrice==-1?'':'仓库租赁：' + list.rentPrice/100}}<span ng-if="list.rentPrice!=-1">元/天/{{list.unit==0?"吨":(list.unit==1?"件":(list.unit==2?"库位":(list.unit==3?"平方":"")))}}</span>
+                                               </span>
+                                                <span style="display: block;margin-top: 3px;">
+                                                   {{list.keepPrice==-1?'':'货物保管：' + list.keepPrice/100}}<span ng-if="list.keepPrice!=-1">元/天/{{list.keepUnit==0?"吨":(list.keepUnit==1?"件":(list.keepUnit==2?"库位":(list.keepUnit==3?"平方":"")))}}</span>
+                                               </span>
+                                            </td>
+                                            <td style="width:15%">
+                                                {{list.shelveTime.split(' ')[0]}}<br/>{{list.shelveTime.split(' ')[1]}}
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="packPagination">
+                                    <uib-pagination class="pagination-prev-large" total-items="d2wsource.pageCount" items-per-page="d2wsource.pageParams.rows" ng-change="d2wsource.getPage()" ng-model="d2wsource.pageParams.page" max-size="d2wsource.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                                    </uib-pagination>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+</md-content>

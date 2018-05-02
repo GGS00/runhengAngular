@@ -1,0 +1,118 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>新建贷款规则</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="lmsLoanRule">
+            <div class="col-md-12">
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="code" class="form-control" placeholder="编码">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="yearInterest" class="form-control" placeholder="月利率(%)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="discountRate" class="form-control" placeholder="折扣率(%)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="daysOfYear" class="form-control" placeholder="一年天数">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="monPaymentDays" class="form-control" placeholder="周一放贷期限(天)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="tuesPaymentDays" class="form-control" placeholder="周二放贷期限(天)">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="wedPaymentDays" class="form-control" placeholder="周三放贷期限(天)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="thuPaymentDays" class="form-control" placeholder="周四放贷期限(天)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="friPaymentDays" class="form-control" placeholder="周五放贷期限(天)">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="satPaymentDays" class="form-control" placeholder="周六放贷期限(天)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="sunPaymentDays" class="form-control" placeholder="周日放贷期限(天)">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="applyDeadline" class="form-control" placeholder="申请截止时间">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="cutoffDate" class="form-control" placeholder="截单时间">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="aheadOfDays" class="form-control" placeholder="预警提前天数">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="invPaymentDays" class="form-control" placeholder="库存池放贷期限">
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="noticeMail" class="form-control" placeholder="通知邮箱">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" placeholder="备注">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="inboundConfirmButton" type="submit" class="btn blue" ng-click="addLoanRule.saveNewLoanRule()">保存</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white" ng-click="addLoanRule.returnButton()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

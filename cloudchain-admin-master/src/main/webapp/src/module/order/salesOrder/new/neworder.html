@@ -1,0 +1,618 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>新订单</span>
+
+    <md-content style="margin-top: 25px;background: #fff">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="所有订单" ng-click="newOrder.showTabs(0)">
+                <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow">
+                        <div class="col-md-10"  style="padding-left: 0px;">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" name="code" class="form-control" placeholder="订单编号">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" name="wayBillCode" class="form-control" placeholder="商品名称">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query">
+                                        <option selected value=" ">订单状态</option>
+                                        <option value="0">发货单</option>
+                                        <option value="1">发货单</option>
+                                        <option value="2">发货单</option>
+                                        <option value="3">发货单</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!--/span-->
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" name="wayBillCode" class="form-control" placeholder="收件人">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query">
+                                        <option selected value=" ">发货仓库</option>
+                                        <option value="0">南京一号仓</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me signStatus">
+                                        <option selected value=" ">是否缺货</option>
+                                        <option value="UN_SIGN">不缺</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="fade-in-up" ng-if="newOrder.menuLen > 6">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control select2me arrivalStatus">
+                                            <option selected value=" ">配送方式</option>
+                                            <option value="UN_SHIP">陆运</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control select2me dataFrom">
+                                            <option selected value=" ">承运商</option>
+                                            <option value="INTERFACE">南京承运商</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control select2me dataFrom">
+                                            <option selected value=" ">发货状态</option>
+                                            <option value="INTERFACE">待发</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 receiveAddress" style="margin-bottom:16px;">
+                                    <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">收件地区
+                                    </label>
+                                    <city-select></city-select>
+                                </div>
+
+                                <div class="col-sm-12" style="margin-bottom:16px;">
+                                    <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">操作时间
+                                    </label>
+                                    <div class="col-sm-4 toOrderTime" style="padding-left: 5px;">
+                                        <time-picker></time-picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="newOrder.getPageByFilter()">
+                                    搜索
+                                </button>
+                                <button type="button" class="btn blue dropdown-toggle" style="padding-left: 5px;padding-right:5px;" ng-click="newOrder.menuLen > 6?  newOrder.menuLen =6:newOrder.menuLen =12">
+                                    <i class="fa fa-angle-down">
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div style="margin-top: -40px;"></div>
+                    <table-expandable table-column="newOrder.allOrderColumn"  table-page="newOrder.getAllOrderPage()" table-data="newOrder.allOrderData" table-conf="newOrder.allOrderParams" self-page="false" entity="newOrder.allOrderEntity">
+                    </table-expandable>
+
+                </md-content>
+            </md-tab>
+            <md-tab label="待配仓" ng-click="newOrder.showTabs(8)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="newOrder.purchase()" style="font-weight: inherit">采购</button>
+                        <button type="button" class="btn btn-default" ng-click="newOrder.splitOrder()" style="font-weight: inherit">拆分订单</button>
+                        <button type="button" class="btn btn-default" ng-click="newOrder.distributeWare()" style="font-weight: inherit">配仓</button>
+                    </div>
+
+                    <table-expandable table-column="newOrder.allotColumn"  table-page="newOrder.getAllotPage()" table-data="newOrder.allotData" table-conf="newOrder.allotParams" self-page="false" entity="newOrder.allotEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待确认" ng-click="newOrder.showTabs(1)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="newOrder.mergeOrder()" style="font-weight: inherit">合并订单</button>
+                        <button type="button" class="btn btn-default" ng-click="newOrder.examineOrder()" style="font-weight: inherit">审单</button>
+                    </div>
+
+                    <table-expandable table-column="newOrder.pendConfirmColumn"  table-page="newOrder.getPendConfirmPage()" table-data="newOrder.pendConfirmData" table-conf="newOrder.pendConfirmParams" self-page="false" entity="newOrder.pendConfirmEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待财务审核" ng-click="newOrder.showTabs(2)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="newOrder.financeExamineOrder()" style="font-weight: inherit">审单</button>
+                    </div>
+
+                    <table-expandable table-column="newOrder.pendConfirmColumn"  table-page="newOrder.getFinanceExaminePage()" table-data="newOrder.financeExamineData" table-conf="newOrder.financeExamineParams" self-page="false" entity="newOrder.financeExamineEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待仓库审核" ng-click="newOrder.showTabs(3)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="newOrder.warehouseExamineOrder()" style="font-weight: inherit">审单</button>
+                    </div>
+
+                    <table-expandable table-column="newOrder.pendConfirmColumn"  table-page="newOrder.getWarehouseExaminePage()" table-data="newOrder.warehouseExamineData" table-conf="newOrder.warehouseExamineParams" self-page="false" entity="newOrder.warehouseExamineEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+           <!-- <md-tab label="审核不通过" ng-click="newOrder.showTabs(4)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="newOrder.reExamine()" style="font-weight: inherit">提交重新审核</button>
+                    </div>
+                    <table-expandable table-column="newOrder.unExamineColumn"  table-page="newOrder.getUnExaminePage()" table-data="newOrder.unExamineData" table-conf="newOrder.unExamineParams" self-page="false" entity="newOrder.unExamineEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>-->
+            <md-tab label="待发货" ng-click="newOrder.showTabs(5)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="newOrder.sendGoods()" style="font-weight: inherit">发货</button>
+                        <button type="button" class="btn btn-default" ng-click="newOrder.printOrder()" style="font-weight: inherit">打印面单</button>
+                    </div>
+
+                    <table-expandable table-column="newOrder.pendSendColumn"  table-page="newOrder.getPendSendPage()" table-data="newOrder.pendSendData" table-conf="newOrder.pendSendParams" self-page="false" entity="newOrder.pendSendEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待收货" ng-click="newOrder.showTabs(6)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="newOrder.pendReceiveColumn"  table-page="newOrder.getPendReceivePage()" table-data="newOrder.pendReceiveData" table-conf="newOrder.pendReceiveParams" self-page="false" entity="newOrder.pendReceiveEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="已完成" ng-click="newOrder.showTabs(7)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="newOrder.orderDoneColumn"  table-page="newOrder.getOrderdonePage()" table-data="newOrder.orderDoneData" table-conf="newOrder.orderDoneParams" self-page="false" entity="newOrder.orderDoneEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+
+</div>
+
+
+<div class="modal fade" id="confirmDis" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>配仓
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 400px;overflow-y: scroll;">
+                <button type="button" class="btn btn-default" ng-click="newOrder.pendConfirmWarehouse()" style="font-weight: inherit">重选仓库</button>
+                <span ng-if="newOrder.pendConfirmGoodsList.warehouses[0].warehouseId!=null" style="color: #929292;margin-left: 20px;font-size: 14px;">已选仓库:{{newOrder.pendConfirmGoodsList.warehouses[0].warehouseName}}</span>
+                <table class="table table-striped table-bordered table-hover order-column addPurchaseTable" style="margin-top: 10px;">
+                    <thead>
+                    <tr>
+                        <th style="width:10%">商品编号</th>
+                        <th style="width:20%">商品</th>
+                        <th style="width:20%">数量</th>
+                        <th style="width:10%">仓库库存</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="list in newOrder.pendConfirmGoodsList.items"  class="pendConfirmGoods_{{$index}}"finish-repeat>
+                        <td style="width:10%">{{list.skuId}}</td>
+                        <td style="width:20%">{{list.skuName}}</td>
+                        <td style="width:10%">{{list.count}}</td>
+                        <td style="width:20%"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmWarehouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>选择仓库
+                </h4>
+            </div>
+            <div class="modal-body">
+                <!--<button type="button" class="btn btn-default" ng-click="newOrder.warehouseType(1)" style="font-weight: inherit">自有仓</button>
+                <button type="button" class="btn btn-default" ng-click="newOrder.warehouseType(2)" style="font-weight: inherit">门店仓</button>
+                <button type="button" class="btn btn-default" ng-click="newOrder.warehouseType(3)" style="font-weight: inherit">供应商仓</button>
+                    <table-expandable  table-column="newOrder.warehouseColumn"  table-page="newOrder.getWarehousePage()" table-data="newOrder.warehouseData" table-conf="newOrder.warehouseParams" self-page="false" entity="newOrder.warehouseEntity">
+                    </table-expandable>-->
+                <form id="settingWayZero">
+                    <div class="packTableHeader">
+                        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+                            <thead class="iboxHeader">
+                            <tr>
+                                <th style="width:20%">仓库名称</th>
+                                <th style="width:20%">商品</th>
+                                <th style="width:20%">供应商</th>
+                                <th style="width:10%">库存</th>
+                                <th style="width:10%">成本价</th>
+                                <th style="width:10%">操作</th>
+                                <th style="width:10%">出库数量</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                    <div class="ibox-content firstLoad lineTable">
+                        <table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15" style="table-layout: fixed">
+                            <tbody>
+                            <tr ng-repeat="list in newOrder.wareList" class="goodsPrice_{{$index}}" ng-init="outerIndex = $index" start-foo-table>
+                                <td style="width:20%">
+                                    {{list.warehouseName}}
+                                </td>
+                                <td style="width:20%;padding:0px">
+                                    <span ng-repeat="goodsList in list.items" class="goodsLine">{{goodsList.skuName}}{{innerIndex}}</span>
+                                </td>
+                                <td style="width:20%;padding:0px">
+                                    <span ng-repeat="supplierList in list.suppliers">
+                                       <span ng-repeat="supplier in supplierList" class="supplierLine">
+                                        {{supplier.supplierName}}
+                                       </span>
+                                    </span>
+                                </td>
+                                <td style="width:10%;padding:0px">
+                                    <span ng-repeat="supplierList in list.suppliers">
+                                       <span ng-repeat="supplier in supplierList" class="supplierLine">
+                                        {{supplier.quantity}}
+                                       </span>
+                                    </span>
+                                </td>
+                                <td style="width:10%;padding:0px">
+                                    <span ng-repeat="supplierList in list.suppliers">
+                                       <span ng-repeat="supplier in supplierList" class="supplierLine">
+                                        {{supplier.cost}}
+                                       </span>
+                                    </span>
+                                </td>
+                                <td style="width:10%;padding:0px">
+                                    <span ng-repeat="supplierList in list.suppliers">
+                                       <span ng-repeat="supplier in supplierList" class="supplierLine">
+                                        {{supplier.cost}}
+                                       </span>
+                                    </span>
+                                </td>
+                                <td style="width:10%;padding:0px">
+                                    <span ng-repeat="supplierList in list.suppliers">
+                                       <span ng-repeat="supplier in supplierList" class="supplierLine">
+                                         <input type="number" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" class="form-control">
+                                       </span>
+                                    </span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="packPagination">
+                        <uib-pagination class="pagination-prev-large" total-items="newOrder.pageCount" items-per-page="newOrder.pageSize" ng-change="newOrder.getGoodsList()" ng-model="newOrder.page" max-size="newOrder.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+                        </uib-pagination>
+
+                        <div class="selectNum">
+                            <select class="form-control" style="width:80px" ng-model="newOrder.selected" ng-options="x.id as x.name for x in newOrder.pages" ng-change="newOrder.packChange(newOrder.selected)"></select>
+                            <span class="selectText">条记录</span>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newOrder.confirmWarehouse()">
+                    配仓
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--待确认订单拆单-->
+<div class="modal fade" id="confirmSplit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-paper-plane" style="margin-right: 10px;"></i>拆单
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 456px;overflow-y: scroll;">
+                <div class="portlet-body">
+                    <form id="pendConfirmGoods">
+                        <input type="hidden" name="orderId" value="{{newOrder.orderId}}"/>
+                        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                            <thead>
+                            <tr>
+                                <th style="width:10%">商品编号</th>
+                                <th style="width:20%">商品</th>
+                                <th style="width:20%">单价</th>
+                                <th style="width:10%">数量</th>
+                                <th style="width:20%">本次拆出数量</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in newOrder.pendConfirmGoodsList.items"  class="pendConfirmGoods_{{$index}}"finish-repeat>
+                                <td style="width:10%">
+                                    <input type="hidden" name="items[{{$index}}].orderId" value="{{newOrder.orderId}}"/>
+                                    <input type="hidden" name="items[{{$index}}].originPrice" value="{{list.originPrice}}"/>
+                                    <input type="hidden" name="items[{{$index}}].skuId" value="{{list.skuId}}"/>
+                                    <input type="hidden" name="items[{{$index}}].skuName" value="{{list.skuName}}"/>
+                                    <input type="hidden" name="items[{{$index}}].spuId" value="{{list.spuId}}"/>
+                                    <input type="hidden" name="items[{{$index}}].price" value="{{list.price}}"/>
+                                    <input type="hidden" name="items[{{$index}}].itemId" value="{{list.itemId}}"/>
+                                    <input type="hidden" name="items[{{$index}}].isGift" value="{{list.isGift}}"/>
+                                    <input type="hidden" name="items[{{$index}}].discountMoney" value="{{list.discountMoney}}"/>
+                                    <input type="hidden" name="items[{{$index}}].count" value="{{list.count}}"/>
+                                    {{list.skuId}}</td>
+                                <td style="width:20%">{{list.skuName}}</td>
+                                <td style="width:10%">{{list.price/100}}</td>
+                                <td style="width:10%">{{list.count}}</td>
+                                <td style="width:20%"><input type="number" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" name="items[{{$index}}].splitCount" value="{{list.count}}" class="form-control"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newOrder.confirmSplit()">
+                    确定拆单
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmMerge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>合单确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    确定合并订单？
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newOrder.confirmMerge()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmCarrier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                 <!--<table-expandable table-column="newOrder.sendAddressColumn"  table-page="newOrder.getSendAddress()" table-data="newOrder.sendAddressData" table-conf="newOrder.sendAddressParams" self-page="false" entity="newOrder.sendAddressEntity">
+                 </table-expandable>-->
+                <span style="margin-left:0px;">收货信息:
+                    <i class="fa fa-edit" style="font-size: 18px;color: #909090;margin-left: 10px;cursor: pointer" ng-click="newOrder.editReceiver()"></i>
+                    <i class="fa fa-plus" style="font-size: 18px;color: #909090;margin-left: 10px;cursor: pointer" ng-click="newOrder.cancelEditReceiver()" ng-if="newOrder.isReceiverChanged==1"></i>
+                </span>
+                <div class="md-radio-inline" style="margin-top: 14px;">
+                    <div class="md-radio addressRadio" style="margin-top: 5px;display:block">
+                        <label style="padding-left: 45px;" ng-if="newOrder.isReceiverChanged==0">
+                            {{newOrder.defaultReceiveAddr}} ({{newOrder.defaultReceiveCneeName}} 收) {{newOrder.defaultReceiveCneeMobile}}
+                        </label>
+                        <div class="md-radio addressRadio" ng-repeat="list in newOrder.receiveAddressData" style="margin-top: 5px;display:block" ng-if="newOrder.isReceiverChanged==1">
+                            <input type="radio" id="checkbox1_{{$index}}" name="address" value="{{list.userId}}" class="md-radiobtn" cneeName={{list.contactName}} cneeMobile="{{list.mobile}}" proId="{{list.province}}" proName="{{list.provinceName}}" cityId="{{list.city}}"  cityName="{{list.cityName}}"  countyId="{{list.county}}"  countyName="{{list.countyName}}" address="{{list.address}}" street="{{list.street}}">
+                            <label for="checkbox1_{{$index}}" style="padding-left: 45px;">
+                                <span class="inc"></span>
+                                <span class="check"></span>
+                                <span class="box"></span>
+                                {{list.provinceName}} {{list.cityName}} {{list.countyName}} {{list.address}} ({{list.contactName}} 收) {{list.mobile}}
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <span style="margin-left:0px;">发货信息:<i class="fa fa-plus" style="font-size: 18px;color: #909090;margin-left: 10px;cursor: pointer" ng-click="newOrder.addSender()"></i></span>
+                <div class="md-radio-inline" style="margin-top: 14px;">
+                    <div class="md-radio addressRadio" style="margin-top: 5px;display:block">
+                        <div >
+                            <label style="padding-left: 45px;" >
+                                {{newOrder.sendAddr}} ({{newOrder.sendName}} 寄) {{newOrder.sendMobile}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="md-radio-inline">
+                    <div class="md-radio">
+                        <input type="radio" id="checkbox3" name="settingWay" value="0" ng-model="newOrder.carrierType" class="md-radiobtn">
+                        <label for="checkbox3">
+                            <span class="inc"></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            自营物流
+                        </label>
+                    </div>
+                    <div class="md-radio">
+                        <input type="radio" id="checkbox4" name="settingWay" value="1" ng-model="newOrder.carrierType" class="md-radiobtn">
+                        <label for="checkbox4">
+                            <span class="inc"></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            柴米平台
+                        </label>
+                    </div>
+                    <div class="md-radio">
+                        <input type="radio" id="checkbox5" name="settingWay" value="2" ng-model="newOrder.carrierType" class="md-radiobtn">
+                        <label for="checkbox5">
+                            <span class="inc"></span>
+                            <span class="check"></span>
+                            <span class="box"></span>
+                            第三方物流
+                        </label>
+                    </div>
+                </div>
+
+                <div  ng-if="newOrder.carrierType==2" style="margin-top: 12px;height: 72px;">
+                    <div class="col-sm-3">
+                        <select class="form-control select2me sendExpress" select-init ng-model="newOrder.logisticsComp"
+                                ng-options="y.id as y.name for y in newOrder.logList">
+                            <!-- <option selected value="initLog">选择物流</option>
+                             <option ng-repeat="list in newOrder.logList" value="{{list.simpleName}}">{{list.expName}}</option>-->
+                        </select>
+                    </div>
+                    <div class="col-sm-3">
+                        <input type="text" name="logisticsNo"  data-required="1" class="form-control" placeholder="运单号"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">备注
+                        </label>
+                        <div class="col-sm-3">
+                            <textarea class="form-control remarks" name="logisticsRemark" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <table-expandable ng-if="newOrder.carrierType==1" table-column="newOrder.transColumn"  table-page="newOrder.getCarriers()" table-data="newOrder.carrierData" table-conf="newOrder.transParams" self-page="false" entity="newOrder.carrierEntity">
+                </table-expandable>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newOrder.confirmCarrier()">
+                    发货
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="selectSendAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-edit" style="margin-right: 10px;"></i>供应商地址
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table-expandable table-column="newOrder.sendAddressColumn" table-page="newOrder.getSendAddress()"
+                                  table-data="newOrder.sendAddressData" table-conf="newOrder.sendAddressParams"
+                                  entity="newOrder.sendAddressEntity" self-page="false">
+                </table-expandable>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newOrder.addSendAddress()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmReExamine" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>提交重新审核
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    确定提交重新审核？
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newOrder.confirmReExamine()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

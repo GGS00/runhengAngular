@@ -1,0 +1,124 @@
+<!--<div id="d2dNav">
+	<ul>
+		<li class="on" ng-click="toPage(1)">
+			<h3>01</h3>
+			<a href="javascript:void(0)">商品</a>
+		</li>
+		<li class="" ng-click="toPage(3)">
+			<h3>03</h3>
+			<a href="javascript:void(0)">购物车</a>
+		</li>
+		<li class="" ng-click="toPage(4)">
+			<h3>04</h3>
+			<a href="javascript:void(0)">订单</a>
+		</li>
+	</ul>
+</div>-->
+<div>
+	<div>
+		<div class="demo-list-content">
+			<div id="jquery-accordion-menu" class="jquery-accordion-menu red">
+				<ul id="demo-list">
+					<li class="active" ng-click="wholesale.getByType()"><a href="javascript:;">全部</a></li>
+					<li ng-repeat="list in menu track by $index" class="index_{{list.cId}}" ng-click="toggleMenu(list.cId,$event,list.isLeaf)">
+						<a href="javascript:;">{{list.name}}<span ng-if="list.children.length > 0" class="submenu-indicator">+</span></a>
+						<ul class="submenu" ng-if="list.children.length > 0">
+							<li ng-repeat="child in list.children" class="index_{{child.cId}}" ng-click="toggleMenu(child.cId,$event,child.isLeaf)"><a href="javascript:;">{{child.name}}<span ng-if="child.children.length > 0" class="submenu-indicator">+</span></a>
+								<ul class="submenu" ng-if="child.children.length > 0">
+									<li ng-repeat="minlist in child.children" class="index_{{minlist.cId}}" ng-click="toggleMenu(minlist.cId,$event,minlist.isLeaf)"><a href="javascript:;">{{minlist.name}}</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div style="margin-left: 266px;    background: #fff;">
+		<div class="query_bar">
+			<ul>
+				<li ng-click="wholesale.sortType(0)" class="defaultSort onSelect">默认</li>
+				<li ng-click="wholesale.sortType(1)" class="priceSort">价格<i class="fa fa-caret-down"></i></li>
+			</ul>
+		</div>
+		<div class="nullInfo" ng-if="wholesale.goodsList==''">
+			暂无信息
+		</div>
+		<div class="row firstRow" ng-if="wholesale.goodsList!=''">
+			<form id="settingWayZero">
+				<div class="packTableHeader">
+					<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+						<thead class="iboxHeader">
+						<tr>
+							<th style="width:55%">商品</th>
+							<th style="width:10%">单位</th>
+							<th style="width:10%">单价</th>
+							<th style="width:15%">数量</th>
+							<th style="width:10%">操作</th>
+						</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="ibox-content firstLoad">
+					<table class="footable table table-stripped toggle-arrow-tiny packCheck" data-page-size="15">
+						<tbody>
+						<tr ng-repeat="list in wholesale.goodsList" class="goodsPrice_{{$index}}" start-foo-table>
+							<td style="width:55%;text-align: left">
+								<div class="media">
+									<div class="media-left">
+											<img class="media-object" ng-src="{{list.imgStr.split(',')[0]}}" alt="{{list.skuDesc}}">
+									</div>
+									<div class="media-body" style="vertical-align: middle;">
+										<h6 class="media-heading">
+											<a href="javascript:;">
+												<span>
+													{{list.goodsName}}
+												</span>
+											</a>
+										</h6>
+										<span class="text-danger">
+											{{list.skuDesc}}
+										</span>
+									</div>
+								</div>
+							</td>
+							<td style="width:10%">
+								{{list.unit}}
+							</td>
+							<td style="width:10%" class="redPrice">
+								￥{{list.salePrice/100}}
+							</td>
+							<td style="width:15%">
+								<div class="numBox">
+									<a class="minus min_{{$index}}" ng-click="reduce($index)" href="javascript:;"><i class="fa fa-minus"></i></a>
+									<input class="text_box_{{$index}}" type="text" value="1" onkeyup="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'1')}else{this.value=this.value.replace(/\D/g,'1')}"
+										   onafterpaste="if(this.value.length==1){this.value=this.value.replace(/[^1-9]/g,'')}else{this.value=this.value.replace(/\D/g,'')}" />
+									<a class="plus add_{{$index}}" ng-click="add($index)" href="javascript:;"><i class="fa fa-plus"></i></a>
+								</div>
+							</td>
+							<td style="width:10%">
+								<input type="hidden" name="skuId_{{$index}}" value="{{list.skuId}}"/>
+								<input type="hidden" name="spuId_{{$index}}" value="{{list.spuId}}"/>
+								<input type="hidden" name="userId_{{$index}}" value="{{list.userId}}"/>
+								<button class="btn btn-danger addBuy" ng-click="wholesale.addCart($index)"><i class="fa fa-shopping-cart"></i></button>
+							</td>
+						</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="packPagination">
+					<uib-pagination class="pagination-prev-large" total-items="wholesale.pageCount" items-per-page="wholesale.pageSize" ng-change="wholesale.getGoodsList()" ng-model="wholesale.page" max-size="wholesale.maxSize" previous-text="上一页" next-text="下一页" boundary-links="false">
+					</uib-pagination>
+
+					<div class="selectNum">
+						<select class="form-control" style="width:80px" ng-model="wholesale.selected" ng-options="x.id as x.name for x in wholesale.pages" ng-change="wholesale.packChange(wholesale.selected)"></select>
+						<span class="selectText">条记录</span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+

@@ -1,0 +1,42 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>车辆类型</span>
+
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="名称"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="brand" class="form-control" placeholder="品牌"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="model" class="form-control" placeholder="型号"> </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="tmsVehicleType.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="tmsVehicleType.addVehicleType()" style="font-weight: inherit">新增
+        </button>
+        <button type="button" class="btn btn-default" ng-click="tmsVehicleType.delete()" style="font-weight: inherit">删除</button>
+    </div>
+    <table-expandable table-column="tmsVehicleType.column"  table-page="tmsVehicleType.getPage()" table-data="tmsVehicleType.data" table-conf="tmsVehicleType.pageParams" self-page="false" entity="tmsVehicleType.entity">
+    </table-expandable>
+
+</div>
+</div>
+

@@ -1,0 +1,212 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf"></i>入库单管理</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="入库单号"></div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group from-group2">
+                    <select class="form-control" id="id_billType">
+                        <option selected value="">单据类型</option>
+                        <option ng-repeat="billTypeList in billInboundManage.billTypeList" value="{{billTypeList.dataValue}}">
+                            {{billTypeList.dataName}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_status">
+                        <option selected value=" ">状态</option>
+                        <option value="OPEN">打开</option>
+                        <option value="ACTIVE">生效</option>
+                        <option value="WORKING">工作中</option>
+                        <option value="FINISHED">完成</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me receiveStatus" id="id_receiveStatus">
+                        <option selected value=" ">收货状态</option>
+                        <option value="UN_RECEIVE">未收货</option>
+                        <option value="RECEIVING">收货中</option>
+                        <option value="RECEIVED">收货完成</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me shelveStatus" id="id_shelveStatus">
+                        <option selected value=" ">上架状态</option>
+                        <option value="UN_SHELVE">未上架</option>
+                        <option value="SHELVING">上架中</option>
+                        <option value="SHELVED">上架完成</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="description" class="form-control" placeholder="描述">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="billInboundManage.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.newInbound()" style="font-weight: inherit">新建入库单</button>
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.addOperationFee()" style="font-weight: inherit">添加杂费</button>
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.singleRreceipt()"
+                style="font-weight: inherit">单一明细收货
+        </button>
+        <button type="button" class="btn btn-default pusht"  ng-click="billInboundManage.operateEffect()" style="font-weight: inherit">生效</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="billInboundManage.invalid()" style="font-weight: inherit">失效</button>
+        <button type="button" class="btn btn-default pusht" style="font-weight: inherit" ng-click="billInboundManage.delete()">删除</button>
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.receiptRecords()"
+                style="font-weight: inherit">查看收货记录
+        </button>
+        <button type="button" class="btn btn-default pusht"  ng-click="billInboundManage.inputSerial()" style="font-weight: inherit">录入唯一码</button>
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.createShelveDoc()"  style="font-weight: inherit">创建上架单</button>
+        <button id="quickShelf_id" type="button" class="btn btn-default pusht" ng-click="billInboundManage.quickShelf()"  style="font-weight: inherit">一键上架</button>
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.print()"  style="font-weight: inherit">打印</button>
+
+        <button type="button" class="btn btn-default pusht" ng-click="billInboundManage.importInbound()" style="font-weight: inherit; float: right; margin-right: 20px;">     导  入      </button>
+    </div>
+
+    <table-expandable table-column="billInboundManage.column" table-page="billInboundManage.getPage()"
+                      table-data="billInboundManage.data" table-conf="billInboundManage.pageParams" self-page="false"
+                      entity="billInboundManage.entity">
+    </table-expandable>
+
+</div>
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改描述</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">单据类型</label>
+                        <div class="col-md-4 col-left2">
+                                <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">入库单号</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">订单状态</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">收货状态</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">供应商</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">结束收货时间</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">描述</label>
+                        <div class="col-md-9 col-left2">
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="newWaybill.test()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style type="text/css" id="printStyle">
+    table{
+        width:700px;
+        border-collapse: collapse;
+        height:240px;
+    }
+
+    table td{
+        border: 1px solid black;
+        text-align:left;
+        word-break: normal;
+        font-size:16px;
+    }
+</style>
+<div id="wmsInboundTable" style="display: none;">
+    <table id="wmsInbound">
+        <thead>
+        <tr>
+            <td class="numberStyle">序号</td>
+            <td>货品编码</td>
+            <td>货品名称</td>
+            <td>预约收货数量</td>
+            <td>实际收货数量</td>
+            <!--<td>生产日期</td>-->
+            <!--<td>有效期</td>-->
+        </tr>
+        </thead>
+        <tbody ng-repeat="list in printList">
+            <tr>
+                <td class="numberStyle">{{$index}}</td>
+                <td>{{list.CODE}}</td>
+                <td>{{list.NAME}}</td>
+                <td>{{list.PRONUMBER}}</td>
+                <td>{{list.REALNUMBER}}</td>
+                <!--<td>{list.PRODATE }</td>-->
+                <!--<td>{list.DUEDATE }</td>-->
+            </tr>
+        </tbody>
+        <tfoot >
+        <tr style="border:0px">
+            <td colspan="2" style="border:0px ;">送货人：</td>
+            <td colspan="1" style="border:0px ;">收货人：</td>
+            <td colspan="3" style="border:0px ;" id ="date"></td>
+        </tr>
+        <tr style="border:0px">
+            <td colspan="2" style="border:0px ;">预约入库数量：{{expectSum}}</td>
+            <td colspan="2" style="border:0px ;">实际收货数量：{{realSum}}</td>
+        </tr>
+        </tfoot>
+    </table>
+
+</div>

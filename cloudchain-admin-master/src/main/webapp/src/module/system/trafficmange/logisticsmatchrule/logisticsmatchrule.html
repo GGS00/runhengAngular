@@ -1,0 +1,36 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf">物流匹配规则</i></span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <label class="col-sm-1 control-label">编号</label>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="编号">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="eSheetOrigin.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="logisticsMatchRule.add()" style="font-weight: inherit">新建</button>
+        <button type="button" class="btn btn-default pusht" ng-click="logisticsMatchRule.update()" style="font-weight: inherit">修改</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="logisticsMatchRule.delete()" style="font-weight: inherit">删除</button>
+    </div>
+
+    <table-expandable table-column="logisticsMatchRule.column" table-page="logisticsMatchRule.getPage()"
+                      table-data="logisticsMatchRule.data" table-conf="logisticsMatchRule.pageParams" self-page="false"
+                      entity="logisticsMatchRule.entity">
+    </table-expandable>
+
+</div>
+</div>
+</div>
+
+
+

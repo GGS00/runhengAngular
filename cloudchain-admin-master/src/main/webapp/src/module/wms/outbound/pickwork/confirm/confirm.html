@@ -1,0 +1,122 @@
+<div>
+   <!-- <div class="row">
+        <div class="col-md-12">
+            <label class="control-label col-md-2">周转箱</label>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select>
+                        <option value="1">哈哈哈</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <div class="row divline">
+
+        <div class="col-md-12">
+
+            <div class="col-sm-3 col-left">
+                <div class="form-group from-group2">
+                    <select class="form-control" id="id_billType" ng-model="outboundPick.cartonSelectedOption"
+                            ng-options="list.id as list.code for list in outboundPick.cartonList">
+
+                    </select>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="outboundPick.sure()" style="font-weight: inherit">拣选确认</button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundPick.onBack()" style="font-weight: inherit">返回</button>
+    </div>
+    <table-expandable table-column="outboundPick.column" table-page="outboundPick.getPage()"
+                      table-data="outboundPick.data" table-conf="outboundPick.pageParams" self-page="false"
+                      entity="outboundPick.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+<div class="modal fade selectCommonContacts" id="Dialog1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">拣选确认</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">数量<span class="required" aria-required="true">*</span></label>
+                        <div class="col-md-6 col-left2">
+                            <input class="form-control"  id="quantity" placeholder="数量"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundPick.add1()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade selectCommonContacts" id="Dialog2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="">
+                    <i class="fa fa-plus" style="margin-right: 10px;">拣选确认</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">数量  <span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-9 col-left2">
+                            <input class="form-control"  id="quantity2" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">唯一码长度  <span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-9 col-left2">
+                            <input class="form-control"  id="length"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">唯一码  <span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-9 col-left2">
+                            <textarea class="form-control" rows="9"  id="uniqueCodes"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundPick.add2()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

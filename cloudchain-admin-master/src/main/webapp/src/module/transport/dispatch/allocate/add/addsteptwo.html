@@ -1,0 +1,123 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-road"></i>新增调度</span><span style="color:#949494">(<span class="badge badge-success" style="margin: 0px 5px 3px 5px;"> 2 </span>选择载具和司机: )</span>
+    <div class="row firstRow">
+        <div class="col-sm-2">
+            <div class="">
+                <input type="text" name="no" class="form-control" placeholder="车牌号"> </div>
+        </div>
+        <!--/span-->
+        <div class="col-sm-2">
+            <select class="form-control select2me transType">
+                <option selected value=" ">运输方式</option>
+                <option value="ROAD_TRANSPORT">公路运输</option>
+                <option value="AIR_TRANSPORT">航空运输</option>
+                <option value="RAIL_TRANSPORT">铁路运输</option>
+                <option value="MARITIME_TRANSPORT">海上运输</option>
+            </select>
+        </div>
+
+        <div class="col-sm-4">
+            <button type="button" class="btn blue" ng-click="selectDispatch.getPageByFilter()">
+                搜索
+            </button>
+
+            <button type="button" class="btn blue" ng-click="selectDispatch.confirmVehicle()">
+                载具确认
+            </button>
+        </div>
+    </div>
+
+
+    <table-expandable table-column="selectDispatch.column"  table-page="selectDispatch.getPage()" table-data="selectDispatch.data" table-conf="selectDispatch.pageParams" self-page="false" entity="selectDispatch.entity">
+    </table-expandable>
+
+</div>
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-user" style="margin-right: 10px;"></i>司机选择
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 456px;overflow-y: scroll;">
+
+                <form  class="form-horizontal ng-pristine ng-invalid ng-invalid-required">
+                    <div ng-repeat="list in selectDispatch.selectVehicleList" class="vehicle_{{$index}} divSpace-unwhite fade-in-up" repeat-finish>
+                        <span class="badge badge-default leftIcon">{{$index+1}}</span>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">车辆信息
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" name="vehicleInfo" value="{{list.no}}" readonly class="form-control"/>
+                                <input type="hidden" name="vehicleId" value="{{list.id}}"/>
+                            </div>
+                            <label class="control-label col-sm-2">车辆型号
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  data-required="1" name="vehicleZZ" value="{{list.vehicleModel}}" readonly class="form-control"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">主司机{{list.MAIN_DRIVER_ID}}
+                            </label>
+                            <div class="col-sm-3">
+                                <select class="form-control select2me mainDriver" ng-model="list.MAIN_DRIVER_ID"  ng-change="selectDispatch.searchMainMobile(list.MAIN_DRIVER_ID,$index)">
+                                    <option selected value=" ">选择主司机</option>
+                                    <option ng-repeat="list in selectDispatch.driversList" value="{{list.userId}}">{{list.nickName}}</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-2">联系方式
+                            </label>
+                            <div class="col-sm-3">
+                                <input type="text"  name="mainDriverMobile"  ng-model="selectDispatch.mobile[$index]" data-required="1" class="form-control" placeholder="联系方式"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">副司机
+                            </label>
+                            <div class="col-sm-3">
+                                <select class="form-control select2me secondDriver" ng-model="list.SECOND_DRIVER_ID" ng-change="selectDispatch.searchSecondMobile(list.SECOND_DRIVER_ID,$index)">
+                                    <option selected value=" ">选择副司机</option>
+                                    <option ng-repeat="list in selectDispatch.driversList" value="{{list.userId}}">{{list.nickName}}</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-2">联系方式
+                            </label>
+                            <div class="col-sm-3">
+                                    <input type="text"  name="secondDriverMobile" ng-model="selectDispatch.secondMobile[$index]" data-required="1" class="form-control" placeholder="联系方式"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">描述
+                            </label>
+                            <div class="col-sm-8">
+                                <input type="text"  name="description"  maxlength="50" data-required="1" class="form-control" placeholder="请输入派车单的描述(50字以内)"/>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="selectDispatch.confirmDrivers()">
+                    下一步
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

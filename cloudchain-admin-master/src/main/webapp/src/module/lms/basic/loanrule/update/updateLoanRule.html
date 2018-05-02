@@ -1,0 +1,133 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>修改贷款规则</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="lmsLoanRule">
+            <div class="col-md-12">
+                <input type="hidden" name="id" value="{{editLoanRule.data.id}}" >
+                <div class="col-md-4  " style="display: inline-flex;width: initial; ">
+                    <label style="line-height: 34px;width:  110px;text-align: right;">编码&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="code" class="form-control" placeholder="请输入编码" value="{{editLoanRule.data.code}}" ng-readonly="true" >
+                    </div>
+                </div>
+                <div class="col-md-4" style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">名称&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="name" class="form-control" placeholder="请输入名称" value="{{editLoanRule.data.name}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label style="line-height: 34px;width:  110px;text-align: right;">月利率(%)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="yearInterest" class="form-control" placeholder="请输入月利率(%)" value="{{editLoanRule.data.yearInterest}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial; ">
+                    <label style="line-height: 34px;width:  110px;text-align: right;">折扣率(%)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="discountRate" class="form-control" placeholder="请输入折扣率(%)" value="{{editLoanRule.data.discountRate}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">一年天数&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="daysOfYear" class="form-control" placeholder="请输入一年天数" value="{{editLoanRule.data.daysOfYear}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周一放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="monPaymentDays" class="form-control" placeholder="请输入周一放贷期限(天)" value="{{editLoanRule.data.monPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial; ">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周二放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="tuesPaymentDays" class="form-control" placeholder="请输入周二放贷期限(天)" value="{{editLoanRule.data.tuesPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周三放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="wedPaymentDays" class="form-control" placeholder="请输入周三放贷期限(天)" value="{{editLoanRule.data.wedPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周四放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="thuPaymentDays" class="form-control" placeholder="请输入周四放贷期限(天)" value="{{editLoanRule.data.thuPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial; ">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周五放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="friPaymentDays" class="form-control" placeholder="请输入周五放贷期限(天)" value="{{editLoanRule.data.friPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周六放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="satPaymentDays" class="form-control" placeholder="请输入周六放贷期限(天)" value="{{editLoanRule.data.satPaymentDays}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">周日放贷期限(天)&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="sunPaymentDays" class="form-control" placeholder="请输入周日放贷期限(天)" value="{{editLoanRule.data.sunPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial; ">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">申请截止时间&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="applyDeadline" class="form-control" placeholder="请输入申请截止时间" value="{{editLoanRule.data.applyDeadline}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">截单时间&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="cutoffDate" class="form-control" placeholder="请输入截单时间" value="{{editLoanRule.data.cutoffDate}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">预警提前天数&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="aheadOfDays" class="form-control" placeholder="请输入预警提前天数" value="{{editLoanRule.data.aheadOfDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial; ">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">库存池放贷期限&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="invPaymentDays" class="form-control" placeholder="请输入库存池放贷期限" value="{{editLoanRule.data.invPaymentDays}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">通知邮箱&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="noticeMail" class="form-control" placeholder="请输入通知邮箱" value="{{editLoanRule.data.noticeMail}}" >
+                    </div>
+                </div>
+                <div class="col-md-4  " style="display: inline-flex;width: initial;">
+                    <label  style="line-height: 34px;width:  110px;text-align: right;">备注&nbsp;</label>
+                    <div class="form-group" class="col-md-3">
+                        <input type="text" name="description" class="form-control" placeholder="请输入备注" value="{{editLoanRule.data.description}}" >
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-10  col-md-9">
+                            <button id="inboundConfirmButton" type="submit" class="btn blue" ng-click="editLoanRule.editLoanRule()">修改</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white" ng-click="editLoanRule.returnButton()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

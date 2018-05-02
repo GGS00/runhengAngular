@@ -1,0 +1,293 @@
+<style>
+    *{
+        font-family: 微软雅黑;
+    }
+
+    body{
+        background: #ECF0F5;
+    }
+
+    table {
+        table-layout: fixed;
+        word-wrap:break-word;
+    }
+    div {
+        word-wrap:break-word;
+    }
+
+    .reviewContent {
+        position: relative;
+        /* height: 334px; */
+        /*width: 98%;*/
+        /*margin: 7px auto;*/
+        /*margin-top: 12px;*/
+        background: #fff;
+        box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+        border-radius: 3px;
+    }
+
+    .reviewContent .box-header {
+        color: #fff;
+        background: #00a65a;
+        background-color: #00a65a;
+        display: block;
+        padding: 6px 10px;
+        position: relative;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+
+    .reviewContent .box-header .box-title {
+        display: inline-block;
+        font-size: 15px;
+        margin: 0;
+        line-height: 1;
+    }
+    .reviewContent .box-content{
+        padding: 0px 10px;
+    }
+    .main-box{
+        border-radius: 3px;
+        background: #fff;
+        box-shadow: rgb(207, 203, 203) 0px 4px 10px;
+    }
+    .main-box .box-header{
+        color: #fff;
+        background: #00A4CC;
+        background-color: #00A4CC;
+        display: block;
+        padding: 6px 10px;
+        position: relative;
+        border-top-right-radius: 4px;
+        border-top-left-radius: 4px;
+    }
+
+    .main-box .box-header .box-title{
+        display: inline-block;
+        font-size: 15px;
+        margin: 0;
+        line-height: 1;
+    }
+    .main-box .ibox-content{
+        padding: 12px;;
+    }
+
+</style>
+<div class="reviewContent animated fadeInRight">
+    <div class="box-header">
+        <h3 class="box-title"><i class="fa fa-search"></i>&nbsp;复核打包</h3>
+        <i class="fa fa-minus minus" ng-click="review.showAndHide()"></i>
+    </div>
+    <div style="padding: 0px 10px 10px 10px">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <button class="btn blue" type="button">查询条件</button>
+                </span>
+                <input type="text" ng-model="pack.id" class="form-control" placeholder="输入周转箱号，串号，订单号，运单号">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row" style="margin-top: 0px">
+                <div class="btn-group btn-group-solid col-md-12 col-lg-8">
+                    <button type="button" class="btn green-meadow" ng-click="pack.getPage()">查询</button>
+                    <button type="button" class="btn red-sunglo" ng-click="pack.overPackage()">包装结束</button>
+                    <button type="button" class="btn blue-madison" ng-click="pack.printList()">打印清单</button>
+                    <button type="button" class="btn blue-hoki" ng-click="pack.printOut()">打印运单</button>
+                </div>
+                <div class="col-md-12 col-lg-4">
+                    <span>是否打印串码明细?</span>
+                    <input type="checkbox" id="ifPrintSerialNo" ng-model="ifPrintSerial" name="ifPrintSerialNo">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn default" ng-init="allshow = false" ng-click="allshow = !allshow">全部</button>
+            <button type="button" class="btn grey-cascade">返回</button>
+        </div>
+        <!--<div class="input-group m-grid-col-md-3">-->
+        <!--<span class="input-group-addon searchButton">查询条件 (F1)</span>-->
+        <!--<input type="text" class="form-control" id="numberCode"  style="width: 265px;" placeholder="输入周转箱号，串号，订单号，运单号">-->
+        <!--</div>-->
+        <!--<div class="reviewOperation m-grid-col-md-12">-->
+        <!--<button type="button" class="btn  btn-success searchOperation" ng-click="review.searchByNumbers()">查询</button>-->
+        <!--<button type="button" class="btn  btn-success endPackage" id="endPackage" ng-click="review.overPackage()">结束包(+)</button>-->
+        <!--<button type="button" class="btn  btn-success printList"  id="printList" ng-click="review.printList()">打印清单(F6)</button>-->
+        <!--<button type="button" class="btn  btn-success printWay" id="printWay"ng-click="review.printWaybill()">打印运单(F8)</button>-->
+        <!--<div class="ifprint">-->
+        <!--<span>是否打印串码明细?</span>-->
+        <!--<input type="checkbox" id="ifPrintSerialNo" name="ifPrintSerialNo" checked="`">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<button type="button" class="btn  btn-success allListShow"ng-click="review.allListShow()">全部</button>-->
+        <!--<button type="button" class="btn  btn-success backToPack"ng-click="review.backToPack()">返回</button>-->
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon searchButton"><i class="fa  fa-star red"></i>&nbsp;计划数量</span>
+                <input type="text" class="form-control " value="{{data.EXPECTEDQUANTITYBU}}"  readonly="readonly">
+            </div>
+         </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon searchButton"><i class="fa  fa-star red"></i>&nbsp;拣货数量</span>
+                <input type="text" class="form-control " value="{{data.PICKEDQUANTITYBU}}"  readonly="readonly">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon searchButton "><i class="fa fa-star red"></i>&nbsp;计划复核数量</span>
+                <input type="text" class="form-control " value="{{data.EXPECTEDCHECKQUANTITYBU}}" value="{{review.fahuo}}" readonly="readonly">
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-addon searchButton "><i class="fa  fa-star red"></i>&nbsp;复核数量</span>
+                <input type="text" class="form-control " value="{{data.CHECKEDQUANTITYBU}}" readonly="readonly">
+            </div>
+        </div>
+    </div>
+    <div ng-show="allshow">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">发货单号</span>
+                    <input type="text" class="form-control"  value="{{data.OUTBOUNDCODE}}" readonly="readonly" style="font-size: 12px;">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">包装任务号</span>
+                    <input type="text" class="form-control" value="{{dat.CODE}}" readonly="readonly" style="font-size: 12px;">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">物流公司</span>
+                    <input type="text" class="form-control" value="{{review.wuliu}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">面单号</span>
+                    <input type="text" class="form-control" value="{{review.miandan}}" readonly="readonly" style="font-size: 12px;">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">单据类型</span>
+                    <input type="text" class="form-control" value="{{data.danju}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">已包装箱数</span>
+                    <input type="text" class="form-control" value="{{data.PACKAGEBOXQUANTITY}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">包裹总计重量(kg)</span>
+                    <input type="text" class="form-control" value="{{data.WEIGHT}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">体积(m<sup>3</sup>)</span>
+                    <input type="text" class="form-control" value="{{data.VOLUME}}" readonly="readonly">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">项目</span>
+                    <input type="text" class="form-control"value="{{review.xiangmu}}"  readonly="readonly">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">复核状态</span>
+                    <input type="text" class="form-control" value="{{data.CHECKSTATUS!=undefined?(data.CHECKSTATUS == 'NON_CHECK'?'无需复核':(data.CHECKSTATUS == 'UN_CHECK'?'未复核':(data.CHECKSTATUS == 'PART_CHECK'?'部分复核':(data.CHECKSTATUS == 'CHECKED'?'已复核':data.CHECKSTATUS)))):'-'}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group">
+                    <span class="input-group-addon searchButton">发运状态</span>
+                    <input type="text" class="form-control" value="{{data.SHIPSTATUS!=undefined?(data.SHIPSTATUS=='UN_SHIP'?'待发运':(data.SHIPSTATUS=='PART_SHIPPED'?'部分发运':(data.SHIPSTATUS=='SHIPPED'?'已发运':data.SHIPSTATUS))):'-'}}" readonly="readonly">
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div id="checkAndPackage_msg" class="msg"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="main-box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-bar-chart-o"></i>&nbsp;发货单明细</h3>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-5 col-sm-8 col-xs-8">
+                        <div class="input-group">
+                            <input type="text" class="form-control" ng-model="uniCode" placeholder="">
+                            <span class="input-group-btn">
+                                <button class="btn blue" type="button" ng-click="pack.checkUniCode()">复合</button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-4 col-xs-4">
+                        <button class="btn blue" type="button">导出</button>
+                    </div>
+                </div>
+                <div>
+                    <table-expandable table-column="pack.column" table-page="pack.getOutPage()"
+                                      table-data="pack.outdata" table-conf="pack.pageParams" self-page="false"
+                                      entity="pack.entity">
+                    </table-expandable>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="main-box">
+            <div class="box-header">
+                <h3 class="box-title"><i class="fa fa-archive"></i>&nbsp;装箱</h3>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">箱数</span>
+                            <input type="text" class="form-control" ng-model="pack.boxQty" value="{{review.xiangmu}}">
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 5px">
+                        <div class="input-group">
+                            <span class="input-group-addon">重量</span>
+                            <input type="text" class="form-control" ng-model="pack.weight" value="{{review.xiangmu}}">
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 5px">
+                        <button type="button" class="btn green-haze" ng-click="pack.confirmPackage()">确定</button>
+                        <button type="button" class="btn red-sunglo">移除</button>
+                        <button type="button" class="btn blue-madison">复制</button>
+                    </div>
+                    <div class="col-md-12">
+                        <table-expandable table-column="pack.shipcolumn" table-page="pack.getShipPage()"
+                                          table-data="pack.shipdata" table-conf="pack.shipParams" self-page="false"
+                                          entity="pack.shipEntity">
+                        </table-expandable>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf">客户信息</i></span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" placeholder="编号"></div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="customerCode" class="form-control" placeholder="客户编号"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_check_status">
+                        <option selected value=" ">审核状态</option>
+                        <option value="WAIT_CHECK">待审核</option>
+                        <option value="WAIT_COMMIT">待提交</option>
+                        <option value="CHECKING">审核中</option>
+                        <option value="CHECKED">已审核</option>
+                        <option value="UN_CHECKED">未审核</option>
+                        <option value="STATUS_CHECK_PASS">审核通过</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="applyCredit.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="applyCredit.approve()" style="font-weight: inherit">审批</button>
+    </div>
+
+    <table-expandable table-column="applyCredit.column" table-page="applyCredit.getPage()"
+                      table-data="applyCredit.data" table-conf="applyCredit.pageParams" self-page="false"
+                      entity="applyCredit.entity">
+    </table-expandable>
+
+</div>
+</div>
+</div>
+
+
+

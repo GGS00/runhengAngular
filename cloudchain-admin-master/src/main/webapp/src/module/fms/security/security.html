@@ -1,0 +1,74 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>账户安全</span>
+    <div class="portlet-body row">
+        <form  id="form_sample_1" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">{{security.isTrueNameStr}}</label>
+                        <label class="control-label col-sm-1" style="text-align: left;width: 12%;">实名认证</label>
+                        <label class="control-label col-sm-4" style="text-align: left;">保障账户安全，确认投资身份</label>
+                        <label class="control-label col-sm-3" style="text-align: left;">{{security.realNameAndCertificateNo}}</label>
+                        <label class="control-label col-sm-2" style="text-align: left;">
+                            <a ng-click="security.gotoRealNameAuthPage()"
+                               ng-if="security.isTrueName != '1' && security.isTrueName != '2' ">设置</a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">{{security.isMobileStr}}</label>
+                        <label class="control-label col-sm-1" style="text-align: left;width: 12%;">手机认证</label>
+                        <label class="control-label col-sm-4" style="text-align: left;">保障资金安全，获取账户资金变动通知</label>
+                        <label class="control-label col-sm-3" style="text-align: left;">{{security.mobile}}</label>
+                        <label class="control-label col-sm-2" style="text-align: left;">
+                            <a ng-click="security.gotoMobileAuthPage()"
+                               ng-if="security.isMobile != '1'">设置</a>
+
+                            <a ng-click="security.gotoUpdateMobilePage()"
+                               ng-if="security.isMobile == '1'">更换</a>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">{{security.dealPwdStr}}</label>
+                        <label class="control-label col-sm-1" style="text-align: left;width: 12%;">支付密码</label>
+                        <label class="control-label col-sm-4" style="text-align: left;">保障资金安全，取现等资金相关操作时使用</label>
+                        <label class="control-label col-sm-3" style="text-align: left;">&nbsp;</label>
+                        <label class="control-label col-sm-2" style="text-align: left;">
+                            <a ng-click="security.gotoPayPwdAuthPage()"
+                               ng-if="security.isPayPwd != '1'">设置</a>
+
+                            <a ng-click="security.gotoPayPwdAuthPage()"
+                               ng-if="security.isPayPwd == '1'">修改</a>
+                        </label>
+                    </div>
+                </div>
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">{{security.isSetPwdQuestionStr}}</label>
+                        <label class="control-label col-sm-1" style="text-align: left;width: 12%;">安全保护问题</label>
+                        <label class="control-label col-sm-4" style="text-align: left;">保障个人隐私，修改个人信息等操作时使用</label>
+
+                        <label class="control-label col-sm-3" style="text-align: left;"
+                               ng-if="security.isSetPwdQuestion == '1'">已设置3个问题</label>
+                        <label class="control-label col-sm-3" style="text-align: left;"
+                               ng-if="security.isSetPwdQuestion != '1'">&nbsp;</label>
+
+                        <label class="control-label col-sm-2" style="text-align: left;">
+                            <a ng-click="security.gotoQuestionPage()"
+                               ng-if="security.isSetPwdQuestion != '1'">设置</a>
+
+                            <a ng-click="security.gotoQuestionPage()"
+                               ng-if="security.isSetPwdQuestion == '1'">修改</a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

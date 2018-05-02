@@ -1,0 +1,78 @@
+<style>
+    .packCheck{
+        margin-bottom:0px;
+    }
+
+    .packCheck tbody tr:first-child td{
+        border-top:none;
+    }
+
+    .packCheck thead th {
+        vertical-align: middle !important;
+        text-align: center;
+        font-size: 13px !important;
+        color: #666;
+    }
+
+    .packCheck tbody td {
+        text-align: center;
+        word-break: break-all;
+        vertical-align: middle !important;
+        font-size: 12px !important;
+    }
+
+    .ibox-content .packCheck tr:nth-child(odd) {
+
+    }
+</style>
+<div>
+    <form name="goods" layout-gt-xs="row">
+        <h5 class="md-block"  flex="20"  flex-gt-xs>销售库存</h5>
+        <div layout-gt-xs="row" flex-gt-xs>
+            <md-input-container class="md-block"  flex-gt-xs>
+                <label>请填写库存</label>
+                <input name="sale" type="number" min="0" ng-model="quantity">
+                <div ng-messages="goods.sale.$error" ng-show="goods.sale.$dirty">
+                    <div ng-message="min">库存不能小于0</div>
+                    <div ng-message="number">必须是数字</div>
+                </div>
+            </md-input-container>
+            <md-input-container ng-if="skus[0].specDesc != null" class="md-block" style="margin-top: 0"  flex-gt-xs>
+                <md-button class="md-raised" ng-click="setInfo()">填充</md-button>
+            </md-input-container>
+            <md-input-container ng-if="skus[0].specDesc == null" class="md-block" style="margin-top: 0"  flex-gt-xs>
+                <md-button class="md-raised md-primary" style="color: #ffffff;" ng-click="save()">保存</md-button>
+            </md-input-container>
+            <md-input-container class="md-block" style="margin-top: 0" >
+                <md-button class="md-raised" onclick="javascript:history.back(-1);">返回</md-button>
+            </md-input-container>
+        </div>
+    </form>
+    <table ng-if="skus[0].specDesc != null" class="table table-striped table-bordered table-hover order-column packCheck" id="table">
+        <thead>
+        <tr>
+            <th>规格</th>
+            <th>主图</th>
+            <!--<th>sku商家编码</th>-->
+            <!--<th>条形码</th>-->
+            <th width="40%">销售库存（计量单位)</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="list in skus track by $index" finish-repeat="initTable()">
+                <td ng-bind-html="list.specDesc"></td>
+                <td style="width: 80px"><img class="img-responsive" ng-src="{{list.skuImgs[0].img !=''?list.skuImgs[0].img:'http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image'}}"  alt=""></td>
+                <!--<td ng-bind-html="list.bn"></td>-->
+                <!--<td ng-bind-html="list.skuBarcode"></td>-->
+                <td><input type="number" min="0" class="form-control" ng-model="list.quantity" placeholder="请填写销售库存"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <!--<td></td>-->
+                <!--<td></td>-->
+                <td><md-button class="md-raised md-primary" style="color: #ffffff;" ng-click="save()">保存</md-button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

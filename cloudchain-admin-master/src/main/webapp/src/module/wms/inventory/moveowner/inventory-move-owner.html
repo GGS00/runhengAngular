@@ -1,0 +1,117 @@
+<div>
+    <span class="pageTitle"><i class="fa fa fa-send"></i>货权转移管理</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-10 form-group">
+                <!--<div class="col-sm-2" style="padding-left: 0px;">-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" name="ownerId" class="form-control" placeholder="货主"></div>-->
+                <!--</div>-->
+                <div class="col-sm-2" style="padding-left: 0px;">
+                    <select  class="form-control select2me status" id="id_billType">
+                    </select>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="supplierId" class="form-control" placeholder="供应商">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="oriCode" class="form-control" placeholder="相关单据">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <input type="text" name="productId" class="form-control" placeholder="商品编号">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-10 form-group" style=" padding-left: 0px;">
+
+                <div class="col-sm-3" ng-click="inventoryMvOwner.warehouseLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text=" inventoryMvOwner.placeholder_warehouseName"
+                                  st-icon=" inventoryMvOwner.icon_warehouse"
+                                  st-value=" inventoryMvOwner.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column=" inventoryMvOwner.warehouseColumn"
+                                          table-page=" inventoryMvOwner.warehousePage()"
+                                          table-data=" inventoryMvOwner.warehouseData"
+                                          table-conf=" inventoryMvOwner.warehouseParams"
+                                          self-page="true"
+                                          entity=" inventoryMvOwner.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+
+                <div class="col-sm-3" style="border:none;outline:none;">
+                    <div ng-click="inventoryMvOwner.regionLinsener()">
+
+                        <select-table st-combo="test()" st-text="inventoryMvOwner.placeholder_regionName"
+                                      st-icon="inventoryMvOwner.icon_region"
+                                      st-value="inventoryMvOwner.regionEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="inventoryMvOwner.regionColumn"
+                                              table-page="inventoryMvOwner.regionPage()"
+                                              table-data="inventoryMvOwner.regionData"
+                                              table-conf="inventoryMvOwner.region_params"
+                                              self-page="true"
+                                              entity="inventoryMvOwner.regionEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-sm-3" ng-click="inventoryMvOwner.locationLinsener()" style="border:none;outline:none;">
+                    <select-table st-combo="test()" st-text="inventoryMvOwner.placeholder_locationName"
+                                  st-icon="inventoryMvOwner.icon_location"
+                                  st-value="inventoryMvOwner.locationEntity.getSelectedRows()[0].name">
+                        <table-expandable table-column="inventoryMvOwner.locationColumn"
+                                          table-page="inventoryMvOwner.locationPage()"
+                                          table-data="inventoryMvOwner.locationrData"
+                                          table-conf="inventoryMvOwner.locationrParams"
+                                          self-page="true"
+                                          entity="inventoryMvOwner.locationEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <select class="form-control select2me status" id="id_status">
+                            <option selected value=" ">状态</option>
+                            <option value="OPEN">待审核</option>
+                            <option value="ACTIVE">审核通过</option>
+                            <option value="INVALID">驳回</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2 form-group">
+                <div class="col-sm-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn blue" ng-click="inventoryMvOwner.getPageByFilter()">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryMvOwner.pass()"
+                style="font-weight: inherit">通过
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryMvOwner.rebut()"
+                style="font-weight: inherit">驳回
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="inventoryMvOwner.delete()"
+                style="font-weight: inherit">删除
+        </button>
+    </div>
+    <table-expandable table-column="inventoryMvOwner.column" table-page="inventoryMvOwner.getPage()"
+                      table-data="inventoryMvOwner.data" table-conf="inventoryMvOwner.pageParams" self-page="false"
+                      entity="inventoryMvOwner.entity">
+    </table-expandable>
+
+</div>
+
+
+
+

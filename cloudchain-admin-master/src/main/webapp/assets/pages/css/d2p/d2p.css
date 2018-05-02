@@ -1,0 +1,63 @@
+.xxx{
+    margin-left: 15px;
+}
+
+.ibox-content{
+    height: 300px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position: relative;
+    padding: 12px;
+    padding-top: 0px;
+    margin-bottom: 24px;
+}
+
+.packPagination{
+    position: relative;
+}
+
+/*.pagination-prev-large{
+    margin: 20px 30px;
+}*/
+
+.selectNum{
+    width: 140px;
+    position: absolute;
+    bottom: 22px;
+    right: 58px;
+    display: inline-flex;
+}
+
+.selectNum .selectText{
+    font-size: 14px;
+    line-height: 34px;
+    margin-left: 5px;
+}
+
+.packTableHeader{
+    padding-right: 20px;
+    padding-left: 12px;
+}
+
+.packCheck{
+    margin-bottom:0px;
+}
+
+.packCheck tbody tr:first-child td{
+    border-top:none;
+}
+
+.packCheck thead th {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.packCheck tbody td {
+    text-align: center;
+    word-break: break-all;
+    vertical-align: middle;
+}
+
+.ibox-content .packCheck tr:nth-child(odd) {
+    background-color: #E6E6E6;
+}

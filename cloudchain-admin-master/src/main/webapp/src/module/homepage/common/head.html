@@ -1,0 +1,73 @@
+<div id="header_top">
+    <div id="top">
+        <div class="Inside_pages">
+            <div class="Collection"><!--<a href="javascript:void(0)" class="green">请登录</a> <a href="javascript:void(0)" class="green">免费注册</a>--></div>
+            <div class="hd_top_manu clearfix">
+                <ul class="clearfix">
+                    <li class="hd_menu_tit" data-addclass="hd_menu_hover"  ng-if="isLogin==0"><a style="color: #DB3A2A;" href="/chailogin">亲,请登录</a></li>
+                    <li class="hd_menu_tit" data-addclass="hd_menu_hover"  ng-if="isLogin==1"><a style="color: #DB3A2A;" href="javascript:void(0)">您好,{{loginName}}</a></li>
+                    <li class="hd_menu_tit" data-addclass="hd_menu_hover" ng-if="isLogin==1"><a ng-click="toLogin()">退出登录</a> </li>
+                    <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a ng-click="toSingleLogin()">用户中心</a> </li>
+                    <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="/settled">申请入驻</a></li>
+                   <!-- <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="javascript:void(0)">帮助中心</a></li>
+                    <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="javascript:void(0)">手机浏览</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div id="top_menu">
+        <div class="logo"><a href="/chaimihome"><img src="../assets/scripts/homepage/images/logo.png" style="width: 100%;"/></a></div>
+
+        <ul class="top_menu">
+            <li class="homepage"><span class="bg_muen"></span><a href="/chaimihome">柴米优仓</a></li>
+            <li class="finance"><a href="/chaimihome#/homepage/finance">供应链金融</a><em class="hot_icon"></em></li>
+            <li class="yiti"><a href="/chaimihome#/homepage/waredis">仓配一体化</a></li>
+            <li class="saas"><a href="/chaimihome#/homepage/saas">SAAS云平台</a></li>
+            <li class="about"><a href="/chaimihome#/homepage/aboutus">关于我们</a></li>
+           <!-- <li class="homepage"><span class="bg_muen"></span><a href="/chaimihome">柴米优仓</a></li>
+            <li class="yunpingtai"><a href="/home">供应链金融</a><em class="hot_icon"></em></li>
+            <li class="youcang"><a href="/chaimihome#/d2w/waresource">仓配一体化</a></li>
+            <li class="caigou"><a href="/d2dhome#/wholesale/goods">SAAS云平台</a></li>
+            <li class="about"><a href="">关于我们</a></li>-->
+        </ul>
+
+        <div class="contact">
+            <i class="iconfont icon-dianhua"></i>025-52307887
+        </div>
+    </div>
+</div>
+<div class="banner-show" style="position:relative;">
+    <!--<img src="../assets/pages/img/d2w/topBg2.jpg" class="imgDe" style="height: 434px;">-->
+    <div style="width: 1100px;margin: 0 auto;">
+        <div class="loginTab">
+            <div class="loginTop">
+                <h3>快速找仓</h3>
+            </div>
+            <div class="loginBody">
+                <h4><i class="iconfont icon-dizhi1"></i>区域找仓</h4>
+                <div class="loginLoc">
+                    <ul ng-click="toWare()">
+                        <li>北京</li><li>天津</li><li>上海</li><li>重庆</li><li>河北</li><li>山西</li><li>辽宁</li><li>吉林</li><li>黑龙江</li><li>江苏</li><li>浙江</li><li>安徽</li><li>福建</li><li>江西</li><li>山东</li><li>河南</li><li>湖北</li><li>湖南</li><li>广东</li><li>四川</li><li>海南</li><li>贵州</li><li>云南</li><li>陕西</li><li>甘肃</li><li>青海</li><li>内蒙古</li><li>宁夏</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="loginFoot">
+                <h4><i class="iconfont icon-ccgl-shiticangku-4"></i>类别找仓</h4>
+                <div class="loginType">
+                    <ul>
+                        <li ng-click="toWare()">普通</li>
+                        <li ng-click="toWare()">冷藏</li>
+                        <li ng-click="toWare()">恒温</li>
+                        <li ng-click="toWare()">特种</li>
+                        <li ng-click="toWare()">气调</li>
+                    </ul>
+                </div>
+                <div class="loginBtn">
+                    <span ng-click="toWare()">查看全部仓储</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

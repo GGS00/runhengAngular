@@ -1,0 +1,98 @@
+<div>
+	<span class="pageTitle"><i class="fa fa-sticky-note-o"></i>采购单管理</span>
+    <div class="row firstRow">
+    	<div class="col-md-10" style="padding-left: 0px;">
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <input type="text" name="purchaseId" class="form-control" placeholder="采购单编号"> </div>
+	        </div>
+	        <!--/span-->
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <input type="text" name="supplierName" class="form-control" placeholder="供应商名称">
+				</div>
+	        </div>
+
+			<div class="col-sm-3">
+				<div class="form-group">
+					<input type="text" name="warehouseName" class="form-control" placeholder="仓库名称"> </div>
+			</div>
+
+	        <!--/span-->
+	        <div class="col-sm-3">
+	            <div class="form-group">
+	                <select class="form-control select2me state">
+                        <option selected value=" ">当前状态</option>
+						<option value="0">待审</option>
+						<option value="1">审核</option>
+						<option value="2">驳回</option>
+						<option value="3">已取消</option>
+					</select>
+	            </div>
+	        </div>
+
+			<div class="col-sm-12" style="margin-bottom:16px;">
+				<label class="control-label col-sm-2" style="padding-top: 5px;text-align: center;font-weight: bold;">应到货时间
+				</label>
+				<div class="col-sm-4 arrivalTime">
+					<time-picker></time-picker>
+				</div>
+			</div>
+
+        </div>
+        <div class="col-md-2">
+	        <div class="btn-group">
+				<button type="button" class="btn blue" ng-click="purchase.getPageByFilter()">
+					搜索
+				</button>
+			</div>
+	    </div>
+
+    </div>
+
+	<div class="search-form btnGroup">
+		<button type="button" class="btn btn-default" ng-click="purchase.toCreatePurchase()" style="font-weight: inherit">新建采购单
+		</button>
+		<button type="button" class="btn btn-default" ng-click="purchase.editPurchase()" style="font-weight: inherit">修改采购单</button>
+		<button type="button" class="btn btn-default" ng-click="purchase.examinePurchase()" style="font-weight: inherit">审核</button>
+		<button type="button" class="btn btn-default" ng-click="purchase.removePurchase()" style="font-weight: inherit">删除</button>
+		<button type="button" class="btn btn-default" ng-click="purchase.importOrder()" style="font-weight: inherit">导入订单</button>
+		<button type="button" class="btn btn-default" ng-click="purchase.exportOrder('0')" style="font-weight: inherit">导出订单</button>
+	</div>
+
+	<table-expandable table-column="purchase.column"  table-page="purchase.getPage()" table-data="purchase.data" table-conf="purchase.pageParams" self-page="false" entity="purchase.entity">
+	</table-expandable>
+
+
+</div>
+</div>
+
+<div class="modal fade" id="confirmExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" style="margin-top:180px;width: 500px">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close"
+						data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title">
+					<i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>导入订单
+				</h4>
+			</div>
+			<div class="modal-body">
+				<input type="file" id="excelFile" style="padding-top: 7px;" name="excelFile">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"
+						data-dismiss="modal">关闭
+				</button>
+				<button type="button" class="btn btn-primary" ng-click="purchase.confirmExcel()">
+					导入
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+

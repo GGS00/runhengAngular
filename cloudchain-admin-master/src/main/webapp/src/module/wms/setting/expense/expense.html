@@ -1,0 +1,37 @@
+    <div>
+    <span class="pageTitle"><i class="fa fa-clone"></i>费用设置</span>
+        <div class="row firstRow">
+            <div class="col-md-10">
+                <div class="col-sm-2" style="padding-left: 0px;">
+                    <div class="form-group">
+                        <input type="text" id="id_fName" class="form-control" placeholder="费用名称"></div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="expense.expenseFind()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="expense.newexpense()"
+                style="font-weight: inherit">新建
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="expense.updataexpense()"
+                style="font-weight: inherit">修改
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="expense.delete()"
+                style="font-weight: inherit">删除
+        </button>
+    </div>
+    <table-expandable table-column="expense.column" table-page="expense.getPage()"
+                      table-data="expense.data" table-conf="expense.expense_params"
+                      self-page="false" entity="expense.entity">
+    </table-expandable>
+</div>
+
+</div>
+

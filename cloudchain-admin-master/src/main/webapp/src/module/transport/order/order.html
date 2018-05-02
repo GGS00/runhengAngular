@@ -1,0 +1,178 @@
+<div>
+	<span class="pageTitle"><i class="fa fa-sticky-note-o"></i>运单管理</span>
+    <div class="row firstRow">
+    	<div class="col-md-10" style="padding-left: 0px;">
+	        <div class="col-sm-2">
+	            <div class="form-group">
+	                <input type="text" name="code" class="form-control" placeholder="订单号"> </div>
+	        </div>
+	        <!--/span-->
+	        <div class="col-sm-2">
+	            <div class="form-group">
+	                <input type="text" name="wayBillCode" class="form-control" placeholder="运单号">
+				</div>
+	        </div>
+
+			<div class="col-sm-2">
+				<div class="form-group">
+					<input type="text" name="ownerName" class="form-control" placeholder="货主"> </div>
+			</div>
+
+	        <!--/span-->
+	        <div class="col-sm-2">
+	            <div class="form-group">
+	                <select class="form-control select2me billType_code_query">
+                        <option selected value=" ">单据类型</option>
+						<option ng-repeat="list in tmsOrder.billTypeList" value="{{list.dataValue}}">{{list.dataName}}</option>
+					</select>
+	            </div>
+	        </div>
+	        <div class="col-sm-2">
+	            <div class="form-group">
+	                <select class="form-control select2me status">
+                        <option selected value=" ">状态</option>
+	                    <option value="OPEN">打开</option>
+                        <option value="ACTIVE">生效</option>
+                        <option value="ENTERED">已入场</option>
+                        <option value="DISPATCHED">已调度</option>
+						<option value="ONWAY">在途</option>
+						<option value="ARRIVED">运抵</option>
+						<option value="SIGNED">已签收</option>
+						<option value="CANCEL">取消</option>
+	                </select>
+	            </div>
+	        </div>
+
+	        <div class="col-sm-2">
+	            <div class="form-group">
+	                <select class="form-control select2me signStatus">
+                        <option selected value=" ">签收状态</option>
+	                    <option value="UN_SIGN">未签收</option>
+	                    <option value="SIGNED">正常签收</option>
+						<option value="ALL_DENIAL">全部签收</option>
+						<option value="PART_SIGNED">部分签收</option>
+						<option value="NOT_HURL">未妥投</option>
+						<option value="DENIAL_SIGNED">正常退签</option>
+	                </select>
+	            </div>
+	        </div>
+			<div ng-if="tmsOrder.menuLen > 6">
+				<div class="col-sm-2">
+					<div class="form-group">
+						<select class="form-control select2me arrivalStatus">
+							<option selected value=" ">运抵状态</option>
+							<option value="UN_SHIP">待发运</option>
+							<option value="ON_ROAD">在途</option>
+							<option value="ARRIVED">已运抵</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-2">
+					<div class="form-group">
+						<select class="form-control select2me dataFrom">
+							<option selected value=" ">单据来源</option>
+							<option value="INTERFACE">接口导入</option>
+							<option value="MANUAL">手工创建</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="col-sm-2">
+					<div class="form-group">
+						<input type="text" name="fromReceiverName" class="form-control" placeholder="发货方">
+					</div>
+				</div>
+				<div class="col-sm-2">
+					<div class="form-group">
+						<input type="text" name="toReceiverName" class="form-control" placeholder="收货方">
+					</div>
+				</div>
+
+				<div class="col-sm-12" style="margin-bottom:16px;">
+							<label class="control-label col-sm-2" style="padding-top: 5px;text-align: center;font-weight: bold;">下单时间
+							</label>
+							<div class="col-sm-4 toOrderTime">
+								<time-picker></time-picker>
+							</div>
+							<label class="control-label col-sm-2" style="padding-top: 5px;text-align: center;font-weight: bold;">实发时间
+							</label>
+							<div class="col-sm-4 toShipTime">
+								<time-picker></time-picker>
+							</div>
+				</div>
+			</div>
+        </div>
+        <div class="col-md-2">
+	        <div class="btn-group">
+				<button type="button" class="btn blue" ng-click="tmsOrder.getPageByFilter()">
+					搜索
+				</button>
+				<button type="button" class="btn blue dropdown-toggle" style="padding-left: 5px;padding-right:5px;" ng-click="tmsOrder.menuLen > 6?  tmsOrder.menuLen =6:tmsOrder.menuLen =12">
+					<i class="fa fa-angle-down">
+					</i>
+				</button>
+
+
+		<!--		<div class="btn-group">
+					<a class="btn btn-default dropdown-toggle btn-operate" data-toggle="dropdown" href="javascript:;">操作
+						<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a ng-click="tmsOrder.toCreateWaybill()">创建订单
+
+							</a>
+						</li>
+						<li>
+							<a href="javascript:;">导入订单</a>
+						</li>
+						<li>
+							<a ng-click="tmsOrder.toSeparateOrder()">按段拆单</a>
+						</li>
+						<li>
+							<a ng-click="tmsOrder.toSeparateOrderByAmount()">按量拆单</a>
+						</li>
+						<li>
+							<a ng-click="tmsOrder.editTmsOrder()">修改运单</a>
+						</li>
+						<li>
+							<a ng-click="tmsOrder.operateEffect()">生效运单</a>
+						</li>
+						<li>
+							<a ng-click="tmsOrder.invalid()">失效运单</a>
+						</li>
+					</ul>
+				</div>-->
+
+				
+			</div>
+	    </div>
+
+    </div>
+
+	<div class="search-form btnGroup">
+		<button type="button" class="btn btn-default" ng-click="tmsOrder.toCreateWaybill()" style="font-weight: inherit">创建运单
+		</button>
+		<!--<button type="button" class="btn btn-default" style="font-weight: inherit">导入运单</button>-->
+		<!--<button type="button" class="btn btn-default" ng-click="tmsOrder.toSeparateOrder()" style="font-weight: inherit">按段拆单</button>
+
+		<button type="button" class="btn btn-default" ng-click="tmsOrder.toSeparateOrderByAmount()" style="font-weight: inherit">按量拆单</button>-->
+		<button type="button" class="btn btn-default" ng-click="tmsOrder.editTmsOrder()" style="font-weight: inherit">修改运单</button>
+		<button type="button" class="btn btn-default" ng-click="tmsOrder.operateEffect()"  style="font-weight: inherit">生效运单</button>
+		<button type="button" class="btn btn-default" ng-click="tmsOrder.invalid()" style="font-weight: inherit">失效运单</button>
+	</div>
+
+	<table-expandable table-column="tmsOrder.column"  table-page="tmsOrder.getPage()" table-data="tmsOrder.data" table-conf="tmsOrder.pageParams" self-page="false" entity="tmsOrder.entity">
+	</table-expandable>
+
+
+</div>
+</div>
+
+<!--	<select-table st-combo="test()" st-value="tmsOrder.entity[0].goods_name" st-text="tmsOrder.placeholder" st-icon="tmsOrder.icon">
+                    <table-expandable  table-column="tmsOrder.column"  table-page="tmsOrder.getPage()" table-data="tmsOrder.data" table-conf="tmsOrder.pageParams" self-page="true" entity="tmsOrder.entity">
+                    </table-expandable>
+                </select-table>-->
+
+

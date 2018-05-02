@@ -1,0 +1,200 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>修改物流匹配规则</span>
+
+
+    <div class="portlet-body row">
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <input type="hidden" name="id" value="{{updateMatchRule.matchRuleData.id}}">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">规则名称<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" name="name" placeholder="请输入规则名称" value="{{updateMatchRule.matchRuleData.name}}">
+                        </div>
+                    </div>
+                    <div class="form-group sendAddress_{{$index}}" ng-repeat="list in updateMatchRule.sendAddressList">
+                        <label class="control-label col-md-2">适用地区<span
+                                style="font-weight: bold">({{$index+1}})</span><span class="required" aria-required="true"> * </span>
+                        </label>
+                        <multicity-select ng-show="updateMatchRule.fahuoSwitch[$index]==$index+1"></multicity-select>
+                        <div class="col-md-3" ng-show="updateMatchRule.fahuoSwitch[$index]==$index">
+                            <input id="fahuoAddr_id{{$index}}" type="text" readonly class="form-control"
+                                   value="{{updateMatchRule.fahuoVal[$index]}}"/>
+                        </div>
+
+                        <button type="button" class="btn btn-default"
+                                ng-show="updateMatchRule.fahuoSwitch[$index]==$index" style=" height: 34px"
+                                ng-click="updateMatchRule.updateArea($index)">修改地址
+                        </button>
+                        <button type="button" class="btn btn-default"
+                                ng-show="updateMatchRule.fahuoSwitch[$index]==$index+1" style=" height: 34px"
+                                ng-click="updateMatchRule.cancelUpdateArea($index)">取消修改
+                        </button>
+                        <div class="col-md-1 pull-left addDiv" ng-show="updateMatchRule.fahuoSwitch[$index]==$index+1">
+                            <i class="fa fa-remove remove"
+                               ng-click="updateMatchRule.removeSend($index)"
+                               ng-if="updateMatchRule.sendAddressList.length>1"></i></div>
+
+                    </div>
+                    <!--<div class="form-group sendAddress_{{$index}}"
+                         ng-repeat="list in addMatchRule.sendAddressList">
+                        <label class="col-md-2 control-label">适用地区
+                            <span style="font-weight: bold">({{$index+1}})</span>
+                        </label>
+                        <multicity-select></multicity-select>
+                        <div class="col-sm-2 pull-left addDiv">
+                            <i class="fa fa-remove remove" ng-click="addMatchRule.removeArea($index)"
+                               ng-if="addMatchRule.sendAddressList.length>1"></i>
+                        </div>
+                    </div>-->
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <label class="control-label col-md-3">
+                        </label>
+                        <div class="col-md-3">
+                            <a class="btn btn-xs blue" ng-click="updateMatchRule.addNewArea()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 ">规则类型<span class="required" aria-required="true"> * </span>
+                        </label>
+                        <div class="col-sm-5">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="radio13" name="ruleType" class="md-radiobtn"
+                                           value="1"  ng-model="updateMatchRule.ruleTypeVal">
+                                    <label for="radio13">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>按任意重量设置</label>
+                                </div>
+                               <!-- <div class="md-radio has-error">
+                                    <input type="radio" id="radio14" name="ruleType" class="md-radiobtn"
+                                           value="0" ng-model="updateMatchRule.ruleTypeVal">
+                                    <label for="radio14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>按重量区间设置</label>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divSpace" ng-show="updateMatchRule.ruleTypeVal==1">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">按任意重量设置
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">首选物流公司</label>
+                        <div class="col-md-4 ">
+                            <input type="hidden" name="itemId1" value="{{updateMatchRule.itemId1}}">
+                            <select class="form-control" id="externalLogisticsCompanyId1" ng-model="updateMatchRule.logisticsCompId1"
+                                    ng-options="y.id as y.name for y in updateMatchRule.logisticsCompanyList" >
+                                <option value="{{updateMatchRule.logisticsCompId1}}" selected>{{updateMatchRule.logisticsCompCode1}}</option>
+                                <option value="">已添加物流公司提供选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="divSpace" ng-show="updateMatchRule.ruleTypeVal==0">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">按重量区间设置
+                        </label>
+                    </div>
+                    <div class="ruleDetailList_{{$index}}"  ng-repeat="list in updateMatchRule.ruleDetailList track by $index">
+
+                        <div class="form-group">
+                            <input type="hidden"  name="itemId" value="{{list.id}}">
+                            <label class="col-md-1 control-label">重量：</label>
+                            <div class="col-md-1 ">
+                                <input type="text" class="form-control" name="minWeight" value="{{list.minWeight}}">
+                            </div>
+                            <label class="col-md-1 control-label" >kg~</label>
+                            <div class="col-md-1 " >
+                                <input type="text" class="form-control" name="maxWeight" value="{{list.maxWeight}}">
+                            </div>
+                            <label class="col-md-1 control-label" >kg</label>
+
+                            <label class="col-md-2 control-label">首选物流公司</label>
+                            <div class="col-md-2 ">
+                                <select class="form-control" id="externalLogisticsCompanyId0" ng-model="list.logisticsCompId"
+                                        ng-options="y.id as y.name for y in updateMatchRule.logisticsCompanyList" >
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <div class="col-sm-2">
+                            <a  class="btn btn-xs blue" ng-click="updateMatchRule.addNewRuleDetail()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                            <a  class="btn btn-xs blue" ng-click="updateMatchRule.removeNewRuleDetail()"> 删除
+                                <i class="fa fa-remove "></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="itemId01" value="{{updateMatchRule.lastItemId}}">
+                        <label class="col-md-1 control-label">重量：</label>
+                        <div class="col-md-1 ">
+                            <input type="text" class="form-control" name="minWeight0" value="{{updateMatchRule.lastItemMinWeight}}">
+                        </div>
+                        <label class="col-md-1 control-label" >kg以上</label>
+                        <div class="col-md-1 " >
+
+                        </div>
+                        <label class="col-md-1 control-label" ></label>
+
+                        <label class="col-md-2 control-label">首选物流公司</label>
+                        <div class="col-md-2 ">
+                            <select class="form-control" id="externalLogisticsCompanyId01" ng-model="updateMatchRule.lastLogisticsComp01"
+                                    ng-options="y.id as y.name for y in updateMatchRule.logisticsCompanyList" >
+                                <option value="{{updateMatchRule.lastLogisticsComp.logisticsCompId}}" selected>{{updateMatchRule.lastLogisticsComp.logisticsCompCode}}</option>
+                                <option value="">已添加物流公司提供选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">生效时间</label>
+                        <div class="col-md-6 activeTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="updateMatchRule.add_invalid_time_switch==1">
+                        <label class="col-md-3 control-label">失效时间</label>
+                        <div class="col-md-6 invalidTime" >
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"></label>
+                        <input id="add_foreverFlg" name="foreverFlg" type="hidden">
+                        <div class="col-md-6">
+                            <input id="add_check_flg" type="checkbox" ng-click="updateMatchRule.addCheckFlg()"><span> 永久有效</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="form-actions">
+        <div class="row" style="margin-left: 15px">
+            <div class="col-md-offset-3 col-md-9">
+                <button type="submit" class="btn blue" ng-click="updateMatchRule.submitUser()">确定</button>
+                <button type="cancel" class="btn white" ng-click="updateMatchRule.return()">取消</button>
+            </div>
+        </div>
+    </div>
+</div>

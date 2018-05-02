@@ -1,0 +1,196 @@
+<div>
+    <span class="pageTitle">
+        <i class="fa fa-truck"></i>司机管理
+      </span>
+
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="userName" class="form-control" placeholder="账号"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="nickName" class="form-control" placeholder="司机姓名"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="mobile" class="form-control" placeholder="联系电话"> </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="driverShow.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form btnGroup" style="margin-top: 15px;">
+        <button type="button" class="btn btn-default" ng-click="driverShow.addDrivers()" style="font-weight: inherit">新增
+        </button>
+        <button type="button" class="btn btn-default" ng-click="driverShow.editDrivers()" style="font-weight: inherit">修改</button>
+    </div>
+
+
+    <table-expandable table-column="driverShow.column"  table-page="driverShow.getPage()" table-data="driverShow.data" table-conf="driverShow.pageParams" self-page="false" entity="driverShow.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-pencil" style="margin-right: 10px;"></i>修改
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <form  id="editDriversInfo" class="form-horizontal">
+                    <div class="form-body">
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">司机信息
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text"  data-required="1" readonly ng-model="driverShow.dataInfo.userName" class="form-control"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text"  data-required="1" readonly ng-model="driverShow.dataInfo.nickName" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">拓展信息
+                            </label>
+                            <div class="col-sm-4">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" id="checkbox1_5" name="sex" value="1" checked class="md-radiobtn"  ng-model="driverShow.extData.userSex">
+                                        <label for="checkbox1_5">
+                                            <span class="inc"></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            男
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" id="checkbox1_6" name="sex" value="0" class="md-radiobtn" ng-model="driverShow.extData.userSex">
+                                        <label for="checkbox1_6">
+                                            <span class="inc"></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            女
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">公司职位
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="company" data-required="1" ng-model="driverShow.extData.company"  class="form-control" placeholder="公司(选填)"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="jobTitle" data-required="1"  ng-model="driverShow.extData.jobTitle"  class="form-control" placeholder="职位(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">所在地址
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="province" data-required="1"  ng-model="driverShow.extData.province"  class="form-control" placeholder="所在省(选填)"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="city" data-required="1"  ng-model="driverShow.extData.city"  class="form-control" placeholder="所在市(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="area" data-required="1"  ng-model="driverShow.extData.area"  class="form-control" placeholder="所在区(选填)"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="addressDetail" data-required="1"  ng-model="driverShow.extData.addressDetail"  class="form-control" placeholder="详细地址(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">身份证
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="idCard" data-required="1" ng-model="driverShow.extData.idCard"   class="form-control" placeholder="身份证号(选填)"/>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">驾龄
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="drivingAge" data-required="1"  ng-model="driverShow.extData.drivingAge"  class="form-control" placeholder="驾龄(选填)"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">行驶证号
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="driveLicense" data-required="1" ng-model="driverShow.extData.driveLicense"   class="form-control" placeholder="行驶证号(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">驾驶证号
+                            </label>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="distributeDriveLicense" data-required="1" ng-model="driverShow.extData.distributeDriveLicense"   class="form-control" placeholder="驾驶证号(选填)"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" style="padding-top: 7px">备注
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="remark" data-required="1"  ng-model="driverShow.extData.remark"  class="form-control" placeholder="备注(选填)"/>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="userSex" id="userSex"/>
+                    <input type="hidden" name="userId" value="{{driverShow.userId}}"/>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="driverShow.confirmModify()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

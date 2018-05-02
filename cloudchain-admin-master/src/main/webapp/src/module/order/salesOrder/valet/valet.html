@@ -1,0 +1,397 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>代客下单</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">客户信息
+                            <i class="fa fa-plus" style="font-size: 18px;color: #909090;margin-left: 10px;cursor: pointer" ng-click="valetOrder.addCustomer()"></i>
+                        </label>
+                    </div>
+
+                   <div class="form-group customerInfo" ng-if="valetOrder.customerInfoList!=undefined&&valetOrder.customerInfoList!=''" style="margin-bottom: 0px;height: auto;">
+                       <span style="margin-left:0px;">收货信息:</span>
+                       <input type="hidden" name="originOrder.customerName" value="{{valetOrder.customerInfo.nickName}}"/>
+
+                       <input type="hidden" name="logistics.cneeName"/>
+                       <input type="hidden" name="logistics.cneeMobile"/>
+                       <input type="hidden" name="logistics.provinceId"/>
+                       <input type="hidden" name="logistics.cityId"/>
+                       <input type="hidden" name="logistics.districtId"/>
+                       <input type="hidden" name="logistics.provinceName"/>
+                       <input type="hidden" name="logistics.cityName"/>
+                       <input type="hidden" name="logistics.districtName"/>
+                       <input type="hidden" name="logistics.address"/>
+                     <!--  <span>{{valetOrder.customerInfo.cneeName}}</span>
+                       <span>{{valetOrder.customerInfo.cneeMobile}}</span>
+                       <span>{{valetOrder.customerInfo.province}}{{valetOrder.customerInfo.city}}{{valetOrder.customerInfo.county}}</span>
+                       <span>{{valetOrder.customerInfo.address}}</span>-->
+                       <div class="md-radio-inline" style="margin-top: 14px;">
+                           <div class="md-radio addressRadio" ng-repeat="list in valetOrder.customerInfoList" style="margin-top: 5px;display:block">
+                               <input type="radio" id="checkbox1_{{$index}}" name="address" value="{{list.userId}}" class="md-radiobtn" cneeName={{list.contactName}} cneeMobile="{{list.mobile}}" proId="{{list.province}}" proName="{{list.provinceName}}" cityId="{{list.city}}"  cityName="{{list.cityName}}"  countyId="{{list.county}}"  countyName="{{list.countyName}}" address="{{list.address}}" street="{{list.street}}">
+                               <label for="checkbox1_{{$index}}" style="padding-left: 45px;">
+                                   <span class="inc"></span>
+                                   <span class="check"></span>
+                                   <span class="box"></span>
+                                   {{list.provinceName}} {{list.cityName}} {{list.countyName}} {{list.address}} ({{list.contactName}} 收) {{list.mobile}}
+                               </label>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">商品清单
+                        </label>
+                    </div>
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                            <thead>
+                            <tr>
+                                <th style="width:20%">sku编号</th>
+                                <th style="width:20%">商品名称</th>
+                                <th style="width:10%">数量</th>
+                                <th style="width:20%">单价(元)</th>
+                                <th style="width:10%">总额</th>
+                                <th style="width:10%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="list in valetOrder.goodsList"  class="goods_{{$index}}"finish-repeat>
+                                <td style="width:10%"><input type="hidden" name="originItems[{{$index}}].spuId" value="{{list.spuId}}"/><input type="hidden" name="originItems[{{$index}}].skuId" value="{{list.skuId}}"/>{{list.skuId}}</td>
+                                <td style="width:20%"><input type="hidden" name="originItems[{{$index}}].skuName" value="{{list.skuTitle}}"/>{{list.skuTitle}}</td>
+                                <td style="width:10%"><input type="text" name="originItems[{{$index}}].count" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')" ng-model="list.count"  class="form-control" placeholder="数量" ></td>
+                                <td style="width:20%"><input type="number" min="0" ng-model="list.price" class="form-control" value="{{list.price/100}}" placeholder="单价"></td>
+                                <td style="width:20%"><input type="hidden" name="originItems[{{$index}}].subTotal" class="form-control" value="{{((list.count*list.price) | totwo)*100 | tozero}}">{{list.price*list.count|currency:'￥'}}</td>
+                                <td style="width:10%"><i class="fa fa-remove remove" ng-click="valetOrder.removeGoods($index)"></i></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <div class="col-sm-2">
+                            <!--<a  class="btn btn-xs blue" ng-click="valetOrder.addNewGoods()"> 添加-->
+                                <!--<i class="fa fa-plus"></i>-->
+                            <!--</a>-->
+                            <select-goods text="'添加供应商品'"
+                                          over-click="valetOrder.addGoods()"
+                                          column="valetOrder.column"
+                                          item="valetOrder.selectGoodsentity"
+                                          params="valetOrder.pageParams">
+                            </select-goods>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">结算信息
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">结算方式
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me goodsDeliveryWay" name="originOrder.settlementWay">
+                                <option selected value="0">现结</option>
+                                <option value="1">月结</option>
+                                <option value="2">预付</option>
+                                <option value="3">组合</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-1">支付方式
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me payWay" name="originPay.payWay">
+                                <option selected value="0">在线支付</option>
+                                <option value="1">货到付款</option>
+                                <option value="2">转账汇款</option>
+                                <option value="3">余额支付</option>
+                                <option value="4">积分扣减</option>
+                                <option value="5">现金支付</option>
+                                <option value="6">组合支付</option>
+                                <option value="7">信用支付</option>
+                                <option value="8">刷卡支付</option>
+                            </select>
+                        </div>
+                    </div>
+
+                  <!--  <div class="form-group">
+                        <label class="control-label col-sm-1">发票信息
+                        </label>
+                        <div class="col-sm-11">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox3" name="invoicex" value="0" ng-model="valetOrder.invoicex" class="md-radiobtn">
+                                    <label for="checkbox3">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        普通发票
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox4" name="invoicex" value="1" ng-model="valetOrder.invoicex" class="md-radiobtn">
+                                    <label for="checkbox4">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        增值税发票0
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="form-group" ng-if="valetOrder.invoicex!=3">
+                        <label class="control-label col-sm-1">发票抬头
+                        </label>
+                        <div class="col-sm-3">
+                            <input type="text" name="invoice.invoiceTitle" class="form-control" placeholder="发票抬头">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="divSpace">
+                    <div class="form-group">
+                        <label class="control-label col-sm-12" style="font-weight: bold;font-size: 15px;text-align: left;">物流信息
+                        </label>
+                    </div>
+                    <!--<div class="form-group">
+                        <label class="control-label col-sm-1">收货日期
+                        </label>
+                        <div class="col-sm-2">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>-->
+                    <!--<div class="form-group">
+                        <label class="control-label col-sm-1">配仓方式
+                        </label>
+                        <div class="col-sm-4">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox5" name="warehouse" value="0" ng-model="valetOrder.sendWarehouse" checked class="md-radiobtn">
+                                    <label for="checkbox5">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        智能配仓
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox6" name="warehouse" value="1" ng-model="valetOrder.sendWarehouse" class="md-radiobtn">
+                                    <label for="checkbox6">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        手动配仓
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>-->
+                    <!--<div class="form-group" ng-if="valetOrder.sendWarehouse == 1">
+                        <label class="control-label col-sm-1">仓库
+                        </label>
+                        <div class="col-sm-3">
+                            <select class="form-control select2me goodsDeliveryWay">
+                                <option selected value="">请选择仓库</option>
+                                <option value="0">仓库内货权转移</option>
+                                <option value="1">自提</option>
+                                <option value="2">供应商送货</option>
+                            </select>
+                        </div>
+                    </div>-->
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">配送方式
+                        </label>
+                        <div class="col-sm-11">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox7" name="deliverWay" value="1" ng-model="valetOrder.sendWarehouse" checked class="md-radiobtn">
+                                    <label for="checkbox7">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        自营物流(TMS发运)
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox8" name="deliverWay" value="2" ng-model="valetOrder.sendWarehouse" class="md-radiobtn">
+                                    <label for="checkbox8">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        合作承运商送货
+                                    </label>
+                                </div>
+                          <!--      <div class="md-radio">
+                                    <input type="radio" id="checkbox9" name="deliverWay" value="1" ng-model="valetOrder.sendWarehouse" class="md-radiobtn">
+                                    <label for="checkbox9">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        外部物流(快递)
+                                    </label>
+                                </div>-->
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox10" name="deliverWay" value="3" ng-model="valetOrder.sendWarehouse" class="md-radiobtn">
+                                    <label for="checkbox10">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        买家自提
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">配送金额
+                        </label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="number" data-required="1" class="form-control" name="originOrder.transFee" value="0"/>
+                                <span class="input-group-addon">元</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">备注
+                        </label>
+                        <div class="col-sm-4">
+                            <textarea class="form-control remarks" name="originOrder.remark" rows="3"></textarea>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="invoice.billType" value="1"/>
+                    <input type="hidden" name="invoice.customerId" value="{{valetOrder.customerInfo.userId}}"/>
+                    <input type="hidden" name="originOrder.customerId" value="{{valetOrder.customerInfo.userId}}"/>
+                    <input type="hidden" ng-if="valetOrder.invoicex!=3" name="invoice.invoiceType" value="{{valetOrder.invoicex}}"/>
+                    <input type="hidden" name="logistics.distributionWay" value="{{valetOrder.sendWarehouse}}"/>
+                    <input type="hidden" name="originOrder.actualMoney" id="actualMoney"/>
+                    <input type="hidden" ng-repeat="list in valetOrder.goodsList" name="originItems[{{$index}}].price" value="{{(list.price | totwo)*100| tozero}}"/>
+                    <input type="hidden" name="originOrder.expectedQuantity" id="expectedQuantity"/>
+                    <input type="hidden" name="originOrder.originOrder" value="0"/>
+                    <input type="hidden"  name="originOrder.isInvoice" value="{{valetOrder.invoicex==3?0:1}}"/>
+                    <input type="hidden" name="originOrder.orderFrom" value="0"/>
+                    <input type="hidden" name="originOrder.orderGoods" id="orderGoods"/>
+                    <input type="hidden" name="originOrder.orderState" value="0"/>
+                    <input type="hidden" name="originOrder.orderType" value="0"/>
+                    <input type="hidden" name="originOrder.payMoney" id="payMoney"/>
+                    <input type="hidden" name="originPay.payMoney" id="originPaypayMoney"/>
+
+
+
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="valetOrder.submit()">下单</button>
+                        <button type="cancel" class="btn white"  ng-click="valetOrder.toPurchase()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+</div>
+
+</div>
+
+
+<div class="modal fade" id="selectCustomer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>选择客户
+                </h4>
+            </div>
+            <div class="modal-body">
+              <!--  <div class="col-sm-3">
+                    <div class="form-group">
+                        <select class="form-control select2me ctypes">
+                            <option selected value=" ">选择角色</option>
+                           &lt;!&ndash; <option value="2">会员</option>&ndash;&gt;
+                            <option value="1">分销网点</option>
+                        </select>
+                    </div>
+                </div>-->
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <input type="text" name="cneeName" class="form-control" placeholder="分销网点">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="btn-group">
+                        <button type="button" class="btn blue" ng-click="valetOrder.getPageByFilter()">
+                            搜索
+                        </button>
+                    </div>
+                </div>
+                <table-expandable table-column="valetOrder.columnTwo" search-switch="valetOrder.searchSwitch"  table-page="valetOrder.getPageTwo()" table-data="valetOrder.dataTwo" table-conf="valetOrder.pageParamsTwo"  entity="valetOrder.entityTwo" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="valetOrder.confirmCustomer()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>商品
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <table-expandable table-column="valetOrder.column"  table-page="valetOrder.getPage()" table-data="valetOrder.data" table-conf="valetOrder.pageParams"  entity="valetOrder.entity" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="valetOrder.addGoods()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

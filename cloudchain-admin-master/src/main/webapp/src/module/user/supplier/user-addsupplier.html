@@ -1,0 +1,191 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>新增供应商</span>
+
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+
+                        <div class="divSpace" style="padding-bottom: 12px;">
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">登入账号
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input type="text" ng-model="provideForm.userName" data-required="1" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">昵称
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input ng-model="provideForm.nickName" type="text" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">登入密码
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input ng-model="provideForm.password" type="password" class="form-control" />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="divSpace" style="padding-bottom: 12px;">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">公司
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input name="nickName" ng-model="provideForm.company" type="text"  class="form-control" placeholder="请输入公司名"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">公司简称
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input name="nickName" ng-model="provideForm.ext1" type="text"  class="form-control" placeholder="选填"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group provideAddress">
+                                    <label class="control-label col-md-3 bold">地址
+                                    </label>
+                                    <city-select></city-select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">详细地址
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input name="nickName" ng-model="provideForm.addressDetail" type="text"  class="form-control" />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="divSpace" style="padding-bottom: 12px;">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">联系人
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input name="nickName" ng-model="provideForm.ext3" type="text"  class="form-control" placeholder="联系人姓名"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">联系方式
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input name="nickName" ng-model="provideForm.ext4" type="tel"  class="form-control" placeholder="联系人电话"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">联系人邮箱
+                                    </label>
+                                    <div class="col-md-3">
+                                        <input name="nickName" ng-model="provideForm.ext5" type="text"  class="form-control" placeholder="选填"/>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="divSpace" style="padding-bottom: 12px;">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">供应商类型
+                                    </label>
+                                    <div class="col-md-3">
+                                        <select class="form-control select2me" ng-model="provideForm.ext9">
+                                            <option value="">请选择</option>
+                                            <option value="0">铺仓供应商</option>
+                                            <option value="1">揽件供应商</option>
+                                            <option value="2">代销供应商</option>
+                                            <option value="3">自采供应商</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">供应商等级
+                                    </label>
+                                    <div class="col-md-3">
+                                        <select class="form-control select2me" ng-model="provideForm.ext7">
+                                            <option value="">请选择</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">到货周期
+                                    </label>
+                                    <div class="col-md-3">
+                                        <div class="input-group">
+                                            <input type="number" class="form-control" ng-model="provideForm.ext8"/>
+                                            <span class="input-group-addon">天</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 bold">采购专员
+                                    </label>
+                                    <div class="col-md-3">
+                                        <select class="form-control select2me" ng-change="addSupplier.selectRoleChange()" ng-model="addSupplier.roleSelect">
+                                            <option selected value="">选择角色</option>
+                                            <option ng-repeat="list in addSupplier.roleList" value="{{list.roleId}}">{{list.roleName}}</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-control select2me" ng-change="addSupplier.selectNameChange()" ng-model="addSupplier.nameSelect">
+                                            <option selected value="">选择姓名</option>
+                                            <option ng-repeat="list in addSupplier.nameList" value="{{list.empId}}">{{list.realName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group sendAddress_{{$index}}"  ng-repeat="list in addSupplier.sendAddressList">
+                                    <label class="control-label col-md-3 bold">发货区域<span style="font-weight: bold">({{$index+1}})</span>
+                                    </label>
+                                    <multicity-select></multicity-select>
+                                    <div class="col-sm-2 pull-left addDiv"><i class="fa fa-remove remove" ng-click="addSupplier.removeSend($index)" ng-if="addSupplier.sendAddressList.length>1"></i></div>
+
+                                </div>
+                                <div class="form-group" style="margin-bottom:0px;">
+                                    <label class="control-label col-md-3">
+                                    </label>
+                                    <div class="col-md-3">
+                                        <a  class="btn btn-xs blue" ng-click="addSupplier.addNewSend()"> 添加
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                        </div>
+
+
+
+
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="submitUser()">确定</button>
+                            <button type="cancel" class="btn white" ui-sref="user.supplier">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+
+</div>

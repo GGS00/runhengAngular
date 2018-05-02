@@ -1,0 +1,129 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-tasks"></i>拣货作业</span>
+    <div class="row  firstRow">
+        <div class="col-md-10">
+            <div class="col-md-3" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="code" class="form-control" placeholder="发运单号"></div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="hidden" id="warehouseId"
+                           value="{{outboundPickWork.warehouseEntity.getSelectedRows()[0].ID}}"
+                           id="id_warehouse">
+                    <select-table st-combo="test()" st-text="outboundPickWork.placeholder_warehouseName"
+                                  st-icon="outboundPickWork.icon_warehouse"
+                                  st-value="outboundPickWork.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="outboundPickWork.warehouseColumn"
+                                          table-page="outboundPickWork.warehousePage()"
+                                          table-data="outboundPickWork.warehouseData"
+                                          table-conf="outboundPickWork.warehouseParams"
+                                          self-page="true"
+                                          entity="outboundPickWork.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <!--/span-->
+            <div class="col-md-3">
+                <input type="hidden" id="ownerId"
+                       value="{{outboundPickWork.ownerEntity.getSelectedRows()[0].userId}}"/>
+                <div class="form-group">
+                    <select-table st-combo="test()" st-text="outboundPickWork.placeholder_ownerName"
+                                  st-icon="outboundPickWork.icon_owner"
+                                  st-value="outboundPickWork.ownerEntity.getSelectedRows()[0].nickName">
+                        <table-expandable table-column="outboundPickWork.ownerColumn"
+                                          table-page="outboundPickWork.ownerPage()"
+                                          table-data="outboundPickWork.ownerData"
+                                          table-conf="outboundPickWork.ownerParams"
+                                          self-page="true"
+                                          entity="outboundPickWork.ownerEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" id="status">
+                        <option selected value="">订单状态</option>
+                        <option value="UNFINISHED">未完成</option>
+                        <option value="OPEN">打开</option>
+                        <option value="WORKING">工作中</option>
+                        <option value="FINISHED">完成</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="outboundPickWork.outboundPickWorkFind()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht"  ng-click="outboundPickWork.taskAssign()" style="font-weight: inherit">作业分配</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="outboundPickWork.tasksure()" style="font-weight: inherit">作业确认</button>
+    </div>
+    <table-expandable table-column="outboundPickWork.column" table-page="outboundPickWork.getPage()"
+                      table-data="outboundPickWork.data" table-conf="outboundPickWork.pageParams" self-page="false"
+                      entity="outboundPickWork.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<!--	<select-table st-combo="test()" st-value="outboundPickWork.entity[0].goods_name" st-text="outboundPickWork.placeholder" st-icon="outboundPickWork.icon">
+                    <table-expandable  table-column="outboundPickWork.column"  table-page="outboundPickWork.getPage()" table-data="outboundPickWork.data" table-conf="outboundPickWork.pageParams" self-page="true" entity="outboundPickWork.entity">
+                    </table-expandable>
+                </select-table>-->
+
+
+<div class="modal fade selectCommonContacts" id="Dialog1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">作业分配</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-3">
+                        <div class="form-group">
+                            <input type="hidden" value="{{outboundPickWork.userEntity.getSelectedRows()[0].userName}}"
+                                   id="id_worker">
+                            <select-table st-combo="test()" st-text="outboundPickWork.placeholder_userName"
+                                          st-icon="outboundPickWork.icon_user"
+                                          st-value="outboundPickWork.userEntity.getSelectedRows()[0].userName">
+                                <table-expandable table-column="outboundPickWork.userColumn"
+                                                  table-page="outboundPickWork.userPage()"
+                                                  table-data="outboundPickWork.userData"
+                                                  table-conf="outboundPickWork.userParams"
+                                                  self-page="true"
+                                                  entity="outboundPickWork.userEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundPickWork.add1()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

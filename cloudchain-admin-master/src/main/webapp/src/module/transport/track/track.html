@@ -1,0 +1,139 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-mail-reply"></i>物流追踪</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-4" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="orderCode" placeholder="订单编号"> </div>
+            </div>
+            <!--/span-->
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="wayBillCode" placeholder="运单号">
+                    <!--<select-table st-combo="test()" st-value="tmsOrder.entity.goods_name">
+                        <table-expandable  table-column="tmsOrder.column"  table-page="tmsOrder.getPage()" table-data="tmsOrder.data" table-conf="tmsOrder.pageParams" self-page="true" entity="tmsOrder.entity">
+                        </table-expandable>
+                    </select-table>-->
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="carrierName" placeholder="承运商"> </div>
+            </div>
+
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="logisticsTrack.getPageByFilter()">
+                    搜索
+                </button>
+                <button type="button" class="btn blue dropdown-toggle" style="padding-left: 5px;padding-right:5px;">
+                    <i class="fa fa-angle-down">
+                    </i>
+                </button>
+
+
+             <!--   <div class="btn-group">
+                    <a class="btn btn-default dropdown-toggle btn-operate" data-toggle="dropdown" href="javascript:;">操作
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-click="logisticsTrack.Sign()">签收</a>
+                        </li>
+                        <li>
+                            <a ng-click="logisticsTrack.modify()">修改</a>
+                        </li>
+                    </ul>
+                </div>-->
+
+
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="logisticsTrack.Sign()" style="font-weight: inherit">签收</button>
+        <button type="button" class="btn btn-default" ng-click="logisticsTrack.modify()" style="font-weight: inherit">修改</button>
+    </div>
+
+    <table-expandable table-column="logisticsTrack.column"  table-page="logisticsTrack.getPage()" table-data="logisticsTrack.data" table-conf="logisticsTrack.pageParams" self-page="false"  entity="logisticsTrack.entity">
+    </table-expandable>
+
+
+</div>
+</div>
+
+<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-pencil" style="margin-right: 10px;"></i>修改
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="form-group">
+
+
+                            <label class="control-label col-sm-2" style="padding-top: 7px">司机信息
+                            </label>
+                            <div class="col-sm-4">
+                                <input type="text" name="goodsName" data-required="1" ng-model="logisticsTrack.driverName" class="form-control" placeholder="司机姓名"/>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <input type="text" name="goodsName" data-required="1" ng-model="logisticsTrack.driverTel" class="form-control" placeholder="司机联系方式"/>
+                            </div>
+
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="logisticsTrack.confirmModify()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirmSign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 938px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-pencil" style="margin-right: 10px;"></i>确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                <span>确认签收？</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="logisticsTrack.confirmSign()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

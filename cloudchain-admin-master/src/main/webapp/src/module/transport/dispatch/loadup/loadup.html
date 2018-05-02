@@ -1,0 +1,53 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-sign-out"></i>装车发运</span>
+    <div class="row firstRow">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="disDriveCode" class="form-control" placeholder="派车单号"> </div>
+        </div>
+        <!--/span-->
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="dispatchCode" class="form-control" placeholder="调度单号">
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="vehicleCode" class="form-control" placeholder="车牌号">
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="mainDriverName" class="form-control" placeholder="主司机姓名">
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="mainDriverMobile" class="form-control" placeholder="主司机电话">
+            </div>
+        </div>
+
+        <div class="btn-group col-sm-2">
+            <button type="button" class="btn blue" ng-click="dispatchLoadUp.getPageByFilter()">
+                搜索
+            </button>
+        </div>
+
+
+    </div>
+
+    <div class="search-form btnGroup">
+       <button type="button" class="btn btn-default" ng-click="dispatchLoadUp.toDistribute()"  style="font-weight: inherit">货物装车</button>
+    </div>
+
+    <table-expandable table-column="dispatchLoadUp.column"  table-page="dispatchLoadUp.getPage()" table-data="dispatchLoadUp.data" table-conf="dispatchLoadUp.pageParams" self-page="false" entity="dispatchLoadUp.entity">
+    </table-expandable>
+
+
+</div>
+
+
+

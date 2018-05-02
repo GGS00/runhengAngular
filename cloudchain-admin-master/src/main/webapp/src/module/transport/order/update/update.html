@@ -1,0 +1,564 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>修改运单</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">托运人
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me ownerName" id="ownerNameType" ng-model="editTmsOrder.orderMap.ownerId" name="tmsOrder.ownerId" ng-change="editTmsOrder.ownerChange()">
+                                <option selected value="initOwner">选择货主</option>
+                                <option ng-repeat="list in editTmsOrder.selectList" value="{{list.userId}}"  userType="{{list.userType}}">{{list.nickName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+                    <div ng-repeat="list in editTmsOrder.goodsList" class="goods_{{$index}}">
+                        <div class="form-group">
+                            <label class="control-label col-sm-1">货物<span style="font-weight: bold">({{$index+1}})</span>
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" value="{{list.goods_name}}" name="orderGoodsList[{{$index}}].goodsName" data-required="1" class="form-control" placeholder="货物名称"/>
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text"  value="{{list.goods_type}}" name="orderGoodsList[{{$index}}].goodsType" data-required="1" class="form-control" placeholder="规格型号" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-sm-1">
+                            </label>
+
+                            <div class="col-sm-2">
+                                <div class="input-group" style="display: flex">
+                                    <input type="number" value="{{list.box_quantity}}" name="orderGoodsList[{{$index}}].boxQuantity" data-required="1" class="form-control" placeholder="数量" style="border-right: none;" />
+                                    <select class="form-control select2me goodsCountUnit" ng-model="list.unit" name="orderGoodsList[{{$index}}].unit">
+                                        <option ng-repeat="list in editTmsOrder.unitList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="number" value="{{list.weight}}" name="orderGoodsList[{{$index}}].weight" data-required="1" class="form-control" placeholder="重量小计" />
+                                    <span class="input-group-addon">吨</span>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="number" value="{{list.volume}}" name="orderGoodsList[{{$index}}].volume" data-required="1" class="form-control" placeholder="体积" />
+                                    <span class="input-group-addon">m<sup>3</sup></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2 pull-left addDiv"><i class="fa fa-align-justify addHistory" ng-click="editTmsOrder.showGodds($index)"></i><i class="fa fa-remove remove" ng-click="editTmsOrder.removeGoods($index)" ng-if="editTmsOrder.goodsList.length>1"></i></div>
+
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <label class="control-label col-sm-1">
+                        </label>
+                        <div class="col-sm-2">
+                            <a  class="btn btn-xs blue" ng-click="editTmsOrder.addNewGoods()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">发货方
+                        </label>
+                        <input type="hidden" name="fromCid" value="{{editTmsOrder.fromReceiverCCId==undefined?'':editTmsOrder.fromReceiverCCId}}"/>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverName" value="{{editTmsOrder.orderMap.fromReceiverName}}" data-required="1" class="form-control" placeholder="发货方名"/>
+                        </div>
+                        <div class="col-sm-1 pull-left addDiv"><i class="fa fa-user-plus addHistory" ng-click="editTmsOrder.showOwner(2,1)"></i> </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">发货人
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverCContactor" value="{{editTmsOrder.orderMap.fromReceiverContact.contactor}}"  data-required="1" class="form-control" placeholder="姓名"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverCMobile" value="{{editTmsOrder.orderMap.fromReceiverContact.mobile}}" data-required="1" class="form-control" placeholder="手机或座机号码" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">发货地
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverCProvince" readonly value="{{editTmsOrder.orderMap.fromReceiverContact.province}}" data-required="1" class="form-control" placeholder="所在省" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverCCity" readonly value="{{editTmsOrder.orderMap.fromReceiverContact.city}}" data-required="1" class="form-control" placeholder="所在市" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverCDistrict" readonly value="{{editTmsOrder.orderMap.fromReceiverContact.district}}" data-required="1" class="form-control" placeholder="所在区" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.fromReceiverCAddress" value="{{editTmsOrder.orderMap.fromReceiverContact.address}}" data-required="1" class="form-control" placeholder="街道" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">发货时间
+                        </label>
+                        <div class="col-sm-3 senderTime">
+                            <!--<input type="text" name="name" data-required="1" class="form-control"/>-->
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="divSpace">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">收货方
+                        </label>
+                        <input type="hidden" name="toCid" value="{{editTmsOrder.toReceiverCCId==undefined?'':editTmsOrder.toReceiverCCId}}"/>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverName" value="{{editTmsOrder.orderMap.toReceiverName}}" data-required="1" class="form-control" placeholder="收货方名"/>
+                        </div>
+                        <div class="col-sm-1 pull-left addDiv"><i class="fa fa-user-plus addHistory" ng-click="editTmsOrder.showOwner(2,2)"></i> </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">收货人
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverCContactor" value="{{editTmsOrder.orderMap.toReceiverContact.contactor}}" data-required="1" class="form-control" placeholder="姓名"/>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverCMobile" value="{{editTmsOrder.orderMap.toReceiverContact.mobile}}" data-required="1" class="form-control" placeholder="手机或座机号码" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">收货地
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverCProvince" readonly value="{{editTmsOrder.orderMap.toReceiverContact.province}}" data-required="1" class="form-control" placeholder="所在省" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverCCity" readonly value="{{editTmsOrder.orderMap.toReceiverContact.city}}" data-required="1" class="form-control" placeholder="所在市" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverCDistrict" readonly value="{{editTmsOrder.orderMap.toReceiverContact.district}}" data-required="1" class="form-control" placeholder="所在区" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="tmsOrder.toReceiverCAddress"  value="{{editTmsOrder.orderMap.toReceiverContact.address}}" data-required="1" class="form-control" placeholder="街道" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">收货时间
+                        </label>
+                        <div class="col-sm-3 receiverTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divSpace">
+
+                    <div class="form-group" ng-if="editTmsOrder.orderMap.ownerId!='initOwner'">
+                        <label class="control-label col-sm-1">单据类型
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me billTypeId" name="tmsOrder.billTypeId" ng-model="editTmsOrder.orderMap.billType.id">
+                                <!--<option selected value="">请选择</option>-->
+                                <option ng-repeat="list in editTmsOrder.billTypeList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">订单金额
+                        </label>
+                        <div class="col-sm-4">
+                            <div class="md-radio-inline">
+                                <!--<div class="md-radio">
+                                    <input type="radio" id="checkbox1_3" name="pay" value="1" class="md-radiobtn" ng-model="editTmsOrder.fee.fee_type">
+                                    <label for="checkbox1_3">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        按单价
+                                    </label>
+                                </div>-->
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_4" name="pay" value="0"  class="md-radiobtn" ng-model="editTmsOrder.fee.fee_type">
+                                    <label for="checkbox1_4">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        按整单
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--按单价的计算方式页面-->
+                    <div ng-if="editTmsOrder.fee.fee_type == 1" style="margin-bottom: 20px;">
+                        <div class="form-group">
+                            <label class="control-label col-sm-1">
+                            </label>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    计费科目
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    单价（元）
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    小计（元）
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    说明
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-repeat="list in editTmsOrder.payList">
+                            <label class="control-label col-sm-1" style="font-weight: bold">{{$index+1}}
+                            </label>
+                            <div class="col-sm-2">
+
+                                <select class="form-control select2me">
+                                    <option selected value="0">选择方式</option>
+                                    <option value="2">手动</option>
+                                    <option value="3">自动1</option>
+                                    <option value="4">自动2</option>
+                                    <option value="5">自动3</option>
+                                </select>
+
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="number" name="singleUnitPrice" data-required="1" class="form-control" placeholder="单价" />
+                            </div>
+
+                            <div class="col-sm-2">
+                                <input type="number" name="singleSubtotal" data-required="1" class="form-control" placeholder="小计" />
+                            </div>
+                            <div class="col-sm-2">
+                                <input type="text" name="singleDescribe" data-required="1" class="form-control" placeholder="说明" />
+                            </div>
+                            <div class="col-sm-2 pull-left addDiv"><i class="fa fa-remove remove" ng-click="editTmsOrder.removePay($index)" ng-if="editTmsOrder.payList.length>1"></i></div>
+
+                        </div>
+                        <div class="form-group" style="margin-bottom:0px;">
+                            <label class="control-label col-sm-1">
+                            </label>
+                            <div class="col-sm-2">
+                                <a  class="btn btn-xs blue" ng-click="editTmsOrder.addNewPay()"> 添加
+                                    <i class="fa fa-plus"></i>
+                                </a>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="totalMoney">总计：<span class="font-red singleMoneyNum"></span>元</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--按整单的计算方式页面-->
+                    <div ng-if="editTmsOrder.fee.fee_type == 0">
+                        <div class="form-group">
+                            <label class="control-label col-sm-1">总运费
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="number" ng-model="editTmsOrder.fee.total_fee"  name="tmsOrderFee.totalFee" data-required="1" class="form-control" placeholder="小计（元）" />
+                            </div>
+                            <div class="col-sm-3">
+                                <label class="control-label totalMoney">总计：<span class="font-red wholeMoneyNum">{{editTmsOrder.fee.total_fee}}</span>元</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">付款方式
+                        </label>
+                        <div class="col-sm-2">
+                            <input type="number" value="{{editTmsOrder.fee.cash_fee==0?'':editTmsOrder.fee.cash_fee}}" name="tmsOrderFee.cashFee" data-required="1" class="form-control" placeholder="现付" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" value="{{editTmsOrder.fee.to_pay_fee==0?'':editTmsOrder.fee.to_pay_fee}}" name="tmsOrderFee.toPayFee" data-required="1" class="form-control" placeholder="到付" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" value="{{editTmsOrder.fee.receipt_fee==0?'':editTmsOrder.fee.receipt_fee}}" name="tmsOrderFee.receiptFee" data-required="1" class="form-control" placeholder="回单付" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" value="{{editTmsOrder.fee.monthly_fee==0?'':editTmsOrder.fee.monthly_fee}}" name="tmsOrderFee.monthlyFee" data-required="1" class="form-control" placeholder="月结" />
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="number" value="{{editTmsOrder.fee.receiver_pay_fee==0?'':editTmsOrder.fee.receiver_pay_fee}}"  name="tmsOrderFee.receiverPayFee" data-required="1" class="form-control" placeholder="收货方付" />
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="divSpace">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">发票
+                        </label>
+                        <div class="col-sm-4">
+                            <div class="md-radio-inline xxxx">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_5" name="invoice" value="0" checked class="md-radiobtn" ng-model="editTmsOrder.orderMap.invoice">
+                                    <label for="checkbox1_5">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        不开票
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_6" name="invoice" value="1" class="md-radiobtn" ng-model="editTmsOrder.orderMap.invoice">
+                                    <label for="checkbox1_6">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        开票
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">回单要求
+                        </label>
+                        <div class="col-sm-4">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_8" name="receipt" value="0"  checked class="md-radiobtn"  ng-model="editTmsOrder.orderMap.receiptType">
+                                    <label for="checkbox1_8">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        不需要回单
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_9" name="receipt" value="1" class="md-radiobtn" ng-model="editTmsOrder.orderMap.receiptType">
+                                    <label for="checkbox1_9">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        货物托运单
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_10" name="receipt" value="3" class="md-radiobtn" ng-model="editTmsOrder.orderMap.receiptType">
+                                    <label for="checkbox1_10">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        发货单
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">备注
+                        </label>
+                        <div class="col-sm-4">
+                            <textarea  class="form-control remarks" id="remarks" name="tmsOrder.description" rows="3"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!-- <input type="hidden" name="tmsOrder.planShipTime" value="{{newWaybill.senderTime}}"/>-->
+                <input type="hidden" name="tmsOrder.planShipTime" id="planShipTime"/>
+                <input type="hidden" name="tmsOrder.planArrivalTime" id="planArrivalTime"/>
+                <input type="hidden" name="tmsOrderFee.feeType" id="feeType"/>
+                <input type="hidden" name="tmsOrder.invoice" id="invoice"/>
+                <input type="hidden" name="tmsOrder.id" id="tmsOrderId"/>
+                <input type="hidden" name="tmsOrderFee.id" id="tmsOrderFeeId"/>
+                <input type="hidden" name="tmsOrder.ownerName" id="ownerName"/>
+
+
+                <!--   <input type="hidden" name="tmsOrder.planArrivalTime" value="{{newWaybill.tmsOrder.planArrivalTime}}"/>
+                   <input type="hidden" name="tmsOrderFee.feeType" value="{{newWaybill.tmsOrderFee.feeType}}"/>
+                   <input type="hidden" name="tmsOrder.invoice" value="{{newWaybill.tmsOrder.invoice}}"/>
+                   <input type="hidden" name="tmsOrder.receiptType" value="{{newWaybill.tmsOrder.receiptType}}"/>-->
+
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="editTmsOrder.submit()">修改</button>
+                        <button type="cancel" class="btn white"  ng-click="editTmsOrder.toTmsOrder()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+</div>
+
+</div>
+
+<div class="modal fade" id="selectCommonAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>常用地址
+                </h4>
+            </div>
+            <div class="modal-body" ng-if="editTmsOrder.contactorSwitch==1">
+                <button type="button" class="btn white"  ng-click="editTmsOrder.addressType()" style="font-weight: inherit">新增地址</button>
+                <div class="addressDiv" style="display:none;margin-top: 14px;height: 290px;background: #E6E6E6">
+                    <div class="modal-body">
+                        <div  class="row">
+                            <div class="form-group">
+
+                                <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">所属公司<span class="required"aria-required="true"> * </span>
+                                </label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="newCompanyName" class="form-control" placeholder="请输入公司名">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div  class="row">
+                            <div class="form-group">
+
+                                <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px;    margin-top: 7px;">联系人<span class="required"aria-required="true"> * </span>
+                                </label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="newContactorName" class="form-control" placeholder="请输入联系人">
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="row">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">联系电话<span class="required"aria-required="true"> * </span>
+                                </label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="newContactMobile" class="form-control" placeholder="请输入联系电话">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div  class="row">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">所在地区<span class="required"aria-required="true"> * </span>
+                                </label>
+                                <div class="col-sm-9 provideAddress" style="margin-left: -15px;">
+                                    <city-select></city-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div  class="row">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2 col-md-offset-1" style="margin-right: -31px; margin-top: 7px;">详细地址<span class="required"aria-required="true"> * </span>
+                                </label>
+                                <div class="col-sm-5">
+                                    <input type="text" name="newContactorAddress" class="form-control" placeholder="请输入街道地址">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-2 col-md-offset-1"></div>
+                            <button type="button" class="btn blue"  ng-click="editTmsOrder.confirmAddNewCommonContactor()" style="font-weight: inherit;    margin-left: -15px;">添加</button>
+                        </div>
+                    </div>
+                </div>
+                <table-expandable table-column="editTmsOrder.columnTwo" search-switch="editTmsOrder.searchSwitch"  table-page="editTmsOrder.getPageTwo()" table-data="editTmsOrder.dataTwo" table-conf="editTmsOrder.pageParamsTwo"  entity="editTmsOrder.entityTwo" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="editTmsOrder.addAddress()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectCommonGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>常用货物
+                </h4>
+            </div>
+            <div class="modal-body">
+                <button type="button" class="btn white"  ng-click="editTmsOrder.addNewCommonAddress()" style="font-weight: inherit">新增货品</button>
+                <div class="newAddressInfo" style="display:none;margin-top: 18px;margin-left: -15px;">
+                    <div class="col-sm-2">
+                        <input type="text"  name="newgoodsName" data-required="1" class="form-control" placeholder="商品名称"/>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control select2me newgoodsCountUnit">
+                            <option ng-repeat="list in editTmsOrder.unitList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn blue"  ng-click="editTmsOrder.confirmAddNewCommonAddress()" style="font-weight: inherit">添加</button>
+                </div>
+                <table-expandable table-column="editTmsOrder.columnThree" search-switch="editTmsOrder.searchSwitch"  table-page="editTmsOrder.getPageThree()" table-data="editTmsOrder.dataThree" table-conf="editTmsOrder.pageParamsThree"  entity="editTmsOrder.entityThree" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="editTmsOrder.addGoods()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

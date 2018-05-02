@@ -1,0 +1,274 @@
+<div>
+    <span class="pageTitle"></i>客户资料审核</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="lmsCustomer">
+            <div class="col-md-12">
+                <div class="col-md-3 col-left">
+                    <input type="hidden" name="customer.id" value="{{approveApplyCredit.data.customer.id}}" >
+                    <div class="form-group">
+                        <input type="text" name="customer.code" class="form-control" placeholder="编码" ng-readonly="true"  value="{{approveApplyCredit.data.customer.code}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" >
+                    <div class="form-group">
+                        <input type="text" name="customer.name" class="form-control" placeholder="名称" value="{{approveApplyCredit.data.customer.name}}" >
+                    </div>
+                </div>
+              <!--  <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].name}}"
+                               id="id_name" name ="loanRuleName" value="{{approveApplyCredit.data.code}}" >
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].code}}"
+                               id="id_code" name ="loanRuleCode" value="{{approveApplyCredit.data.code}}" >
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].id}}"
+                               id="id_id" name ="loanRuleId" value="{{approveApplyCredit.data.code}}" >
+                        <select-table st-combo="test()" st-text="addCustomer.placeholder_loanRuleName"
+                                      st-icon="addCustomer.icon_loanRule"
+                                      st-value="addCustomer.loanRuleEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="addCustomer.loanRuleColumn"
+                                              table-page="addCustomer.loanRulePage()"
+                                              table-data="addCustomer.loanRuleData"
+                                              table-conf="addCustomer.loanRuleParams"
+                                              self-page="true"
+                                              entity="addCustomer.loanRuleEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+               &lt;!&ndash; <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="excessRuleId" class="form-control" placeholder="超额规则">
+                    </div>
+                </div>&ndash;&gt;
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity2.getSelectedRows()[0].id}}"
+                               id="id_excessId" name ="excessRuleId">
+                        <select-table st-combo="test()" st-text="placeholder_excessRuleName"
+                                      st-icon="addCustomer.icon_loanRule"
+                                      st-value="addCustomer.loanRuleEntity2.getSelectedRows()[0].name">
+                            <table-expandable table-column="addCustomer.loanRuleColumn"
+                                              table-page="addCustomer.loanRulePage()"
+                                              table-data="addCustomer.loanRuleData"
+                                              table-conf="addCustomer.loanRuleParams"
+                                              self-page="true"
+                                              entity="addCustomer.loanRuleEntity2">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>-->
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.basicAmount" class="form-control" placeholder="基础额度" value="{{approveApplyCredit.data.customer.basicAmount}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="状态"
+                               value="{{approveApplyCredit.data.customer.status=='ACTIVE'?'生效':(approveApplyCredit.data.customer.status=='INVALID'?'失效':approveApplyCredit.data.customer.status)}}" ng-readonly="true" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="type" name="type" class="form-control">
+                            <option value="{{approveApplyCredit.data.customer.type}}" selected>{{approveApplyCredit.data.customer.type=="PERSON"?"个人":(approveApplyCredit.data.customer.type=="LEGAL"?"法人":(approveApplyCredit.data.customer.type=="COMPANY"?"公司":(approveApplyCredit.data.customer.type=="GROUP"?"集团":approveApplyCredit.data.customer.type)))}}</option>
+                            <option value="PERSON">个人</option>
+                            <option value="LEGAL">法人</option>
+                            <option value="COMPANY">公司</option>
+                            <option value="GROUP">集团</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select class="form-control" id="pickStatus " name="certType" >
+                            <option value="{{approveApplyCredit.data.customer.certType}}" selected>{{approveApplyCredit.data.customer.certType=="ID"?"身份证":(approveApplyCredit.data.customer.certType=="BUSINESS"?"营业执照":(approveApplyCredit.data.customer.certType=="PASSPORT"?"护照":(approveApplyCredit.data.customer.certType=="OFFICERS"?"军官证":approveApplyCredit.data.customer.certType)))}}</option>
+                            <option value="ID">身份证</option>
+                            <option value="BUSINESS">营业执照</option>
+                            <option value="PASSPORT">护照</option>
+                            <option value="OFFICERS">军官证</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.certNo" class="form-control" placeholder="证件号" value="{{approveApplyCredit.data.customer.certNo}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="sex" name="sex" class="form-control" >
+                            <option value="{{approveApplyCredit.data.customer.sex}}" selected>{{approveApplyCredit.data.customer.sex=="1"?"男":(approveApplyCredit.data.customer.sex=="0"?"女":approveApplyCredit.data.customer.sex)}}</option>
+                            <option value="1">男</option>
+                            <option value="0">女</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.age" class="form-control" placeholder="年龄" value="{{approveApplyCredit.data.customer.age}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="maritalStatus" name="maritalStatus" class="form-control" >
+                            <option value="{{approveApplyCredit.data.customer.maritalStatus}}" selected>{{approveApplyCredit.data.customer.maritalStatus=="MARRIED"?"已婚":(approveApplyCredit.data.customer.maritalStatus=="UNMARRIED"?"未婚":(approveApplyCredit.data.customer.maritalStatus=="DIVORCE"?"离异":approveApplyCredit.data.customer.maritalStatus))}}</option>
+                            <option value="MARRIED">已婚</option>
+                            <option value="UNMARRIED">未婚</option>
+                            <option value="DIVORCE">离异</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.nativePlace" class="form-control" placeholder="籍贯" value="{{approveApplyCredit.data.customer.nativePlace}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.residentCity" class="form-control" placeholder="户口所在地" value="{{approveApplyCredit.data.customer.residentCity}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.postcode" class="form-control" placeholder="邮编" value="{{approveApplyCredit.data.customer.postcode}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.phone" class="form-control" placeholder="联系电话" value="{{approveApplyCredit.data.customer.phone}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.address" class="form-control" placeholder="地址" value="{{approveApplyCredit.data.customer.address}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="loanType" name="loanType" class="form-control"  >
+                            <option value="{{approveApplyCredit.data.customer.loanType}}" selected>{{approveApplyCredit.data.customer.loanType=="ORDER_FINANCE"?"单好贷":(approveApplyCredit.data.customer.loanType=="INVENTORY_FINANCE"?"货好贷":approveApplyCredit.data.customer.loanType)}}</option>
+                            <option value="ORDER_FINANCE">单好贷</option>
+                            <option value="INVENTORY_FINANCE">货好贷</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.bankName" class="form-control" placeholder="开户行" value="{{approveApplyCredit.data.customer.bankName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.accountName" class="form-control" placeholder="账号名" value="{{approveApplyCredit.data.customer.accountName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.bankAccount" class="form-control" placeholder="银行账号" value="{{approveApplyCredit.data.customer.bankAccount}}" >
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="pTitle">单位信息</p>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.businessLicenseNo" class="form-control" placeholder="营业执照号" value="{{approveApplyCredit.data.customer.businessLicenseNo}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgCode" class="form-control" placeholder="工作单位代码" value="{{approveApplyCredit.data.customer.orgCode}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgName" class="form-control" placeholder="工作单位名称" value="{{approveApplyCredit.data.customer.orgName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgPostcode" class="form-control" placeholder="工作单位邮编" value="{{approveApplyCredit.data.customer.orgPostcode}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgTel" class="form-control" placeholder="工作单位联系电话" value="{{approveApplyCredit.data.customer.orgTel}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgAddress" class="form-control" placeholder="工作单位地址" value="{{approveApplyCredit.data.customer.orgAddress}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.legelPersonIdNo" class="form-control" placeholder="法人身份证号" value="{{approveApplyCredit.data.customer.legelPersonIdNo}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgAccountName" class="form-control" placeholder="工作单位账号名" value="{{approveApplyCredit.data.customer.orgAccountName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgBankAccount" class="form-control" placeholder="工作单位银行账号" value="{{approveApplyCredit.data.customer.orgBankAccount}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.orgBankName" class="form-control" placeholder="工作单位开户行" value="{{approveApplyCredit.data.customer.orgBankName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="customer.description" class="form-control" placeholder="备注" value="{{approveApplyCredit.data.customer.description}}" >
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="pTitle">审核信息</p>
+                </div>
+                <input type="hidden" name="id" value="{{approveApplyCredit.data.id}}" >
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="checkStatus" name="checkStatus" class="form-control">
+                            <option value="STATUS_CHECK_PASS" selected>通过</option>
+                            <option value="CHECK_FAIL">不通过</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="checkOption1" class="form-control" placeholder="审核意见" value="{{approveApplyCredit.data.checkOption1}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" placeholder="备注" value="{{approveApplyCredit.data.description}}" >
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="inboundConfirmButton" type="submit" class="btn blue" ng-click="approveApplyCredit.approve()">审批提交</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white" ng-click="approveApplyCredit.returnButton()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

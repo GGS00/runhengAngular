@@ -1,0 +1,154 @@
+<style>
+    md-tabs .md-tab.md-active{
+        color: #DE5D43;
+        font-weight:bold;
+    }
+</style>
+<div class="topLine"></div>
+<div class="row" style="color: #7E7E7E;padding: 20px 20px 10px 20px;width: 1190px;margin: 10px auto;">
+    <div class="mbxue">
+        <span ng-click="d2wsourcedetail.toWaresource()" style="cursor:pointer">仓源</span> > {{d2wsourcedetail.detailData.warehouseName}}
+        <span class="toOrder" ng-click="toOrder()" ng-if="d2wsourcedetail.isLogin == 1">下单</span>
+    </div>
+    <div class="htmleaf-container">
+        <div class="contentBox">
+            <div class="slider-container">
+                <div class="slider">
+                    <div class="slider__item" ng-repeat="list in d2wsourcedetail.detailData.imgs" img-repeat>
+                        <img ng-if="list.img!=null"  ng-src="{{list.img}}" alt="{{list.img}}" style="height: 336px;">
+                        <img ng-if="list.img==null"  src="../assets/pages/img/d2w/warehouse.jpg" style="height: 336px;">
+                    </div>
+                </div>
+                <div class="slider__switch slider__switch--prev" data-ikslider-dir="prev">
+                    <span><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20"><path d="M13.89 17.418c.27.272.27.71 0 .98s-.7.27-.968 0l-7.83-7.91c-.268-.27-.268-.706 0-.978l7.83-7.908c.268-.27.7-.27.97 0s.267.71 0 .98L6.75 10l7.14 7.418z"/></svg></span>
+                </div>
+                <div class="slider__switch slider__switch--next" data-ikslider-dir="next">
+                    <span><svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20"><path d="M13.25 10L6.11 2.58c-.27-.27-.27-.707 0-.98.267-.27.7-.27.968 0l7.83 7.91c.268.27.268.708 0 .978l-7.83 7.908c-.268.27-.7.27-.97 0s-.267-.707 0-.98L13.25 10z"/></svg></span>
+                </div>
+            </div>
+            <div class="preview" >
+                <a ng-repeat="list in d2wsourcedetail.detailData.imgs" href="#{{$index+1}}" img-repeat><img ng-if="list.img!=null" ng-src="{{list.img}}" alt="" /><img ng-if="list.img==null" src="../assets/pages/img/d2w/warehouse.jpg" alt="" /></a>
+            </div>
+        </div>
+
+        <div class="contentDesc">
+            <div class="contentDesc-1">
+                <h3>{{d2wsourcedetail.detailData.warehouseName}}</h3>
+                <p>仓库编号：{{d2wsourcedetail.detailData.id}}</p>
+            </div>
+            <div class="contentDesc-2">
+                <div class="contentDesc-2-float" style="margin-top:0px">
+                    <span class="contentDesc-2-float-title">租金</span>
+                    <span class="contentDesc-2-float-desc">{{d2wsourcedetail.detailData.rentPrice<0?'-':d2wsourcedetail.detailData.rentPrice/100}}元/m<sup>2</sup>/{{d2wsourcedetail.detailData.chargingRule==0?d2wsourcedetail.detailData.cycle+'天':(d2wsourcedetail.detailData.chargingRule==1?'日':(d2wsourcedetail.detailData.chargingRule==2?'月':''))}} 起</span>
+                </div>
+                <div class="contentDesc-2-float">
+                    <span class="contentDesc-2-float-title">总面积</span>
+                    <span class="contentDesc-2-float-desc">50000m<sup>2</sup></span>
+                </div>
+                <div class="contentDesc-2-float">
+                    <span class="contentDesc-2-float-title">可租面积</span>
+                    <span class="contentDesc-2-float-desc">{{d2wsourcedetail.detailData.storageSqm}}m<sup>2</sup></span>
+                </div>
+            </div>
+            <div class="contentDesc-3">
+                <div class="contentDesc-3-content">
+                    <span class="contentDesc-3-content-title">仓库面积：</span>
+                    <span class="contentDesc-3-content-desc">50000m<sup>2</sup></span>
+                </div>
+                <div class="contentDesc-3-content">
+                    <span class="contentDesc-3-content-title">起租面积：</span>
+                    <span class="contentDesc-3-content-desc">500m<sup>2</sup></span>
+                </div>
+                <div class="contentDesc-3-content">
+                    <span class="contentDesc-3-content-title">地理位置：</span>
+                    <span class="contentDesc-3-content-desc">{{d2wsourcedetail.detailData.provinceName}}-{{d2wsourcedetail.detailData.cityName}}-{{d2wsourcedetail.detailData.districtName}}-{{d2wsourcedetail.detailData.address}}</span>
+                </div>
+                <div class="contentDesc-3-content">
+                    <span class="contentDesc-3-content-title">模&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;式：</span>
+                    <span class="contentDesc-3-content-desc">{{d2wsourcedetail.detailData.warehouseAreaType==01?"普通":(d2wsourcedetail.detailData.warehouseAreaType==02?"冷藏":(d2wsourcedetail.detailData.warehouseAreaType==03?"恆溫":(d2wsourcedetail.detailData.warehouseAreaType==04?"特种":(d2wsourcedetail.detailData.warehouseAreaType==05?"气调":""))))}}</span>
+                </div>
+                <div class="contentDesc-3-content">
+                    <span class="contentDesc-3-content-title">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;坪：</span>
+                    <span class="contentDesc-3-content-desc">金刚砂</span>
+                </div>
+            </div>
+            <div class="contentDesc-4">
+                <span class="contactIme">
+                    <a ng-click="toOrder()" ng-if="d2wsourcedetail.isLogin == 1" style="margin-right: 8px;">下单</a>
+                </span>
+                <span class="contactIme">
+                    <a target="_blank" href="http://wpa.qq.com/msgrd?v=1&uin=3588415131&site=qq&menu=yes">立即咨询</a>
+                </span>
+                <span class="contactTel">
+                    <i class="iconfont icon-dianhua"></i>
+                    <span>025-52307887</span>
+                </span>
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        <md-content style="background: #fff;padding: 0px 20px 10px 20px;width: 1190px;margin:0 auto">
+            <md-tabs md-dynamic-height md-border-bottom>
+                <md-tab label="园区概述" class="wareSource" >
+                    <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                        <div style="padding:0px">
+                            <div class="mdContent-1">
+                                <h3>园区概述</h3>
+                                <p>项目坐落于{{d2wsourcedetail.detailData.provinceName}}{{d2wsourcedetail.detailData.cityName}}{{d2wsourcedetail.detailData.districtName}}{{d2wsourcedetail.detailData.address}}，仓库类型为{{d2wsourcedetail.detailData.warehouseAreaType==01?"普通":(d2wsourcedetail.detailData.warehouseAreaType==02?"冷藏":(d2wsourcedetail.detailData.warehouseAreaType==03?"恆溫":(d2wsourcedetail.detailData.warehouseAreaType==04?"特种":(d2wsourcedetail.detailData.warehouseAreaType==05?"气调":""))))}}，建设面积50000m<sup>2</sup>，园区主干道宽40米，温度范围为{{d2wsourcedetail.detailData.temperatureRange==null?'-':d2wsourcedetail.detailData.temperatureRange.split('-')[0]}}~{{d2wsourcedetail.detailData.temperatureRange==null?'-':d2wsourcedetail.detailData.temperatureRange.split('-')[1]}}℃。</p>
+                            </div>
+                            <div class="mdContent-2">
+                                <h3>基本信息</h3>
+                                <div class="mdContent-2-content">
+                                    <div class="mdContent-2-desc" style="width:17%">
+                                        参数
+                                    </div>
+                                    <div class="mdContent-2-desc">
+                                        <div class="mdContent-2-desc-text" style="margin-top: 0;"><span class="mdContent-2-desc-title">仓库个数：</span><span class="mdContent-2-desc-font">4个</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">底层承重：</span><span class="mdContent-2-desc-font">5吨/m<sup>2</sup></span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">主干道宽度：</span><span class="mdContent-2-desc-font">40米</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">建筑结构：</span><span class="mdContent-2-desc-font">钢结构</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">服务：</span><span class="mdContent-2-desc-font">配送 库内操作</span></div>
+                                    </div>
+                                    <div class="mdContent-2-desc">
+                                        <div class="mdContent-2-desc-text" style="margin-top: 0;"><span class="mdContent-2-desc-title">园区资质：</span><span class="mdContent-2-desc-font">产权证 土地使用证 消防证</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">二层以上承重：</span><span class="mdContent-2-desc-font">-</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">卸货平台：</span><span class="mdContent-2-desc-font">双面</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">仓库高度：</span><span class="mdContent-2-desc-font">8-11米</span></div>
+                                    </div>
+                                </div>
+                                <div class="mdContent-2-content" style="height: 98px;">
+                                    <div class="mdContent-2-desc" style="width:17%">
+                                        设施
+                                    </div>
+                                    <div class="mdContent-2-desc">
+                                        <div class="mdContent-2-desc-text" style="margin-top: 0;"><span class="mdContent-2-desc-title">是否通水：</span><span class="mdContent-2-desc-font">是</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">是否有雨棚：</span><span class="mdContent-2-desc-font">是</span></div>
+                                    </div>
+                                    <div class="mdContent-2-desc">
+                                        <div class="mdContent-2-desc-text" style="margin-top: 0;"><span class="mdContent-2-desc-title">是否配电（380V）：</span><span class="mdContent-2-desc-font">是</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">其他：</span><span class="mdContent-2-desc-font">通风 防尘 停车场</span></div>
+                                    </div>
+                                </div>
+                                <div class="mdContent-2-content" style="height: 88px;">
+                                    <div class="mdContent-2-desc" style="width:17%">
+                                        安防
+                                    </div>
+                                    <div class="mdContent-2-desc">
+                                        <div class="mdContent-2-desc-text" style="margin-top: 0;"><span class="mdContent-2-desc-title">消防设备：</span><span class="mdContent-2-desc-font">消防栓 灭火器</span></div>
+                                        <div class="mdContent-2-desc-text"><span class="mdContent-2-desc-title">安保系统：</span><span class="mdContent-2-desc-font">监控 安保人员</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="mdContent-3">
+                                <h3>地理位置</h3>
+                            </div>-->
+                        </div>
+                    </md-content>
+                </md-tab>
+            </md-tabs>
+        </md-content>
+    </div>
+
+</div>

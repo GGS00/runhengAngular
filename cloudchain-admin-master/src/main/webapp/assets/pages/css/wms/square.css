@@ -1,0 +1,224 @@
+.square_title{
+    font-size: 18px;
+    font-weight: 700;
+    color: #8e9daa;
+    margin: 0 0 12px;
+    text-align: center;
+}
+
+.square_title_t{
+    font-size: 14px;
+    font-weight: 700;
+    color: #93A0AA;
+    margin: 0 0 12px;
+    text-align: center;
+}
+
+.squareAreaDiv{
+    height: 245px;
+    margin-bottom: 24px;
+}
+
+.dashboard-stat.blue .details .desc {
+    margin-top: 15px;
+}
+
+.squareArea{
+    position: relative;
+    width:100px;
+    float: left;
+    height: 248px;
+}
+
+
+.squareArea{
+    background: #CACACA;
+}
+
+.squarePositionBox{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 29px;
+    text-decoration: none;
+}
+
+.squarePositionBox.green{
+    background: #32C5D2;
+}
+
+.squarePositionBox.blue{
+    background: #3598DC;
+}
+
+.squarePositionBox.purple{
+    background: #8E44AD;
+}
+
+.squarePositionBox.red{
+    background: #E7505A;
+}
+
+.squarePositionBox.zero{
+    width:0px;
+}
+
+.squarePositionBox.erwu{
+    width:40px;
+}
+
+.squarePositionBox.wushi{
+    width:80px;
+}
+
+.squarePositionBox.qiwu{
+    width:120px;
+}
+
+.squarePositionBox.yibai{
+    width:158px;
+}
+
+.squarePositionText{
+    width: 158px;
+    color: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 30px;
+}
+
+.squarePositionPercent{
+    position: absolute;
+    top: 0px;
+    left: 8px;
+}
+
+.squareArea .dashboard-stat{
+    margin-bottom: 0px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+
+.dashboard-stat .visual > i {
+    opacity: 0.4;
+}
+
+.squareArea .dashboard-stat.zero{
+    height: 0px;
+}
+
+.squareArea .dashboard-stat.green{
+    height: 96px;
+}
+
+.squareArea .dashboard-stat.blue{
+    height: 128px;
+}
+
+.squareArea .dashboard-stat.purple{
+    height: 162px;
+}
+
+.squareArea .dashboard-stat.red{
+    height: 244px;
+}
+
+.dashboard-stat .details{
+    position: absolute;
+    right: 10px !important;
+    padding-right: 2px !important;
+}
+
+.dashboard-stat .visual > i {
+    position: absolute;
+    bottom: -29px;
+    left: 5px;
+}
+
+
+.squarePosition{
+    float: left;
+    width: 85%;
+    padding-left: 12px;
+    height: 248px;
+    overflow-y: scroll;
+}
+.squarePo{
+    list-style:none;
+    margin: 0;
+    padding: 0;
+}
+
+.squarePo li{
+    float: left;
+    background: #ABABAB;
+    width: 158px;
+    height: 29px;
+    margin: 0 8px 7px 0;
+    color: #fff;
+    text-align: center;
+    line-height: 29px;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+}
+
+.squarePo li i{
+    opacity: 0.2;
+    position: absolute;
+    color: #fff;
+    top: 15px;
+    left: -9px;
+    font-size: 32px;
+}
+
+.squareAreaDiv .details{
+    position: absolute;
+    right: 10px !important;
+    padding-right: 2px !important;
+}
+
+.squareAreaDiv .details .number{
+    padding-top: 25px;
+    text-align: right;
+    font-size: 34px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    margin-bottom: 0px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.squareAreaDiv .details .desc{
+    text-align: right;
+    font-size: 16px;
+    letter-spacing: 0px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.squareAreaDiv .visual{
+    width: 80px;
+    height: 80px;
+    display: block;
+    float: left;
+    padding-left: 15px;
+    padding-top: 35px;
+    margin-bottom: 40px;
+    font-size: 35px;
+    line-height: 35px;
+}
+
+.squareAreaDiv .visual i{
+    margin-left: -35px;
+    font-size: 110px;
+    line-height: 110px;
+    color: #ffffff;
+    opacity: 0.2;
+    position: absolute;
+    bottom: -29px;
+    left: 5px;
+}

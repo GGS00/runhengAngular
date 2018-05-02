@@ -1,0 +1,152 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-send"></i>
+    </div>
+    <span class="pageTitle" style="display: block;margin-bottom: 28px;"><i class="fa fa-truck"></i>新增供应商</span>
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form id="pointSetInfo" class="form-horizontal">
+            <div class="form-body">
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司名称<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input name="company" ng-model="provideForm.company" type="text" class="form-control"
+                                   placeholder="请输入公司名"/>
+                        </div>
+                    </div>
+
+                    <input ng-model="provideForm.nickName" type="hidden"  class="form-control" />
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">公司简称
+                        </label>
+                        <div class="col-md-3">
+                            <input name="nickName" ng-model="provideForm.ext1" type="text" class="form-control"
+                                   placeholder="选填"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group provideAddress">
+                        <label class="control-label col-md-3 bold">公司地址<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <city-select></city-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold">详细地址<span class="required"aria-required="true"> * </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input name="nickName" ng-model="provideForm.addressDetail" type="text"
+                                   class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="divSpace" style="padding-bottom: 12px;">
+                    <div class="form-group" id="ext9_id">
+                        <label class="control-label col-md-3 bold">是否供货
+                        </label>
+                        <div class="col-md-8">
+                            <div class="radio-list">
+                                <div class="radio col-md-8"><span><input type="radio" name="ext9" ng-model="add.ext9"
+                                                                         ng-checked="true"
+                                                                         ng-change="add.radioChecked1()"
+                                                                         value="1"></span><label>是（供应商不仅可以在平台销售商品也可以提供货物给我发）</label>
+                                </div>
+                                <div class="radio  col-md-8"><span><input type="radio" name="ext9" ng-model="add.ext9"
+                                                                          ng-change="add.radioChecked1()"
+                                                                          value="0"></span><label>否（供应商仅在平台销售商品，不给我方供货）</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="ext10_id">
+                        <label class="control-label col-md-3 bold">是否必须采购
+                        </label>
+                        <div class="col-md-8">
+                            <div class="radio-list">
+                                <div class="radio col-md-8"><span><input type="radio" name="ext10" ng-model="add.ext10"
+                                                                         ng-change="add.radioChecked2()" value="1"
+                                                                         checked=""></span><label>是（销售订单供应商完全不协助拣发货）</label>
+                                </div>
+
+                                <div class="radio  col-md-8"><span><input type="radio" name="ext10" ng-model="add.ext10"
+                                                                          ng-checked="true"
+                                                                          ng-change="add.radioChecked2()" value="0"
+                                                                          checked=""></span><label>否（销售订单供应商可以协助拣货或者发货）</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="ext11_id">
+                        <label class="control-label col-md-3 bold">是否铺仓
+                        </label>
+                        <div class="col-md-8">
+                            <div class="radio-list">
+                                <div class="radio col-md-8"><span><input type="radio" name="ext11" ng-model="add.ext11"
+                                                                         ng-change="add.radioChecked3()" value="1"
+                                                                         checked=""></span><label>是（供应商货物存放在我方控制仓库）</label>
+                                </div>
+
+                                <div class="radio  col-md-8"><span><input type="radio" name="ext11" ng-model="add.ext11"
+                                                                          ng-checked="true"
+                                                                          ng-change="add.radioChecked3()" value="0"
+                                                                          checked=""></span><label>否（供应商货物不存放在我方控制仓库）</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" id="ext12_id">
+                        <label class="control-label col-md-3 bold">是否代发货
+                        </label>
+                        <div class="col-md-8">
+                            <div class="radio-list">
+                                <div class="radio col-md-8"><span><input type="radio" name="ext12" ng-model="add.ext12"
+                                                                         ng-checked="true"
+                                                                         ng-change="add.radioChecked4()"
+                                                                         value="1"></span><label>是（不使用我方物流，供应商可自行发货）</label>
+                                </div>
+
+                                <div class="radio  col-md-8"><span><input type="radio" name="ext12" ng-model="add.ext12"
+                                                                          ng-change="add.radioChecked4()"
+                                                                          value="0"></span><label>否（使用我方物流，由我方统一发货）</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="fahuo_id_{{$index}}" class="form-group sendAddress_{{$index}}"
+                         ng-repeat="list in add.sendAddressList">
+                        <label class="control-label col-md-3 bold">发货区域<span
+                                style="font-weight: bold">({{$index+1}})</span><span class="required"aria-required="true"> * </span>
+                        </label>
+                        <multicity-select></multicity-select>
+                        <div class="col-sm-2 pull-left addDiv"><i class="fa fa-remove remove"
+                                                                  ng-click="add.removeSend($index)"
+                                                                  ng-if="add.sendAddressList.length>1"></i></div>
+
+                    </div>
+                    <div id="fahuo_add_id" class="form-group" style="margin-bottom:0px;">
+                        <label class="control-label col-md-3">
+                        </label>
+                        <div class="col-md-3">
+                            <a class="btn btn-xs blue" ng-click="add.addNewSend()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button type="submit" class="btn blue" ng-click="submitUser()">确定</button>
+                            <button type="cancel" class="btn white" ui-sref="supplier.manage">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>

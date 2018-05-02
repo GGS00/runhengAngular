@@ -1,0 +1,212 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-sign-out"></i>装车发运</span>
+    <form  id="finalDispatch" class="form-horizontal ng-pristine ng-invalid ng-invalid-required">
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <label class="control-label col-sm-1">
+                </label>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        派车单
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        调度单
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="divTableHeader">
+                        载具
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        主司机
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        副司机
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        说明
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                    <span class="badge badge-default">载具与司机</span>
+                </label>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{distribute.dispatchDriver.disDriverCode}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{distribute.dispatchDriver.dispatchCode}}</div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="showInfo">{{distribute.dispatchVehicle.no}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{distribute.dispatchDriver.mainDriverName}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{distribute.dispatchDriver.secondDriverName}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{distribute.dispatchDriver.description}}</div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="distribute.addLoadUp()" style="font-weight: inherit">货物装载
+        </button>
+        <button type="button" class="btn btn-default" ng-click="distribute.shipment()" style="font-weight: inherit">发运
+        </button>
+        <button type="button" class="btn btn-primary" ng-click="distribute.toLoadUp()" style="font-weight: inherit">返回
+        </button>
+    </div>
+
+    <table-expandable table-column="distribute.column"  table-page="distribute.getPage()" table-data="distribute.data" table-conf="distribute.pageParams" self-page="false" entity="distribute.entity">
+    </table-expandable>
+
+
+</div>
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1250px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-paper-plane" style="margin-right: 10px;"></i>货物装载
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 456px;overflow-y: scroll;">
+
+                <form  class="form-horizontal ng-pristine ng-invalid ng-invalid-required" id="orderSelect">
+                    <input type="hidden" name="ddId" value="{{distribute.id}}"/>
+                    <input type="hidden" name="segmentId" value="{{distribute.segmentId}}"/>
+                    <div class="divSpace-white fade-in-up">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    订单号
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="divTableHeader">
+                                    货主
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    货物名称
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="divTableHeader">
+                                    调度量
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    已装载
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    装载重量
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    装载件数
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group goodsFill{{$index}}" ng-repeat="list in distribute.selectOrderList">
+                            <div class="col-sm-2">
+                                <input type="hidden" name="goods[{{$index}}].goodsId" value="{{list.id}}"/>
+                                <input type="hidden" name="goods[{{$index}}].goodsName" value="{{list.goods_name}}"/>
+                                <input type="hidden" name="goods[{{$index}}].totalQuantity" value="{{list.box_quantity}}"/>
+                                <input type="hidden" name="goods[{{$index}}].totalWeight" value="{{list.weight}}"/>
+                                <input type="hidden" name="goods[{{$index}}].totalVolume" value="{{list.volume}}"/>
+                                <div class="showInfo">{{distribute.tmsOrder.code}}</div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="showInfo">{{distribute.tmsOrder.ownerName}}</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="showInfo">{{list.goods_name}}</div>
+                            </div>
+                            <div class="col-sm-1">
+                                <div class="showInfo">{{list.weight}}kg/{{list.box_quantity}}{{list.unit}}</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="showInfo">{{list.truck_weight}}kg/{{list.truck_quantity}}{{list.unit}}</div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="number" data-required="1" class="form-control"  name="goods[{{$index}}].truckWeight">
+                                    <span class="input-group-addon">kg</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="input-group">
+                                    <input type="number" data-required="1" class="form-control"  name="goods[{{$index}}].truckQuantity">
+                                    <span class="input-group-addon">{{list.unit}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="distribute.confirmGoodsAdd()">
+                    确定装车
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmShipment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>确认
+                </h4>
+            </div>
+            <div class="modal-body">
+                        确认要发运么?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="distribute.confirmShipment()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

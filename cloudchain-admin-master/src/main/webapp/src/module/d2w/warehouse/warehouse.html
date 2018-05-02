@@ -1,0 +1,63 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-sticky-note-o"></i>仓源管理</span>
+    <div class="row firstRow">
+        <div class="form-group" style="height:33px">
+            <label class="control-label col-sm-1" style="padding-top: 5px;">仓库地址
+            </label>
+            <multicity-select></multicity-select>
+        </div>
+        <div class="col-md-12" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="warehouseName" class="form-control" placeholder="仓库名称"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status">
+                        <option selected value=" ">状态</option>
+                        <option value="0">上架</option>
+                        <option value="1">下架</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me storeMent" name="storeMent">
+                        <option selected value=" ">保管条件</option>
+                        <option value="01">普通</option>
+                        <option value="02">冷藏</option>
+                        <option value="03">恒温</option>
+                        <option value="04">特种</option>
+                        <option value="05">气调</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="warehouse.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="warehouse.addWsource()" style="font-weight: inherit">新增</button>
+        <!--<button type="button" class="btn btn-default" ng-click="warehouse.editWsource()" style="font-weight: inherit">编辑</button>-->
+        <button type="button" class="btn btn-default" ng-click="warehouse.onsale()"  style="font-weight: inherit">上架</button>
+        <button type="button" class="btn btn-default" ng-click="warehouse.offsale()" style="font-weight: inherit">下架</button>
+    </div>
+
+    <table-expandable table-column="warehouse.column"  table-page="warehouse.getPage()" table-data="warehouse.data" table-conf="warehouse.pageParams" self-page="false" entity="warehouse.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

@@ -1,0 +1,103 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>出库单结算</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <div class="form-group">
+                <label class="col-md-2 control-label">转入账户名
+                </label>
+                <div class="col-md-2  col-left">
+                    <div class="form-group">
+                        <input  type="hidden"  name="accountName"
+                                value="{{settleByCustomer.accountEntity.getSelectedRows()[0].account_name}}" >
+                        <select-table st-combo="test()" st-text="settleByCustomer.placeholder_accountName"
+                                      st-icon="settleByCustomer.icon_account"
+                                      st-value="settleByCustomer.accountEntity.getSelectedRows()[0].account_name">
+                            <table-expandable table-column="settleByCustomer.accountColumn"
+                                              table-page="settleByCustomer.accountPage()"
+                                              table-data="settleByCustomer.accountData"
+                                              table-conf="settleByCustomer.accountParams"
+                                              self-page="true"
+                                              entity="settleByCustomer.accountEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <label class="col-md-2 control-label">客户 </label>
+                <div class="col-md-2  col-left">
+                    <div class="form-group">
+                        <input  type="hidden"  name="customerId"
+                                value="{{settleByCustomer.customerEntity.getSelectedRows()[0].id}}" >
+                        <select-table st-combo="test()" st-text="settleByCustomer.placeholder_customerName"
+                                      st-icon="settleByCustomer.icon_customer"
+                                      st-value="settleByCustomer.customerEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="settleByCustomer.customerColumn"
+                                              table-page="settleByCustomer.customerPage()"
+                                              table-data="settleByCustomer.customerData"
+                                              table-conf="settleByCustomer.customerParams"
+                                              self-page="true"
+                                              entity="settleByCustomer.customerEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+
+                <label class="col-md-2 control-label">转入银行账号
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" name="bankAccount"
+                           value="{{settleByCustomer.accountEntity.getSelectedRows()[0].bank_account}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">实际付款金额
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text" name="payAmount" class="form-control" ng-blur="settleByCustomer.getInterest()" ng-model="settleByCustomer.payAmount">
+                </div>
+                <label class="col-md-2 control-label">实际还款本金
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" value="{{settleByCustomer.payAmount-settleByCustomer.toRepayInterest}}" readonly>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">转入账号开户行
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" name="bankName"
+                           value="{{settleByCustomer.accountEntity.getSelectedRows()[0].bank_name}}" readonly="readonly">
+                </div>
+
+
+                <label class="col-md-2 control-label">实际支付日期
+                </label>
+                <div class="col-md-2 col-left2 payTime ">
+                    <single-time-picker callback="settleByCustomer.getInterest()"></single-time-picker>
+                </div>
+                <label class="col-md-2 control-label">应付利息
+                </label>
+                <div class="col-md-2 col-left2">
+                    <input type="text"  class="form-control" readonly value="{{settleByCustomer.toRepayInterest}}" >
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="settleByCustomer.confirmSettlement()">确认结算
+                        </button>
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="settleByCustomer.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>发运</span>
+    <div class="row firstRow">
+
+        <div class="col-md-10">
+            <div class="col-md-3" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" id="code" class="form-control" placeholder="发运单号"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="text" id="outboundCode" class="form-control" placeholder="出库单号"></div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <input type="hidden" id="warehouseId"
+                           value="{{outboundDelivery.warehouseEntity.getSelectedRows()[0].ID}}"
+                           id="id_warehouse">
+                    <select-table st-combo="test()" st-text="outboundDelivery.placeholder_warehouseName"
+                                  st-icon="outboundDelivery.icon_warehouse"
+                                  st-value="outboundDelivery.warehouseEntity.getSelectedRows()[0].NAME">
+                        <table-expandable table-column="outboundDelivery.warehouseColumn"
+                                          table-page="outboundDelivery.warehousePage()"
+                                          table-data="outboundDelivery.warehouseData"
+                                          table-conf="outboundDelivery.warehouseParams"
+                                          self-page="true"
+                                          entity="outboundDelivery.warehouseEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+
+            <!--/span-->
+            <div class="col-md-3">
+                <input type="hidden" id="ownerId"
+                       value="{{outboundDelivery.ownerEntity.getSelectedRows()[0].userId}}"/>
+                <div class="form-group">
+                    <select-table st-combo="test()" st-text="outboundDelivery.placeholder_ownerName"
+                                  st-icon="outboundDelivery.icon_owner"
+                                  st-value="outboundDelivery.ownerEntity.getSelectedRows()[0].nickName">
+                        <table-expandable table-column="outboundDelivery.ownerColumn"
+                                          table-page="outboundDelivery.ownerPage()"
+                                          table-data="outboundDelivery.ownerData"
+                                          table-conf="outboundDelivery.ownerParams"
+                                          self-page="true"
+                                          entity="outboundDelivery.ownerEntity">
+                        </table-expandable>
+                    </select-table>
+                </div>
+            </div>
+            <div class="col-md-3" style="padding-left: 0px;"    >
+                <div class="form-group">
+                    <select class="form-control" id="status">
+                        <option selected value="">订单状态</option>
+                        <option value="UNFINISHED">未完成</option>
+                        <option value="OPEN">打开</option>
+                        <option value="WORKING">工作中</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <select class="form-control" id="shipStatus">
+                        <option selected value="">发运状态</option>
+                        <option value="UNSHIPPED">未发运</option>
+                        <option value="SHIPPED">已发运</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="outboundDelivery.parceFind()">
+                    搜索
+                </button>
+              
+            </div>
+        </div>
+    </div>
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="outboundDelivery.toPack()"
+                style="font-weight: inherit">复合
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="outboundDelivery.toShip()"
+                style="font-weight: inherit">发运
+        </button>
+    </div>
+    <table-expandable table-column="outboundDelivery.column" table-page="outboundDelivery.getPage()"
+                      table-data="outboundDelivery.data" table-conf="outboundDelivery.pageParams" self-page="false"
+                      entity="outboundDelivery.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+<div class="modal fade selectCommonContacts" id="Dialog1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">发运确认</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-7 col-sm-offset-2">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">发运方式
+                            </label>
+                            <div class="col-sm-9">
+                                <div class="md-radio-inline">
+                                    <div class="md-radio">
+                                        <input type="radio" id="checkbox1_5" name="transType" value="0" checked class="md-radiobtn" ng-model="outboundDelivery.logis">
+                                        <label for="checkbox1_5">
+                                            <span class="inc"></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            自营物流
+                                        </label>
+                                    </div>
+                                    <div class="md-radio">
+                                        <input type="radio" id="checkbox1_6" name="transType" value="1" class="md-radiobtn" ng-model="outboundDelivery.logis">
+                                        <label for="checkbox1_6">
+                                            <span class="inc"></span>
+                                            <span class="check"></span>
+                                            <span class="box"></span>
+                                            柴米平台
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="outboundDelivery.logis == 1">
+                    <div class="col-sm-7 col-sm-offset-2">
+                        <div class="form-group">
+                            <label class="control-label col-sm-3">承运商
+                            </label>
+                            <input type="hidden" id="id_trans"
+                                   value="{{outboundDelivery.transEntity.getSelectedRows()[0].taker_id}}"/>
+                            <select-table st-combo="test()" st-text="outboundDelivery.placeholder_transName"
+                                          st-icon="outboundDelivery.icon_owner"
+                                          st-value="outboundDelivery.transEntity.getSelectedRows()[0].taker_nicknm">
+                                <table-expandable table-column="outboundDelivery.transColumn"
+                                                  table-page="outboundDelivery.transPage()"
+                                                  table-data="outboundDelivery.transData"
+                                                  table-conf="outboundDelivery.transParams"
+                                                  self-page="true"
+                                                  entity="outboundDelivery.transEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="outboundDelivery.sure()">
+                    发运
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

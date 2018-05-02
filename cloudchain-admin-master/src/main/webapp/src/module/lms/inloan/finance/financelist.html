@@ -1,0 +1,105 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf"></i>贷款审核(金融部)</span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="applyLoanCode" class="form-control" placeholder="申请编号"></div>
+            </div>
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="customerName" class="form-control" placeholder="客户名称"></div>
+            </div>
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status" id="id_loan_type">
+                        <option selected value="">货代品种</option>
+                        <option value="INVENTORY_FINANCE">货好贷</option>
+                        <option value="ORDER_FINANCE">单好贷</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="financeList.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="financeList.approve()" style="font-weight: inherit">审批</button>
+    </div>
+
+    <table-expandable table-column="financeList.column" table-page="financeList.getPage()"
+                      table-data="financeList.data" table-conf="financeList.pageParams" self-page="false"
+                      entity="financeList.entity">
+    </table-expandable>
+
+</div>
+</div>
+<!--
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">修改描述</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">申请编号</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">贷款品种</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">状态</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">申请金额</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">审批额度</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">已还本金</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">申请时间</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">审批意见</label>
+                        <div class="col-md-9 col-left2">
+                            <textarea class="form-control" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

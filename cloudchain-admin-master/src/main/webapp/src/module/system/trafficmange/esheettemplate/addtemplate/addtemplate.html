@@ -1,0 +1,208 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>新建电子面单模板</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class="col-md-12">
+            <label class="col-md-1 control-label">模板名称
+            </label>
+            <div class="col-md-4 col-left2 ">
+                <input type="text" class="form-control" ng-model="templateName" name="name">
+            </div>
+            <label class="col-md-1 col-left2">模板类型
+            </label>
+            <div class="col-md-4 col-left2">
+                <select id="checkStatus2" name="type" ng-model="dtype" ng-change="addTemplate.changePrintType()" class="form-control">
+                    <option value="11" ng-selected="dtype == 11">电子面单</option>
+                    <option value="10" ng-selected="dtype == 10">传统面单</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12 form-inline" style="padding-top: 15px;" >
+
+            <label class="control-label col-sm-1">单据尺寸
+            </label>
+            <div class="col-sm-2">
+                <div class="input-group">
+                    <span class="input-group-addon">高</span>
+                    <input type="number" name="prepayProportion" ng-model="height" data-required="1" class="form-control" />
+                    <span class="input-group-addon">mm</span>
+                </div>
+            </div>
+            <div class="col-sm-2" >
+                <div class="input-group">
+                    <span class="input-group-addon">宽</span>
+                    <input type="number" name="prepayProportion" ng-model="width" data-required="1" class="form-control" />
+                    <span class="input-group-addon">mm</span>
+                </div>
+            </div>
+            <label class="col-md-1 col-left2">单据图片
+            </label>
+            <!--<div class="col-md-2 col-left2">-->
+                <!--<input type="text" class="form-control" id="name" placeholder="请输入名称">-->
+            <!--</div>-->
+            <div class="col-md-2 col-left2">
+                <input type="file" id="inputfile">
+            </div>
+
+        </div>
+        <div class="col-md-12" style="padding-top: 15px;" >
+            <label class="col-md-1 col-left2">打印单据项
+            </label>
+            <div class="col-md-4 col-left2">
+                <select  name="type" class="form-control">
+                    <option value="XXXXXX" selected>新增打印项</option>
+                </select>
+            </div>
+
+            <label class="col-md-1 col-left2">字体设置
+            </label>
+            <div class="col-md-2 col-left2">
+                <select  name="type" class="form-control" ng-model="fontStyle">
+                    <option value=" " selected>字体样式</option>
+                </select>
+            </div>
+            <div class="col-md-2 col-left2">
+                <select  name="type" class="form-control" ng-model="fontSize">
+                    <option value=" " selected>字体大小</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12" style="padding-top: 15px;">
+            <label class="control-label col-md-1">打印整体偏移
+            </label>
+            <div class="col-md-2">
+                <div class="input-group">
+                    <span class="input-group-addon">上下</span>
+                    <input type="number" name="prepayProportion" ng-model="offsetUpdown" data-required="1" class="form-control" />
+                    <span class="input-group-addon">mm</span>
+                </div>
+            </div>
+            <div class="col-md-2" >
+                <div class="input-group">
+                    <span class="input-group-addon">左右</span>
+                    <input type="number" name="prepayProportion" ng-model="offsetLeftright" data-required="1" class="form-control" />
+                    <span class="input-group-addon">mm</span>
+                </div>
+            </div>
+            <label class="control-label col-md-1">二维码项
+            </label>
+            <div class="col-md-4 col-left2">
+                <select  name="type" class="form-control">
+                    <option value=" " selected>二维码项</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-12" style="padding-top: 15px;">
+            <label class="control-label col-md-1">打印条码项</label>
+            <div class="col-md-4 col-left2">
+                <select  name="type" class="form-control">
+                    <option value=" " selected>打印条码项</option>
+                </select>
+            </div>
+            <label class="control-label col-md-1">公司logo</label>
+            <div class="col-md-4 col-left2">
+                <select  name="type" class="form-control">
+                    <option value=" " selected>公司logo</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-12" style="padding-top: 15px;">
+            <div class="col-md-12">
+                <div class="mt-checkbox-inline" ng-if="dtype == 10">
+                    <label class="mt-checkbox" ng-repeat="list in list track by $index">
+                        <input type="checkbox" id="{{list.printColId}}" value="{{list.printKey}}" ng-click="cItem($index)">{{list.printName}}
+                        <span></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="button" class="btn blue" ng-click="addTemplate.preview()">预览
+                    </button>
+                    <button type="cancel" class="btn btn-primary" ng-click="addTemplate.save()" >保存
+                    </button>
+                    <button type="cancel" class="btn white" onclick="javascript:history.back(-1);">返回
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span class="pageTitle"></i>预览界面</span>
+    <div class="panel panel-default">
+        <div class="panel-body"     style=" height: 300px; text-align:center">
+            <!--<div id="whole">-->
+            <!--&lt;!&ndash;style="width:200px; height:160px; margin:20px; padding:10px 20px 10px 20px; border:1px solid #FF6600; text-align:center"&ndash;&gt;>-->
+               <!--&lt;!&ndash; <div id="top" style="width:150px; height:30px; border:1px solid #009966"></div>-->
+                <!--<div id="middle" style="width:150px; height:30px; border:1px solid #009966"></div>-->
+                <!--<div id="bottom" style="width:150px; height:30px; border:1px solid #009966"></div>&ndash;&gt;-->
+                <!--<div style=" width:400px;height:500px;border: 1px solid black" >-->
+                    <!--<div style=" width:388px;height:488px;border: 1px solid black;margin: 5px 5px 5px 5px" >-->
+                        <!--<div style="position:absolute;height:50px; border: 1px solid black;width:200px;border-left: none;border-top: none;"><img src="/static/images/t1.png"/></div>-->
+                        <!--<div style="margin-left: 200px;height:50px;border: 1px solid black;border-top: none;border-right: none;text-align: center;">标准快件-->
+                            <!--<div style="border-top: 1px solid black">次日必达</div>-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:20px;height:70px; border: 1px solid black;border-left: none;border-top: none;">收件人</div>-->
+                        <!--<div style="margin-left: 20px;height:70px;border: 1px solid black;border-top: none;border-right: none;">-->
+                            <!--<span style="display: block;">XXX</span>-->
+                            <!--<span style="display: block;">电话:17682349521</span>-->
+                            <!--<span style="display: block;">地址:浙江省，杭州市，江干区，迪凯银座1301</span>-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:20px;height:70px; border: 1px solid black;border-left: none;border-top: none;border-bottom: none;">寄件人</div>-->
+                        <!--<div style="margin-left: 273px;height:70px;border: 1px solid black;border-top: none;width:116px;position: absolute;border-bottom: none;border-left: none;border-right: none;">-->
+                            <!--<span style="display: block;font-size: 13px">付款方式：XXXX</span>-->
+                            <!--<span style="display: block;font-size: 13px">报价费用：XXXX</span>-->
+                            <!--<span style="display: block;font-size: 13px">投保金额：XXXX</span>-->
+                            <!--<span style="display: block;font-size: 13px">签单返还：XXXX</span>-->
+                        <!--</div>-->
+                        <!--<div style="margin-left: 20px;height:70px;border: 1px solid black;border-top: none;border-bottom: none;width:250px;">-->
+                            <!--<span style="display: block;">XXX</span>-->
+                            <!--<span style="display: block;">电话:17682349521</span>-->
+                            <!--<span style="display: block;">地址:浙江省，杭州市，江干区</span>-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:20px;height:70px; border: 1px solid black;border-left: none;">目的地</div>-->
+                        <!--<div style="margin-left: 20px;height:70px;border: 1px solid black;border-right: none;">-->
+                            <!--<div style="display: block;text-align: center;padding-top: 20px;font-size: 25px">鄂-宜昌（鄂-2）</div>-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:200px;height:70px; border: 1px solid black;border-left: none;border-top: none;text-align: center;">-->
+                            <!--<span style="display: block;">始发：江西省</span>-->
+                            <!--<span style="display: block;">到达：浙江省</span>-->
+                            <!--<span style="display: block;">A101</span>-->
+                        <!--</div>-->
+                        <!--<div style="margin-left: 200px;height:70px;border: 1px solid black;border-top: none;border-right: none;text-align: center;">-->
+                            <!--<span style="display: block;">收件人签收/日期</span>-->
+                            <!--<span style="display: block;"><img src="/static/images/t2.png"/></span>-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:200px;height:50px; border: 1px solid black;border-left: none;border-right: none;border-top: none;text-align: center;">-->
+                            <!--<span style="display: block;"><img src="/static/images/t3.png"/></span>-->
+                        <!--</div>-->
+                        <!--<div style="margin-left: 200px;height:50px;border: 1px solid black;border-top: none;border-right: none;border-left: none;text-align: center;">-->
+                            <!--<span style="display: block;"><img src="/static/images/t4.png"/></span>-->
+                        <!--</div>-->
+                        <!--<div style="position:absolute;width:200px;height:70px; border: 1px solid black;border-left: none;border-top: none;">-->
+                            <!--<span style="display: block;">寄件人：XXX</span>-->
+                            <!--<span style="display: block;">电话:17682349521</span>-->
+                            <!--<span style="display: block;">地址:浙江省，杭州市</span>-->
+                        <!--</div>-->
+                        <!--<div style="margin-left: 200px;height:70px;border: 1px solid black;border-top: none;border-right: none;">-->
+                            <!--<span style="display: block;">收件人：XXX</span>-->
+                            <!--<span style="display: block;">电话:17682349521</span>-->
+                            <!--<span style="display: block;">地址:浙江省，杭州市</span>-->
+                        <!--</div>-->
+
+
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+
+
+

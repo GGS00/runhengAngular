@@ -1,0 +1,81 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-sticky-note-o"></i>货源管理</span>
+    <div class="row firstRow" style="margin-bottom: 12px;">
+        <div class="col-md-10" style="padding-left: 0px;">
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="id" class="form-control" placeholder="货源编号"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <input type="text" name="title" class="form-control" placeholder="标题"> </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me type">
+                        <option selected value=" ">服务类型</option>
+                        <option value="0">仓储租赁</option>
+                        <option value="1">货物保管</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me status">
+                        <option selected value=" ">当前状态</option>
+                        <option value="0">待报价</option>
+                        <option value="1">待择库</option>
+                        <option value="2">完成</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me warehouseAreaType" name="warehouseAreaType">
+                        <option selected value=" ">库区类型</option>
+                        <option value="01">普通</option>
+                        <option value="02">冷藏</option>
+                        <option value="03">恆溫</option>
+                        <option value="04">特种</option>
+                        <option value="05">气调</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="btn-group">
+                    <button type="button" class="btn blue" ng-click="goodsource.getPageByFilter()">
+                        搜索
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-10" style="padding-left: 0px;">
+            <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">仓库区域</label>
+            <multicity-select></multicity-select>
+        </div>
+
+
+
+    </div>
+
+    <div class="search-form btnGroup">
+        <button type="button" class="btn btn-default" ng-click="goodsource.addgoodsource()" style="font-weight: inherit">发布</button>
+        <button type="button" class="btn btn-default" ng-click="goodsource.checkgoodsource()"  style="font-weight: inherit">查看</button>
+        <button type="button" class="btn btn-default" ng-click="goodsource.selectwarehouse()"  style="font-weight: inherit">选择仓库</button>
+    </div>
+
+    <table-expandable table-column="goodsource.column"  table-page="goodsource.getPage()" table-data="goodsource.data" table-conf="goodsource.pageParams" self-page="false" entity="goodsource.entity">
+    </table-expandable>
+
+</div>
+</div>
+
+
+

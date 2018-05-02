@@ -1,0 +1,533 @@
+<style>
+    .daterangepicker.dropdown-menu{
+        z-index: 10052!important;
+    }
+</style>
+<div>
+  <span class="pageTitle"><i class="fa fa-truck"></i>仓库管理</span>
+  <div class="portlet-body" style="margin-top: 10px;">
+    <div class="tabbable-bordered">
+      <ul class="nav nav-tabs" id="myTab">
+            <li class="active">
+                <a href="#tab_simple" ng-click="wareHouseMange.showTabs(0)" data-toggle="tab">自建仓库</a>
+            </li>
+            <li>
+                <a href="#tab_chaimi" ng-click="wareHouseMange.showTabs(1)" data-toggle="tab">柴米仓储服务商</a>
+            </li>
+      </ul>
+      <div class="tab-content">
+          <div class="tab-pane active" id="tab_simple">
+
+              <div class="row  firstRow">
+                  <div class="col-md-10">
+                      <div class="col-sm-2" style="padding-left: 0px">
+                          <div class="form-group">
+                              <input type="text" id="id_wareNmae" class="form-control" placeholder="仓库名称">
+                          </div>
+                      </div>
+                      <div class="col-sm-2 form-group">
+                          <select class="form-control select2me status" id="id_useIntent">
+                              <option selected value=" ">仓库用途</option>
+                              <option value="01">发货</option>
+                              <option value="02">备货</option>
+                              <option value="03">融资监管</option>
+                          </select>
+                      </div>
+                      <div class="col-sm-2 form-group">
+                          <select class="form-control select2me status" id="id_status2">
+                              <option selected value=" ">当前状态</option>
+                              <option value="ACTIVE">有效</option>
+                              <option value="INVALID">无效</option>
+                          </select>
+                      </div>
+                      <div class=" col-sm-8 form-group warehouseaddr">
+                          <label class="col-md-2 control-label" style=" margin-top: 7px; margin-right: -73px;">仓库地址：</label>
+                          <multicity-select></multicity-select>
+                      </div>
+
+                  </div>
+
+                  <div class="col-sm-2">
+                      <div class="btn-group">
+                          <button type="button" class="btn blue" ng-click="wareHouseMange.getPageByFilter11()">
+                              搜索
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="search-form  divline  divdistance">
+                  <button type="button" class="btn btn-default pusht" ng-click="wareHouseMange.newWarehouse()"
+                          style="font-weight: inherit">新建
+                  </button>
+                  <button type="button" class="btn btn-default pusht" ng-click="wareHouseMange.updataWarehouse()"
+                          style="font-weight: inherit">修改
+                  </button>
+                  <button type="button" class="btn btn-default pusht" ng-click="wareHouseMange.invalidWarehouse()"
+                          style="font-weight: inherit">失效
+                  </button>
+              </div>
+              <table-expandable table-column="wareHouseMange.warehouseColumn" table-page="wareHouseMange.getWarehousePage()"
+                                table-data="wareHouseMange.warehouseData" table-conf="wareHouseMange.warehouseParams"
+                                self-page="false" entity="wareHouseMange.warehouseEntity">
+              </table-expandable>
+              </div>
+          <div class="tab-pane" id="tab_chaimi">
+              <input id="qry_cooperRole" name="qryRole" type="hidden" value="4">
+              <input id="qry_function" type="hidden" value="wms">
+              <div class="row firstRow">
+                  <div class="col-md-10">
+                      <div class="col-sm-2" style="padding-left: 0px;">
+                          <div class="form-group">
+                              <input type="text" id="qryName" name="qryName" class="form-control" placeholder="账号"></div>
+                      </div>
+                      <div class="col-sm-2">
+                          <div class="form-group">
+                              <input type="text" id="qryNick" name="qryNick" class="form-control" placeholder="昵称">
+                          </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <div class="form-group">
+                              <input type="text" id="qryTel" name="qryTel" class="form-control" placeholder="手机">
+                          </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <div class="form-group">
+                              <input type="text" id="qryMail" name="qryMail" class="form-control" placeholder="邮箱">
+                          </div>
+                      </div>
+                      <div class="col-sm-2">
+                          <div class="form-group">
+                              <select class="form-control select2me receiveStatus" id="id_status">
+                                  <option selected value=" ">当前状态</option>
+                                  <option value="01">有效</option>
+                                  <option value="02">无效</option>
+                              </select>
+                          </div>
+                      </div>
+
+                      <div class="col-md-2">
+                          <div class="btn-group">
+                              <button type="button" class="btn blue" ng-click="wareHouseMange.getPageByFilter()">
+                                  搜索
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="search-form btnGroup" style="margin-top: 15px;">
+                  <button type="button" class="btn btn-default pusht" ng-click="wareHouseMange.addCooper()" style="font-weight: inherit">新增</button>
+                  <button type="button" class="btn btn-default pusht" ng-click="wareHouseMange.updCooper()" style="font-weight: inherit">修改</button>
+                  <button type="button" class="btn btn-default pusht" ng-click="wareHouseMange.delCooper()" style="font-weight: inherit">删除</button>
+              </div>
+
+              <table-expandable id="cooperTable" table-column="wareHouseMange.column"  table-page="wareHouseMange.getPage()" table-data="wareHouseMange.data"
+                                table-conf="wareHouseMange.pageParams" self-page="false" entity="wareHouseMange.entity">
+              </table-expandable>
+
+              <br>
+              <!-- 仓库信息 -->
+              <div class="row">
+                  <div class="col-md-12">
+                      <span class="pageTitle">服务商仓库信息</span>
+                  </div>
+                  <div class="col-md-12">
+                      <table class="table table-striped table-hover dataTable no-footer">
+                          <thead>
+                          <tr role="row">
+                              <th width="18%">仓库编号</th>
+                              <th width="18%">仓库名称</th>
+                              <th width="18%">仓库类型</th>
+                              <th width="18%">仓库地址</th>
+                              <th width="18%">仓库状态</th>
+                          </tr>
+                          </thead>
+                      </table>
+                      <div class="table-scrollable" style="overflow-x: auto; overflow-y: auto; height: 300px;">
+                          <table class="table table-striped table-hover dataTable no-footer">
+                              <tbody style="">
+                              <tr role="row" class="odd" ng-repeat="house in warehouseLst track by $index">
+                                  <td width="18%" style="offset-start: 5px">{{house.CODE}}</td>
+                                  <td width="18%" style="offset-start: 5px">{{house.NAME}}</td>
+                                  <td width="18%" style="offset-start: 5px">{{house.TYPE=="100"?"自建仓库":(house.TYPE=="110"?"柴米wms":(house.TYPE=="111"?"非柴米":house.TYPE))}}</td>
+                                  <td width="18%" style="offset-start: 5px">{{house.ADDRESS}}</td>
+                                  <td width="18%" style="offset-start: 5px">{{house.STATUS=="ACTIVE"?"生效":(house.STATUS=="INVALID"?"失效":house.STATUS)}}</td>
+                                  <!--td >
+                                      <button class="btn btn-primary" ng-click="showHouse(house)">查看</button>
+                                  </td-->
+                              </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  </div>
+</div>
+
+<!--添加自建仓库-->
+<div class="modal fade selectCommonContacts2" id="newWarehouse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">新建仓库</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class=" form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">仓库编码</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" id="id_wareId" value="" placeholder="如江苏南京仓,编码可输:JSNJ">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">仓库名称<span class="required"
+                                                                        aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareName" value="" placeholder="请输入仓库名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">仓库模式<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="id_model">
+                                <option  value="">请选择仓库模式</option>
+                                <option value="SIMPLE" selected="selected">普通仓库</option>
+                                <option value="FINANCE">金融仓库</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">仓库类型<span class="required" aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <select class="form-control" id="id_type" readonly="readonly" disabled="disabled">
+                                <option value="100" selected>自建仓库</option>
+                                <!--option value="110">柴米wms</option>
+                                <option value="111">非柴米</option>
+                                <option value="200">供应商仓</option>
+                                <option value="300">门店仓</option>
+                                <option value="400">经销商仓</option-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group warehouseAddress">
+                        <label class="col-md-2 control-label">省市区<span class="required"  aria-required="true"> * </span></label>
+                        <city-select ng-if="wareHouseMange.sendSwitch == 0"></city-select>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">负责人<span class="required"  aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="hidden" id="id_controller"/>
+                            <select-table st-combo="test()" st-text="wareHouseMange.placeholder_employName"
+                                          st-icon="wareHouseMange.icon_employ"
+                                          st-value="wareHouseMange.employEntity.getSelectedRows()[0].realName">
+                                <table-expandable table-column="wareHouseMange.employColumn"
+                                                  table-page="wareHouseMange.employPage()"
+                                                  table-data="wareHouseMange.employData"
+                                                  table-conf="wareHouseMange.employParams"
+                                                  self-page="true"
+                                                  entity="wareHouseMange.employEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">电话<span class="required"  aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_tel" value="" placeholder="请输入联系电话">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">地址<span class="required"  aria-required="true"> * </span></label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareAddr" value="" placeholder="请输入仓库详细地址">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">描述</label>
+                        <div class="col-md-4 ">
+                            <input type="text" class="form-control" id="id_wareDescript"  value="" placeholder="请输入对仓库的描述">
+                        </div>
+                    </div>
+
+                    <div class="form-group sendAddress_{{$index}}"  ng-repeat="list in wareHouseMange.sendAddressList">
+                        <label class="col-md-2 control-label">发货区域<span style="font-weight: bold">({{$index+1}})</span>
+                        </label>
+                        <multicity-select></multicity-select>
+                        <div class="col-sm-2 pull-left addDiv">
+                            <i class="fa fa-remove remove" ng-click="wareHouseMange.removeSend($index)" ng-if="wareHouseMange.sendAddressList.length>1"></i>
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <label class="control-label col-md-3">
+                        </label>
+                        <div class="col-md-3">
+                            <a  class="btn btn-xs blue" ng-click="wareHouseMange.addNewSend()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="wareHouseMange.add()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--添加柴米合作商-->
+<div class="modal fade" id="add_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 795px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加柴米仓储服务商</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="UmsCooperInfo">
+                    <div class=" form-horizontal">
+                        <input type="hidden" id="add_cooperMode" name="cooperMode" value="02"/>
+                        <input type="hidden" id="add_cooperRole" name="cooperRole" value="4"/>
+                        <div class="form-group">
+                            <input id="add_cooperUserId" name="cooperUserId" type="hidden">
+                            <label class="col-md-3 control-label">对方账号<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperUserNm" name="cooperUserNm" placeholder="根据输入的关键字匹配开通了WMS的用户">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">昵称<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperNicknm" name="cooperNicknm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperPhone" name="cooperPhone" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperEmail" name="cooperEmail" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">对方仓库</label>
+                            <div class="col-md-3">
+
+                                <input type="radio" id="add_cooperScope_all" name="wareHouseCheck" ng-click="wareHouseMange.warehouseLinsener(1)" value="all" checked="checked"><span> 全部仓库可用</span>
+                            </div>
+                        </div>
+                        <input name="cooperScope" id="idcooperScope" type="hidden">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-3">
+                                <input type="radio" id="add_cooperScope_part" name="wareHouseCheck"  ng-click="wareHouseMange.warehouseLinsener(2)" value="part"><span> 部分仓库可用</span>
+                            </div>
+                            <a ng-click="wareHouseMange.selectWarehouse()" ng-show="wareHouseMange.selectWarehouseFlag" style=" margin-left: -60px; margin-top: 3px;"
+                               class="col-sm-2 ">选择仓库</a>
+                        </div>
+                        <div class="form-group" ng-show="wareHouseMange.selectWarehouseFlag">
+                            <div class="col-sm-5">
+                                <table class="table table-striped table-bordered table-hover order-column addPurchaseTable"
+                                       style="table-layout: fixed;width: 750px;">
+                                    <thead>
+                                    <tr style="background: #509EFF;">
+                                        <th style="width:2%">仓库编码</th>
+                                        <th style="width:2%">仓库名称</th>
+                                        <th style="width:2%">操作</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="list in wareHouseMange.warehouseList">
+                                        <td style="width:2%">{{list.code}}</td>
+                                        <td style="width:2%;">  {{list.name}}
+                                        </td>
+                                        <td style="width:2%"><i class="fa fa-remove remove"
+                                                                 ng-click="wareHouseMange.removeWarehouse(list.code)"></i></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="add_startTime" name="startTime" type="hidden">
+                            <label class="col-md-3 control-label">合作开始时间</label>
+                            <div class="col-md-6 addStartTime">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="add_endTime" name="endTime" type="hidden">
+                            <label class="col-md-3 control-label">合作结束时间</label>
+                            <div class="col-md-6 addEndTime" ng-if="wareHouseMange.add_end_time_switch==1">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <input id="add_foreverFlg" name="foreverFlg" type="hidden" value="0">
+                            <div class="col-md-6">
+                                <input id="add_check_flg" type="checkbox" ng-click="wareHouseMange.addCheckFlg()"><span> 永久有效</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="submitAddCooper" class="btn btn-primary" ng-click="wareHouseMange.submitAddCooper()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lar11ge" tabindex="-1" role="dialog" aria-labelledby="myModal2Label" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择仓库</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9"
+                             style="padding: 10px">
+
+                            <table-expandable table-column="wareHouseMange.warehouseColumn" table-page="wareHouseMange.getWarehousePage()"
+                                              table-data="wareHouseMange.warehouseData" table-conf="wareHouseMange.warehouseParams"
+                                              self-page="false" entity="wareHouseMange.warehouseEntity2">
+                            </table-expandable>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="wareHouseMange.selectWarehouseSure()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--柴米详情model-->
+<div class="modal fade" id="upd_cooper_model" tabindex="-1" role="dialog" aria-labelledby="updModalCooper"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">柴米服务商详情</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="updUmsCooperInfo">
+                    <div class=" form-horizontal">
+                        <div class="form-group">
+                            <input id="updCooperRole" name="cooperRole" type="hidden">
+                            <label class="col-md-3 control-label">服务商类型<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_cooperRole" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">对方账号<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_acc_name" name="cooperUserNm" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">昵称<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_nick_name" name="cooperNicknm">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_phone" name="cooperPhone" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_email" name="cooperEmail" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">合作开始时间</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_startTime" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input id="upd_endTime" name="endTime" type="hidden">
+                            <label class="col-md-3 control-label">合作结束时间</label>
+                            <div class="col-md-6 updEndTime" ng-if="wareHouseMange.upd_end_time_switch==1">
+                                <single-time-picker time="{{wareHouseMange.testTime}}"></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <input id="upd_foreverFlg" name="foreverFlg" type="hidden">
+                            <div class="col-md-6">
+                                <input id="upd_check_flg" type="checkbox" ng-click="wareHouseMange.updCheckFlg()"><span> 永久有效</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="submitUpdCooper" class="btn btn-primary" ng-click="wareHouseMange.submitUpdCooper()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

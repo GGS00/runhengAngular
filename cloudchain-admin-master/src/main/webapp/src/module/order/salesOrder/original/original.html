@@ -1,0 +1,175 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-file-o"></i>原始订单</span>
+
+    <md-content style="margin-top: 25px;background: #fff">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="所有订单" ng-click="original.showTabs(0)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow">
+                        <div class="col-md-10"  style="padding-left: 0px;">
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" name="wayBillCode" class="form-control" placeholder="订单编号">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" name="wayBillCode" class="form-control" placeholder="商品名称">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query">
+                                        <option selected value=" ">订单来源</option>
+                                        <option value="0">发货单</option>
+                                        <option value="1">发货单</option>
+                                        <option value="2">发货单</option>
+                                        <option value="3">发货单</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query">
+                                        <option selected value=" ">订单类型</option>
+                                        <option value="0">发货单</option>
+                                        <option value="1">发货单</option>
+                                        <option value="2">发货单</option>
+                                        <option value="3">发货单</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="fade-in-up" ng-if="original.menuLen > 6">
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control select2me arrivalStatus">
+                                            <option selected value=" ">配送方式</option>
+                                            <option value="UN_SHIP">陆运</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control select2me dataFrom">
+                                            <option selected value=" ">承运商</option>
+                                            <option value="INTERFACE">南京承运商</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <select class="form-control select2me dataFrom">
+                                            <option selected value=" ">发货状态</option>
+                                            <option value="INTERFACE">待发</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 receiveAddress" style="margin-bottom:16px;">
+                                    <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">收件地区
+                                    </label>
+                                    <city-select></city-select>
+                                </div>
+
+                                <div class="col-sm-12" style="margin-bottom:16px;">
+                                    <label class="control-label col-sm-2" style="padding-left: 0px;padding-top: 5px;text-align: center;font-weight: bold;">操作时间
+                                    </label>
+                                    <div class="col-sm-4 toOrderTime" style="padding-left: 5px;">
+                                        <time-picker></time-picker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="original.getPageByFilter()">
+                                    搜索
+                                </button>
+                                <button type="button" class="btn blue dropdown-toggle" style="padding-left: 5px;padding-right:5px;" ng-click="original.menuLen > 6?  original.menuLen =6:original.menuLen =12">
+                                    <i class="fa fa-angle-down">
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="search-form btnGroup">
+                        <button type="button" class="btn btn-default" ng-click="original.importOrder()" style="font-weight: inherit">导入订单</button>
+                        <button type="button" class="btn btn-default" ng-click="original.exportOrder('0')" style="font-weight: inherit">导出订单</button>
+                    </div>
+
+                    <table-expandable table-column="original.allOrderColumn"  table-page="original.getAllOrderPage()" table-data="original.allOrderData" table-conf="original.allOrderParams" self-page="false" entity="original.allOrderEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待付款" ng-click="original.showTabs(1)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="original.payOrderColumn"  table-page="original.getPayPage()" table-data="original.payOrderData" table-conf="original.payOrderParams" self-page="false" entity="original.payOrderEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待发货" ng-click="original.showTabs(2)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="original.sendOrderColumn"  table-page="original.getSendPage()" table-data="original.sendOrderData" table-conf="original.sendOrderParams" self-page="false" entity="original.sendOrderEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="待收货" ng-click="original.showTabs(3)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="original.receiveOrderColumn"  table-page="original.getReceivePage()" table-data="original.receiveOrderData" table-conf="original.receiveOrderParams" self-page="false" entity="original.receiveOrderEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="已完成" ng-click="original.showTabs(4)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="original.doneOrderColumn"  table-page="original.getDonePage()" table-data="original.doneOrderData" table-conf="original.doneOrderParams" self-page="false" entity="original.doneOrderEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="已关闭" ng-click="original.showTabs(5)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <table-expandable table-column="original.closeOrderColumn"  table-page="original.getClosePage()" table-data="original.closeOrderData" table-conf="original.closeOrderParams" self-page="false" entity="original.closeOrderEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+
+</div>
+
+<div class="modal fade" id="confirmExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;width: 500px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-hand-pointer-o" style="margin-right: 10px;"></i>导入订单
+                </h4>
+            </div>
+            <div class="modal-body">
+                <input type="file" id="excelFile" style="padding-top: 7px;" name="excelFile">
+                <button type="button"  ng-click="original.download()" class="btn green btn-outline">模板下载</button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="original.confirmExcel()">
+                    导入
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

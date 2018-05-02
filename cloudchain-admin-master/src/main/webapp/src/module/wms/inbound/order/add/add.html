@@ -1,0 +1,376 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-plus"></i>新建入库单</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="WmsInbound">
+            <div class="col-md-12">
+                <div class="col-md-3  col-left">
+                    <input type="hidden" name="ownerId"/>
+                    <input type="hidden" name="billTypeId"/>
+                    <input type="hidden"  name="warehouseId"/>
+                    <div class="form-group" ng-click="InboundNew.ownerClickAction()">
+                      <select-table st-combo="test()" st-text="InboundNew.placeholder_ownerName"
+                                  st-icon="InboundNew.icon_owner"
+                                  st-value="InboundNew.ownerEntity.getSelectedRows()[0].nickName">
+                        <table-expandable table-column="InboundNew.ownerColumn"
+                                          table-page="InboundNew.ownerPage()"
+                                          table-data="InboundNew.ownerData"
+                                          table-conf="InboundNew.ownerParams"
+                                          self-page="true"
+                                          entity="InboundNew.ownerEntity">
+                        </table-expandable>
+                      </select-table>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <select class="form-control" id="id_billType" ng-click="InboundNew.selectClickAction()" ng-model="InboundNew.selectBillId">
+                            <option selected value="">单据类型</option>
+                            <option value="10006001">采购入库</option>
+                            <option value="10006002">铺仓入库</option>
+                            <option value="10006003">默认入库</option>
+                            <option value="10006004">赠品入库</option>
+                            <option value="10006005">销售退换货</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.relatedBillNo1_switch==1">
+                    <div class="form-group">
+                        <input type="text" id="id_relatedBillNo1" name="relatedBillNo1" class="form-control" readonly ng-click="InboundNew.qryRelateBillNo()" placeholder="{{InboundNew.relatedBillNo1Title}}">
+                    </div>
+                </div>
+                <input type="hidden" id="id_supplierId" name="supplierId" value="{{InboundNew.ownerEntity.getSelectedRows()[0].userId}}"/>
+                <div class="col-md-3  col-left" ng-if="InboundNew.supplierSwitch==1">
+                    <div class="form-group">
+                        <select-table st-combo="test()" st-text="InboundNew.placeholder_supliName"
+                                      st-icon="InboundNew.icon_supli"
+                                      st-value="InboundNew.supliEntity.getSelectedRows()[0].nickName">
+                            <table-expandable table-column="InboundNew.supliColumn"
+                                              table-page="InboundNew.supliPage()"
+                                              table-data="InboundNew.supliData"
+                                              table-conf="InboundNew.supliParams"
+                                              self-page="true"
+                                              entity="InboundNew.supliEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <!--优仓订单号-->
+                <input type="hidden" name="fineOrderId"/>
+                <div class="col-md-3 col-left" ng-click="InboundNew.fineOrderClickAction()" ng-if="InboundNew.fineOrder_switch==1" >
+                    <div class="form-group">
+                        <select-table st-combo="test()" st-text="InboundNew.placeholder_fineOrder"
+                                      st-icon="InboundNew.icon_fineOrder"
+                                      st-value="InboundNew.fineOrderEntity.getSelectedRows()[0].orderId">
+                            <table-expandable table-column="InboundNew.fineOrderColumn"
+                                              table-page="InboundNew.fineOrderPage()"
+                                              table-data="InboundNew.fineOrderData"
+                                              table-conf="InboundNew.fineOrderParams"
+                                              self-page="true"
+                                              entity="InboundNew.fineOrderEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.fineOrder_item_switch==1">
+                    <div class="input-group">
+                        <span class="input-group-addon">服务类型</span>
+                        <input type="text" id="id_fine_order_type" class="form-control" readonly>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.fineOrder_item_switch==1">
+                    <div class="input-group">
+                        <span class="input-group-addon">计费单位</span>
+                        <select class="form-control" id="id_fine_order_unit" ng-model="InboundNew.selectFeeUnit">
+                            <option ng-repeat="feeUnitList in InboundNew.feeUnitList" value="{{feeUnitList.dataValue}}">
+                                {{feeUnitList.dataName}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.fineOrder_item_switch==1">
+                    <div class="input-group">
+                        <span class="input-group-addon">收费模式</span>
+                        <select class="form-control" id="id_fine_order_feetype" ng-change="InboundNew.feeTypeChgAction()" ng-model="InboundNew.selectFeeType">
+                            <option value=""></option>
+                            <option value="0">按周期</option>
+                            <option value="1">按每天</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.fineOrder_item_switch==1">
+                    <div class="input-group">
+                        <span class="input-group-addon">周期</span>
+                        <input type="text" id="id_fine_order_cycle" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.fineOrder_item_switch==1">
+                    <div class="input-group">
+                        <span class="input-group-addon">服务单价</span>
+                        <input type="text" id="id_fine_order_price" class="form-control">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" ng-if="InboundNew.fineOrder_item_switch==1">
+                    <div class="input-group">
+                        <span class="input-group-addon">库区</span>
+                        <input type="text" id="id_fine_order_area" class="form-control" readonly>
+                    </div>
+                </div>
+
+                <div class="col-sm-3 col-left" ng-if="InboundNew.fineOrder_item_switch==0">
+                    <div class="form-group from-group2">
+                        <select-table st-combo="test()" st-text="InboundNew.placeholder_warehouseName"
+                                      st-icon="InboundNew.icon_warehouse"
+                                      st-value="InboundNew.warehouseEntity.getSelectedRows()[0].NAME"
+                                      ng-model="InboundNew.selectedWareHouseId">
+                            <table-expandable table-column="InboundNew.warehouseColumn"
+                                              table-page="InboundNew.warehousePage()"
+                                              table-data="InboundNew.warehouseData"
+                                              table-conf="InboundNew.warehouseParams"
+                                              self-page="true"
+                                              entity="InboundNew.warehouseEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="input-group">
+                        <span class="input-group-addon">数量</span>
+                        <input type="text" name="totalBU" class="form-control" readonly placeholder="">
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="input-group">
+                        <span class="input-group-addon">描述</span>
+                        <input type="text" id="id_description" name="description" class="form-control">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="inboundConfirmButton" type="button" class="btn blue" ng-click="InboundNew.submitPoint()">确定</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="InboundNew.addDetail()"
+                style="font-weight: inherit">添加明细
+        </button>
+        <button type="button" class="btn btn-default pusht" ng-click="InboundNew.returnButton()"
+                style="font-weight: inherit">返回
+        </button>
+    </div>
+    <table-expandable table-column="InboundNew.column" table-page="InboundNew.getPage()"
+                      table-data="InboundNew.data" table-conf="InboundNew.pageParams" self-page="false"
+                      entity="InboundNew.entity">
+    </table-expandable>
+</div>
+
+    <div class="modal fade" id="selectCommonContacts2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加明细</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="WmsInboundItem">
+                    <div class=" form-horizontal">
+                        <input name="inboundId" type="hidden">
+                        <input name="inboundCode" type="hidden">
+                        <input name="productId" type="hidden">
+
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">商品<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-2">
+                                <input type="button" class="form-control" id="goods1" value="请选择商品"
+                                       ng-click="InboundNew.aaaa()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">数量<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-4 ">
+                                <input type="text" class="form-control" name="expectedQuantityBu" value="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">商品形态</label>
+                            <div class="col-md-4 ">
+                                <select class="form-control" name="inventoryStatus">
+                                    <option selected value="GOOD">良品</option>
+                                    <option value="BAD">不良品</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="InboundNew.sumbitAddDeatil()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="lar11ge" tabindex="-1" role="dialog" aria-labelledby="myModal2Label" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">选择商品</h4>
+            </div>
+            <div class="modal-body">
+                <div class="m-grid m-grid-demo">
+                    <div class="m-grid-row">
+                        <div class="m-grid-col m-grid-col-md-3">
+                            <div id="categoryTree" class="tree-demo"
+                                 style="height: 100%;overflow: hidden;overflow-y: scroll;"></div>
+                        </div>
+                        <div class="m-grid-col m-grid-col-middle m-grid-col-center m-grid-col-md-9"
+                             style="padding: 10px">
+                            <div>
+                                <div class="input-group">
+                                    <div class="input-icon input-icon-sm">
+                                        <i class="fa fa-search"></i>
+                                        <input class="form-control input-sm" type="text" ng-model="skuName"
+                                               placeholder="输入商品名搜索">
+                                    </div>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-sm btn-default" ng-click="InboundNew.serachGoods()"
+                                                type="button">
+                                            <i class="fa fa-arrow-left fa-fw"></i> 搜索</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <table-expandable table-column="InboundNew.skuColumn"
+                                              table-page="InboundNew.skuPage()"
+                                              table-data="InboundNew.skuData"
+                                              table-conf="InboundNew.skuParams"
+                                              self-page="false"
+                                              entity="InboundNew.skuEntity">
+                            </table-expandable>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn dark btn-outline" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn green" ng-click="InboundNew.overClick()" data-dismiss="modal">确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--相关采购单据选择对话框-->
+<div class="modal fade" id="selectRelatePurChaseMode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:80px;min-width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>关联单据
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row firstRow">
+                    <div class="col-md-10" style="padding-left: 0px;">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" id="searchRelateNo" name="purchaseId" class="form-control" placeholder="关联单编号"> </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="InboundNew.getOrderPageByFilter()">
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table-expandable table-column="InboundNew.columnPurchOrder"  table-page="InboundNew.getPagePurchOrder()"
+                                  table-data="InboundNew.dataPurchOrder" table-conf="InboundNew.paramPurchOrder"
+                                  self-page="false" entity="InboundNew.entityPurchOrder">
+                </table-expandable>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="InboundNew.addRelateBillPurChaseNo()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--调拨出库单选择对话框-->
+<div class="modal fade" id="selectRelateOutboundMode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:80px;min-width: 900px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>关联单据
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="row firstRow">
+                    <div class="col-md-10" style="padding-left: 0px;">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" id="searchRelateNo" name="purchaseId" class="form-control" placeholder="关联单编号"> </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="InboundNew.getOrderPageByFilter()">
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table-expandable table-column="InboundNew.columnOutbound"  table-page="InboundNew.getPageOutbound()"
+                                  table-data="InboundNew.dataOutbound" table-conf="InboundNew.paramOutbound"
+                                  self-page="false" entity="InboundNew.entityOutbound">
+                </table-expandable>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="InboundNew.addRelateBillNo()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

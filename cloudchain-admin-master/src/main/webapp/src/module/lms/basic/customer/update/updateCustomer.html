@@ -1,0 +1,280 @@
+<div>
+    <span class="pageTitle">修改客户信息</span>
+    <div class="row divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <!-- BEGIN FORM-->
+        <form id="lmsCustomer">
+            <div class="col-md-12">
+                <div class="col-md-3 col-left">
+                    <input type="hidden" name="id" value="{{editCustomer.data.id}}" >
+                    <div class="form-group">
+                        <input type="text" name="code" class="form-control" placeholder="编码" ng-readonly="true"  value="{{editCustomer.data.code}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left" >
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="名称" value="{{editCustomer.data.code}}" >
+                    </div>
+                </div>
+              <!--  <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].name}}"
+                               id="id_name" name ="loanRuleName" value="{{editCustomer.data.code}}" >
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].code}}"
+                               id="id_code" name ="loanRuleCode" value="{{editCustomer.data.code}}" >
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity.getSelectedRows()[0].id}}"
+                               id="id_id" name ="loanRuleId" value="{{editCustomer.data.code}}" >
+                        <select-table st-combo="test()" st-text="addCustomer.placeholder_loanRuleName"
+                                      st-icon="addCustomer.icon_loanRule"
+                                      st-value="addCustomer.loanRuleEntity.getSelectedRows()[0].name">
+                            <table-expandable table-column="addCustomer.loanRuleColumn"
+                                              table-page="addCustomer.loanRulePage()"
+                                              table-data="addCustomer.loanRuleData"
+                                              table-conf="addCustomer.loanRuleParams"
+                                              self-page="true"
+                                              entity="addCustomer.loanRuleEntity">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>
+               &lt;!&ndash; <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="excessRuleId" class="form-control" placeholder="超额规则">
+                    </div>
+                </div>&ndash;&gt;
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="hidden" value="{{addCustomer.loanRuleEntity2.getSelectedRows()[0].id}}"
+                               id="id_excessId" name ="excessRuleId">
+                        <select-table st-combo="test()" st-text="placeholder_excessRuleName"
+                                      st-icon="addCustomer.icon_loanRule"
+                                      st-value="addCustomer.loanRuleEntity2.getSelectedRows()[0].name">
+                            <table-expandable table-column="addCustomer.loanRuleColumn"
+                                              table-page="addCustomer.loanRulePage()"
+                                              table-data="addCustomer.loanRuleData"
+                                              table-conf="addCustomer.loanRuleParams"
+                                              self-page="true"
+                                              entity="addCustomer.loanRuleEntity2">
+                            </table-expandable>
+                        </select-table>
+                    </div>
+                </div>-->
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="basicAmount" class="form-control" placeholder="基础额度" value="{{editCustomer.data.basicAmount}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="状态"
+                               value="{{editCustomer.data.status=='WAIT_COMMIT'?'待提交':(editCustomer.data.status=='WAIT_CHECK'?'待审核':(editCustomer.data.status=='ACTIVE'?'生效':(editCustomer.data.status=='FINISHED'?'完成':(editCustomer.data.status=='WAIT_IN'?'待入库':(editCustomer.data.status=='CHECKING'?'审核中':(editCustomer.data.status=='CHECKED'?'已审核':(editCustomer.data.status=='FINISH_IN'?'入库完成':(editCustomer.data.status=='UN_CHECKED'?'未审核':(editCustomer.data.status=='STATUS_CHECK_PASS'?'审核通过':(editCustomer.data.status=='CHECK_FAIL'?'审核失败':(editCustomer.data.status=='EXTENDED'?'已放款':(editCustomer.data.status=='PART_REFUND'?'部分还款':(editCustomer.data.status=='REFUNDED'?'还款完成':(editCustomer.data.status=='NONE'?'无需回款':(editCustomer.data.status=='UN_BACKED'?'未回款':(editCustomer.data.status=='UN_CLEARED'?'未结清':(editCustomer.data.status=='CLEARED'?'已结清':(editCustomer.data.status=='NO_CLEARED'?'无需结清':(editCustomer.data.status=='INVALID'?'失效':(editCustomer.data.status=='OPEN'?'打开':editCustomer.data.status))))))))))))))))))))}}" ng-readonly="true" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="type" name="type" class="form-control">
+                            <option value="{{editCustomer.data.type}}" selected>{{editCustomer.data.type=="PERSON"?"个人":(editCustomer.data.type=="LEGAL"?"法人":(editCustomer.data.type=="COMPANY"?"公司":(editCustomer.data.type=="GROUP"?"集团":editCustomer.data.type)))}}</option>
+                            <option value="PERSON">个人</option>
+                            <option value="LEGAL">法人</option>
+                            <option value="COMPANY">公司</option>
+                            <option value="GROUP">集团</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select class="form-control" id="pickStatus " name="certType" value="{{editCustomer.data.pickStatus}}" >
+                            <option value="{{editCustomer.data.certType}}" selected>{{editCustomer.data.certType=="ID"?"身份证":(editCustomer.data.certType=="BUSINESS"?"营业执照":(editCustomer.data.certType=="PASSPORT"?"护照":(editCustomer.data.certType=="OFFICERS"?"军官证":editCustomer.data.certType)))}}</option>
+                            <option value="ID">身份证</option>
+                            <option value="BUSINESS">营业执照</option>
+                            <option value="PASSPORT">护照</option>
+                            <option value="OFFICERS">军官证</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="certNo" class="form-control" placeholder="证件号" value="{{editCustomer.data.certNo}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="sex" name="sex" class="form-control" value="{{editCustomer.data.sex}}" >
+                            <option value="{{editCustomer.data.sex}}" selected>{{editCustomer.data.sex=="1"?"男":(editCustomer.data.sex=="0"?"女":editCustomer.data.sex)}}</option>
+                            <option value="1">男</option>
+                            <option value="0">女</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="age" class="form-control" placeholder="年龄" value="{{editCustomer.data.age}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="maritalStatus" name="maritalStatus" class="form-control" value="{{editCustomer.data.maritalStatus}}" >
+                            <option value="{{editCustomer.data.maritalStatus}}" selected>{{editCustomer.data.maritalStatus=="MARRIED"?"已婚":(editCustomer.data.maritalStatus=="UNMARRIED"?"未婚":(editCustomer.data.maritalStatus=="DIVORCE"?"离异":editCustomer.data.maritalStatus))}}</option>
+                            <option value="MARRIED">已婚</option>
+                            <option value="UNMARRIED">未婚</option>
+                            <option value="DIVORCE">离异</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="nativePlace" class="form-control" placeholder="籍贯" value="{{editCustomer.data.nativePlace}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="residentCity" class="form-control" placeholder="户口所在地" value="{{editCustomer.data.residentCity}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="postcode" class="form-control" placeholder="邮编" value="{{editCustomer.data.postcode}}" >
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="phone" class="form-control" placeholder="联系电话" value="{{editCustomer.data.phone}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="address" class="form-control" placeholder="地址" value="{{editCustomer.data.address}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <select id="loanType" name="loanType" class="form-control" value="{{editCustomer.data.loanType}}" >
+                            <option value="{{editCustomer.data.loanType}}" selected>{{editCustomer.data.loanType=="ORDER_FINANCE"?"单好贷":(editCustomer.data.loanType=="INVENTORY_FINANCE"?"货好贷":editCustomer.data.loanType)}}</option>
+                            <option value="ORDER_FINANCE">单好贷</option>
+                            <option value="INVENTORY_FINANCE">货好贷</option>
+                        </select>
+                    </div>
+                </div>
+               <!-- <div class="col-sm-3 col-left">
+                    <div class="form-group">
+                        <input  type="hidden"  name="accountName"
+                                value="{{editCustomer.accountEntity.getSelectedRows()[0].account_name}}" >
+                        <select-table st-combo="test()" st-text="editCustomer.placeholder_accountName"
+                                      st-icon="editCustomer.icon_account"
+                                      st-value="editCustomer.accountEntity.getSelectedRows()[0].account_name">
+                            <table-expandable table-column="editCustomer.accountColumn"
+                                              table-page="editCustomer.accountPage()"
+                                              table-data="editCustomer.accountData"
+                                              table-conf="editCustomer.accountParams"
+                                              self-page="true"
+                                              entity="editCustomer.accountEntity">
+                            </table-expandable>
+                        </select-table>
+
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="text" name="bankAccount"  placeholder="银行卡号"
+                               class="form-control" value="{{editCustomer.accountEntity.getSelectedRows()[0].bank_account}}"/>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-left">
+                    <div class="form-group from-group2">
+                        <input type="text" name="bankName"  placeholder="开户行"
+                               class="form-control"  value="{{editCustomer.accountEntity.getSelectedRows()[0].bank_name}}"/>
+                    </div>
+                </div>-->
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="bankName" class="form-control" placeholder="开户行" value="{{editCustomer.data.bankName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="accountName" class="form-control" placeholder="账号名" value="{{editCustomer.data.accountName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="bankAccount" class="form-control" placeholder="银行账号" value="{{editCustomer.data.bankAccount}}" >
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <p class="pTitle">单位信息</p>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="businessLicenseNo" class="form-control" placeholder="营业执照号" value="{{editCustomer.data.businessLicenseNo}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgCode" class="form-control" placeholder="工作单位代码" value="{{editCustomer.data.orgCode}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgName" class="form-control" placeholder="工作单位名称" value="{{editCustomer.data.orgName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgPostcode" class="form-control" placeholder="工作单位邮编" value="{{editCustomer.data.orgPostcode}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgTel" class="form-control" placeholder="工作单位联系电话" value="{{editCustomer.data.orgTel}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgAddress" class="form-control" placeholder="工作单位地址" value="{{editCustomer.data.orgAddress}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="legelPersonIdNo" class="form-control" placeholder="法人身份证号" value="{{editCustomer.data.legelPersonIdNo}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgAccountName" class="form-control" placeholder="工作单位账号名" value="{{editCustomer.data.orgAccountName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgBankAccount" class="form-control" placeholder="工作单位银行账号" value="{{editCustomer.data.orgBankAccount}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="orgBankName" class="form-control" placeholder="工作单位开户行" value="{{editCustomer.data.orgBankName}}" >
+                    </div>
+                </div>
+                <div class="col-md-3 col-left">
+                    <div class="form-group">
+                        <input type="text" name="description" class="form-control" placeholder="备注" value="{{editCustomer.data.description}}" >
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row" style="margin-left: 15px">
+                        <div class="col-md-offset-3 col-md-9">
+                            <button id="inboundConfirmButton" type="submit" class="btn blue" ng-click="editCustomer.editCustomer()">修改</button>
+                            <button id="inboundCancelButton" type="cancel" class="btn white" ng-click="editCustomer.returnButton()">取消</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

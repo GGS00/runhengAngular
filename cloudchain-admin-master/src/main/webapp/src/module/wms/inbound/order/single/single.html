@@ -1,0 +1,95 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-magic"></i>单一明细收货</span>
+    <div class="row  divline">
+        <div class="col-md-10">
+            <div class="col-sm-4 col-left">
+                <div class="form-group">
+                    <input type="text" name="code" class="form-control" title="订单号" readonly="readonly"></div>
+            </div>
+            <!--/span-->
+            <div class="col-sm-2 col-left">
+                <div class="form-group">
+                    <input type="text" name="nickName" class="form-control" title="货主" readonly="readonly">
+                </div>
+            </div>
+            <!--/span-->
+            <div class="col-sm-2 col-left">
+                <div class="form-group">
+                    <input type="text" name="billType" class="form-control" title="单据类型" readonly="readonly">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="search-form  divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="InboundSingle.receipt()" style="font-weight: inherit">收货</button>
+        <button type="button" class="btn btn-default pusht" ng-click="InboundSingle.returnButton()" style="font-weight: inherit">返回</button>
+    </div>
+
+    <table-expandable table-column="InboundSingle.column" table-page="InboundSingle.getPage()"
+                      table-data="InboundSingle.data" table-conf="InboundSingle.pageParams" self-page="false"
+                      entity="InboundSingle.entity">
+    </table-expandable>
+
+</div>
+</div>
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-plus" style="margin-right: 10px;">收货信息登记</i>
+                </h4>
+            </div>
+            <div class="modal-body" id="doReceiveDetailForm">
+                <div class=" form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">行号</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" name="lineNo" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">货品</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" name="productName" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">供应商</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" name ="supplierName" class="form-control" readonly>
+                        </div>
+                        <label class="col-md-2 control-label">库存状态</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" class="form-control" id="upd_inventStatus" readonly="readonly">
+                                <!--<select class="form-control" id="upd_inventStatus" name="inventoryStatus" readonly>-->
+                                    <!--<option selected value="GOOD">良品</option>-->
+                                    <!--<option selected value="BAD">不良品</option>-->
+                                <!--</select>-->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">收货数量</label>
+                        <div class="col-md-4 col-left2">
+                            <input type="text" name= "quantity" class="form-control">
+                            <input name="id" type="hidden">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="InboundSingle.doDetailRecive()">
+                    确定
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

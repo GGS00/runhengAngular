@@ -1,0 +1,47 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-leaf">运单打印模板</i></span>
+    <div class="row firstRow">
+        <div class="col-md-10">
+            <div class="col-sm-2" style="padding-left: 0px;">
+                <div class="form-group">
+                    <input type="text" name="templateName" class="form-control" placeholder="模板名称"></div>
+            </div>
+
+            <div class="col-sm-2">
+                <div class="form-group">
+                    <select class="form-control select2me type" id="id_printType">
+                        <option selected value=" ">模板类型</option>
+                        <option value="11">电子面单</option>
+                        <option value="10">传统面单</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="btn-group">
+                <button type="button" class="btn blue" ng-click="eSheetTemplate.getPageByFilter()">
+                    搜索
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="search-form divline  divdistance">
+        <button type="button" class="btn btn-default pusht" ng-click="eSheetTemplate.addTemplate()" style="font-weight: inherit">新建</button>
+        <button type="button" class="btn btn-default pusht" ng-click="eSheetTemplate.updateCustomer()" style="font-weight: inherit">修改</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="eSheetTemplate.delete()" style="font-weight: inherit">删除</button>
+        <button type="button" class="btn btn-default pusht"  ng-click="eSheetTemplate.export()" style="font-weight: inherit">导入面单</button>
+    </div>
+
+    <table-expandable table-column="eSheetTemplate.column" table-page="eSheetTemplate.getPage()"
+                      table-data="eSheetTemplate.data" table-conf="eSheetTemplate.pageParams" self-page="false"
+                      entity="eSheetTemplate.entity">
+    </table-expandable>
+
+</div>
+</div>
+</div>
+
+
+

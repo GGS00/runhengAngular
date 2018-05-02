@@ -1,0 +1,172 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>修改采购单</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">供应商
+                        </label>
+                        <div class="col-sm-2">
+                                <select class="form-control select2me supplierId" name="supplierId"  ng-model="editpurchase.purchaseSelect.supplierId">
+                                    <option selected value=" ">请选择</option>
+                                    <option ng-repeat="list in editpurchase.supplierList" value="{{list.userId}}">{{list.nickName}}</option>
+                                </select>
+                        </div>
+                        <label class="control-label col-sm-1">收货仓库
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me warehouseId" name="warehouseId" ng-model="editpurchase.purchaseSelect.warehouseId">
+                                <option selected value=" ">请选择</option>
+                                <option ng-repeat="list in editpurchase.wareList" value="{{list.ID}}">{{list.NAME}}</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-1">到货时间
+                        </label>
+                        <div class="col-sm-2 arrivalDate">
+                            <input type="text" name="arrivalDate" class="form-control" readonly ng-model="editpurchase.purchaseSelect.arrivalTime">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="divSpace">
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                            <thead>
+                            <tr>
+                                <th style="width:10%">商品编码</th>
+                                <th style="width:10%">商品名称</th>
+                                <th style="width:20%">属性</th>
+                                <th style="width:10%">采购单价</th>
+                                <th style="width:10%">采购数量</th>
+                                <th style="width:20%">备注</th>
+                                <th style="width:10%">操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                        <tr ng-repeat="list in editpurchase.goodsList"  class="goods_{{$index}}"finish-repeat>
+                                <td style="width:10%"><input type="hidden" name="spuId" value="{{list.spuId}}"/><input type="hidden" name="skuId" value="{{list.skuId}}"/>{{list.skuId}}</td>
+                                <td style="width:10%"><input type="hidden" name="skuName" value="{{list.title}}"/>{{list.skuName}}</td>
+                                <td style="width:20%"><input type="hidden" name="spec" value="{{list.spec}}"/>{{list.spec}}</td>
+                                <td style="width:10%"><input type="hidden" name="price" value="{{list.price}}"/>{{list.price}}</td>
+                                <td style="width:10%"><input type="text" name="count" class="form-control" placeholder="数量" ng-model="list.count"> </td>
+                                <td style="width:20%"><input type="text" name="remark" class="form-control" placeholder="备注" ng-model="list.remark"></td>
+                                <td style="width:10%"><i class="fa fa-remove remove" ng-click="editpurchase.removeGoods($index)"></i></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0px;">
+                        <div class="col-sm-2">
+                            <a  class="btn btn-xs blue" ng-click="editpurchase.addNewGoods()"> 添加
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="divSpace">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">交割方式
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me goodsDeliveryWay" ng-model="editpurchase.goodsDeliveryWaySelected" name="goodsDeliveryWay" ng-options="x.id as x.name for x in editpurchase.goodsDeliveryWayList"></select>
+                        </div>
+                        <label class="control-label col-sm-1">结款方式
+                        </label>
+                        <div class="col-sm-2">
+                            <select class="form-control select2me settlementWay" ng-model="editpurchase.settlementWaySelected" name="goodsDeliveryWay" ng-options="x.id as x.name for x in editpurchase.settlementWayList"></select>
+                        </div>
+                       <!-- <label class="control-label col-sm-1">预付比例
+                        </label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="number" name="prepayProportion" data-required="1" class="form-control" ng-model="editpurchase.purchaseSelect.prepayProportion"/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+
+                        <label class="control-label col-sm-1">余款结算
+                        </label>
+                        <div class="col-sm-2">
+                            <div class="input-group">
+                                <input type="number" name="balanceSettlementDays" data-required="1" class="form-control" ng-model="editpurchase.purchaseSelect.balanceSettlementDays"/>
+                                <span class="input-group-addon">天</span>
+                            </div>
+                        </div>
+-->
+                    </div>
+
+                </div>
+
+
+                <div class="divSpace">
+
+                    <div class="form-group">
+                        <label class="control-label col-sm-1">备注
+                        </label>
+                        <div class="col-sm-4">
+                            <textarea class="form-control remarks" id="remarks" name="remark" rows="3"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="editpurchase.submit()">保存</button>
+                        <button type="cancel" class="btn white"  ng-click="editpurchase.toPurchase()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+
+
+</div>
+
+</div>
+
+
+
+<div class="modal fade" id="selectGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>商品
+                </h4>
+            </div>
+            <div class="modal-body">
+
+                <table-expandable table-column="editpurchase.column"  table-page="editpurchase.getPage()" table-data="editpurchase.data" table-conf="editpurchase.pageParams"  entity="editpurchase.entity" self-page="false">
+                </table-expandable>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="editpurchase.addGoods()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

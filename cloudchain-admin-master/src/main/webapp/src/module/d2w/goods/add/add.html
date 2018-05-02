@@ -1,0 +1,409 @@
+<div>
+    <div class="icon">
+        <i class="fa fa-cart-plus"></i>
+    </div>
+    <span class="pageTitle"><i class="fa fa-truck"></i>新建货源</span>
+
+    <div class="portlet-body row">
+        <!-- BEGIN FORM-->
+        <form  id="newWayCommit" class="form-horizontal">
+            <div class="form-body">
+
+                <div class="divSpace" style="margin-top:18px;">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold" style="font-size: 15px;">
+                            新增货源&nbsp;&nbsp;
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            标题
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input type="text"  data-required="1" class="form-control" placeholder="(60字以内)" name="title"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            服务需求
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox0_10" name="serviceType" ng-model="addgoodsource.serviceType" value="0" class="md-radiobtn">
+                                    <label for="checkbox0_10">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        仓储租赁
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox0_11" name="serviceType" ng-model="addgoodsource.serviceType" value="1" class="md-radiobtn">
+                                    <label for="checkbox0_11">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        货物保管
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="addgoodsource.serviceType==1">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 bold" style="font-size: 15px;">
+                                入库物品&nbsp;&nbsp;
+                            </label>
+                        </div>
+                        <div class="goodsSpace" style="box-shadow: 0px 4px 18px #F3F3F3;" ng-repeat="list in addgoodsource.goodsList" ng-init="goodIndex = $index">
+                            <i class="fa fa-remove removeGoods" ng-if="addgoodsource.goodsList.length>1" ng-click="addgoodsource.removeGood($index)"></i>
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    货品名称
+                                    <span class="required" aria-required="true">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-3">
+                                    <button type="button" class="btn blue" ng-click="addgoodsource.addNewGoods(goodIndex)">选择商品</button>
+                                </div>
+                            </div>
+
+                            <div class="form-group" ng-if="list.goodsName!=''&&list.goodsType!=''">
+                                <label class="control-label col-md-3">
+                                </label>
+                                <div class="portlet-body col-md-7">
+                                    <table class="table table-striped table-bordered table-hover order-column addPurchaseTable">
+                                        <thead>
+                                        <tr>
+                                            <th style="width:30%">商品分类</th>
+                                            <th style="width:70%">商品名</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td style="width:30%">{{list.goodsType}}</td>
+                                            <td style="width:70%">{{list.goodsName}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="height: auto;">
+                                <label class="control-label col-md-3">
+                                    货品图片
+                                    <span class="required" aria-required="true">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-7">
+                                    <div class="d2wAddImg" style="position: relative;" ng-repeat="imglist in list.newImgUrl  track by $index" ng-init="imgIndex = $index"><img class="media-object" ng-src="{{imglist.img}}" alt="{{imglist.img}}" style="width:100%;height:100%"><i class="fa fa-close" style="position: absolute;top: 2px;right: 2px;color: #CF1C1C;cursor:pointer" ng-click="addgoodsource.removeImg(goodIndex,imgIndex)"></i></div>
+                                    <div class="addD2wImg" ng-click="showAddImg(goodIndex)" ng-if="list.newImgUrl.length < 5"><i class="fa fa-plus"></i>
+                                        <span class="addText">最多5张</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3">
+                                    入库数量
+                                    <span class="required" aria-required="true">
+                                        *
+                                    </span>
+                                </label>
+                                <div class="col-md-3">
+                                    <input name="goodsCount" type="number" min="1" class="form-control" ng-model="list.count" onKeyUp="value=value.replace(/[^\d+(\-\d+)?$]/g,'')">
+                                </div>
+                                <div class="textInput" style="width: 110px;padding-left:0px;">
+                                    <select class="form-control select2me goodsUnit"  ng-change="addgoodsource.unitChange(list.unit)" ng-model="addgoodsource.goodsList[goodIndex].unit" ng-options="x.dataValue as x.dataName for x in addgoodsource.unitList"></select>
+                                    <!--<select class="form-control select2me goodsUnit" ng-model="addgoodsource.goodsList[goodIndex].unit" ng-change="addgoodsource.unitChange(list.unit)">
+                                        <option repeat-finish ng-repeat="list in addgoodsource.unitList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                                    </select>-->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 22px;">
+                            <label class="control-label col-md-3">
+                            </label>
+                            <div class="col-md-3">
+                                <button type="button" class="btn blue" ng-click="addgoodsource.addGoods()">继续添加</button>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 bold" style="font-size: 15px;">
+                            仓库需求&nbsp;&nbsp;
+                        </label>
+                    </div>
+
+                    <div class="form-group provideAddress">
+                        <label class="control-label col-md-3">
+                            仓库所在区域
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <city-select></city-select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            库区类型
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-sm-8">
+                            <div class="md-radio-inline">
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_10" name="areaType" value="01" class="md-radiobtn">
+                                    <label for="checkbox1_10">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        普通
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_11" name="areaType"  value="02" class="md-radiobtn">
+                                    <label for="checkbox1_11">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        冷藏
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_12" name="areaType"  value="03" class="md-radiobtn">
+                                    <label for="checkbox1_12">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        恆溫
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_13" name="areaType"  value="04" class="md-radiobtn">
+                                    <label for="checkbox1_13">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        特种
+                                    </label>
+                                </div>
+                                <div class="md-radio">
+                                    <input type="radio" id="checkbox1_14" name="areaType"  value="05" class="md-radiobtn">
+                                    <label for="checkbox1_14">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                        气调
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            温度范围
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入温度范围" name="temperatureRangeStart"/>
+                                <span class="input-group-addon">℃</span>
+                            </div>
+                        </div>
+                        <div class="rangeLine">—</div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入温度范围" name="temperatureRangeEnd"/>
+                                <span class="input-group-addon">℃</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            湿度范围
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入湿度范围" name="humidityRangeStart"/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                        <div class="rangeLine">—</div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="请输入湿度范围" name="humidityRangeEnd"/>
+                                <span class="input-group-addon">%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            所需库容
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="number"  data-required="1" class="form-control" placeholder="平方米" name="storageSqm"/>
+                                <span class="input-group-addon">m<sup>2</sup></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            入库时间
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3 rukuTime">
+                            <single-time-picker></single-time-picker>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            意向价格
+                            <span class="required" aria-required="true">
+                                *
+                            </span>
+                        </label>
+                        <div class="col-md-3">
+                            <input type="number"  data-required="1" class="form-control" placeholder="请输入意向价格" name="wannaPrice"/>
+                        </div>
+                        <div style="display: flex;padding-left: 0px;width: 150px;float: left;">
+                            <span class="d2wunit">元/天/{{addgoodsource.serviceType==0?'':addgoodsource.goodsList[0].unit}}</span>
+                            <div  ng-if="addgoodsource.serviceType==0">
+                                <select class="form-control select2me" name="wannaUnit">
+                                    <option ng-repeat="list in addgoodsource.unitList" value="{{list.dataValue}}">{{list.dataName}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" style="height:auto">
+                        <label class="control-label col-md-3">
+                            特殊说明&nbsp;&nbsp;&nbsp;
+                        </label>
+                        <div class="col-md-4">
+                            <textarea class="form-control remarks" rows="3" style="resize: none;" placeholder="200个字符以内"></textarea>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-5 col-md-9">
+                        <button type="submit" class="btn blue" ng-click="addgoodsource.submitSource()">发布</button>
+                        <button type="cancel" class="btn white"  ng-click="addgoodsource.togoods()">取消</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+
+</div>
+
+
+<div class="modal fade" id="showAddImg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top: 100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>添加图片
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group last">
+                    <div class="col-md-12 text-center">
+                        <div class="fileinput fileinput-new" data-provides="fileinput">
+                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
+                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" /> </div>
+                            <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"> </div>
+                            <div>
+                                                                <span class="btn default btn-file">
+                                                                    <span class="fileinput-new"> 选一张 </span>
+                                                                    <span class="fileinput-exists"> 换一张 </span>
+                                                                    <input id="file" type="file" name="..."> </span>
+                                <a href="javascript:;" class="btn red fileinput-exists" data-dismiss="fileinput"> 移除 </a>
+                            </div>
+                        </div>
+                        <div class="clearfix margin-top-10">
+                            <span class="label label-danger">注意!</span>
+                            请使用非IE浏览器进行上传
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn green" ng-click="addImg()">
+                    确定上传
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="selectGoods" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;"></i>商品
+                </h4>
+            </div>
+            <div class="modal-body">
+                <table-expandable table-column="addgoodsource.column"  table-page="addgoodsource.getPage()" table-data="addgoodsource.data" table-conf="addgoodsource.pageParams"  entity="addgoodsource.entity" self-page="false">
+                </table-expandable>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn blue" ng-click="addgoodsource.confirmGoods()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

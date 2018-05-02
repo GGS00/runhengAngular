@@ -1,0 +1,340 @@
+<div>
+    <md-content style="margin-top: 25px;background: #fff">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="外部物流公司" ng-click="logisticsComp.showTabs(0)">
+                <md-content layout-padding style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow">
+                        <div class="col-sm-12"  style="padding-left: 0px;">
+                            <label class="col-sm-1 control-label">公司名称</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" name="name" class="form-control" placeholder="公司名称">
+                                </div>
+                            </div>
+                            <label class="col-sm-1 control-label">电商物流</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control" id="parentLogisticCompId">
+                                        <option value=" " selected>交易系统中物流名称</option>
+                                        <option value="111">111</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label class="col-sm-1 control-label sheetTemplateId">打印模板</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control" id="sheetTemplateId">
+                                        <option value=" " selected>对应面单类型提供选择</option>
+                                        <option value="1" >1</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <label class="col-sm-1 control-label">状态</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control" id="status">
+                                        <option selected value=" ">状态</option>
+                                        <option value="ACTIVE">有效</option>
+                                        <option value="INVALID">失效</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12"  style="padding-left: 0px;">
+                            <div class="form-group companyAddress">
+                                <label class="col-sm-1 control-label">公司网点</label>
+                                <city-select ></city-select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="logisticsComp.getLogisticsPageByFilter()">
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.addLogisticsComp()" style="font-weight: inherit">新建</button>
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.editLogisticsComp()" style="font-weight: inherit">修改</button>
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.activeLogisticsComp()" style="font-weight: inherit">生效</button>
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.InvalidLogisticsComp()" style="font-weight: inherit">失效</button>
+                    </div>
+                    <table-expandable table-column="logisticsComp.externalLogisticsCompanyColumn"  table-page="logisticsComp.getAllExternalLogisticsCompanyPage()"
+                                      table-data="logisticsComp.externalLogisticsCompanyData" table-conf="logisticsComp.externalLogisticsCompanyPageParams"
+                                      self-page="false" entity="logisticsComp.externalLogisticsCompanyEntity">
+                    </table-expandable>
+
+                </md-content>
+            </md-tab>
+            <md-tab label="柴米承运商" ng-click="logisticsComp.showTabs(1)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="row firstRow">
+                        <input id="qry_cooperRole" name="qryRole" type="hidden" value="3">
+                        <input id="qry_function" type="hidden" value="transport">
+                        <div class="col-sm-12"  style="padding-left: 0px;">
+                            <label class="col-sm-1 control-label">昵称</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" id="qryNick" name="qryNick" class="form-control" placeholder="昵称">
+                                </div>
+                            </div>
+                            <label class="col-sm-1 control-label">手机号</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" id="qryTel" name="qryTel" class="form-control" placeholder="手机号">
+                                </div>
+                            </div>
+                            <label class="col-sm-1 control-label">邮箱</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" id="qryMail" name="qryMail" class="form-control" placeholder="邮箱">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12"  style="padding-left: 0px;">
+                            <label class="col-sm-1 control-label">账号</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <input type="text" id="qryName" name="qryName" class="form-control" placeholder="账号">
+                                </div>
+                            </div>
+                            <label class="col-sm-1 control-label">状态</label>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <select class="form-control select2me billType_code_query" id="id_status">
+                                        <option selected value=" ">状态</option>
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="btn-group">
+                                <button type="button" class="btn blue" ng-click="logisticsComp.getPageByFilter()">
+                                    搜索
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.addCooper()" style="font-weight: inherit">添加承运商</button>
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.editCooper()" style="font-weight: inherit">修改</button>
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.deleteCooper()" style="font-weight: inherit">删除</button>
+                    </div>
+
+                    <table-expandable table-column="logisticsComp.cooperColumn"  table-page="logisticsComp.getCooperPage()"
+                                      table-data="logisticsComp.cooperData" table-conf="logisticsComp.cooperPageParams"
+                                      self-page="false" entity="logisticsComp.cooperEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+            <md-tab label="第三方物流对接平台" ng-click="logisticsComp.showTabs(2)">
+                <md-content class="md-padding" style="padding: 8px 24px;background: #fff;">
+                    <div class="search-form btnGroup" style="margin-top: 15px;">
+                        <button type="button" class="btn btn-default" ng-click="logisticsComp.financeExamineOrder()" style="font-weight: inherit">审单</button>
+                    </div>
+
+                    <table-expandable table-column="newOrder.pendConfirmColumn"  table-page="newOrder.getFinanceExaminePage()" table-data="newOrder.financeExamineData" table-conf="newOrder.financeExamineParams" self-page="false" entity="newOrder.financeExamineEntity">
+                    </table-expandable>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
+</div>
+
+<div class="modal fade" id="add_cooper_model" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">添加柴米承运商</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="UmsCooperInfo">
+                    <div class=" form-horizontal">
+                        <input type="hidden" id="add_cooperMode" name="cooperMode" value="02"/>
+                        <input type="hidden" id="add_cooperRole" name="cooperRole" value="3"/>
+                        <div class="form-group">
+                            <input id="add_cooperUserId" name="cooperUserId" type="hidden">
+                            <label class="col-md-3 control-label">对方账号<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperUserNm" name="cooperUserNm" placeholder="根据输入的关键字匹配开通了TMS的用户">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">昵称<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperNicknm" name="cooperNicknm" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperPhone" name="cooperPhone" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperEmail" name="cooperEmail" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">本系统中名称</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_cooperNicknmHere" name="cooperNicknmHere" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">物流费用结算周期</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="add_settlFeePrd" name="settlFeePrd" value="1">
+                            </div>
+                            <label class="control-label">天</label>
+                        </div>
+                        <div class="form-group">
+                            <input id="add_startTime" name="startTime" type="hidden">
+                            <label class="col-md-3 control-label">合作开始时间</label>
+                            <div class="col-md-6 addStartTime">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="logisticsComp.add_end_time_switch==1">
+                            <input id="add_endTime" name="endTime" type="hidden">
+                            <label class="col-md-3 control-label">合作结束时间</label>
+                            <div class="col-md-6 addEndTime" ng-if="logisticsComp.add_end_time_switch==1">
+                                <single-time-picker></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <input id="add_foreverFlg" name="foreverFlg" type="hidden" value="0">
+                            <div class="col-md-6">
+                                <input id="add_check_flg" type="checkbox" ng-click="logisticsComp.addCheckFlg()"><span> 永久有效</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="submitAddCooper" class="btn btn-primary" ng-click="logisticsComp.submitAddCooper()">
+                    添加
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--柴米详情model-->
+<div class="modal fade" id="upd_cooper_model" tabindex="-1" role="dialog" aria-labelledby="updModalCooper"
+     aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:100px;width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title">
+                    <i class="fa fa-plus" style="margin-right: 10px;">柴米服务商详情</i>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form id="updUmsCooperInfo">
+                    <div class=" form-horizontal">
+                        <div class="form-group">
+                            <input id="updCooperRole" name="cooperRole" type="hidden">
+                            <label class="col-md-3 control-label">服务商类型<span class="required"
+                                                                             aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_cooperRole" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">对方账号<span class="required"
+                                                                            aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_acc_name" name="cooperUserNm" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">昵称<span class="required"
+                                                                          aria-required="true"> * </span></label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_nick_name" name="cooperNicknm" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">手机</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_phone" name="cooperPhone" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">邮箱</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_email" name="cooperEmail" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">本系统中名称</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_cooperNicknmHere" name="cooperNicknmHere" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">物流费用结算周期</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_settlFeePrd" name="settlFeePrd">
+                            </div>
+                            <label class="control-label">天</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">合作开始时间</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" id="upd_startTime" readonly="readonly">
+                            </div>
+                        </div>
+                        <div class="form-group" ng-if="logisticsComp.upd_end_time_switch==1">
+                            <input id="upd_endTime" name="endTime" type="hidden">
+                            <label class="col-md-3 control-label">合作结束时间</label>
+                            <div class="col-md-6 updEndTime" ng-if="logisticsComp.upd_end_time_switch==1">
+                                <single-time-picker time="{{logisticsComp.testTime}}"></single-time-picker>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label"></label>
+                            <input id="upd_foreverFlg" name="foreverFlg" type="hidden">
+                            <div class="col-md-6">
+                                <input id="upd_check_flg" type="checkbox" ng-click="logisticsComp.updCheckFlg()"><span> 永久有效</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" id="submitUpdCooper" class="btn btn-primary" ng-click="logisticsComp.submitUpdCooper()">
+                    修改
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

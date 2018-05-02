@@ -1,0 +1,102 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>确定放款</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <form id="confirmExtend">
+                <div class="form-group">
+                    <!--<input  type="hidden" value="{{confirmExtend.objData.id}}" name="id" >-->
+                    <input  type="hidden" value="{{confirmExtend.objData.applyLoanId}}" name="applyLoanId" >
+                    <input  type="hidden" value="{{confirmExtend.objData.applyLoanCode}}" name="applyLoanCode" >
+                    <input  type="hidden" value="{{confirmExtend.objData.loanType}}" name="loanType" >
+                    <input  type="hidden" value="{{confirmExtend.objData.customer.code}}" name="customerCode" >
+                    <input  type="hidden" value="{{confirmExtend.objData.customerName}}" name="customerName" >
+                    <input  type="hidden" value="{{confirmExtend.objData.customerId}}" name="customerId" >
+                    <label class="col-md-2 control-label">转出账号名</label>
+                    <div class="col-md-2  col-left">
+                        <div class="form-group">
+                            <input  type="hidden"  name="fromAccountName"
+                                    value="{{confirmExtend.accountEntity.getSelectedRows()[0].account_name}}" >
+                            <select-table st-combo="test()" st-text="confirmExtend.placeholder_accountName"
+                                          st-icon="confirmExtend.icon_account"
+                                          st-value="confirmExtend.accountEntity.getSelectedRows()[0].account_name">
+                                <table-expandable table-column="confirmExtend.accountColumn"
+                                                  table-page="confirmExtend.accountPage()"
+                                                  table-data="confirmExtend.accountData"
+                                                  table-conf="confirmExtend.accountParams"
+                                                  self-page="true"
+                                                  entity="confirmExtend.accountEntity">
+                                </table-expandable>
+                            </select-table>
+                        </div>
+                    </div>
+                    <label class="col-md-2 control-label">转出银行账号</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="fromBankAccount" readonly="readonly"
+                               value="{{confirmExtend.accountEntity.getSelectedRows()[0].bank_account}}">
+                    </div>
+                    <label class="col-md-2 control-label">转出账号开户行</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="fromBankName" readonly="readonly"
+                               value="{{confirmExtend.accountEntity.getSelectedRows()[0].bank_name}}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label">转入账号名</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="toAccountName"
+                               value="{{confirmExtend.objData.customer.accountName}}"  >
+                    </div>
+                    <label class="col-md-2 control-label">转入银行账号</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="toBankAccount"
+                               value="{{confirmExtend.objData.customer.bankAccount}}" >
+                    </div>
+                    <label class="col-md-2 control-label">转入账号开户行</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="toBankName"
+                               value="{{confirmExtend.objData.customer.bankName}}" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">应发金额</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" readonly="readonly" name="toIssueAmount"
+                               value="{{confirmExtend.objData.checkedAmount-confirmExtend.objData.applyLoanRecord.loanAmount}}"  >
+                    </div>
+                    <label class="col-md-2 control-label">实发金额</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="realIssueAmount"
+                               value="{{confirmExtend.objData.checkedAmount-confirmExtend.objData.applyLoanRecord.loanAmount}}" >
+                    </div>
+                    <label class="col-md-2 control-label">发放时间</label>
+                    <div class="col-md-2 col-left2 issueTime">
+                        <!-- <input type="text" class="form-control" name="issueTime" >-->
+                        <single-time-picker></single-time-picker>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">备注</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="description" >
+                    </div>
+                </div>
+            </form>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="confirmExtend.confirm()">确认放款
+                        </button>
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="confirmExtend.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

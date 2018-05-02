@@ -1,0 +1,368 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-pencil-square-o"></i>签收</span>
+    <form  id="finalDispatch" class="form-horizontal ng-pristine ng-invalid ng-invalid-required">
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <label class="control-label col-sm-1">
+                </label>
+                <div class="col-sm-3">
+                    <div class="divTableHeader">
+                        订单号
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        运单号
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        发货方
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        收货方
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        描述
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                    <span class="badge badge-default">运段信息</span>
+                </label>
+                <div class="col-sm-3">
+                    <div class="showInfo">{{receiptSignDetail.orderShow.code}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.orderShow.wayBillCode}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.orderShow.fromReceiverName}}({{receiptSignDetail.orderShow.fromReceiverCContactor}}{{receiptSignDetail.orderShow.fromReceiverCMobile}})</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.orderShow.toReceiverName}}({{receiptSignDetail.orderShow.toReceiverCContactor}}{{receiptSignDetail.orderShow.toReceiverCMobile}})</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.orderShow.description}}</div>
+                </div>
+
+            </div>
+        </div>
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <label class="control-label col-sm-1">
+                </label>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        现付
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        到付
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        回单付
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        月结
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        收货方付
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="divTableHeader">
+                        合计
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                    <span class="badge badge-default">费用信息</span>
+                </label>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.feeList.cashFee}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.feeList.toPayFee}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.feeList.receiptFee}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.feeList.monthlyFee}}</div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="showInfo">{{receiptSignDetail.feeList.receiverPayFee}}</div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="showInfo">{{receiptSignDetail.feeList.totalFee}}</div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="divSpace-white fade-in-up">
+            <div class="form-group">
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        车辆
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="divTableHeader">
+                        主司机
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        货物名
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        配载量
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        运载量
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="divTableHeader">
+                        已签收量
+                    </div>
+                </div>
+                <div class="col-sm-1">
+                    <div class="divTableHeader">
+                        操作
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-repeat="list in receiptSignDetail.goodsList">
+
+                    <div class="col-sm-2">
+                        <div class="showInfo">{{list[0].vehicleCode}}</div>
+                    </div>
+                    <div class="col-sm-1">
+                        <div class="showInfo">{{list[0].mainDriverName}}</div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div ng-repeat="listo in list">
+                            <div class="showInfo">{{listo.goodsName}}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <div ng-repeat="listo in list">
+                            <div class="showInfo">{{listo.totalWeight}}kg/{{listo.totalQuantity}}{{listo.unit}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div ng-repeat="listo in list">
+                            <div class="showInfo">{{listo.truckWeight}}kg/{{listo.truckQuantity}}{{listo.unit}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div ng-repeat="listo in list">
+                            <div class="showInfo">{{listo.signWeight}}kg/{{listo.signQuantity}}{{listo.unit}}</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-1">
+                        <div class="showInfo">
+                            <button style="width:100%;white-space:inherit" ng-if="list[0].vStatus=='ALL_DENIAL'" type="button" class="btn red" disabled>
+                                已拒签
+                            </button>
+                            <button style="width:100%;white-space:inherit" ng-if="list[0].vStatus=='SIGNED'" type="button" class="btn blue" disabled>
+                                已签收
+                            </button>
+                            <button style="width:100%;white-space:inherit" ng-if="list[0].vStatus=='ON_ROAD'" type="button" class="btn blue"  ng-click="receiptSignDetail.signForCar(list)">
+                                签收
+                            </button>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<div class="modal fade" id="selectCommonContacts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="margin-top:180px;min-width: 1100px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    <i class="fa fa-paper-plane" style="margin-right: 10px;"></i>货物签收
+                </h4>
+            </div>
+            <div class="modal-body" style="height: 456px;overflow-y: scroll;">
+
+                <form  class="form-horizontal ng-pristine ng-invalid ng-invalid-required" id="signConfirm">
+              <!-- <input type="hidden" name="ddId" value="{{distribute.id}}"/>-->
+
+                    <div class="divSpace-white fade-in-up">
+                        <div class="form-group">
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    车辆
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    货物名
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    配载量
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    运载量
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    签收重量
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="divTableHeader">
+                                    签收件数
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group signDiv">
+
+                            <div class="col-sm-2">
+                                <div class="showInfo">{{receiptSignDetail.goodsSignList[0].vehicleCode}}</div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <div ng-repeat="list in receiptSignDetail.goodsSignList">
+                                    <div class="showInfo">{{list.goodsName}}</div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <input type="hidden" name="ddId" value="{{receiptSignDetail.goodsSignList[0].ddId}}"/>
+                                <div ng-repeat="list in receiptSignDetail.goodsSignList">
+                                    <input type="hidden" name="goodsList[{{$index}}].id" value="{{list.goodsId}}"/>
+                                    <div class="showInfo">{{list.totalWeight}}kg/{{list.totalQuantity}}{{list.unit}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div ng-repeat="list in receiptSignDetail.goodsSignList">
+                                    <div class="showInfo">{{list.truckWeight}}kg/{{list.truckQuantity}}{{list.unit}}</div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div ng-repeat="list in receiptSignDetail.goodsSignList" style="margin-bottom: 2px;">
+                                    <div class="input-group">
+                                        <input type="number" data-required="1" class="form-control"  name="goodsList[{{$index}}].signWeight">
+                                        <span class="input-group-addon">kg</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div ng-repeat="list in receiptSignDetail.goodsSignList" style="margin-bottom: 2px;">
+                                    <div class="input-group">
+                                        <input type="number" data-required="1" class="form-control"  name="goodsList[{{$index}}].signQuantity">
+                                        <span class="input-group-addon">{{list.unit}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <div class="divSpace-white fade-in-up">
+                        <div class="form-group">
+                            <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                                签收人
+                            </label>
+                            <div class="col-sm-2">
+                                <input type="text" data-required="1" class="form-control"  name="signPerson">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                                签收结果
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control select2me" name="signStatus" ng-model="receiptSignDetail.signStatus">
+                                    <option value="SIGNED">签收</option>
+                                    <option value="ALL_DENIAL">拒签</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="receiptSignDetail.signStatus == 'ALL_DENIAL'">
+                            <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                                拒签原因
+                            </label>
+                            <div class="col-sm-2">
+                                <select class="form-control select2me" name="denialReasonId" ng-change="receiptSignDetail.denialChange()" ng-model="receiptSignDetail.denialId">
+                                    <option selected value="init">选择拒签原因</option>
+                                    <option ng-repeat="list in receiptSignDetail.denialReasonList" value="{{list.id}}">{{list.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" ng-if="receiptSignDetail.signStatus == 'ALL_DENIAL'">
+                            <label class="control-label col-sm-1" style="font-weight: bold;padding-top:2px">
+                                拒签描述
+                            </label>
+                            <div class="col-sm-4">
+                                <textarea class="form-control" id="denialDescription" placeholder="{{receiptSignDetail.denialDescription}}" name="denialDescription" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" ng-click="receiptSignDetail.confirmSign()">
+                    确定签收
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+

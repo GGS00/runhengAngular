@@ -1,0 +1,32 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-pencil-square-o"></i>回单签收</span>
+    <div class="row firstRow">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="code" class="form-control" placeholder="订单号"> </div>
+        </div>
+        <!--/span-->
+        <div class="col-sm-2">
+            <div class="form-group">
+                <input type="text" name="wayBillCode" class="form-control" placeholder="运单号">
+            </div>
+        </div>
+
+        <div class="btn-group col-sm-2">
+            <button type="button" class="btn blue" ng-click="receiptSign.getPageByFilter()">
+                搜索
+            </button>
+        </div>
+
+    </div>
+    <div class="search-form btnGroup"">
+        <button type="button" class="btn btn-default"  ng-click="receiptSign.toSign()" style="font-weight: inherit">签收</button>
+    </div>
+    <table-expandable table-column="receiptSign.column"  table-page="receiptSign.getPage()" table-data="receiptSign.data" table-conf="receiptSign.pageParams" self-page="false" entity="receiptSign.entity">
+    </table-expandable>
+
+
+</div>
+
+
+

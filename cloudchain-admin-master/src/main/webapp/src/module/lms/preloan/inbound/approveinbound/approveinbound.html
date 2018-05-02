@@ -1,0 +1,94 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>入库申请审批</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <div class="form-group">
+                <input id="inboundStatus" type="hidden" value="{{approveInbound.objData.status}}" >
+                <input id="inboundId" type="hidden" value="{{approveInbound.objData.id}}" name="inboundId" >
+                <label class="col-md-2 control-label">入库申请单号
+                </label>
+                <div class="col-md-4 col-left2 ">
+                    <input type="text" id = "inboundCode" name="code" class="form-control" value="{{approveInbound.objData.code}}"
+                           readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">订单总额
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="orderAmount" class="form-control"
+                           value="{{approveInbound.objData.orderAmount}}" readonly="readonly">
+                </div>
+            </div>
+            <div class="form-group">
+                <!--<label class="col-md-2 control-label">仓库
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="warehouseName" class="form-control"
+                           value="{{approveInbound.objData.warehouseName}}" readonly="readonly">
+                </div>-->
+                <label class="col-md-2 control-label">下单时间
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="orderTime" class="form-control"
+                           value="{{approveInbound.objData.orderTime}}" readonly="readonly">
+                </div>
+                <label class="col-md-2 control-label">备注
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" id="id_remark" class="form-control"
+                           value="{{approveInbound.objData.remark}}" readonly="readonly">
+                </div>
+
+            </div>
+           <!-- <div class="form-group">
+                <label class="col-md-2 control-label">备注
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" id="id_descript" class="form-control"
+                           value="{{approveInbound.objData.remark}}">
+                </div>
+            </div>-->
+            <div class="form-group">
+                <label class="col-md-2 control-label">审核结果
+                </label>
+                <div class="col-md-4 col-left2">
+                    <select id="checkStatus" name="checkStatus" class="form-control">
+                        <option value="STATUS_CHECK_PASS" selected>通过</option>
+                        <option value="CHECK_FAIL">不通过</option>
+                    </select>
+                </div>
+                <label class="col-md-2 control-label">审核意见
+                </label>
+                <div class="col-md-4 col-left2">
+                    <input type="text" name="checkOpinion" class="form-control"
+                           value="{{approveInbound.objData.checkOpinion}}" >
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="approveInbound.approve()">审批确定
+                        </button>
+                    </div>
+
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="approveInbound.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div>
+        <table-expandable table-column="approveInbound.column" table-page="approveInbound.getPage()"
+                          table-data="approveInbound.data" table-conf="approveInbound.pageParams" self-page="false"
+                          entity="approveInbound.entity">
+        </table-expandable>
+    </div>
+</div>

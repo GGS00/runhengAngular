@@ -1,0 +1,195 @@
+<div>
+    <span class="pageTitle"><i class="fa fa-exclamation-circle"></i>贷款申请审批(金融部)</span>
+    <div class="row  divline">
+        <div class="col-md-12">
+            <p class="pTitle">基础信息</p>
+        </div>
+        <div class=" form-horizontal ">
+            <form id="financeCheck">
+                <div class="form-group">
+                    <input  type="hidden" value="{{financeCheck.objData.id}}" name="id" >
+                    <input  type="hidden" value="{{financeCheck.objData.applyLoanId}}" name="applyLoanId" >
+                    <input  type="hidden" value="{{financeCheck.objData.customerId}}" name="customerId" >
+                    <label class="col-md-2 control-label">客户编号
+                    </label>
+                    <div class="col-md-2 col-left2 ">
+                        <input type="text" class="form-control" name="customer.code" value="{{financeCheck.objData.customer.code}}"
+                               readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">客户名称
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control"
+                               value="{{financeCheck.objData.customerName}}" readonly="readonly" name="customerName">
+                    </div>
+                    <label class="col-md-2 control-label">贷款品种
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="loanType" class="form-control"
+                               value="{{financeCheck.objData.loanType}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">申请金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" id="id_remark" class="form-control" name="applyLoanRecord.applyAmount"
+                               value="{{financeCheck.objData.applyLoanRecord.applyAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">申请时间
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.applyTime"
+                               value="{{financeCheck.objData.applyLoanRecord.applyTime}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">银行账号</label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="customer.bankAccount"
+                               value="{{financeCheck.objData.customer.bankAccount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">账号名
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="customer.accountName"
+                               value="{{financeCheck.objData.customer.accountName}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">开户行
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="customer.bankName"
+                               value="{{financeCheck.objData.customer.bankName}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">产品总价
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.applyAmount"
+                               value="{{financeCheck.objData.applyLoanRecord.totalAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">近期销售额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.nearSaleAmount"
+                               value="{{financeCheck.objData.applyLoanRecord.nearSaleAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">本期已贷总金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.loanedAmount"
+                               value="{{financeCheck.objData.applyLoanRecord.loanedAmount}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">前期未还总额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.preLoanedAmount"
+                               value="{{financeCheck.objData.applyLoanRecord.preLoanedAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">可申请金额
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.maxApplyAmount"
+                               value="{{financeCheck.objData.applyLoanRecord.maxApplyAmount}}" readonly="readonly">
+                    </div>
+                    <label class="col-md-2 control-label">折扣率
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" class="form-control" name="applyLoanRecord.discountRate"
+                               value="{{financeCheck.objData.applyLoanRecord.discountRate}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">实际产品数量
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realTotalQuantity" class="form-control"
+                               value="{{financeCheck.objData.realTotalQuantity}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">实际产品总价
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realTotalAmount" class="form-control"
+                               value="{{financeCheck.objData.realTotalAmount}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">产品部审核人姓名
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkPersonName1" class="form-control"
+                               value="{{financeCheck.objData.checkPersonName1}}" readonly="readonly" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">产品部审核时间
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkTime1" class="form-control"
+                               value="{{financeCheck.objData.checkTime1}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">实际可申请额度
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="realMaxApplyAmount" class="form-control"
+                               value="{{financeCheck.objData.realMaxApplyAmount}}" readonly="readonly" >
+                    </div>
+                    <label class="col-md-2 control-label">产品部审核人意见
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkOption1" class="form-control"
+                               value="{{financeCheck.objData.checkOption1}}" readonly="readonly">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-2 control-label">审批额度
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkedAmount" class="form-control"
+                               value="{{financeCheck.objData.applyLoanRecord.applyAmount}}" >
+                    </div>
+                    <label class="col-md-2 control-label">审核结果
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <select id="checkStatus2" name="checkStatus2" class="form-control">
+                            <option value="STATUS_CHECK_PASS" selected>通过</option>
+                            <option value="CHECK_FAIL">不通过</option>
+                        </select>
+                    </div>
+                    <label class="col-md-2 control-label">审核意见
+                    </label>
+                    <div class="col-md-2 col-left2">
+                        <input type="text" name="checkOption2" class="form-control"
+                               value="{{financeCheck.objData.checkOption2}}" >
+                    </div>
+
+                </div>
+            </form>
+            <div class="form-actions">
+                <div class="row">
+
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="inboundConfirmButton" type="button" class="btn blue"
+                                ng-click="financeCheck.approve()">审批确定
+                        </button>
+                    </div>
+
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="returnButton" type="button" class="btn blue"
+                                ng-click="financeCheck.return()">返回
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  <!--  <div>
+        <table-expandable table-column="financeCheck.column" table-page="financeCheck.getPage()"
+                          table-data="financeCheck.data" table-conf="financeCheck.pageParams" self-page="false"
+                          entity="financeCheck.entity">
+        </table-expandable>
+    </div>-->
+</div>
