@@ -6,7 +6,6 @@ angular
 
 
 
-
 d2wRouter.$inject= ['$stateProvider'];
 lazyLoad.$inject= ['$ocLazyLoadProvider'];
 
